@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eselhans | Musik & Songtexte</title>
+  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland. Ehrliche Songs, Musikvideos, Songtexte und Links zu YouTube, Spotify, Apple Music und weiteren Plattformen." />
+  <meta name="keywords" content="Eselhans, Musik, KI-Musik, Songtexte, Ostfriesland, YouTube, Spotify, Apple Music, Singer Songwriter" />
+  <meta name="author" content="Eselhans" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Eselhans | Songs aus Herz & Staub" />
+  <meta property="og:description" content="Ehrliche KI-Musik aus Ostfriesland — Songs, Videos, Songtexte und Links zu allen wichtigen Plattformen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eselhans-music.netlify.app" />
+  <meta property="og:image" content="https://eselhans-music.netlify.app/bilder/banner-eselhans.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eselhans | Songs aus Herz & Staub" />
+  <meta name="twitter:description" content="Ehrliche KI-Musik aus Ostfriesland — Songs, Videos und Songtexte." />
+  <meta name="twitter:image" content="https://eselhans-music.netlify.app/bilder/banner-eselhans.png" />
+  <link rel="canonical" href="https://eselhans-music.netlify.app" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg: #09090d;
+      --bg-soft: #14141c;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f4f1ea;
+      --muted: #b7aea3;
+      --accent: #c98b4f;
+      --accent-soft: rgba(201, 139, 79, 0.18);
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(201, 139, 79, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(97, 74, 125, 0.10), transparent 28%),
+        linear-gradient(rgba(7, 7, 10, 0.84), rgba(7, 7, 10, 0.94)),
+        url("bilder/hintergrund-eselhans.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      background: rgba(9, 9, 13, 0.74);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.18rem;
+      padding-left: 4px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .menu {
+      position: relative;
+    }
+
+    .menu summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.07);
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .menu-links {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 210px;
+      padding: 10px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      background: rgba(14, 14, 20, 0.96);
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(14px);
+    }
+
+    .menu-links a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .menu-links a:hover {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    header {
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--card-border);
+      background:
+        linear-gradient(180deg, rgba(9, 9, 13, 0.32), rgba(9, 9, 13, 0.88)),
+        url("bilder/banner-eselhans.png");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .hero {
+      max-width: 820px;
+      padding: 42px 24px;
+      border-radius: 28px;
+      background: rgba(9, 9, 13, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(4px);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 9vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 22px;
+      text-shadow: 0 18px 45px var(--shadow);
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--accent-soft);
+      border-color: rgba(201, 139, 79, 0.55);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, #d59a5d, #8f5d35);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #140d08;
+    }
+
+    section {
+      scroll-margin-top: 110px;
+      margin-top: 34px;
+      padding: 30px;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      background: var(--card);
+      box-shadow: 0 24px 70px var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 4vw, 2.55rem);
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .link-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid var(--card-border);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      background: var(--accent-soft);
+    }
+
+    .link-card strong {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .link-card i,
+    .mini-link i {
+      width: 18px;
+      text-align: center;
+      color: var(--accent);
+    }
+
+    .link-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .video-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      background: #050507;
+      margin-top: 20px;
+    }
+
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .contact-card {
+      margin-top: 34px;
+      padding: 30px;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      background: rgba(9, 9, 13, 0.54);
+      box-shadow: 0 24px 70px var(--shadow);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .contact-card .section-text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mini-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mini-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .mini-link:hover {
+      transform: translateY(-2px);
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    footer {
+      padding: 24px 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--text);
+      margin: 0 8px;
+      opacity: 0.86;
+    }
+
+    footer a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(94%, 1120px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        top: 10px;
+      }
+
+      .menu-links {
+        right: -4px;
+        min-width: 190px;
+      }
+
+      header {
+        min-height: 66vh;
+      }
+
+      section {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .hero {
+        padding-inline: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topbar">
+      <a class="brand" href="index.html"><img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />Eselhans</a>
+      <details class="menu">
+        <summary>Menü ▾</summary>
+        <div class="menu-links">
+          <a href="#links">Links</a>
+          <a href="#ueber-mich">Über mich</a>
+          <a href="#musik">Aktuelles Video</a>
+          <a href="songtexte.html">Songtexte</a>
+        </div>
+      </details>
+    </nav>
+
+    <header>
+      <div class="hero">
+        <span class="eyebrow">Deutschsprachige KI-Musik</span>
+        <h1>Eselhans</h1>
+        <p class="subtitle">
+          Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen.
+        </p>
+        <div class="hero-buttons">
+          <a class="button primary" href="https://www.youtube.com/@Esel1983" target="_blank" rel="noopener">Auf YouTube hören</a>
+          <a class="button" href="songtexte.html">Songtexte lesen</a>
+          <a class="button" href="#links">Alle Links</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="links">
+      <h2 class="section-title">Meine Musik & Kanäle</h2>
+      <p class="section-text">
+        Hier findest du meine Musik, Videos, Shorts und Social-Media-Seiten auf einen Blick.
+      </p>
+
+      <div class="link-grid">
+        <a class="link-card" href="https://www.youtube.com/@Esel1983" target="_blank" rel="noopener"><strong><i class="fa-brands fa-youtube"></i>YouTube</strong><span>Musikvideos, Lyric Videos & Shorts</span></a>
+        <a class="link-card" href="https://music.youtube.com/@esel1983?si=1gpCOhMvAfkE-9sE" target="_blank" rel="noopener"><strong><i class="fa-brands fa-youtube"></i>YouTube Music</strong><span>Songs direkt streamen</span></a>
+        <a class="link-card" href="https://open.spotify.com/artist/5Ib0WFO78TGEzNOwuwsuDA?si=82Z7P-a7ThW9yNd21iYZ8Q" target="_blank" rel="noopener"><strong><i class="fa-brands fa-spotify"></i>Spotify</strong><span>Meine Veröffentlichungen</span></a>
+        <a class="link-card" href="https://music.apple.com/de/artist/eselhans/1839635407" target="_blank" rel="noopener"><strong><i class="fa-brands fa-apple"></i>Apple Music</strong><span>Meine Songs auf Apple Music</span></a>
+        <a class="link-card" href="https://music.amazon.de/artists/B0FR2FXMDP?ref=dm_sh_GlXnhDAyYHbP4fZZWNxSEnbTu" target="_blank" rel="noopener"><strong><i class="fa-brands fa-amazon"></i>Amazon Music</strong><span>Musik auf Amazon hören</span></a>
+        <a class="link-card" href="https://www.instagram.com/eselhans1983?igsh=MXdhZWxvbjlycnFkOA==" target="_blank" rel="noopener"><strong><i class="fa-brands fa-instagram"></i>Instagram</strong><span>Shorts, Bilder & Updates</span></a>
+        <a class="link-card" href="https://www.tiktok.com/@florianpahl3?_r=1&_t=ZG-96gNfXAUy3c" target="_blank" rel="noopener"><strong><i class="fa-brands fa-tiktok"></i>TikTok</strong><span>Kurze Clips & Songmomente</span></a>
+        <a class="link-card" href="https://www.threads.com/@eselhans1983" target="_blank" rel="noopener"><strong><i class="fa-brands fa-threads"></i>Threads</strong><span>Gedanken, Teaser & Updates</span></a>
+        <a class="link-card" href="https://www.facebook.com/share/1Gfj6mh3eQ/" target="_blank" rel="noopener"><strong><i class="fa-brands fa-facebook"></i>Facebook</strong><span>Beiträge und Neuigkeiten</span></a>
+      </div>
+    </section>
+
+    <section id="ueber-mich">
+      <h2 class="section-title">Über mich</h2>
+      <p class="section-text">
+        Ich bin Eselhans, ein KI-Musik-Künstler aus Ostfriesland. Meine Songs entstehen aus eigenen Texten, Gefühlen, Erinnerungen und Momenten, die im Alltag oft leise bleiben. Mit KI-Musik, Stimmen, Atmosphäre und Mastering forme ich daraus Lieder über Verlust, Hoffnung, Familie, innere Kämpfe und das Weitergehen, auch wenn es manchmal schwerfällt.
+      </p>
+      <p class="section-text">
+        Dabei lege ich mich nicht auf eine feste Musikrichtung fest. Manche Songs sind dunkel und emotional, andere mystisch, ruhig, leicht oder erzählerisch. Jeder Titel darf seinen eigenen Klang finden — so, wie es zur Geschichte und zur Stimmung passt.
+      </p>
+      <p class="section-text">
+        Mir geht es nicht darum, perfekt zu klingen. Mir geht es darum, ehrlich zu klingen. Jeder Song soll ein kleines Stück Geschichte tragen — mal dunkel, mal warm, mal traurig, mal hoffnungsvoll, aber immer mit Gefühl. Vor allem sind meine Songs für euch, wenn ihr sie gerade braucht.
+      </p>
+    </section>
+
+    <section id="musik">
+      <h2 class="section-title">Aktuelles Video</h2>
+      <p class="section-text">
+        Mein neuestes Video auf YouTube. Ein Songmoment zum Reinhören, Mitfühlen und Ankommen.
+      </p>
+
+      <div class="video-box">
+        <iframe
+          src="https://www.youtube.com/embed/vyxofDHhO5Y"
+          title="Eselhans Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section id="songtexte">
+      <h2 class="section-title">Songtexte</h2>
+      <p class="section-text">
+        Meine Songtexte bekommen eine eigene Seite mit Covern, Titeln und aufklappbaren Texten. So bleibt diese Startseite ruhig und übersichtlich, während die Texte ihren eigenen Platz bekommen.
+      </p>
+      <div class="hero-buttons" style="justify-content: flex-start; margin-top: 18px;">
+        <a class="button primary" href="songtexte.html">Zu den Songtexten</a>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact-card">
+      <h2 class="section-title">Bleib dabei</h2>
+      <p class="section-text">
+        Wenn du meine Musik weiter begleiten möchtest, findest du neue Songs, Videos, Shorts und kleine Updates auf meinen Kanälen.
+      </p>
+      <div class="mini-links">
+        <a class="mini-link" href="https://www.youtube.com/@Esel1983" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i>YouTube</a>
+        <a class="mini-link" href="https://music.youtube.com/@esel1983?si=1gpCOhMvAfkE-9sE" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i>YouTube Music</a>
+        <a class="mini-link" href="https://open.spotify.com/artist/5Ib0WFO78TGEzNOwuwsuDA?si=82Z7P-a7ThW9yNd21iYZ8Q" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i>Spotify</a>
+        <a class="mini-link" href="https://music.apple.com/de/artist/eselhans/1839635407" target="_blank" rel="noopener"><i class="fa-brands fa-apple"></i>Apple Music</a>
+        <a class="mini-link" href="https://www.instagram.com/eselhans1983?igsh=MXdhZWxvbjlycnFkOA==" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i>Instagram</a>
+        <a class="mini-link" href="https://www.tiktok.com/@florianpahl3?_r=1&_t=ZG-96gNfXAUy3c" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i>TikTok</a>
+        <a class="mini-link" href="https://www.threads.com/@eselhans1983" target="_blank" rel="noopener"><i class="fa-brands fa-threads"></i>Threads</a>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Eselhans · Musik, Texte & Gedanken · Songs aus Herz & Staub · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </main>
+</body>
+</html>
