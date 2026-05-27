@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eselhans | Songtexte</title>
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=_8Gm_aUkxbTB9dNYA-DOVKpTBN_HdaRfYz5YMl8jO9bbHG_4-6oCLx947cXJVlk7GPYiOqO5oKLRlKna9PIup9_YM2tET4yJ4l3jIqtP1MJA6s3hxTGbLcfzltaXuhtxmiSVGuPINdDLETra9W3LEv0TVqyel6J2ngg74CtvvTrvD8zqZX51_I_p37bksN_7pYOzA_Hfj0QNB2Ov0g07zp9ePu82Ch9Agsq7GLG1DOLmd7ZJR84TeqnQpvKyMP_gUat6TccrzpinOsaZsFTEHwO2IIN2fGPDIEMu9CiMoY49dc8Ti5a9bIAc9S8MZk9H4JG-NfQ1cffr81UXeGcHng" charset="UTF-8"></script><style>
+  <meta name="description" content="Songtexte von Eselhans: Albumtexte, Singles und Geschichten hinter der Musik." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=57oB5HZ8Nr6jPYQSdC5jWh39CzRfKMEGdd2P1mE0K88imd9-R8er4y8L3j1aRJv70pOP8QWj8AQuo71_XwiFPkxAYDfSViV-UXy54GR6wANSlFe9GRikJd1cXpDZpNbFmz4_OKUP3jQssbtalO7xGhn-iT5uP3PB2bCzrKWoIGsc4Dle_KqPrtm-1n9pZtBjRFEfLJyP071P4XT3dNyu5uSQNB5HmrHwkFPFWJs8g_Pv2v33UEXabk8XBTZw7jEt19UHcfYEr3N5ishAkOs15g" charset="UTF-8"></script><style>
     :root {
       --bg: #09090d;
       --bg-soft: #14141c;
@@ -17,15 +21,9 @@
       --shadow: rgba(0, 0, 0, 0.45);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
@@ -42,16 +40,9 @@
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    .page {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      padding: 34px 0 56px;
-    }
+    .page { width: min(1120px, 92%); margin: 0 auto; padding: 34px 0 56px; }
 
     .topbar {
       position: sticky;
@@ -145,11 +136,7 @@
       text-shadow: 0 18px 45px var(--shadow);
     }
 
-    .intro {
-      max-width: 820px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
+    .intro { max-width: 820px; color: var(--muted); font-size: 1.08rem; }
 
     .filter-panel {
       position: sticky;
@@ -176,13 +163,8 @@
       outline: none;
     }
 
-    .filter-panel input::placeholder {
-      color: rgba(244, 241, 234, 0.55);
-    }
-
-    .filter-panel select option {
-      color: #141414;
-    }
+    .filter-panel input::placeholder { color: rgba(244, 241, 234, 0.55); }
+    .filter-panel select option { color: #141414; }
 
     .result-info {
       grid-column: 1 / -1;
@@ -247,9 +229,7 @@
       background: linear-gradient(135deg, rgba(201,139,79,0.18), rgba(97,74,125,0.18));
     }
 
-    .song-content {
-      padding: 22px;
-    }
+    .song-content { padding: 22px; }
 
     .song-meta {
       color: var(--muted);
@@ -266,9 +246,7 @@
       background: rgba(0, 0, 0, 0.18);
     }
 
-    details[open] {
-      background: rgba(0, 0, 0, 0.26);
-    }
+    details[open] { background: rgba(0, 0, 0, 0.26); }
 
     summary {
       cursor: pointer;
@@ -284,15 +262,24 @@
       line-height: 1.75;
     }
 
-    .is-hidden {
-      display: none !important;
-    }
+    .is-hidden { display: none !important; }
 
     footer {
       padding: 36px 0 0;
       color: var(--muted);
       text-align: center;
       font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--text);
+      margin: 0 8px;
+      opacity: 0.86;
+    }
+
+    footer a:hover {
+      opacity: 1;
+      color: var(--accent);
     }
 
     @media (max-width: 820px) {
@@ -303,33 +290,12 @@
     }
 
     @media (max-width: 680px) {
-      .page {
-        width: min(94%, 1120px);
-        padding-top: 20px;
-      }
-
-      .topbar {
-        top: 10px;
-      }
-
-      .hero {
-        padding: 34px 22px;
-        border-radius: 24px;
-      }
-
-      .album-section {
-        padding: 20px;
-        border-radius: 22px;
-      }
-
-      .song-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .album-heading {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .page { width: min(94%, 1120px); padding-top: 20px; }
+      .topbar { top: 10px; }
+      .hero { padding: 34px 22px; border-radius: 24px; }
+      .album-section { padding: 20px; border-radius: 22px; }
+      .song-grid { grid-template-columns: 1fr; }
+      .album-heading { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -344,7 +310,7 @@
       <span class="eyebrow">Texte & Geschichten</span>
       <h1>Songtexte</h1>
       <p class="intro">
-        Hier entsteht nach und nach eine Sammlung meiner Songtexte. Über die Suche und die Filter findest du schneller einzelne Songs, Alben oder Singles.
+        Hier findest du eine wachsende Sammlung meiner Songtexte. Über die Suche und die Filter findest du schneller einzelne Songs, Alben oder Singles.
       </p>
     </header>
 
@@ -357,12 +323,12 @@
       </select>
       <select id="albumFilter" aria-label="Album auswählen">
         <option value="all">Alle Alben & Singles</option>
-          <option value="lebensweg">Lebensweg</option>
-          <option value="snow and fire">Snow and Fire</option>
-          <option value="lauter als die stille">Lauter als die Stille</option>
-          <option value="gradeaus">Gradeaus</option>
-          <option value="echos from the past">Echos from the Past</option>
-          <option value="nächte und stimmen">Nächte und Stimmen</option>
+        <option value="lebensweg">Lebensweg</option>
+        <option value="snow and fire">Snow and Fire</option>
+        <option value="lauter als die stille">Lauter als die Stille</option>
+        <option value="gradeaus">Gradeaus</option>
+        <option value="echos from the past">Echos from the Past</option>
+        <option value="nächte und stimmen">Nächte und Stimmen</option>
         <option value="single">Singles</option>
       </select>
       <p class="result-info" id="resultInfo">Alle Songs werden angezeigt.</p>
@@ -381,11 +347,69 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Mmmm ich war noch jung und auch dumm
+Hab mich verliebt und rannte um sie rum
+Hab mich zum affen gemacht
+Und mit ihr gelacht
+
+Ich habe alles getan und
+Doch hab ich verlorn
+
+Du gingst und ich war allein
+Oh ich dacht ich wär dein
+Doch scheiß auf das was war
+Hallo leben ich bin wieder da
+
+Ich erinner mich noch genau
+Der tag war so grau
+Hab die zeichen nicht gesehn
+Bis heut kann ich's nicht verstehn
+
+Du gingst und ich war allein
+Oh ich dacht ich wär dein
+Doch scheiß auf das was war
+Hallo leben ich bin wieder da
+
+Ich kann dir nur sagen was ich fühl
+Doch alles was von dir kommt ist kühl
+Mein herz es bricht in tausend scherben
+Will vor deinen augen einfach sterben
+
+Aber mein herz bleibt heil
+Auch wenn der weg steinig und steil
+
+Du gingst und ich war allein
+Oh ich dacht ich wär dein
+Doch scheiß auf das was war
+Hallo leben ich bin wieder da
+
+Was soll ich sagen es ist nun etwas her
+Meine seele und mein herz sie schmerzen nicht mehr
+Oh die erste liebe sie ist so schön
+Aber wo eine geht wird eine neue entsteh'n
+
+Du gingst und ich war allein
+Oh ich dacht ich wär dein
+Doch scheiß auf das was war
+Hallo leben ich bin wieder da
+
+Ich hab dich später noch einmal geseh'n
+Wollte zu dir hin und dann wieder geh'n
+Doch dann sah ich dass du glücklich bist
+Anscheinend hast du mich wohl nicht vermisst
+
+Und ich bin hier auch nicht mehr allein
+Das alles sollte wohl dann schicksal sein
+
+Du gingst und ich war allein
+Oh ich dacht ich wär dein
+Doch scheiß auf das was war
+Hallo leben ich bin wieder da
+
+Ich bin wieder da</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="sag ja" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Sag Ja" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -393,11 +417,68 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Es ist jetzt zeit ich stehe nur herum
+Ganz viel lachen und weinen um mich rum
+Dieser tag wird unser leben ändern
+Alle sind gekleidet in so festlichen gewändern
+
+Und die zeit steht still
+Weiß grad genau was ich will
+
+Sag ja zu einem leben mit mir
+Sag ja wir beide sind jetzt hier
+Sag ja was auch immer passiert
+Unser leben beginnt jetzt garantiert
+
+Ich warte auf dich alles ist geschmückt
+Gott das warten macht mich verrückt
+Wann kann ich dich sehn
+Ich will endlich mit dir nach vorne gehn
+
+Und ich denke nur bei mir
+
+Sag ja zu einem leben mit mir
+Sag ja wir beide sind jetzt hier
+Sag ja was auch immer passiert
+Unser leben beginnt jetzt garantiert
+
+Die kirche ist voll unsere eltern freuen sich voll
+Unsere freunde sie finden es toll
+Und die einzige die zählt das bist du
+Dann öffnet sich die tür und ich schau nur zu
+
+Ich stehe am altar mein blick sagt schon ja
+Was jetzt passiert das ist so klar
+
+Sag ja zu einem leben mit mir
+Sag ja wir beide sind jetzt hier
+Sag ja was auch immer passiert
+Unser leben beginnt jetzt garantiert
+
+Dein anblick haut mich glatt um
+In meinem kopf macht es boom
+Mehr als je zuvor ist alles klar
+Ich liebe dich und das ganz und gar
+
+Sag ja zu einem leben mit mir
+Sag ja wir beide sind jetzt hier
+Sag ja was auch immer passiert
+Unser leben beginnt jetzt garantiert
+
+Dieser tag war so schön in unserm leben
+Haben uns vor allen das ja wort gegeben
+Ich denke gerne dran zurück
+An jenem tag war alles voller glück
+
+Sag ja zu einem leben mit mir
+Sag ja wir beide sind jetzt hier
+Sag ja was auch immer passiert
+Unser leben beginnt jetzt garantiert
+
+Für immer und ewig nur dein</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wenn wir faxen machen" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn wir Faxen machen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -405,11 +486,86 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich komme in die küche und sehe dich
+Dein anblick er verzaubert mich
+Wie eh und je schlägt mein herz
+Ob winter, sommer oder herbst
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Was soll ich sagen zu ihr
+Mein herz es schreit noch nach dir
+Was auch immer passiert
+Hast meine gedanken verwirrt
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Ein lachen kam von dir
+Dann gabst du mir dein bier
+Als ich gehen wollt kamst du zu mir
+Ein blick ein lächeln und du sagst hier
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Da stand ich nun wie ein tropf
+Hatte einen roten kopf
+Deine nummer in der hand
+Und mein herz ausser rand und band
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Ein paar tage später hab ich's gewagt
+Deine nummer gewählt und hallo gesagt
+Und du hast gelacht und dir gedacht
+Er hats ja wirklich gemacht
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Jetzt steh ich hier und bin nicht mehr jung
+Du spürst mich wohl und drehst dich um
+Ein fragender blick von dir
+Dann ein lächeln und du kommst zu mir
+
+Uh oh oh meine liebe gehört dir
+Uh oh oh für immer bei mir
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen
+
+Uh oh oh yeah
+Du bringst mich zum lachen
+Wenn wir faxen machen
+Hast mir mein herz genommen
+Sind dann im glück geschwommen</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="kleines wunder" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Kleines Wunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -417,11 +573,66 @@
             <p class="song-meta">Lebensweg · Rock Ballade</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich bin so müde und kaputt meine augen fallen zu
+Doch dann seh ich in dein friedliches gesicht
+In meinem kopf läuft es wie ein film
+
+Du bist da mein kleines wunder
+Hast uns beschenkt mit deinem lachen
+Du bist da mein kleines wunder
+Bist mein größter schatz der welt
+Und alles was nun zählt
+
+Deine mutter hat dich so lang getragen
+Sie hat es ohne klage ertragen
+Du weißt es nicht mein stern
+Aber glaub mir sie tat es gern
+
+Denn ohne dich fehlt uns was
+
+Du bist da mein kleines wunder
+Hast uns beschenkt mit deinem lachen
+Du bist da mein kleines wunder
+Bist mein größter schatz der welt
+Und alles was nun zählt
+
+Dann war er da der große tag
+Oh mann deine mutter in den wehen lag
+Ich war die ganze zeit für sie da
+So wie für dich jetzt das ist klar
+
+Du bist da mein kleines wunder
+Hast uns beschenkt mit deinem lachen
+Du bist da mein kleines wunder
+Bist mein größter schatz der welt
+Und alles was nun zählt
+
+Ich verspreche dir eins mein schatz
+Passe auf dich auf und mache platz
+Werde dein schutzschild sein
+Bin da du brauchst nicht wein
+
+So wunderschön liegst du da
+Und ich sag dir nur eins
+
+Du bist da mein kleines wunder
+Hast uns beschenkt mit deinem lachen
+Du bist da mein kleines wunder
+Bist mein größter schatz der welt
+Und alles was nun zählt
+
+Deine eltern werden immer für dich da sein
+Egal was auch kommt unsere liebe vergeht nicht nein
+Für immer wirst du in unseren herzen bleiben
+
+Du bist da mein kleines wunder
+Hast uns beschenkt mit deinem lachen
+Du bist da mein kleines wunder
+Bist mein größter schatz der welt
+Und alles was nun zählt</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wie die zeit vergeht" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wie die Zeit vergeht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -429,11 +640,71 @@
             <p class="song-meta">Lebensweg · Rock Ballade</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich hab dich in meinen händen getragen
+Du warst noch so klein
+Hab deine tränen getrocknet
+Und die wunden geheilt
+
+Und jetzt seh ich dich vor mir und denk
+
+Wie die zeit vergeht oh ho
+Wie das leben so geht oh ho
+Die welt sie dreht sich weiter
+Du bist mein licht und mein glück
+Oh uh oh yeah
+
+Ich weiß es noch genau und seh es vor mir
+Du warst so klein und voller schmutz hier
+Dein fahrrad es lag im dreck
+Deine mama wischt dir die tränen weg
+
+Doch du gabst nicht auf und fuhrst wieder los
+
+Wie die zeit vergeht oh ho
+Wie das leben so geht oh ho
+Die welt sie dreht sich weiter
+Du bist unser licht und unser glück
+Oh uh oh yeah
+
+Eines tages kamst du nicht zur ruh
+Wusste es da schon ich geb's zu
+Deine lehrerin hat es mir gesagt
+Du hast dich über die note beklagt
+
+Ich habe nicht geschimpft sonder einfach nur gedacht
+
+Wie die zeit vergeht oh ho
+Wie das leben so geht oh ho
+Die welt sie dreht sich weiter
+Du bist unser licht und unser glück
+Oh uh oh yeah
+
+Was auch immer noch geschah
+Deine mutter und ich waren da
+Wir haben dir geholfen was auch war
+Denn als eltern ist uns klar
+
+Wie die zeit vergeht oh ho
+Wie das leben so geht oh ho
+Die welt sie dreht sich weiter
+Du bist unser licht und unser glück
+Oh uh oh yeah
+
+Nun bist du schon so groß
+Kommt mir vor als saß't du gestern noch auf meinem schoss
+Wenn ich jetzt zu dir seh
+Eine junge frau vor mir steht
+
+Wie die zeit vergeht oh ho
+Wie das leben so geht oh ho
+Die welt sie dreht sich weiter
+Du bist mein licht und mein glück
+Oh uh oh yeah
+
+Wie die zeit vergeht</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="geh deinen weg mein kind" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Geh deinen Weg mein Kind" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -441,11 +712,129 @@
             <p class="song-meta">Lebensweg · Rock Ballade</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich stehe da und sie trocknet meine tränen
+Meine hand hält ihre noch ganz fest
+Was ich auch sage und denke
+Kann nicht verhindern dass sie mich verlässt
+
+Geh dein weg mein kind
+Wo hin er dich auch führt
+Ich werde bei dir sein
+Du bist niemals allein
+Was auch passiert
+
+Sie kam eines tages zu uns
+Erzählte ganz stolz dass sie geht
+Ich sah sie an und mir wurde klar
+Dass es jetzt fast ein abschied war
+
+Und ich flüstere nur leise
+
+Geh dein weg mein kind
+Wo hin er dich auch führt
+Ich werde bei dir sein
+Du bist niemals allein
+Was auch passiert
+
+Die tage vor dem großen tag
+Waren wie ein traum
+Sie hat sich gefreut man glaubt es kaum
+Wir haben ihr geholfen so gut es ging
+
+Doch meine stimmung nach unten fiel
+
+Geh dein weg mein kind
+Wo hin er dich auch führt
+Ich werde bei dir sein
+Du bist niemals allein
+Was auch passiert
+
+Jetzt ist er da der große moment
+Sie hat alles gepackt und ist bereit
+Ihre mutter steht bei ihr
+Und ich ja ich sitze nur hier
+
+Und alles was ich denken kann ist nur eins
+
+Geh dein weg mein kind
+Wo hin er dich auch führt
+Ich werde bei dir sein
+Du bist niemals allein
+Was auch passiert
+
+Ich stehe auf und geh zu ihr hin
+Weiß nichts zu sagen was jetzt hilft
+Mein herz will nicht dass sie geht
+Und doch ich kann sie versteh'n
+
+Ich nehme meine tochter in den arm und flüster ihr zu
+
+Geh dein weg mein kind
+Wo hin er dich auch führt
+Ich werde bei dir sein
+Du bist niemals allein
+Was auch passiert
+
+Danke dad ich hab dich lieb
+
+
+Die Jahre vergehn:
+Es ist morgens um sechs und ich wache auf
+Meine gedanken sie bestehen drauf
+Wach auf alter mann es ist zeit
+Mach dich fürs leben bereit
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Ich stehe auf und es knackt überall
+Strecke mich dann noch einmal
+Oh verdammt was ist das nur
+Meine knochen sind heut so stur
+
+Ich atme noch einmal durch und denk
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Ich steh wieder vorm spiegel
+Sehe zu wie ich langsam graue haare kriege
+Meine frau hat mir gesagt dass sie das an mir mag
+Was soll man da noch gegen tun
+
+Dann geb ich mir einen schlag und sag
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Der doktor ist mein bester freund
+Habe alles genommen und es nicht bereut
+Warum bin ich nur so alt
+Meine tochter sagt ich wäre durch geknallt
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Doch egal was auch schmerzt
+Es wird immer noch gescherzt
+Es ist egal wie alt man ist
+Hab im leben nichts vermisst
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die jahre vergehen" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Die Jahre Vergehen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -453,11 +842,62 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Es ist morgens um sechs und ich wache auf
+Meine gedanken sie bestehen drauf
+Wach auf alter mann es ist zeit
+Mach dich fürs leben bereit
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Ich stehe auf und es knackt überall
+Strecke mich dann noch einmal
+Oh verdammt was ist das nur
+Meine knochen sind heut so stur
+
+Ich atme noch einmal durch und denk
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Ich steh wieder vorm spiegel
+Sehe zu wie ich langsam graue haare kriege
+Meine frau hat mir gesagt dass sie das an mir mag
+Was soll man da noch gegen tun
+
+Dann geb ich mir einen schlag und sag
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Der doktor ist mein bester freund
+Habe alles genommen und es nicht bereut
+Warum bin ich nur so alt
+Meine tochter sagt ich wäre durch geknallt
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n
+
+Doch egal was auch schmerzt
+Es wird immer noch gescherzt
+Es ist egal wie alt man ist
+Hab im leben nichts vermisst
+
+Uuuh die jahre vergeh'n
+Kann meine falten kommen sehn
+Was kann ich nur tun uh yeah
+Egal keine zeit mich aus zu ruh'n</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wenn du mich opa nennst" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn du mich Opa nennst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -465,11 +905,84 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Uuuhh huuuu hu
+Was ist dann jetzt hier los
+Ja das frag ich mich bloß
+Wieder baby geschrei
+Ich dachte das wäre vorbei
+
+Doch dann sinke ich wieder zurück
+Denke nur oh mann was ein glück
+
+Wenn du mich opa nennst
+Wieder mal durchs zimmer rennst
+Dein lachen durch das haus schallt
+Und gegen mein herz und seele knallt
+Bin ich einfach nur verliebt
+Wie schön das es dich nun gibt
+
+Es ist noch gar nicht lange her
+Dein dad ist gefahren wie die feuerwehr
+Er wollte schnell zu dir und deiner mom
+Ein wunder dass er noch rechtzeitig kam
+
+Und als wir dann zu euch kam
+Ja da wurde mir ganz warm
+
+Wenn du mich opa nennst
+Wieder mal durchs zimmer rennst
+Dein lachen durch das haus schallt
+Und gegen mein herz und seele knallt
+Bin ich einfach nur verliebt
+Wie schön das es dich nun gibt
+
+Ich weiß noch als wärs gestern erst
+Wie du bei uns im garten fahrrad fährst
+Oma war so stolz auf dich
+Und wieder mal wütend auf mich
+
+Doch eines das ist klar
+Du bist und bleist wunderbar
+
+Wenn du mich opa nennst
+Wieder mal durchs zimmer rennst
+Dein lachen durch das haus schallt
+Und gegen mein herz und seele knallt
+Bin ich einfach nur verliebt
+Wie schön das es dich nun gibt
+
+Deine mama ist das beste was es gibt
+Das schönste an ihr ist dass sie dich liebt
+So wie du ist sie mein größter schatz
+Verrat's ihr bloß nicht doch ich nenn sie spatz
+
+Aber du bist meine maus
+Drum haue ich jetzt raus
+
+Wenn du mich opa nennst
+Wieder mal durchs zimmer rennst
+Dein lachen durch das haus schallt
+Und gegen mein herz und seele knallt
+Bin ich einfach nur verliebt
+Wie schön das es dich nun gibt
+
+Deine ankunft war so ein glück
+Vergrößerst die familie ein stück
+Wir sind alt das ist wahr
+Aber hey als großeltern unschlagbar
+
+Wenn du mich opa nennst
+Wieder mal durchs zimmer rennst
+Dein lachen durch das haus schallt
+Und gegen mein herz und seele knallt
+Bin ich einfach nur verliebt
+Wie schön das es dich nun gibt
+
+Wenn du mich opa nennst
+Bin ich einfach nur verliebt</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="lebensweg" data-album="lebensweg" data-category="album">
           <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Lebensweg" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -477,7 +990,73 @@
             <p class="song-meta">Lebensweg · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Mmmmmm hmmmmm uuuhhhh ooohhhhh
+Wir sitzen hier du bist bei mir
+Wir sind alt und grau von soviel leben schon ganz schlau
+Ich blicke zurück auf das was war
+Dann sage ich nur zu dir es war wunderbar
+
+Jetzt sind wir hier
+Du und ich ein wir
+Die ganze zeit gelebt
+Jedes erbeben überlebt
+Auf unseren lebensweg
+
+Als ich dich damals sah da war es mir klar
+Ich wollte dich haben
+Zusammen mit dir in gefühlen baden
+Ich wollte dich und klar du mich
+
+Nun schau uns an
+
+Jetzt sind wir hier
+Du und ich ein wir
+Die ganze zeit gelebt
+Jedes erbeben überlebt
+Auf unseren lebensweg
+
+Weißt du noch wie es damals war
+Als ich unsere kleine sah
+Ich hab geheult wie ein kind
+Weiß nicht wo die zeiten geblieben sind
+
+Ich war so stolz auf dich und jetzt
+
+Jetzt sind wir hier
+Du und ich ein wir
+Die ganze zeit gelebt
+Jedes erbeben überlebt
+Auf unseren lebensweg
+
+Die zeit sie verging wie im flug
+So wie in einem schnellen zug
+Was auch immer passierte ich war da
+Für dich und mich war nur eines klar
+
+Unsere liebe wird alles überstehen
+
+Jetzt sind wir hier
+Du und ich ein wir
+Die ganze zeit gelebt
+Jedes erbeben überlebt
+Auf unseren lebensweg
+
+Jetzt liegen wir im bett alle sind nun da wie nennt
+Ich halte deine hand bei mir meine liebste ich bin bei dir
+Unsere welt sie wird jetzt klein dann atmen wir beide ein
+
+Und gehen auf die letzte reiße
+Flüstere mit letzter kraft leise
+
+Jetzt sind wir hier
+Du und ich ein wir
+Die ganze zeit gelebt
+Jedes erbeben überlebt
+Auf unseren lebensweg
+
+Auf unseren lebensweg
+Für immer
+In liebe</div>
             </details>
           </div>
         </article>
@@ -501,7 +1080,6 @@
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="raunächte" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Raunächte" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -509,11 +1087,92 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Die nacht bricht herein 
+Draußen heult der Wind 
+Und der Schnee Tanzt
+
+Wenn die Welt im Schnee versinkt
+Und der Sturm sein Lied Singt 
+Zieh'n die Geister durch die Nacht
+Die Raunächte sind erwacht
+
+Aus den Häusern scheint es Hell 
+Draußen kommt der Nebel schnell
+Die alte Sage hört gut zu
+Kommt doch nicht zur ruh
+
+Hey Ho
+Von der Küste bis ins Land
+Die Sage ist bekannt 
+Nehmt euch in acht!
+Die Raunächte... 
+Sind erwacht
+
+Der Ofen Knistert Leise 
+Die alten flüstern weise 
+Alle Tiere schlafen, still und sacht,
+Die Nacht birgt alte Macht.
+
+Die Träume fliegen durch die Zeit,
+Wie Schiffe auf dem Meer der Ewigkeit,
+die Rauhnächte, geheim und klar,
+Zeigen uns, was einst war.
+
+Hey Ho
+Von der Küste bis ins Land
+Die Sage ist bekannt 
+Nehmt euch in acht!
+Die Raunächte... 
+Sind erwacht
+
+Räucherwerk zieht durch das Haus 
+Treiben Böse Seelen raus 
+Der Duft Zieht in jeden Raum 
+Bringt euch die Wahrheit im Traum 
+
+Vergesst nicht die Tiere dort
+Sonst nimmt man sie euch fort
+In den Raunächten offenbart 
+Die Zukunft, nun aufklart 
+
+Hey Ho
+Von der Küste bis ins Land
+Die Sage ist bekannt 
+Nehmt euch in acht!
+Die Raunächte... 
+Sind erwacht
+
+Dreizehn Wünsche schreibst du auf 
+Nimmst die Erfüllung in kauf 
+Zwölft davon soll'n in flammen steh'n
+Die Asche wird im kalten wind verweh'n
+
+Der Letze aber bleibt für dich
+Soll man selbst kümmern sich 
+Allein du selbst kannst es tun
+Erntest nach den Raunächten deinen Lohn
+
+Hey Ho
+Von der Küste bis ins Land
+Die Sage ist bekannt 
+Nehmt euch in acht!
+Die Raunächte... 
+Sind erwacht
+
+Und wenn der Morgen graut,
+Schnee und Wind nun abflaut 
+wissen wir, die Nacht war lang,
+Doch sie macht uns stark und nicht bang
+
+Hey Ho
+Von der Küste bis ins Land
+Die Sage ist bekannt 
+Nehmt euch in acht!
+Die Raunächte... 
+Sind erwacht</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="winterzeit" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Winterzeit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -521,11 +1180,69 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Der Wald schläft still und starr 
+Ich weiß noch wie es war 
+Der Schnee fällt leis 
+Die Welt wird weiß 
+
+Ich gehe durch den Wald und Singe....
+
+Winterzeit
+Ist Weihnachts Zeit 
+Winterzeit
+Macht euch bereit 
+Alles ist jetzt Weiß 
+Und überall glitzert Eis 
+
+Der Schnee Knackt unter mir
+Alles ist verschneit hier 
+Der Mond scheint hell und klar
+Die Luft ist frisch und wunderbar
+
+Winterzeit
+ist Weihnachts Zeit 
+Winterzeit
+Macht euch bereit 
+Alles ist jetzt Weiß 
+Und überall glitzert Eis 
+
+Es ist die schönste Zeit im Jahr 
+Weil alles glänzt so Wunderbar 
+Ich Fühle mich so ruhig und still 
+Die Gedanken frei und wild 
+
+Drum schaut euch um und freut euch auf
+
+Winterzeit
+Ist Weihnachts Zeit 
+Winterzeit
+Macht euch bereit 
+Alles ist jetzt Weiß 
+Und überall glitzert Eis 
+
+Häuser glänzen voller Lichter in der Stadt
+Der Schnee macht die Landschaft weiß und Glatt 
+Alle Leute freu'n sich sehr 
+Denn bald, ja bald kommt der Weihnachtsmann hier her
+
+Winterzeit
+ist Weihnachts Zeit 
+Winterzeit
+Macht euch bereit 
+Alles ist jetzt Weiß 
+Und überall glitzert Eis
+
+Ich komm nach haus und alle sind jetzt da 
+Familie und Freunde Singen Klar 
+Winterzeit
+Ist Weihnachts Zeit 
+Winterzeit
+Macht euch bereit 
+Alles ist jetzt Weiß 
+Und Leis...</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="weihnachtsmann sein" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weihnachtsmann sein" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -533,11 +1250,60 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich stehe hier und denke mir 
+was mach ich bloß mit dir?
+hab sowas noch nicht erlebt.
+Es ist so als ob die Erde Bebt 
+
+Weihnachtsmann sein ist nicht schwer 
+Gott hilf mir ich Zitter so sehr
+Doch alles wird jetzt gut 
+Drum mach es auch und fasse Mut.
+
+Rote Mütze und Mantel an
+Gott was hängt denn da noch dran? 
+Der Zettel vom letzen Jahr!
+Na super-wie wunderbar... 
+
+Weihnachtsmann sein ist nicht schwer 
+Gott hilf mir ich Zitter so sehr
+Doch alles wird jetzt gut 
+Drum mach es auch und fasse Mut.
+
+Junge? kannst du das auch wirklich tun? 
+Ich lache rau und frage mich was nun? 
+Mein Dad hatte ja so recht. 
+Weihnachtsmann zu sein ist nicht schlecht
+
+Weihnachtsmann sein ist nicht schwer 
+Gott hilf mir ich Zitter so sehr
+Doch alles wird jetzt gut 
+Drum mach es auch und fasse Mut.
+
+Ich Sehe lachende Kinder hier 
+Strahlende Augen glänzen vor mir 
+Das alles nur weil ich jetzt da bin 
+All die Arbeit und das zittern-
+machen jetzt sinn
+
+Weihnachtsmann sein ist nicht schwer 
+Gott hilf mir ich Zitter so sehr
+Doch alles wird jetzt gut 
+Drum mach es auch und fasse Mut.
+
+Was ich hier mach, kann jeder tun 
+Weihnachtsmann sein das kann ich nun 
+Kinder Herzen schalgen schnell 
+Ihr lachen Klingt so rein und hell 
+Das ist was mein Herz bewegt
+
+Weihnachtsmann sein ist nicht schwer 
+Gott hilf mir ich Zitter so sehr
+Doch alles wird jetzt gut 
+Drum mach es auch und fasse Mut.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die tiere erzählen" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Tiere Erzählen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -545,11 +1311,83 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Die Turm Uhr schlägt Mitternacht
+Ich Schleich mich raus zum Stall
+Und höre atemlos die Stimmen flüstern.
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Das Schaf es Blökt ganz Laut 
+Habt ihr schon das Kind geschaut? 
+So ruhig und lieb, liegt es da 
+Freut euch, der Heiland ist nun da
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Der Ochse brummt nur leis 
+Was das Schaf nur wieder weiß!
+Ich selbst hab ihn dort geseh'n 
+Es war so laut am Krähen.
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Da Meldet sich der Esel nun 
+Es hat geweint und ist nun am ruh'n
+Ein lächeln auf dem Gesicht es hat
+Ja wohl, seit ruhig es schläft jetzt grad.
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Das Kamel es seufzt ganz schwer
+Ich bracht die drei Könige her
+Von weit weg kommen wir 
+Folgten dem Stern nach hier
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Da Sprach der Engel zu den Vier
+Freut euch, der Sohn Gottes ist nun hier 
+Von nun an soll jedes Tier ob na ob fern 
+Für diese Nacht das Sprechen lern 
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Seit diesem Tag so heißt es hier
+Das nicht nur die Vier
+Sondern jedes Tier sprechen kann,
+Wie es nur ein Wunder tun kann.
+
+Wir Tiere erzählen von dieser Nacht 
+Die uns das Jesuskind gebracht 
+Frieden und Freude sollen jetzt kommen
+Eure Sorgen werden von euch genommen
+
+Seit jenem Abend nun kenn ich die Geschichte
+Ich hörte noch mehr was sie erzählen 
+Doch ich will euch nicht die Zeit stehlen 
+Am Heiligen Abend hört doch hin 
+Wenn die Stimmen der Tiere wieder erkling.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="farewell" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Farewell" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -557,11 +1395,75 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Every year on the same day
+The candle burns in every home
+It helps us find the right way
+
+Back to loved ones
+
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+Farewell
+
+With the light, the family prays
+That their loved ones will find their way
+And guard the house from envy and spite
+From all the spirits in the night
+
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+Farewell
+
+On Christmas Eve, many a heart
+Hopes to see their loved ones once more
+And speak to them, just one last time
+A final farewell for all of time
+
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+Farewell
+
+A mother who misses her son
+Lights the sacred candle and prays
+The father lost at sea so long ago
+Is awaited by his daughter’s gaze
+
+[Chorus]
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+Farewell
+
+When Christmas is gone
+All whisper softly their goodbye
+Farewell
+
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+
+Farewell
+Farewell
+Farewell
+Come back when the time is right
+The candle burns for you to night
+Farewell</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich bin der grinch" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Ich bin der Grinch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -569,11 +1471,64 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">OH NEIN!
+Nicht schon wieder...
+Jedes Jahr das selbe..
+BÄH ! 
+
+Schon wieder ist es Weihnachten 
+und ich höre wie alle erwachen 
+Überall ist es Freundlich und mehr 
+Ich Hasse es so sehr!
+
+Ich bin Der Grinch!
+Bei Weihnachten wird mir Schlecht
+Viel lachen und die lichter 
+Sind mir ein graus! 
+
+Als Kind war ich genau wie ihr
+Draußen spielen bis ich Frier 
+Hab mich auf IHN gefreut 
+Doch dann hab ich's eines tages bereut! 
+
+Ich bin Der Grinch!
+Bei Weihnachten wird mir Schlecht
+Viel lachen und die lichter 
+Sind mir ein graus! 
+
+An diesem Tag hab ich's gelernt
+und vom Weihnachtsmann geschwärmt
+Doch hat er mir nichts gebracht! 
+Bestimmt hat er über mich gelacht
+
+Ich bin Der Grinch!
+Bei Weihnachten wird mir Schlecht
+Viel lachen und die lichter 
+Sind mir ein graus!  
+
+Eines Tages hatte ich einen Plan!
+Die Geschenke der Kinder ich nahm
+Alle sollten mein nur sein 
+Ich höre schon das Schluchzen und Wein
+HAHAHAHA
+
+Ich bin Der Grinch!
+Bei Weihnachten wird mir Schlecht
+Viel lachen und die lichter 
+Sind mir ein graus!  
+
+Doch alles ging so schief und dann
+Fing mein Kaltes Herz zu schmelzen an..
+Ein Kind zeigt mir was Liebe ist
+Oh wie habe ich das vermisst...
+
+Ich bin Der Grinch!
+Bei Weihnachten wird mir warm
+Viel lachen und die lichter 
+War'n mir ein graus!</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="praise the lord" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Praise the Lord" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -581,11 +1536,90 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Oh Lord!
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Oh, the Savior is born in a poor stable.
+The night was clear, and the star shone brightly.
+The world was waiting for him, now he’s here 
+He brings us salvation and joy. . 
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Can you hear the angels singing songs of praise? 
+God the Father gave us his Son 
+so that we might find love and joy.
+Praise the Lord for the love he gives us.
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Jesus brings us hope and peace
+and takes away our sins.
+Let us all sing and praise him
+For he is the one who brings us hope
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Today is the day when the Son came to us 
+and blessed us with his goodness. 
+He did not have to be born into wealth 
+To lead us to the kingdom of heaven.
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Like the Son of God, spreading hope and love
+Get ready for the day of days when he comes
+With or without sin, we’re all the same to him
+Praise our Lord and praise his Son
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+so great!
+Let us celebrate His name,
+Celebrate Him — today!
+
+Let us all sing out and praise together,
+Thank God for all He’s given — forever.
+Let us celebrate His name!
+
+Oh, praise the Lord!
+Lord!
+His name is great — so great!
+So great!
+Let us celebrate His name,
+Celebrate Him — today!
+Forever and ever!</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die welt erstrahlt" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Welt erstrahlt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -593,11 +1627,92 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Weihnachtszeit, ist die schönste Zeit
+Alle machen sich bereit
+Nirgends herrscht der Neid
+Überall die Lichter glüh’n
+Sorgen aus dem Kopf entflieh’n
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+Wars and hate, they fill the air
+But love can still be everywhere
+Tonight let’s lay our pain aside
+And find some peace we cannot hide
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+La familia es lo más real
+Que nadie esté solo en Navidad
+Sé amable, da tu corazón
+El amor es la solución
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+Pour certains, le temps est dur
+Mais l’amour est la plus belle cure
+Un sourire peut guérir le cœur
+Et rallumer un peu de chaleur
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+Quando il mondo è buio e freddo
+Una luce nasce nel tuo volto
+Niente è perso, c’è speranza
+È nato il Re della speranza
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+Minna de te o toriatte
+Mirai e issho ni ikou
+Kokoro tsunagu hikari
+
+Die ganze Welt erstrahlt im Glück
+Wir schauen auf das Jahr zurück
+Alle sind wir jetzt hier
+Frieden auf Erden wollen wir
+Drum macht zu Weihnachten
+Aus Ihr ein Wir
+
+Frohe Weihnachten
+
+Merry Christmas
+
+Feliz Navidad
+
+Joyeux Noël
+
+Buon Natale
+
+Merī Kurisumasu</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="this is my country (live)" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: This is my Country (Live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -605,11 +1720,62 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">The old town’s shining bright tonight,
+Everyone’s filled with cheer,
+Every house is trimmed with lights,
+And the streets are white and clear.
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.
+
+My mom and dad, they’re getting old,
+But their hearts are warm as gold,
+Their son is coming home tonight,
+We’ll laugh and hug under the lights.
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.
+
+I’m driving home, my truck knows the way,
+To where my memories stay,
+Everyone’s there on this special day,
+I’m so glad — I wouldn’t change a thing today.
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.
+
+Oh, what a day, what a sight to see,
+Everyone I love’s right here with me,
+Whatever happens, who cares tonight,
+It’s Christmas Eve, it all feels right!
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.
+
+The day’s been long, the night’s grown still,
+We’re smiling soft, the air is chill,
+And once again I think out loud...
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.
+
+This is my country,
+I know every single road,
+It’s Christmas time again,
+Every light is shining bold.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="weißt du&#x27;s noch (live)" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weißt du&#x27;s noch (live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -617,11 +1783,64 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Das Haus geschmückt, die Stube warm
+die Kinder machen wieder Alarm 
+Du lächelst nur und bist ganz still
+Dann Flüster ich mit Gefühl
+
+Weißt du noch wie es war?
+Die Freude, Liebe alles da
+Gemeinsam sind wir alle hier
+Weißt du's noch? 
+
+Wir waren Kinder und freuten uns drauf
+Konnten nicht abwarten, alles nahm seinen Lauf
+Die Eltern waren Froh und freuten sich 
+So war Weihnachten für dich und mich
+
+Ich lächle sanft und frage dich...
+
+Weißt du noch wie es war?
+Die Freude, Liebe alles da
+Gemeinsam sind wir alle hier
+Weißt du's noch? 
+
+Ich denke gern an das zurück 
+An die zeit voll glück 
+Ein warmer Kamin der brennt
+Und man keine sorgen kennt 
+
+Du schaust auf zu mir und sagst...
+
+Weißt du noch wie es war?
+Die Freude, Liebe alles da
+Gemeinsam sind wir alle hier
+Weißt du's noch? 
+
+Heute sind wir, was unsere Eltern warn 
+Halten uns ganz fest und alles warm 
+Die Stimmung ist wie sie damals war 
+Nur andersrum und schöner sogar 
+
+Wir beide fragen uns zusamm...
+
+Weißt du noch wie es war?
+Die Freude, Liebe alles da
+Gemeinsam sind wir alle hier
+Weißt du's noch? 
+
+Und irgendwann wird es so sein 
+Das die Kinder, die heute lachen und auch Schrein 
+Morgen schon hier selber stehn 
+Und dann, es so wie wir jetzt sehn
+
+Weißt du noch wie es war?
+Die Freude, Liebe alles da
+Gemeinsam sind wir alle hier
+Weißt du's noch?</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="das ist weihnachten" data-album="snow and fire" data-category="album">
           <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Das ist Weihnachten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -629,7 +1848,67 @@
             <p class="song-meta">Snow and Fire · Season</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Jetzt ist es soweit, der Letze Song ist nun da.
+Und dieser Song soll uns alle dran erinnern 
+was Weihnachten überhaupt bedeutet. 
+Nämlich Frieden, Freude und
+Familie
+
+Die Stube ist warm und der Baum er glänzt 
+Die Kerzen brennen und das licht es tanzt 
+Alle sind versammelt, alle sind jetzt da 
+Ich Spüre die wärme und die Liebe ganz nah 
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht
+
+Das Jahr es ist fast am ende nun 
+Es ist jetzt zeit, die Gedanken ruhn 
+Denk nicht mehr an das was sein wird 
+verdränge alles was dich nur verwirrt 
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht
+
+Manche sind nicht mehr hier bei uns 
+Drum machen wir uns jetzt bewusst 
+Unsere Liebsten die nicht mehr dar 
+Wie schön es damals mit ihnen war 
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht
+
+Heute ist der Tag, an dem Frieden herrschen soll 
+Alle Kinder auf der Welt, sie freuen sich ganz doll
+Geschenke, Freude, Lachen machen die Herzen voll 
+Was Morgen ist das ist egal..... 
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht.
+
+Heute ist der Tag es ist soweit
+Macht euch jetzt bereit
+Weihnachten oh Weihnachten 
+Du stille Nacht.
+Hast uns heut Zusamm gebracht</div>
             </details>
           </div>
         </article>
@@ -649,11 +1928,88 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Verloren in der Stille der Welt
+Was ist nur passiert? 
+Jetzt bin ich hier und schau hinab 
+Vor mir dein kaltes Grab 
+
+Familie und Freunde reden mit mir 
+Doch ich denke nur, du bist nicht hier. 
+Wie ist es nur passiert? 
+Soviel fragen die niemand interessiert.
+
+Ein Tag wie jeder andere war
+Doch plötzlich warst du nicht mehr da
+Ein Tag der mich zerbrach 
+Und ein Messer in meine Seele stach. 
+Ich weiß ich bin noch stark 
+Doch überlebe ich diesen Tag? 
+
+Ich erinnere mich noch ganz genau 
+Wie ich dir beim abschied in die Augen schau
+Alles war so perfekt 
+Wir haben uns noch geneckt 
+
+Dann gingst du aus der Tür und meinem Leben
+Was hätte ich nicht alles gegeben
+Um noch einmal sagen zu können
+Ich Liebe dich und pass auf dich auf
+
+Ein Tag wie jeder andere war
+Doch plötzlich warst du nicht mehr da
+Ein Tag der mich zerbrach 
+Und ein Messer in meine Seele stach. 
+Ich weiß ich bin noch stark 
+Doch überlebe ich diesen Tag?
+
+Du hast das Auto nicht kommen sehn 
+wolltest nur schnell wieder zu mir gehen
+Hast deine Schlüssel vergessen 
+Als hätten wir nur den einen besessen.
+
+Ich hörte nur den Schlag und ein Menschen schrein 
+Erkannte die Stimme und mein Herz fror ein. 
+Ab da setzt meine Erinnerung aus
+Sperre alles aus meinen Gedanken raus. 
+
+Ein Tag wie jeder andere war
+Doch plötzlich warst du nicht mehr da
+Ein Tag der mich zerbrach 
+Und ein Messer in meine Seele stach. 
+Ich weiß ich bin noch stark 
+Doch überlebe ich diesen Tag? 
+
+Jetzt stehe ich hier und denke bei mir 
+Warum bist du nicht hier?!
+Mein Kopf ist Leer, ich vermisse dich sehr
+Mein Körper sagt ich kann nicht mehr! 
+
+Ich breche zusamm an deinem Grab
+Heule weil es an mir lag 
+Die Schuld dafür das du nicht mehr da 
+Liegt bei mir das ist doch wohl klar! 
+
+Ein Tag wie jeder andere war
+Doch plötzlich warst du nicht mehr da
+Ein Tag der mich zerbrach 
+Und ein Messer in meine Seele stach. 
+Ich weiß ich bin noch stark 
+Doch überlebe ich diesen Tag? 
+
+Natürlich kann ich nichts dafür
+Das weis ich tief in mir 
+Doch hätte ich nicht deine Schlüssel genomm 
+Wärst du an dem Tag nach hause gekomm..... 
+
+Ein Tag wie jeder andere war
+Doch plötzlich warst du nicht mehr da
+Ein Tag der mich zerbrach 
+Und ein Messer in meine Seele stach. 
+Ich weiß ich bin noch stark 
+Doch überlebe ich diesen Tag?</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="aufstehn" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Aufstehn" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -661,11 +2017,95 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Alte Männer haben zu viel Geld
+Sie regieren nur ihre Welt
+Führen Kriege um das was für sie zählt
+Interessieren sich nicht was andere Menschen Quält
+
+Panzer, Waffen und Gewalt 
+Über das Land viele Schüsse hallt 
+Wie soll das nur weiter gehen?!
+Menschen dieser einen Welt müssen...
+
+Aufstehn
+Wir haben nur diese Eine Welt
+Aufstehn
+Jede Stimme Zählt
+Aufstehn
+Wir wollen wieder Frieden sehn!
+Aufstehn
+Lasst es alle Hören!
+
+Der Mann der seine Frau nur Schlägt
+Sie vor Angst nicht von ihm geht
+Oh warum lässt er das nicht sein? 
+Könnte wieder mal nur Schrein 
+
+Doch die meisten Schauen nur noch weg
+Interessiert ihr Schicksal nur nen Dreck 
+Was auch immer hinter den Blauen flecken steht 
+Leider ist es meistens viel zu Spät
+
+darum müssen wir....
+
+Aufstehn
+Wir haben nur diese Eine Welt
+Aufstehn
+Jede Stimme Zählt
+Aufstehn
+Wir wollen wieder Frieden sehn!
+Aufstehn
+Lasst es alle Hören!
+
+Kinder die den Müll durch wühln 
+Kann ein Mensch da nichts bei Fühln? 
+Armut ist das Problem 
+Wollen manche Menschen das nicht sehn?!
+
+Die Mutter die ihr Kind fest hält 
+Alles was sie braucht ist ein bisschen Geld
+Der Hunger treibt ihr Streben an 
+Verkauft sich selbst, damit es essen kann
+
+Aufstehn
+Wir haben nur diese Eine Welt
+Aufstehn
+Jede Stimme Zählt
+Aufstehn
+Wir wollen wieder Frieden sehn!
+Aufstehn
+Lasst es alle Hören!
+
+Kriege, Hunger, Leid und mehr 
+Das alles interessiert uns sehr 
+Die Nachrichten sind voll davon 
+Was soll denn da noch komm? 
+
+Es ist Zeit sich nicht mehr aus zu ruhn 
+Denn jeder von euch kann was tun
+Ein Wort und eine Tat allein 
+Kann schon die Veränderung sein! 
+
+Aufstehn
+Wir haben nur diese Eine Welt
+Aufstehn
+Jede Stimme Zählt
+Aufstehn
+Wir wollen wieder Frieden sehn!
+Aufstehn
+Lasst es alle Hören!
+
+Aufstehn
+Wir haben nur diese Eine Welt
+Aufstehn
+Jede Stimme Zählt
+Aufstehn
+Wir wollen wieder Frieden sehn!
+Aufstehn
+Lasst es alle Hören!</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="sternenstaub" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Sternenstaub" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -673,11 +2113,58 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich erinnere mich an jene Nacht
+Zusammen haben wir sie draußen verbracht 
+Du Schaust in den Himmel hoch 
+Mein blick ruht nur auf dir.
+
+Meine Liebe zu dir ist so tief
+Auch wenn mein Leben vorher schief lief 
+Hast du mich geheilt
+Und wir haben alles zusammen geteilt
+
+Sternenstaub und Galaxien 
+Am Himmel vorüber ziehn 
+Du und Ich das ist was zählt
+Wir haben unser Glück selbst gewählt!
+
+Du sagst zu mir das ich dein Teddy bin 
+Zum Kuscheln und Trösten, das nehm ich hin 
+Ich werde dein ein und alles sein 
+Denn du bist mein und ich bin dein
+
+Es ist noch nicht so lange her
+Da hatte ich keine kraft mehr 
+Dann Traf ich dich dort in der Bar 
+Und plötzlich war mir alles klar! 
+
+Sternenstaub und Galaxien 
+Am Himmel vorüber ziehn 
+Du und Ich das ist was zählt
+Wir haben unser Glück selbst gewählt!
+
+Auf einmal schaust du mich an
+dein Lächeln schlägt mich in deinen Bann 
+Du hast gerade ein Stern leuchten sehn
+Sagst, du willst mit mir heute Nacht fliegen gehn! 
+
+Wir stehen auf und Laufen ins Haus 
+Schalten schnell alle lichter aus 
+Legen uns hin und lassen uns gehn
+Dann Lassen wir neue Sterne entstehen!
+
+Sternenstaub und Galaxien 
+Am Himmel vorüber ziehn 
+Du und Ich das ist was zählt
+Wir haben unser Glück selbst gewählt!
+
+Sternenstaub und Galaxien 
+Am Himmel vorüber ziehn 
+Du und Ich das ist was zählt
+Wir haben unser Glück selbst gewählt!</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich bin da (new recordet)" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ich bin da (New Recordet)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -685,11 +2172,73 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Diese Träume und Momente sie gehen davon
+Alles was ich denken kann ist alleine zu sein
+Immer wenn ich da sitze und meine Gedanken kreisen
+werde ich traurig und frage mich – warum?
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+Es gibt diese Tage, an denen ich glücklich bin.
+Da weiß ich wieder, was Leben ist.
+Doch dann kommt der Schlag mitten ins Gesicht
+Und schon lieg ich wieder am Boden und kann nicht mehr.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+Ohne meine Lieder bin ich verloren und leer.
+Was gäbe ich nur dafür, das zu teilen und mehr.
+Ich hoffe sehr, dass sie eines Tages kommt,
+In mein Leben tritt und meine Hand nimmt.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+In meinen Träumen lachen wir zusamm’
+Wir sind ein Paar und leben unser Leben.
+Sie versteht mich von Anfang an,
+Keine Lügen, kein Verstecken – alles offen und klar.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+Wir würden unsere Leidenschaft teilen,
+uns gegenseitig hoch helfen, wenn einer unten liegt.
+Ich möchte sie finden und halten,
+aber leider wird sie wohl nie bei mir sein.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+Ich habe viel erlebt in den letzten Jahr’n,
+hab verloren und getrauert, bin aufgestanden und gefallen.
+Alles was ich will, ist nur eine Schulter, die mich trägt —
+jemand, dem ich für immer mein Herz schenke.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg der einsam ist.
+
+Ich bin Da, am Anfang meines Weges
+Ich bin Da, wo ich nie mehr hin will
+Ich bin da, mit leeren Händen
+Auf einem Weg zu uns.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wenn alles in mir schreit" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wenn alles in mir Schreit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -697,11 +2246,109 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Sie sagen du bist doch normal.
+Das bisschen Müde ist doch egal.
+Du findest bestimmt noch jemanden
+Bist doch eigentlich Scharmant.
+Du kriegst das hin
+Doch verstehen könnt ihr mich nicht 
+Ich zeige mein lächeln im Gesicht
+Zu oft setz ich die Maske auf 
+Wie es in mir aus sieht, da kommt ihr nicht drauf! 
+
+Wenn alles in mir schreit!
+Wütet der Sturm in mir
+Gedanken
+Gefühle 
+Ich warte, dass ich explodier!
+
+Wenn alles in mir Schreit!
+Ist die Welt um mich herum zu Laut
+Habe mir einen Panzer gebaut 
+Die Welt mir mein Leben raubt
+
+In mir tobt der Ewige Sturm
+Es aus zu sprechen bringt mich fast um
+Wie soll ich erklären was ihr nicht versteht?
+Ihr wisst doch nicht mal wie es mir geht! 
+Alleine unter einer Million 
+Die Einsamkeit ist wohl mein Lohn
+Was auch immer ich will 
+Ich kann es nicht sagen, bleibe still 
+
+Wenn alles in mir schreit!
+Wütet der Sturm in mir
+Gedanken
+Gefühle 
+Ich warte, dass ich explodier!
+
+Wenn alles in mir Schreit!
+Ist die Welt um mich herum zu Laut
+Habe mir einen Panzer gebaut 
+Die Welt mir mein Leben raubt
+
+Verdammt was ist mit mir los?
+Sitze da, die Hände im Schoss 
+Ohne Richtung und Ziel auf dem ewigen Fluss
+Mit Zuviel Gedanken die ich sortieren muss! 
+Alt und Verbraucht von leben geschlaucht
+Für die Liebe und Leben zu viel verbraucht 
+Ich bin Feige und kann nicht mehr
+Das Kämpfen, es schmerzt schon zu sehr!
+
+Wenn alles in mir schreit!
+Wütet der Sturm in mir
+Gedanken
+Gefühle 
+Ich warte, dass ich explodier!
+
+Wenn alles in mir Schreit!
+Ist die Welt um mich herum zu Laut
+Habe mir einen Panzer gebaut 
+Die Welt mir mein Leben raubt 
+
+Ihr sagt ihr kennt mich so gut
+Doch seht ihr nicht meinen fehlenden Mut? 
+Meinen Inneren Druck den fühle nur ich 
+Scheiße! warum begreift ihr das nicht?!
+In mir da tobt dieser Sturm
+Ich falle von einem Turm
+Blitze schlagen in mich ein!
+Löse mich auf, will nicht mehr sein
+
+Wenn alles in mir schreit!
+Wütet der Sturm in mir
+Gedanken
+Gefühle 
+Ich warte, dass ich explodier!
+
+Wenn alles in mir Schreit!
+Ist die Welt um mich herum zu Laut
+Habe mir einen Panzer gebaut 
+Die Welt mir mein Leben raubt
+
+Ich Stehe hier, mein inneres schmerzt 
+wehrend um mich herum alles scherzt 
+Ohne klar zu denken schaffe ich es zu stehn
+Meinen weg doch noch zu gehen
+Wie lange noch das weiß ich nich
+Bestimmt gibt es dich für mich 
+Habe ich den Mut in die Welt zu gehen?
+Lerne ich dann wieder aufrecht zu stehen? 
+
+Wenn alles in mir schreit!
+Wütet der Sturm in mir
+Gedanken
+Gefühle 
+Ich warte, dass ich explodier!
+
+Wenn alles in mir Schreit!
+Ist die Welt um mich herum zu Laut
+Habe mir einen Panzer gebaut 
+Die Welt mir mein Leben raubt</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="halt mich fest" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Halt mich fest" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -709,11 +2356,67 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich komme in die Küche und sehe dich 
+Mein Herz und meine Seele glühen innerlich 
+Dein Anblick verzaubert mich immer noch 
+Habe nicht gewusst das es geht und doch.....
+
+Wünsche ich mir nur....
+
+Halt mich fest
+Ich will deine nähe spürn
+Halt mich fest
+Unsere herzen sich berühren
+Halt mich fest 
+Alle solln es sehn 
+Ich lasse dich nie wieder gehn   
+
+Wiedermal war mein Tag echt mies
+Die Welt und jeder darin warn zu mir fies
+Du lächelst mich an und die Wolken sie gehn
+Nun kann ich wieder die Sonne sehn 
+
+Und ich flüster nur.....
+
+Halt mich fest
+Ich will deine nähe spürn
+Halt mich fest
+Unsere herzen sich berühren
+Halt mich fest 
+Alle solln es sehn 
+Ich lasse dich nie wieder gehn  
+
+Die Tränen in deinem Gesicht 
+Glaub ja nicht das kümmert mich nicht 
+Was ist denn passiert frage ich leis 
+Du erklärst es mir damit ich es weiß 
+
+Am ende flüsterst du....
+
+[Chorus]
+Halt mich fest
+Ich will deine nähe spürn
+Halt mich fest
+Unsere herzen sich berühren
+Halt mich fest 
+Alle solln es sehn 
+Ich lasse dich nie wieder gehn 
+
+Zusammen haben wir die Kraft 
+Haben schon viel durch gemacht 
+Stehen im Leben wie ein Fels 
+Ich hoffe das du es nie in frage stellst 
+
+Halt mich fest
+Ich will deine nähe spürn
+Halt mich fest
+Unsere herzen sich berühren
+Halt mich fest 
+Alle solln es sehn 
+Ich lasse dich nie wieder gehn</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="schließe die augen" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Schließe die Augen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -721,11 +2424,48 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Draußen ist es Dunkel und die Nacht kommt
+Der Tag war ansträngend und Schön 
+Darum Leg dich hin und atme durch 
+Und ich singe dir ganz ruhig
+
+Schließe die Augen und hör zu 
+Deine Gedanken kommen zur ruh 
+Lass alles jetzt hinter dir 
+Denn du bist jetzt bei mir 
+
+Ich halte deine Hand und lasse nicht los 
+Leg deinen Kopf auf meinen Schoss.
+Ich Streichle dein Gesicht 
+Böse Geister kommen jetzt nicht
+
+Schließe die Augen und hör zu 
+Deine Gedanken kommen zur ruh 
+Lass alles jetzt hinter dir 
+Denn du bist jetzt bei mir 
+
+Ich flüstere dir leise ins Ohr 
+In deinen Träumen kommt jetzt Liebe vor. 
+Nur Glück und Frieden werden dort sein 
+Dort kann man einfach nicht Weinen 
+
+Schließe die Augen und hör zu 
+Deine Gedanken kommen zur ruh 
+Lass alles jetzt hinter dir 
+Denn du bist jetzt bei mir 
+
+Jetzt geht dein Atem ruhig und Still 
+Ich denke das ist alles was ich will 
+Ein leises Lächeln auf deinem Gesicht 
+Das gibt mir ein inneres Licht.
+
+Schließe die Augen und hör zu 
+Deine Gedanken kommen zur ruh 
+Lass alles jetzt hinter dir 
+Denn du bist jetzt bei mir</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="der letzte funke" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Der letzte Funke" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -733,11 +2473,78 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Schon wieder stehe ich am Abgrund 
+Sehe in das schwarze Loch 
+Mein Leben läuft nicht rund 
+Und trotzdem Bin ich noch 
+
+Mehr als Schwarz und Weiß kann ich nicht sehn
+Will wieder mit dem Kopf durch die Wand gehen 
+Immer die selben Fehler, ich lern auch nicht dazu 
+Warum fühl ich mich so Leer? was mach ich nun? 
+
+Der letzte Funken brennt so hell 
+Aufgeben das geht schnell 
+Wieder und wieder auf zu stehen 
+Meinen eigenen Weg zu gehen 
+
+Der letzte Funke ist was zählt
+Egal wie das leben einen Quält
+Der Sumpf den ich Leben nenn
+Lasse ich mit ihm am Ende nieder Brenn
+
+Ein Tag kann so grausam sein 
+Sitze da und bin nur am Wein 
+Sehe die Sonne nicht mehr 
+Mein Leben kalt und Leer 
+
+Die Letze Hoffnung ist noch da 
+Was auch immer letztens war 
+Es gibt immer noch ein teil der scheint 
+Auch wenn man nur noch weint 
+
+Der letzte Funken brennt so hell 
+Aufgeben das geht schnell 
+Wieder und wieder auf zu stehen 
+Meinen eigenen Weg zu gehen 
+
+Der letzte Funke ist was zählt
+Egal wie das leben einen Quält
+Der Sumpf den ich Leben nenn
+Lasse ich mit ihm am Ende nieder Brenn
+
+Doch immer wieder zieht es mich hinab 
+Hab im Leben nicht viel glück gehabt 
+Gewonnen und verloren das kenn ich schon 
+Doch treffe nie den richtigen Ton 
+
+Ich habe zu viel gegeben und Kämpfe nicht mehr 
+Wo nehme ich bloß die letze Kraft her? 
+Noch einmal ein Schimmer in der Dunkelheit 
+Mache mich wieder zum Sprung bereit!
+
+Der letzte Funken brennt so hell 
+Aufgeben das geht schnell 
+Wieder und wieder auf zu stehen 
+Meinen eigenen Weg zu gehen 
+
+Der letzte Funke ist was zählt
+Egal wie das leben einen Quält
+Der Sumpf den ich Leben nenn
+Lasse ich mit ihm am Ende nieder Brenn
+
+Der letzte Funken brennt so hell 
+Aufgeben das geht schnell 
+Wieder und wieder auf zu stehen 
+Meinen eigenen Weg zu gehen 
+
+Der letzte Funke ist was zählt
+Egal wie das leben einen Quält
+Der Sumpf den ich Leben nenn
+Lasse ich mit ihm am Ende nieder Brenn</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wiedermal" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wiedermal" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -745,11 +2552,69 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Es ist Lange her das ich nicht geweint hab.
+So lange schon fühl ich mich taub
+Die Sonne ist bedeckt vom Regen 
+Mein Herz zerfällt zu Staub. 
+
+In Meinem Leben Fehlt so vieles 
+Doch was mir wirklich fehlt bist du 
+Ich kann nicht mehr klar denken
+Verdammt was mach ich nu ? 
+
+Wiedermal hab ich an dich gedacht
+Wiedermal hab ich geheult
+Wiedermal bist du nicht mehr da!
+Wieder weiß ich nicht was war. 
+Und doch mach ich weiter !
+
+Lange schon ist es her und ich erinnere mich sehr
+Ein ganz normaler Tag wurde zum Alptraum 
+Warum hab ich das nicht kommen sehn? 
+Du wolltest wohl schon lange gehn.
+
+Jedes Wort von dir hat mir weh getan 
+Du wolltest nicht mehr bei mir sein
+Kannst mich nicht mehr ertragen oh nein 
+Deine Liebe ist erstarrt, war schon immer zu zart. 
+
+Wiedermal hab ich an dich gedacht
+Wiedermal hab ich geheult
+Wiedermal bist du nicht mehr da!
+Wieder weiß ich nicht was war. 
+Und doch mach ich weiter !
+
+Die letzten worte von dir hallen nach 
+mein Herz es liegt seit dem brach 
+Was auch immer gewesen ist 
+Die ganze Zeit hab ich dich vermisst!
+
+Am Ende bin ich nun doch allein 
+Mein Herz ist gebrochen und in zwei 
+Vielleicht kommt jemand und macht es ganz 
+Und zeigt mir wieder wie man Tanzt 
+
+zu Zweit.....
+
+Wiedermal hab ich an dich gedacht
+Wiedermal hab ich geheult
+Wiedermal bist du nicht mehr da!
+Wieder weiß ich nicht was war. 
+Und doch mach ich weiter!
+
+Bis heute wusste ich nicht was war. 
+Was damals mit uns geschah 
+Doch ich hab dich gesehn
+neben einem Anderen Stehn! 
+
+Wiedermal hab ich an dich gedacht
+Wiedermal hab ich geheult
+Wiedermal bist du nicht mehr da!
+Wieder weiß ich nicht was war. 
+Und doch mach ich weiter!</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ohne euch" data-album="lauter als die stille" data-category="album">
           <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ohne euch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -757,7 +2622,80 @@
             <p class="song-meta">Lauter als die Stille · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich bin hier oben und ihr seid da
+Was ich mache das ist klar
+Doch was wäre ich alleine hier?
+Na was glaub denn ihr?!
+
+Ohne euch wär ich allein!
+Ohne euch will ich nicht mehr sein 
+Ohne euch wäre die Welt nur Grau 
+Darum lassen wir sie in Flammen steht!
+
+Ohne euch wäre ich allein!
+Ohne euch da ist es Still 
+Ohne euch das ist wahr 
+Währe das Leben nur halb so wunderbar 
+
+Jeder Text den ich schreib 
+Bei euch in Erinnerung bleibt
+Ihr seid meine Therapie 
+So glücklich war ich nie!
+
+Ohne euch wär ich allein!
+Ohne euch will ich nicht mehr sein 
+Ohne euch wäre die Welt nur Grau 
+Darum lassen wir sie in Flammen steht!
+
+Ohne euch wäre ich allein!
+Ohne euch da ist es Still 
+Ohne euch das ist wahr 
+Währe das Leben nur halb so wunderbar 
+
+Was ihr mir gebt ist was keiner kann 
+Setzt mein kleines Herz in Flamm 
+Ich gebe euch ein Stück von mir 
+Denn was ich brauche das seid ihr!
+
+Ohne euch wär ich allein!
+Ohne euch will ich nicht mehr sein 
+Ohne euch wäre die Welt nur Grau 
+Darum lassen wir sie in Flammen steht!
+
+Ohne euch wäre ich allein!
+Ohne euch da ist es Still 
+Ohne euch das ist wahr 
+Währe das Leben nur halb so wunderbar 
+
+Und wenn alles mal zu ende ist
+Dann möchte ich das ihr nun wisst 
+Egal wann und wo ich bin 
+Eure Stimmen sind jetzt in mir drin!
+
+Ohne euch wär ich allein!
+Ohne euch will ich nicht mehr sein 
+Ohne euch wäre die Welt nur Grau 
+Darum lassen wir sie in Flammen steht!
+
+Ohne euch wäre ich allein!
+Ohne euch da ist es Still 
+Ohne euch das ist wahr 
+Währe das Leben nur halb so wunderbar 
+
+Danke an alle die hier sind! 
+Und danke auch an alle da draußen
+Die meine Songs hören und mögen.
+Ihr seid die wahre Magie
+
+Ohne euch wär ich allein!
+Ohne euch will ich nicht mehr sein 
+Ohne euch wäre die Welt nur Grau 
+Darum lassen wir sie in Flammen steht!
+
+Ohne euch wäre ich allein!
+Ohne euch da ist es Still 
+Ohne euch das ist wahr 
+Währe das Leben nur halb so wunderbar</div>
             </details>
           </div>
         </article>
@@ -777,11 +2715,61 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Es ist schon lange her bei mir.
+Ich war ein Teenager und nicht mehr.
+War nicht Schön und nicht beliebt. 
+Für nen Kind wohl nichts schlimmeres gibt. 
+
+Viele Freunde hatte ich nicht.
+Jeder Tag war ein Kampf.
+Mobbing und Spaß
+Immer im Wechsel, das war so Krass.
+
+Erste Liebe 
+Erster Schmerz
+Keinen Mut und Zuviel Herz.
+Hab Heimlich an Sie gedacht. 
+Was wäre gewesen? 
+Hätte ich den Mut gehabt. 
+
+Ich kam in die neue Schule
+Allein und unbekannt.
+Fand ein Paar Freunde 
+Wir waren wie ein Team 
+
+Doch unerwartet kommt es immer. 
+Und leider wurds noch schlimmer.
+Ich Verliebte mich in Sie. 
+Heute weiß ich, mehr als Freunde 
+Wurde es nie. 
+
+Erste Liebe 
+Erster Schmerz
+Keinen Mut und Zuviel Herz.
+Hab Heimlich an Sie gedacht. 
+Was wäre gewesen? 
+Hätte ich den Mut gehabt. 
+
+Zu Verliebt und weg zu gehen
+Zu Feige um es ihr zu gestehen.
+Tag für Tag mit ihr zusammen.
+Musste die Liebe in mir verbannen.
+
+Heute bin ich Alt und Grau
+Wenn ich jetzt auf die Zeit zurück schau.
+Lächle ich in mich hinein
+Es Sollte wohl nicht sein.
+Hab wieder was fürs Leben gelernt. 
+
+Erste Liebe 
+Erster Schmerz
+Keinen Mut und Zuviel Herz.
+Hab Heimlich an Sie gedacht. 
+Was wäre gewesen? 
+Hätte ich den Mut gehabt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="gefunden" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -789,11 +2777,67 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Die Geschichte begann
+Wie sie nur beginnen kann
+Ich hab sie nicht gesucht 
+Und doch 
+Fand ich sie.
+
+Mehr zufall als alles andere
+Ging alleine Durch die Stadt.
+Es war nur ein Blick 
+Aber er traf mich 
+Und setzte mich Schachmatt.
+
+Nicht Gesucht und doch gefunden.
+Mein Herz dreht seine Runden.
+Für immer zusammen, ein Weg zu Zweit.
+Sind beide für ein uns bereit.
+Die Reise beginnt
+Für 
+Uns. 
+
+Sie Fragte mich sofort
+An diesem Seltsamen Ort.
+Nummern wurden getauscht.
+Was folgte war ein Rausch. 
+
+Viele Treffen folgten dann 
+Das ist wohl was man Volltreffer nennen kann.
+Je mehr wir uns verstanden.
+Desto besser wir uns fanden.
+
+Diese Zeit werd ich nie vergessen....
+
+Nicht Gesucht und doch gefunden.
+Mein Herz dreht seine Runden.
+Für immer zusammen, ein Weg zu Zweit.
+Sind beide für ein uns bereit.
+Die Reise beginnt
+Für 
+Uns. 
+
+Sie machte mich zum Mann 
+Dachte nicht das es so passieren kann.
+Wir schwebten auf Wolke Sieben
+Erfuhr was es heißt wirklich zu Lieben.
+
+Ich gab ihr alles was ich konnte 
+Meine Seele gehörte ihr.
+Es war nicht mehr nur ich, es war jetzt ein Wir.
+Was auch immer noch so kommt, mein Herz es gehört...
+Ihr... 
+
+Nicht Gesucht und doch gefunden.
+Mein Herz dreht seine Runden.
+Für immer zusammen, ein Weg zu Zweit.
+Sind beide für ein uns bereit.
+Die Reise beginnt
+Für 
+Uns.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="zerfetztes herz" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Zerfetztes Herz" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -801,11 +2845,76 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Hörst du die Melodie im Radio? 
+Sie Spielen unser Lied.
+Träume und Erinnerungen
+Versetzen mir nen Hieb. 
+Ich habe gedacht das mit uns.
+Wird ewig halten, egal was kommt.
+Doch Nun Sitze ich hier alleine 
+Ohne dich....
+
+Ich Liebe dich
+Hast du gesagt 
+Ich brauche dich
+Hast du geklagt
+Es ist nichts
+Waren deine Worte zuletzt
+Nun hast du mit Freude mein Herz zerfetzt
+
+Es war doch alles wie im Traum
+Ein Haus ,Ein Hund und ein Baum.
+Alles war wie wir es wollten.
+Hatten noch soviel vor, wir Zwei.
+Doch Es fing wohl langsam an.
+Kann nicht genau sagen wann.
+War ich nicht mehr gut genug? 
+Oder alles nur selbst betrug? 
+
+Ich Liebe dich
+Hast du gesagt
+Ich brauche dich
+Hast du geklagt
+Es ist nichts
+Waren deine Worte zuletzt
+Nun hast du mit Freude mein Herz zerfetzt
+
+Nur ein Kollege, hast du gesagt.
+Das du ihn magst, war klar. 
+Doch ich hab gedacht, Lass ihr Raum.
+Du hast mich Betrogen, wer weiß wie oft.
+Hast mich nur belogen, was ihn angeht.
+War es Falsch dir zu Vertrauen? 
+Oder dein Plan, alles zu versaun. 
+Nein
+Das ist nur der Schmerz der das zu mir sagt....
+
+Ich Liebe dich
+Hast du gesagt 
+Ich brauche dich
+Hast du geklagt
+Es ist nichts
+Waren deine Worte zuletzt
+Nun hast du mit Freude mein Herz zerfetzt
+
+Dunkle Wolken über mir.
+Tiefe Schatten in meinem Herz.
+Am Ende bin ich nicht Schlauer.
+Bis Heute ist mir nichts Klar.
+Ich habe meine Fehler gemacht. 
+Das ist doch normal
+oder?
+
+Ich Liebe dich
+Hast du gesagt 
+Ich brauche dich
+Hast du geklagt
+Es ist nichts
+Waren deine Worte zuletzt
+Nun hast du mit Freude mein Herz zerfetzt</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="krone richten" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Krone richten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -813,11 +2922,71 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Neue Liebe, neues Glück?
+Das klingt doch nur verrückt.
+Lag am Boden und war allein.
+Was auch immer…
+Schluss mit Weinen.
+Junge, steh jetzt auf.
+Heb deinen Arsch wieder hoch.
+Komm endlich raus aus diesem Loch.
+Das schaffst du, du kannst das doch.
+
+Immer wieder falle ich hin,
+Denke zu viel an den Sinn.
+Manchmal tut es noch weh,
+Aber das ist okay.
+Deshalb:
+Aufstehen, Krone richten,
+Der Weg ist das Ziel.
+
+Der Alltag hat mich wieder.
+Ich höre wieder meine Lieder.
+Bin langsam wieder klar,
+Denke nicht mehr so oft an das, was war.
+Ohne Hilfe hab ich es geschafft,
+Schmore nicht mehr im eigenen Saft.
+Seht mich an, ich lebe noch,
+Sehe langsam das Ende des Tunnels.
+
+Und doch
+
+Immer wieder falle ich hin,
+Denke zu viel an den Sinn.
+Manchmal tut es noch weh,
+Aber das ist okay.
+Deshalb:
+Aufstehen, Krone richten,
+Der Weg ist das Ziel.
+
+Alles wird wieder hell,
+Der Regen weicht aus meinem Kopf.
+Die Wolken verziehen sich schnell,
+Packe mein Leben beim Schopf.
+Fühl mich besser, bin wieder da.
+Der Schmerz kommt zwar wieder,
+Aber ich bleib klar.
+Jetzt ist die Zeit, wieder rauszugehen
+Und wieder aufrecht zu stehen.
+
+Immer wieder falle ich hin,
+Denke zu viel an den Sinn.
+Manchmal tut es noch weh,
+Aber das ist okay.
+Deshalb:
+Aufstehen, Krone richten,
+Der Weg ist das Ziel.
+
+Immer wieder falle ich hin,
+Denke zu viel an den Sinn.
+Manchmal tut es noch weh,
+Aber das ist okay.
+Deshalb:
+Aufstehen, Krone richten,
+Der Weg ist das Ziel.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="traumfrau" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Traumfrau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -825,11 +2994,61 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Rechner an, Kaffee bereit,
+Auf geht’s, ich bin soweit.
+Hier ’ne App und da ’ne Seite,
+Ich surfe durch die große Weite.
+Lese viel und denke nach,
+Mann, wer hätte das gedacht.
+Doch die Frage, die bleibt:
+Wo find ich sie?
+Und ist sie „Frau Right“?
+
+Wo bist du?
+Wo bleibst du?
+Wann kommst du zu mir?
+Wünschte, du wärst schon hier.
+Immer einen Klick entfernt,
+Oder haben wir uns schon kennengelernt?
+Meine Traumfrau… für mich.
+
+Ich hab so viel Bilder im Kopf,
+Blonder, schwarzer, brauner Schopf.
+Es ist so verdammt schwer,
+Blaue, grüne, graue Augen –
+Oh Mann, ich kann nicht mehr.
+Was will ich denn nun?
+Wie sieht sie nur aus?
+Komm ich aus diesem Kreis
+Wieder raus?
+
+Wo bist du?
+Wo bleibst du?
+Wann kommst du zu mir?
+Wünschte, du wärst schon hier.
+Immer einen Klick entfernt,
+Oder haben wir uns schon kennengelernt?
+Meine Traumfrau… für mich.
+
+Doch dann wird es mir klar,
+Das, was ich will, ist im Kopf schon da.
+Ich hab das Bild vor mir stehen,
+So kann sie aussehen.
+Irgendwie ist es mir egal,
+Warum mach ich draus ’ne Qual?
+Es kann doch so einfach sein:
+Ein Lächeln, ein Wort – und ich bin dein.
+
+Wo bist du?
+Wo bleibst du?
+Wann kommst du zu mir?
+Wünschte, du wärst schon hier.
+Immer einen Klick entfernt,
+Oder haben wir uns schon kennengelernt?
+Meine Traumfrau… für mich.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ein schritt vor" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ein Schritt vor" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -837,11 +3056,83 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Lange her, dass mich jemand so packt.
+Ich wollte mich nicht mehr verlieben
+Und doch ist das Herzklopfen wieder da.
+Wir haben uns nicht gesucht und doch gefunden.
+Haben beide unsere Wunden.
+Doch etwas in mir ist noch verletzt.
+
+Ein Schritt vor
+Und zehn zurück.
+Das große Zweifeln
+Macht mich verrückt.
+Ich will nicht mehr alleine sein.
+Doch darf ich wieder vertrauen?
+Ja oder nein?…
+
+Wir lachen und scherzen zusammen.
+Sind lange spazieren gegangen.
+Geredet, bis wir nur noch stumm waren.
+Doch selbst das Schweigen tat so gut.
+Ich merk, wie mein Herz in mir ruht.
+Doch ein Stich in mir hält mich zurück.
+
+Ein Schritt vor
+Und zehn zurück.
+Das große Zweifeln
+Macht mich verrückt.
+Ich will nicht mehr alleine sein.
+Doch darf ich wieder vertrauen?
+Ja oder nein?…
+
+Es ist anders als vorher.
+Nicht wild und stürmisch.
+Auf einer Ebene, wir zwei.
+Ist es mehr als nur Freunde?
+Sollte es wahr sein?
+Mein Inneres tanzt vor Freude,
+Doch mein Herz fängt an zu weinen.
+
+Ein Schritt vor
+Und zehn zurück.
+Das große Zweifeln
+Macht mich verrückt.
+Ich will nicht mehr alleine sein.
+Doch darf ich wieder vertrauen?
+Ja oder nein?…
+
+Fühle mich wie eine Schildkröte,
+Die ihren Kopf hervorstreckt.
+Immer bereit, sich zurückzuziehen.
+Ist sie nicht da, dann will ich zu ihr.
+Ist sie bei mir, werde ich unruhig wie ein Tier.
+Wie kann ich meinen Kopf nur ausschalten?
+Mein Herz wieder sprechen lassen?…
+
+Ein Schritt vor
+Und zehn zurück.
+Das große Zweifeln
+Macht mich verrückt.
+Ich will nicht mehr alleine sein.
+Doch darf ich wieder vertrauen?
+Ja oder nein?…
+
+Am Ende wage ich den Sprung,
+Lasse mich fallen bis zum Grund.
+Kopf aus und Herz an.
+Was ist schon verkehrt daran…
+
+Ein Schritt vor
+Und zehn zurück.
+Das große Zweifeln(Macht mich verrückt.
+Ich will nicht mehr alleine sein.
+Doch darf ich wieder vertrauen?
+
+Ja oder nein?…</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich bleib bei dir" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ich bleib bei dir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -849,11 +3140,49 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich mache meine Augen auf.
+Sehe dich neben mir.
+Das Zimmer im Dunkeln liegt.
+Bin ganz nah bei dir.
+Dein Atem geht ruhig.
+Du schläfst tief und fest.
+Was hab ich nur für ein Glück?
+
+Jeder Tag ist ein Geschenk
+Jeder Tag ist so neu.
+Jeder Tag ist anders mit dir.
+Was auch immer geschieht.
+Ich bleibe bei dir.
+
+Ich beobachte dich ganz leise.
+Den Schlaf und deine Traumreise.
+Ein Zucken hier und da.
+Machst mir eines klar.
+Du bist und bleibst die Richtige für mich.
+Egal was kommt, ich liebe dich.
+
+Jeder Tag ist ein Geschenk
+Jeder Tag ist so neu.
+Jeder Tag ist anders mit dir.
+Was auch immer geschieht.
+Ich bleibe bei dir.
+
+Dann schlägst du die Augen auf.
+Dein Blick noch verschlafen.
+Ein zartes Lächeln auf deinem Gesicht.
+Es fühlt sich an, als überrollt es mich.
+Ich streichele deine Wange ganz leicht.
+Unser Glück hat trotz allem
+Noch keinen Tiefpunkt erreicht.
+
+Jeder Tag ist ein Geschenk
+Jeder Tag ist so neu.
+Jeder Tag ist anders mit dir.
+Was auch immer geschieht.
+Ich bleibe bei dir.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="am boden" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Am Boden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -861,11 +3190,69 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Meine Stimme kommt langsam wieder.
+Die Tränen bleiben aus.
+Doch es drückt mich noch nieder.
+Ich will hier wieder raus.
+Alles ist so Dumpf.
+Kein gefühl mehr in mir.
+Warum ist es so gekommen?
+Alles wegen ihr?....
+
+Wieder
+Zuviel gewagt.
+Wieder
+Ein Dolch in meinem Herzen.
+Wieder
+Bin Ich alleine.
+
+Wir waren doch so glücklich.
+Haben viel zusamm gelacht. 
+Oder verschleiert sich der Rückblick?
+Was hab ich bloß gemacht?
+Kann nicht genau sagen wo es anfing.
+Keine Ahnung wie es weiter geht.
+Eines ist nur sicher, das einer von uns ging.
+Und das mein Leben auf dem Kopf steht.
+
+Wieder
+Zuviel gewagt.
+Wieder
+Ein Dolch in meinem Herzen.
+Wieder
+Bin Ich alleine.
+
+Du sagtest mir das es kein vertrauen mehr gibt.
+Das gab mir den Letzten hieb.
+Jetzt sitze ich hier ohne dich.
+Mein Kopf weiß es schon längst....
+Das es kein wir mehr gibt.
+Dunkel greift die Leere nach mir.
+Trotz allem, hoffe ich, es geht dir besser....
+Als mir....
+
+Wieder
+Zuviel gewagt.
+Wieder
+Ein Dolch in meinem Herzen.
+Wieder
+Bin Ich alleine.
+
+Ich kann nicht mehr...
+Hab Zuviel um uns gekämpft.
+Viel zu viel hab ich mich aufgegeben.
+Und am ende habe ich nicht nur mich.
+Sonder auch dich verloren....
+
+Wieder
+Zuviel gewagt.
+Wieder
+Ein Dolch in meinem Herzen.
+Wieder
+Bin Ich alleine.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="schwerelos" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Schwerelos" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -873,11 +3260,61 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Alles Dunkel um mich herum.
+Kein Lachen und kein Weinen.
+Die Welt ist aus geblendet. 
+Meine Gefühle sind Stumpf. 
+Der Erste Schock ist weg.
+Nun sitze ich hier und fühl mich.....
+
+Schwerelos wie ein Astronaut. 
+Leichtigkeit um mich herum.
+Schwerelos wie ein Astronaut.
+Alles Schwarz in mir drin. 
+Was ich spüre ist dahin..... 
+
+Man sagt die Zeit heilt alle Wunden.
+Ich glaub es grade nicht. 
+Der Tag hat Zuviel Stunden...
+Und viel zu viel Licht. 
+Ich Lächle für die Außenwelt. 
+Doch im inneren herrscht nur leere. 
+
+Schwerelos wie ein Astronaut. 
+Leichtigkeit um mich herum.
+Schwerelos wie ein Astronaut.
+Alles Schwarz in mir drin. 
+Was ich spüre ist dahin..... 
+
+Habe gedacht das ich alles erlebt hab.
+Vom Höhenflug bis Tiefen fall. 
+Doch was jetzt ist, das ist noch mehr.... 
+Kein Feuerwerk und kein Regen in mir drin.
+Nur diese eine Frage, nach dem Sinn...
+
+Schwerelos wie ein Astronaut. 
+Leichtigkeit um mich herum.
+Schwerelos wie ein Astronaut.
+Alles Schwarz in mir drin. 
+Was ich spüre ist dahin..... 
+
+Langsam kommt was ich befürchtet hab.
+Alleine sein mit mir selbst. 
+Eine lange Zeit gab es mich nicht alleine.
+Und nun, bin da nur noch ich selbst. 
+Keine Trauer und kein Vorwurf.
+Keine Fragen oder Wut. 
+Das einzige was in mir brennt ist nur noch.....
+Eine kleine Glut....... 
+
+Schwerelos wie ein Astronaut. 
+Leichtigkeit um mich herum.
+Schwerelos wie ein Astronaut.
+Alles Schwarz in mir drin. 
+Was ich spüre ist dahin.....</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="gradeaus" data-album="gradeaus" data-category="album">
           <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gradeaus" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -885,7 +3322,61 @@
             <p class="song-meta">Gradeaus · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Immer wieder bin ich Aufgewacht.
+Gefallen und geflogen. 
+Bis hier her bin ich gekommen.
+Und IHR
+Habt mich mit gezogen. 
+Durch Berg und Tal ging mein Leben.
+Von Ruhig bis Seebeben. 
+
+Doch ihr tragt mich – und ich euch.
+Ob Sturmwind oder Stille.
+Der Weg ist das Ziel mit euch,
+bis zum letzten Willen.
+
+Wieder gehe ich diese Straße lang. 
+Wieder gehe ich diesen Weg. 
+Lange ist alles gut gegang. 
+Egal wo hin es geht. 
+Ob Einsam oder zusammen...
+Es geht wieder weiter gradeaus. 
+
+Ist der Tag auch mal nur Müll.
+Oder alles total egal. 
+Was auch immer nun kommt. 
+Nichts bleibt ganz normal.
+Schau noch oben und nicht hinab.
+Geh ein Schritt vor und mach nicht schlapp. 
+
+Wieder gehe ich diese Straße lang. 
+Wieder gehe ich diesen Weg. 
+Lange ist alles gut gegang. 
+Egal wo hin es geht. 
+Ob Einsam oder zusammen...
+Es geht wieder weiter gradeaus. 
+
+Geht es dir auch mal schlecht. 
+Denkst die Welt ist nur ungerecht.
+Dann bleib auf Kurs und halte durch.
+Irgendwann wird dein Leben wieder ruhig. 
+Ich sage es nicht gern. 
+Doch auch aus Nichts entsteht ein Stern.
+
+Wieder gehe ich diese Straße lang. 
+Wieder gehe ich diesen Weg. 
+Lange ist alles gut gegang. 
+Egal wo hin es geht. 
+Ob Einsam oder zusammen...
+Es geht wieder weiter gradeaus.
+
+Wieder gehe ich diese Straße lang. 
+Wieder gehe ich diesen Weg.
+[stadium crowd cheering]
+Lange ist alles gut gegang. 
+Egal wo hin es geht. 
+Ob Einsam oder zusammen...
+Es geht wieder weiter gradeaus.</div>
             </details>
           </div>
         </article>
@@ -905,11 +3396,62 @@
             <p class="song-meta">Echos from the Past · Gothic</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich sitze auf meinem Bett und lasse Gedanken kreisen,  
+Sie tragen mich voll Wehmut auf traurige Reisen.  
+Was nützt es, an früher zu denken,  
+Meine Erinnerungen in diese Richtung zu lenken?  
+Eine Träne zieht ihre Spur auf meinen Wangen,  
+Ich lasse sie laufen, hab keine Kraft, sie zu fangen.  
+
+Wo nur, wo? Ja, wo bist du nur?  
+Hab gesucht und gehofft,  
+Geweint und geflucht,  
+Gelacht und gesucht –  
+Wo nur, wo? Ja, wo find ich dich nur?  
+ 
+Mein Herz, es sehnt sich nach Freude, Liebe und Licht,  
+Ich lache mit den anderen, doch sie sehen es nicht.  
+Wie leer und hohl ich bin innerlich.  
+Hab gedacht, dass ich alleine sein kann,  
+Doch schaff es nicht ohne dich an meiner Seite dann.  
+
+Wo nur, wo? Ja, wo bist du nur?  
+Hab gesucht und gehofft,  
+Geweint und geflucht,  
+Gelacht und gesucht –  
+Wo nur, wo? Ja, wo find ich dich nur?  
+
+Ich spür die Lücke in mir – groß und leer.  
+Hab ich es selbst gewollt? Ich weiß es nicht mehr.  
+Ich hoffte so sehr, dich zu finden,  
+Der die Leere im Herzen könnte überwinden –  
+Mit Worten, Berührung, mit Halt und Trost.  
+ 
+Wo nur, wo? Ja, wo bist du nur?  
+Hab gesucht und gehofft,  
+Geweint und geflucht,  
+Gelacht und gesucht –  
+Wo nur, wo? Ja, wo find ich dich nur?  
+ 
+Eines Tages vielleicht,  
+Kommst du und machst mich heil.  
+Was auch immer passieren mag,  
+Es wird nicht so sein wie jetzt – so karg, so allein.  
+Komm zu mir und halte mich fest,  
+Schütze mein Herz und den Rest.  
+
+Wo nur, wo? Ja, wo bist du nur?  
+Hab gesucht und gehofft,  
+Geweint und geflucht,  
+Gelacht und gesucht –  
+Wo nur, wo? Ja, wo find ich dich nur?  
+
+Wann nur, wann wird es im Herzen wieder warm?  
+So hoffe ich schließlich auf dich –  
+Denn irgendwann, ja, findest du mich.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="alleine und einsam (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Alleine und Einsam (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -917,11 +3459,73 @@
             <p class="song-meta">Echos from the Past · Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Einsam und alleine ging ich durch die Stadt
+Weiß nicht mehr wo es genau begonnen hat
+Fühle mich so einsam 
+Fühle mich so leer
+Wann schweigt das verlangen wann kommst du zu mir her. 
+
+Alleine und Einsam geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Keiner der für mich da ist und heilt meine Welt
+
+Ich hab so oft geglaubt das ich ihn gefunden hab
+Doch wie immer stand ich am ende vor einem Grab
+Ich Trauer um mein Herz was dort begraben liegt 
+Frage mich so oft wann kommt er der mich Liebt.
+
+Alleine und Einsam geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Keiner der für mich da ist und heilt meine Welt
+
+Die anderen sieh sehen es nicht
+Sehen nur mein Lachen und glückliches Gesicht
+Doch tief in meinem Herzen spüre ich die Leere
+Wie sie es fest hält und drückt
+Dieses gefühl der Einsamkeit es macht mich verrückt! 
+
+Alleine und Einsam geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Keiner der für mich da ist und heilt meine Welt
+
+Jetzt stehe ich hier an diesem Ort
+Wünsche mich weit weg, wünsche mich fort
+Wohin soll ich jetzt gehen ?
+Kann mein Ziel nicht mehr sehn
+
+Alleine und Einsam geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Keiner der für mich da ist und heilt meine Welt
+
+Doch dann ein neuer Tag es beginnt von vorn 
+Kalte Gefühle verwandeln sich in Zorn
+So kann es doch nicht Bleiben!
+So will ich nicht mehr leiden
+Komm zu mir und Halte mich fest! 
+
+Alleine und Einsam geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Keiner der für mich da ist und heilt meine Welt
+
+Ich habe nicht mehr dran geglaubt
+Es hat mir meinen schlaf geraubt
+Doch nun stehst du neben mir 
+An diesem Ort, im jetzt und im hier
+Du hälst mich fest und gibst mir schutz
+Wäscht alles ab, den dreck und den schmutz....
+
+Alleine und Einsam, geh ich durch mein Leben
+Alleine und Einsam, hab niemand zum Reden
+Keiner der mich tröstet und hält
+Einer der für mich da ist und zählt........</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="lied der erinnerung (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Lied der Erinnerung (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -929,11 +3533,53 @@
             <p class="song-meta">Echos from the Past · Ballade</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Er sitzt allein, das Zimmer ist kalt
+Hände auf den Knien, die Geschichte entfaltet sich
+Er Dachte, er sei stark, dachte, er überlebt
+Doch ein einziges Lied zeigt, wie es wirklich steht...
+
+Erinnerungen steigen wie Stürme auf
+Die Hand des Schmerzes hält ihn fest, und drückt zu
+Ein Bild in der Ecke, Tränen im Blick
+Glückliche Tage verblassen Stück für Stück
+
+Ein Lied, ein Schlag, die Wunde reißt auf
+Ein Herz, das heil war, jetzt verloren im Schmerz
+Warum hast du mich verlassen, warum bist du nicht hier?
+Die Melodie verfolgt mich, sie erlischt nicht in mir
+
+Der Brief spricht die Wahrheit so hart
+Worte der Liebe, doch alles verzerrt 
+Eine Seele zerdrückt unter der Last
+Von Angst, von Verlust, von Schatten ohne Rast...
+
+Jede Zeile ein Dolch in der Brust
+Jede Erinnerung ein schmerzhafter verlust
+Er kennt die Wahrheit, fühlt den Schmerz
+Doch Liebe und Leid bleiben in seinem Herz
+
+Ein Lied, ein Schlag, die Wunde reißt auf
+Ein Herz, das heil war, jetzt verloren im Schmerz
+Warum hast du mich verlassen, warum bist du nicht hier?
+Die Melodie verfolgt mich, sie erlischt nicht in mir
+
+Das Radio spielt, die Welt bricht zusammen
+Ein Leben zerfällt, ein König ohne Flammen
+Kann Musik töten, kann Melodie fesseln?
+Das Lied erklingt, die Ketten nicht lösen
+
+Ein Lied, ein Schlag, die Wunde reißt auf
+Ein Herz, das heil war, jetzt verloren im Schmerz
+Warum hast du mich verlassen, warum bist du nicht hier?
+Die Melodie verfolgt mich, sie erlischt nicht in mir
+
+Allein noch einmal, Schatten umarmt
+Die kalte Hand bleibt, Spuren der Narben tief im Herz
+Doch tief im Innern, ein Funken bleibt
+Durch Schmerz und Lied, ein kleines Licht von dir bleibt...</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="verlangen (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Verlangen (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -941,11 +3587,64 @@
             <p class="song-meta">Echos from the Past · Dark Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Sünde, Verlangen, Glut, Hitze
+
+In den Gedanken so frei und wild
+Male ich mir mein Bild
+Hast mich gesehen, gefangen und steigerst mein verlangen....
+Du bist was ich will, im ewigen Meer
+Weißt nicht wie, ich will dich so sehr
+
+In meiner Seele Brennt das Feuer so hell
+In meiner Seele das verlangen es steigert sich schnell
+Was du auch tust du tust mir nicht gut
+Deine Berührung sie steigert die Glut.....
+
+Ich stehe vor dir, Verlassen und Still 
+Weiß selbst nicht was ich hier will
+Doch als ich dich sah da wusste ich gleich
+Dein Körper, dein Geist, machen mich Reich
+
+In meiner Seele Brennt das Feuer so hell
+In meiner Seele das verlangen es steigert sich schnell
+Was du auch tust du tust mir nicht gut
+Deine Berührung sie steigert die Glut.....
+
+Mein Herz kommt nicht mehr los
+Vergessen kann ich nicht, was mache ich bloß
+Hitze im Kopf was hab ich getan ? 
+Bin wie verrückt und völlig im Wahn....
+
+In meiner Seele Brennt das Feuer so hell
+In meiner Seele das verlangen es steigert sich schnell
+Was du auch tust du tust mir nicht gut
+Deine Berührung sie steigert die Glut.....
+
+Im Geiste so blind für das was ich tu
+Mein Körper er kommt nicht zur ruh
+Was immer ich will kann ich nicht mehr sehn 
+Der Schmerz und das Leid muss ich überstehn
+
+In meiner Seele Brennt das Feuer so hell
+In meiner Seele das verlangen es steigert sich schnell
+Was du auch tust du tust mir nicht gut
+Deine Berührung sie steigert die Glut.....
+
+An einem Tag so Schwarz wie die Nacht, hat sie es gemacht
+Konnte nicht warten, konnte nicht gehen
+konnte ihm einfach nicht wiederstehen
+Den Letzten weg zu nehmen war ihr Ziel 
+Die gier nach ihm war einfach zu viel 
+Ein Letzter Augenblick dann nichts mehr nur stille und Glück......
+
+In meiner Seele Brennt das Feuer so hell
+In meiner Seele das verlangen es steigert sich schnell
+Was du auch tust du tust mir nicht gut
+Deine Berührung sie steigert die Glut.....
+Steigert die Glut....</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich brenne wie feuer (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Ich brenne wie Feuer (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -953,11 +3652,65 @@
             <p class="song-meta">Echos from the Past · Dark Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Wie soll ich es dir nur erklären? 
+Ich will meine Seele nich entleeren.
+Du sollst nicht Traurig sein. 
+Das will ich nicht, oh nein
+
+Ich Brenne wie Feuer
+Mein Herz vergeht
+Meine Liebe sie schreit 
+Aber die Freundschaft besteht!
+
+Ich habe Liebe gefunden.
+Verbrachte so schöne stunden.
+Doch alles ist vorbei.
+Aus einem Herz, wurden zwei. 
+
+Ich Brenne wie Feuer
+Mein Herz vergeht
+Meine Liebe sie schreit 
+Aber die Freundschaft besteht!
+
+Ich habe nicht auf gegeben.
+Glaub mir, ich hänge am Leben.
+Doch die letzte Zeit allein.
+Sticht zu tief in die Seele hinein. 
+
+Ich Brenne wie Feuer
+Mein Herz vergeht
+Meine Liebe sie schreit 
+Aber die Freundschaft besteht!
+
+Ich bin nicht wichtig, bin egal.
+Das denk ich manchmal mit qual.
+Du sagst das stimmt nicht! 
+Und du rettest mich. 
+
+Ich Brenne wie Feuer
+Mein Herz vergeht
+Meine Liebe sie schreit 
+Aber die Freundschaft besteht!
+
+Ich empfinde so viel, für dich.
+Doch ich weiß, sagen kann ich's nicht.
+Will nicht noch etwas verlieren
+Was ich nicht ersetzen kann.
+Am ende bleibt mir nur eins
+Die Freundschaft mit dir 
+Mein Herz bleibt wohl ewig meins.
+Obwohl ich mir wünschte es wär'
+Deins.... 
+
+Ich Brenne wie Feuer
+Mein Herz vergeht
+Meine Liebe sie schreit 
+Aber die Freundschaft besteht!
+
+Die Freundschaft besteht....</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wir beide (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wir beide (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -965,11 +3718,80 @@
             <p class="song-meta">Echos from the Past · Country Rock</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Ich schaue in die Nacht hinein
+Mein Kopf voller Gedanken an dich 
+Wie kann sowas nur sein?
+Hab dich so schnell gefunden für mich
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Ich sitz hier allein am Meer
+Rau und Dunkel, die Wellen sie Rauschen
+Mein Herz es schlägt so sehr
+Was will ich noch hier draußen?
+Was will ich am Meer? 
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Ein Blick eine Berührung
+Wie ein Blitz der in meine Seele schlägt
+Dein Anblick ist Verführung
+Ich vergesse nie diesen Tag
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Schritte hinter mir 
+ich dreh mich um und lächle dich an
+Wie ein Engel erscheinst du hier
+Und denke versonnen daran...
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Jetzt stehen wir Arm in Arm 
+Die Nacht sie zeigt ihr schönstes Gesicht
+Ich halte dich ganz warm
+Denn verlieren will ich dich nicht
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Die Zeit hat uns die Jahre geraubt
+Die Enkel sie spielen jetzt dort
+Beide alt und Grau wer hätt es geglaubt?
+Gingen beide nie fort von diesem Ort....
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+
+Mit Tränen des Glücks dreh ich mich um
+Die Zeit sie hat uns Falten gegeben
+was immer passiert ist, ich sag es dir noch mal...
+Ich Liebe dich ewig ob freud oder Qual....
+
+Wir Beide unter dem selben Himmels Zelt 
+Haben uns gefunden und gewählt
+Nie wieder allein das haben wir gesagt 
+Haben beide das Träumen Gewagt...
+Das Träumen Gewagt...</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="phönix (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Phönix (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -977,11 +3799,86 @@
             <p class="song-meta">Echos from the Past · Gothic</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Du kamst mir vor 
+Wie meine schützende Hand
+Doch hast du in Wirklichkeit 
+Meine Seele verbrannt
+
+Gefesselt an die Liebe,
+An den Schutz den ich gesucht
+Alle haben es gesehen, 
+Nur ich sah nicht deinen Fluch
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+Der Phönix in mir erwacht!
+
+Meine Freunde gingen alle weg von mir
+Sie sahen den Schrecken, 
+Sahen das Grauen bei dir
+Nur meine Augen waren blind,
+Ich hab's vor Liebe nicht gesehen
+Am Ende war ich zu schwach zum Gehen
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+Der Phönix in mir erwacht!
+
+Jetzt bin ich hier und kann es nicht fassen
+Hat mich Gott wirklich verlassen?
+Mit jedem Tag der vergeht 
+In mir der Dämon weiter aufsteht
+Ich spüre den Zorn und seine Macht, 
+Und höre wie er in mir lacht!
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+der Phönix in mir erwacht!
+
+Seine Stärke, sie gibt mir die Kraft
+Du siehst es nicht, was er mit mir macht
+Doch du wirst es erleben, wirst es bereuen
+Ich, ja ich werde mich am Ende freuen!
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+Der Phönix in mir erwacht!
+
+An einem Tag, du warst nicht da
+Hab ich gesehen, wo meine Chance war
+Ich bin gelaufen, ich weiß nicht wohin
+Frage mich verzweifelt, wo ich bin!
+
+Ein Haus, das mein Blick anzieht
+Kann nicht fassen, dass es hier liegt
+Habe ihn gefunden, meinen sicheren Hafen
+Kann jetzt endlich in Ruhe und Sicherheit schlafen
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+Der Phönix in mir erwacht!
+
+Das ist nun Jahre her 
+Die Erinnerung daran fällt mir noch schwer
+Doch geboren aus der Asche bin ich erwacht 
+Das Feuer deiner Schwingen hat mich neu gemacht
+
+Neu geboren aus der Asche,
+Zu der du mich gemacht
+Durch Blut und tiefe Narben
+Der Phönix in mir
+
+Lebt
+
+in mir lebt</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wann und wo (reimagined)" data-album="echos from the past" data-category="album">
           <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wann und Wo (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -989,7 +3886,67 @@
             <p class="song-meta">Echos from the Past · Gothic Film</p>
             <details>
               <summary>Songtext anzeigen</summary>
-              <div class="lyrics">Songtext folgt</div>
+              <div class="lyrics">Wie immer sitze ich hier
+Und denke über mein leben nach.
+Egal was ich auch mache 
+Meine Seele liegt brach 
+
+Ich mache alles falsch
+Die erste Liebe gefunden
+das erste mal entdeckt
+Wieder alles verloren.
+Hinter meinem Panzer versteckt
+
+Habe viel getrauert und geweint
+Gehofft das es nicht mehr so weh tut.
+
+Wann kommst du?
+Wo bleist du? 
+Werd ich dich finden? 
+ewig allein 
+Kann mein Herz nicht heil'n
+Vielleicht schaffst du's?
+
+Durch Schicksal oder Zufall
+Fand ich wieder
+Eine neue Liebe
+Und was ist passiert ?
+Am Ende wieder Scherben
+Überall.
+Ich denke ich bin nicht gemacht
+Für die ewige Liebe in mir.
+
+Doch immer wieder
+Flehe ich in die Nacht
+
+Wann kommst du?
+Wo bleist du? 
+Werd ich dich finden? 
+Ewig allein 
+kann mein Herz nicht heil'n
+Ich hoffe und warte
+
+Mein Herz trägt Narben
+Die nie wieder heilen
+Und jedes mal auf's neue
+Wenn ich alleine bin
+Schmerzt es sehr
+So sehr...
+Ob ich je wieder Liebe und Glück finde? 
+Ich werde nicht nach ihr suchen 
+Denn vielleicht findet sie mich. 
+
+Irgendwann
+
+Vielleicht
+
+Wann kommst du?
+Wo bleist du? 
+Werd ich dich finden? 
+Ewig allein 
+Kann mein Herz nicht heil'n
+
+Komm und finde mich</div>
             </details>
           </div>
         </article>
@@ -1074,7 +4031,6 @@ Schlaf, jetzt, ein.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="nächte und stimmen" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Nächte und Stimmen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1160,7 +4116,6 @@ Ich spüre alles und fühl mich so frei..</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="leere neben mir" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Leere neben mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1227,7 +4182,6 @@ Ich vermisse dich...</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="unerkannt (live version)" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Unerkannt (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1325,7 +4279,6 @@ Unerkannt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="summer nights" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Summer Nights" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1394,7 +4347,6 @@ Summer nights…</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="weg zum leben" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Weg zum Leben" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1456,7 +4408,6 @@ Der zum Leben führt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich (live version)" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ich (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1531,7 +4482,6 @@ Und Wein...</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wege und geschichten" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Wege und Geschichten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1616,7 +4566,6 @@ Denn stehen bleiben tun wir nicht</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ein neuer tag beginnt" data-album="nächte und stimmen" data-category="album">
           <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ein neuer Tag beginnt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1706,7 +4655,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="verlangen" data-album="single" data-category="single">
           <img class="cover" src="bilder/verlangen.jpg" alt="Cover: Verlangen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1718,7 +4666,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="johny o&#x27;brian" data-album="single" data-category="single">
           <img class="cover" src="bilder/johny-o-brian.jpg" alt="Cover: Johny O&#x27;Brian" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1730,7 +4677,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="alleine und einsam" data-album="single" data-category="single">
           <img class="cover" src="bilder/alleine-und-einsam.jpg" alt="Cover: Alleine und Einsam" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1742,7 +4688,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="unser chat unser takt" data-album="single" data-category="single">
           <img class="cover" src="bilder/unser-chat-unser-takt.jpg" alt="Cover: Unser Chat unser Takt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1754,7 +4699,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="phönix" data-album="single" data-category="single">
           <img class="cover" src="bilder/phoenix.jpg" alt="Cover: Phönix" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1766,7 +4710,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="im regen gefunden" data-album="single" data-category="single">
           <img class="cover" src="bilder/im-regen-gefunden.jpg" alt="Cover: Im Regen Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1778,7 +4721,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="alleine in mir" data-album="single" data-category="single">
           <img class="cover" src="bilder/alleine-in-mir.jpg" alt="Cover: Alleine in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1790,7 +4732,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die weiße frau" data-album="single" data-category="single">
           <img class="cover" src="bilder/die-weisse-frau.jpg" alt="Cover: Die weiße Frau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1802,7 +4743,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wann und wo" data-album="single" data-category="single">
           <img class="cover" src="bilder/wann-und-wo.jpg" alt="Cover: Wann und Wo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1814,7 +4754,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="dunkles erbe" data-album="single" data-category="single">
           <img class="cover" src="bilder/dunkles-erbe.jpg" alt="Cover: Dunkles Erbe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1826,7 +4765,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="found and lost" data-album="single" data-category="single">
           <img class="cover" src="bilder/found-and-lost.jpg" alt="Cover: Found and Lost" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1838,7 +4776,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich brenne wie feuer" data-album="single" data-category="single">
           <img class="cover" src="bilder/ich-brenne-wie-feuer.jpg" alt="Cover: Ich brenne wie Feuer" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1850,7 +4787,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="halt meine hand" data-album="single" data-category="single">
           <img class="cover" src="bilder/halt-meine-hand.jpg" alt="Cover: Halt meine Hand" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1862,7 +4798,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wieland der schmied" data-album="single" data-category="single">
           <img class="cover" src="bilder/wieland-der-schmied.jpg" alt="Cover: Wieland der Schmied" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1874,7 +4809,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="papa lass los" data-album="single" data-category="single">
           <img class="cover" src="bilder/papa-lass-los.jpg" alt="Cover: Papa lass los" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1886,7 +4820,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="mama ich lebe" data-album="single" data-category="single">
           <img class="cover" src="bilder/mama-ich-lebe.jpg" alt="Cover: Mama Ich Lebe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1898,7 +4831,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die schlachten krähe" data-album="single" data-category="single">
           <img class="cover" src="bilder/die-schlachten-kraehe.jpg" alt="Cover: Die Schlachten Krähe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1910,7 +4842,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="hurra! es ist herbst" data-album="single" data-category="single">
           <img class="cover" src="bilder/hurra-es-ist-herbst.jpg" alt="Cover: Hurra! es ist Herbst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1922,7 +4853,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="drachensong" data-album="single" data-category="single">
           <img class="cover" src="bilder/drachensong.jpg" alt="Cover: Drachensong" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1934,7 +4864,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="through the night" data-album="single" data-category="single">
           <img class="cover" src="bilder/through-the-night.jpg" alt="Cover: Through the night" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1946,7 +4875,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="your touch haunts me" data-album="single" data-category="single">
           <img class="cover" src="bilder/your-touch-haunts-me.jpg" alt="Cover: Your Touch Haunts Me" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1958,7 +4886,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="halloween nehmt euch in acht" data-album="single" data-category="single">
           <img class="cover" src="bilder/halloween-nehmt-euch-in-acht.jpg" alt="Cover: Halloween nehmt euch in acht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1970,7 +4897,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="halloween you better beware" data-album="single" data-category="single">
           <img class="cover" src="bilder/halloween-you-better-beware.jpg" alt="Cover: Halloween You better beware" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1982,7 +4908,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="kokoro no melody" data-album="single" data-category="single">
           <img class="cover" src="bilder/kokoro-no-melody.jpg" alt="Cover: Kokoro no Melody" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -1994,7 +4919,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich bin frei" data-album="single" data-category="single">
           <img class="cover" src="bilder/ich-bin-frei.jpg" alt="Cover: Ich bin Frei" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2006,7 +4930,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="es ist halloween" data-album="single" data-category="single">
           <img class="cover" src="bilder/es-ist-halloween.jpg" alt="Cover: Es ist Halloween" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2018,7 +4941,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="song called loneliness" data-album="single" data-category="single">
           <img class="cover" src="bilder/song-called-loneliness.jpg" alt="Cover: Song called loneliness" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2030,7 +4952,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich bin da" data-album="single" data-category="single">
           <img class="cover" src="bilder/ich-bin-da.jpg" alt="Cover: Ich bin Da" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2042,7 +4963,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="licht und schatten" data-album="single" data-category="single">
           <img class="cover" src="bilder/licht-und-schatten.jpg" alt="Cover: Licht und Schatten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2054,7 +4974,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="the thunder" data-album="single" data-category="single">
           <img class="cover" src="bilder/the-thunder.jpg" alt="Cover: The Thunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2066,7 +4985,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="nicht ganz nah" data-album="single" data-category="single">
           <img class="cover" src="bilder/nicht-ganz-nah.jpg" alt="Cover: Nicht ganz nah" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2078,7 +4996,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="aufrecht" data-album="single" data-category="single">
           <img class="cover" src="bilder/aufrecht.jpg" alt="Cover: Aufrecht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2090,7 +5007,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="letters to santa" data-album="single" data-category="single">
           <img class="cover" src="bilder/letters-to-santa.jpg" alt="Cover: Letters to Santa" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2102,7 +5018,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="irgendwo im nirgendwo" data-album="single" data-category="single">
           <img class="cover" src="bilder/irgendwo-im-nirgendwo.jpg" alt="Cover: Irgendwo im Nirgendwo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2114,7 +5029,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="nicht zu zweit" data-album="single" data-category="single">
           <img class="cover" src="bilder/nicht-zu-zweit.jpg" alt="Cover: Nicht zu Zweit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2126,7 +5040,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="wie eins" data-album="single" data-category="single">
           <img class="cover" src="bilder/wie-eins.jpg" alt="Cover: Wie Eins" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2138,7 +5051,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="kōri no hana" data-album="single" data-category="single">
           <img class="cover" src="bilder/kori-no-hana.jpg" alt="Cover: Kōri no Hana" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2150,7 +5062,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="die maske in mir" data-album="single" data-category="single">
           <img class="cover" src="bilder/die-maske-in-mir.jpg" alt="Cover: Die Maske in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2162,7 +5073,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="das kind in mir" data-album="single" data-category="single">
           <img class="cover" src="bilder/das-kind-in-mir.jpg" alt="Cover: Das Kind in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2174,7 +5084,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="norddeutschland" data-album="single" data-category="single">
           <img class="cover" src="bilder/norddeutschland.jpg" alt="Cover: Norddeutschland" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2186,7 +5095,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="lieder" data-album="single" data-category="single">
           <img class="cover" src="bilder/lieder.jpg" alt="Cover: Lieder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2198,7 +5106,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="letztes licht" data-album="single" data-category="single">
           <img class="cover" src="bilder/letztes-licht.jpg" alt="Cover: Letztes Licht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2210,7 +5117,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="unerkannt (studio)" data-album="single" data-category="single">
           <img class="cover" src="bilder/unerkannt-studio.jpg" alt="Cover: Unerkannt (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2222,7 +5128,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="ich (studio)" data-album="single" data-category="single">
           <img class="cover" src="bilder/ich-studio.jpg" alt="Cover: Ich (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2234,7 +5139,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="world stands still" data-album="single" data-category="single">
           <img class="cover" src="bilder/world-stands-still.jpg" alt="Cover: World Stands Still" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2246,7 +5150,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="endgame" data-album="single" data-category="single">
           <img class="cover" src="bilder/endgame.jpg" alt="Cover: Endgame" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2258,7 +5161,6 @@ Und ein neuer Tag beginnt.</div>
             </details>
           </div>
         </article>
-
         <article class="song-card" data-title="tänzerin" data-album="single" data-category="single">
           <img class="cover" src="bilder/taenzerin.jpg" alt="Cover: Tänzerin" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
           <div class="song-content">
@@ -2274,7 +5176,7 @@ Und ein neuer Tag beginnt.</div>
     </section>
 
     <footer>
-      © 2026 Eselhans · Songtexte, Musik und Geschichten
+      © 2026 Eselhans · Songtexte, Musik und Geschichten · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
     </footer>
   </main>
 
@@ -2324,7 +5226,6 @@ Und ein neuer Tag beginnt.</div>
     searchInput.addEventListener("input", applyFilters);
     categoryFilter.addEventListener("change", applyFilters);
     albumFilter.addEventListener("change", applyFilters);
-
     applyFilters();
   </script>
 </body>
