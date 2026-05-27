@@ -8,7 +8,7 @@
   <meta name="robots" content="index,follow" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=57oB5HZ8Nr6jPYQSdC5jWh39CzRfKMEGdd2P1mE0K88imd9-R8er4y8L3j1aRJv70pOP8QWj8AQuo71_XwiFPkxAYDfSViV-UXy54GR6wANSlFe9GRikJd1cXpDZpNbFmz4_OKUP3jQssbtalO7xGhn-iT5uP3PB2bCzrKWoIGsc4Dle_KqPrtm-1n9pZtBjRFEfLJyP071P4XT3dNyu5uSQNB5HmrHwkFPFWJs8g_Pv2v33UEXabk8XBTZw7jEt19UHcfYEr3N5ishAkOs15g" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=QSVkuVmIEL1cbOvYax5ATc56KQ0FAjGl-4d8Mjt74K0mSxGXS0B4iVAng_r5n_rTUei_GRcQTE5CN4cLf5m1xnodwZq84GC807FxYVk905en0i6A0BhSDOA8rHYt_PXMT4F70vq5BXZ9vuuKwu90hdl7Q9R-1nKcHgKe3IV-0hqXhnnOVRyJrZTxGRhRJsG3hhFK7C8Tk8nMKedL3kDrk0PP9iveqcPgvfO4f2oNpkMIovYQiURknWAb6PzjcMOAebEl08lpHCbGSAomIaiVb-m8JzyMdeAGHa8JqTaFmQP0p8cmb_JGyapkd7mcVmH_N6kXfg4hGepQiL0NB163YQ" charset="UTF-8"></script><style>
     :root {
       --bg: #09090d;
       --bg-soft: #14141c;
@@ -208,16 +208,60 @@
 
     .song-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 22px;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
     .song-card {
       overflow: hidden;
       border: 1px solid var(--card-border);
-      border-radius: 24px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.055);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    .song-toggle {
+      width: 100%;
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-weight: 900;
+      color: var(--text);
+      transition: background 0.2s ease;
+    }
+
+    .song-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .song-toggle::after {
+      content: "▾";
+      color: var(--accent);
+      font-size: 1rem;
+      transform: rotate(-90deg);
+      transition: transform 0.2s ease;
+      flex: 0 0 auto;
+    }
+
+    .song-card[open] .song-toggle {
+      background: rgba(201, 139, 79, 0.12);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .song-card[open] .song-toggle::after {
+      transform: rotate(0deg);
+    }
+
+    .song-open {
+      display: grid;
+      grid-template-columns: minmax(160px, 240px) 1fr;
+      gap: 22px;
+      padding: 20px;
+      align-items: start;
     }
 
     .cover {
@@ -226,36 +270,23 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
       background: linear-gradient(135deg, rgba(201,139,79,0.18), rgba(97,74,125,0.18));
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
     }
 
-    .song-content { padding: 22px; }
+    .song-content {
+      min-width: 0;
+    }
 
     .song-meta {
       color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 3px;
-      margin-bottom: 13px;
-    }
-
-    details {
-      margin-top: 12px;
-      padding: 16px 17px;
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-      background: rgba(0, 0, 0, 0.18);
-    }
-
-    details[open] { background: rgba(0, 0, 0, 0.26); }
-
-    summary {
-      cursor: pointer;
-      font-weight: 800;
-      color: var(--text);
+      font-size: 0.94rem;
+      margin-bottom: 14px;
     }
 
     .lyrics {
-      margin-top: 16px;
       color: var(--muted);
       white-space: pre-line;
       font-size: 1rem;
@@ -294,7 +325,8 @@
       .topbar { top: 10px; }
       .hero { padding: 34px 22px; border-radius: 24px; }
       .album-section { padding: 20px; border-radius: 22px; }
-      .song-grid { grid-template-columns: 1fr; }
+      .song-open { grid-template-columns: 1fr; }
+      .cover { max-width: 280px; }
       .album-heading { align-items: flex-start; flex-direction: column; }
     }
   </style>
@@ -310,7 +342,7 @@
       <span class="eyebrow">Texte & Geschichten</span>
       <h1>Songtexte</h1>
       <p class="intro">
-        Hier findest du eine wachsende Sammlung meiner Songtexte. Über die Suche und die Filter findest du schneller einzelne Songs, Alben oder Singles.
+        Hier findest du meine Songtexte als kompaktes Archiv. Klicke einen Titel an, dann öffnen sich Cover, Albuminfo und Liedtext.
       </p>
     </header>
 
@@ -340,13 +372,12 @@
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="hallo leben" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Hallo Leben" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Hallo Leben</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="hallo leben" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Hallo Leben</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Hallo Leben" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Mmmm ich war noch jung und auch dumm
 Hab mich verliebt und rannte um sie rum
 Hab mich zum affen gemacht
@@ -407,16 +438,15 @@ Doch scheiß auf das was war
 Hallo leben ich bin wieder da
 
 Ich bin wieder da</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="sag ja" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Sag Ja" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Sag Ja</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="sag ja" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Sag Ja</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Sag Ja" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Es ist jetzt zeit ich stehe nur herum
 Ganz viel lachen und weinen um mich rum
 Dieser tag wird unser leben ändern
@@ -476,16 +506,15 @@ Sag ja was auch immer passiert
 Unser leben beginnt jetzt garantiert
 
 Für immer und ewig nur dein</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wenn wir faxen machen" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn wir Faxen machen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wenn wir Faxen machen</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wenn wir faxen machen" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Wenn wir Faxen machen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn wir Faxen machen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Ich komme in die küche und sehe dich
 Dein anblick er verzaubert mich
 Wie eh und je schlägt mein herz
@@ -563,16 +592,15 @@ Du bringst mich zum lachen
 Wenn wir faxen machen
 Hast mir mein herz genommen
 Sind dann im glück geschwommen</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="kleines wunder" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Kleines Wunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Kleines Wunder</h3>
-            <p class="song-meta">Lebensweg · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="kleines wunder" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Kleines Wunder</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Kleines Wunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock Ballade</p>
               <div class="lyrics">Ich bin so müde und kaputt meine augen fallen zu
 Doch dann seh ich in dein friedliches gesicht
 In meinem kopf läuft es wie ein film
@@ -630,16 +658,15 @@ Hast uns beschenkt mit deinem lachen
 Du bist da mein kleines wunder
 Bist mein größter schatz der welt
 Und alles was nun zählt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wie die zeit vergeht" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wie die Zeit vergeht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wie die Zeit vergeht</h3>
-            <p class="song-meta">Lebensweg · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wie die zeit vergeht" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Wie die Zeit vergeht</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wie die Zeit vergeht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock Ballade</p>
               <div class="lyrics">Ich hab dich in meinen händen getragen
 Du warst noch so klein
 Hab deine tränen getrocknet
@@ -702,16 +729,15 @@ Du bist mein licht und mein glück
 Oh uh oh yeah
 
 Wie die zeit vergeht</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="geh deinen weg mein kind" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Geh deinen Weg mein Kind" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Geh deinen Weg mein Kind</h3>
-            <p class="song-meta">Lebensweg · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="geh deinen weg mein kind" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Geh deinen Weg mein Kind</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Geh deinen Weg mein Kind" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock Ballade</p>
               <div class="lyrics">Ich stehe da und sie trocknet meine tränen
 Meine hand hält ihre noch ganz fest
 Was ich auch sage und denke
@@ -832,16 +858,15 @@ Uuuh die jahre vergeh'n
 Kann meine falten kommen sehn
 Was kann ich nur tun uh yeah
 Egal keine zeit mich aus zu ruh'n</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die jahre vergehen" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Die Jahre Vergehen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die Jahre Vergehen</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die jahre vergehen" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Die Jahre Vergehen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Die Jahre Vergehen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Es ist morgens um sechs und ich wache auf
 Meine gedanken sie bestehen drauf
 Wach auf alter mann es ist zeit
@@ -895,16 +920,15 @@ Uuuh die jahre vergeh'n
 Kann meine falten kommen sehn
 Was kann ich nur tun uh yeah
 Egal keine zeit mich aus zu ruh'n</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wenn du mich opa nennst" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn du mich Opa nennst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wenn du mich Opa nennst</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wenn du mich opa nennst" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Wenn du mich Opa nennst</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Wenn du mich Opa nennst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Uuuhh huuuu hu
 Was ist dann jetzt hier los
 Ja das frag ich mich bloß
@@ -980,16 +1004,15 @@ Wie schön das es dich nun gibt
 
 Wenn du mich opa nennst
 Bin ich einfach nur verliebt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="lebensweg" data-album="lebensweg" data-category="album">
-          <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Lebensweg" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Lebensweg</h3>
-            <p class="song-meta">Lebensweg · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="lebensweg" data-album="lebensweg" data-category="album">
+          <summary class="song-toggle">Lebensweg</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lebensweg.jpg" alt="Cover: Lebensweg" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lebensweg · Rock</p>
               <div class="lyrics">Mmmmmm hmmmmm uuuhhhh ooohhhhh
 Wir sitzen hier du bist bei mir
 Wir sind alt und grau von soviel leben schon ganz schlau
@@ -1057,9 +1080,9 @@ Auf unseren lebensweg
 Auf unseren lebensweg
 Für immer
 In liebe</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -1069,24 +1092,22 @@ In liebe</div>
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="intro" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Intro" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Intro</h3>
-            <p class="song-meta">Snow and Fire</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="intro" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Intro</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Intro" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="raunächte" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Raunächte" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Raunächte</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="raunächte" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Raunächte</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Raunächte" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Die nacht bricht herein 
 Draußen heult der Wind 
 Und der Schnee Tanzt
@@ -1170,16 +1191,15 @@ Die Sage ist bekannt
 Nehmt euch in acht!
 Die Raunächte... 
 Sind erwacht</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="winterzeit" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Winterzeit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Winterzeit</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="winterzeit" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Winterzeit</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Winterzeit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Der Wald schläft still und starr 
 Ich weiß noch wie es war 
 Der Schnee fällt leis 
@@ -1240,16 +1260,15 @@ Winterzeit
 Macht euch bereit 
 Alles ist jetzt Weiß 
 Und Leis...</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="weihnachtsmann sein" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weihnachtsmann sein" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Weihnachtsmann sein</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="weihnachtsmann sein" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Weihnachtsmann sein</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weihnachtsmann sein" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Ich stehe hier und denke mir 
 was mach ich bloß mit dir?
 hab sowas noch nicht erlebt.
@@ -1301,16 +1320,15 @@ Weihnachtsmann sein ist nicht schwer
 Gott hilf mir ich Zitter so sehr
 Doch alles wird jetzt gut 
 Drum mach es auch und fasse Mut.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die tiere erzählen" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Tiere Erzählen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die Tiere Erzählen</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die tiere erzählen" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Die Tiere Erzählen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Tiere Erzählen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Die Turm Uhr schlägt Mitternacht
 Ich Schleich mich raus zum Stall
 Und höre atemlos die Stimmen flüstern.
@@ -1385,16 +1403,15 @@ Ich hörte noch mehr was sie erzählen
 Doch ich will euch nicht die Zeit stehlen 
 Am Heiligen Abend hört doch hin 
 Wenn die Stimmen der Tiere wieder erkling.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="farewell" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Farewell" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Farewell</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="farewell" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Farewell</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Farewell" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Every year on the same day
 The candle burns in every home
 It helps us find the right way
@@ -1461,16 +1478,15 @@ Farewell
 Come back when the time is right
 The candle burns for you to night
 Farewell</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich bin der grinch" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Ich bin der Grinch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich bin der Grinch</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich bin der grinch" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Ich bin der Grinch</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Ich bin der Grinch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">OH NEIN!
 Nicht schon wieder...
 Jedes Jahr das selbe..
@@ -1526,16 +1542,15 @@ Ich bin Der Grinch!
 Bei Weihnachten wird mir warm
 Viel lachen und die lichter 
 War'n mir ein graus!</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="praise the lord" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Praise the Lord" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Praise the Lord</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="praise the lord" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Praise the Lord</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Praise the Lord" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Oh Lord!
 
 Oh, praise the Lord!
@@ -1617,16 +1632,15 @@ So great!
 Let us celebrate His name,
 Celebrate Him — today!
 Forever and ever!</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die welt erstrahlt" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Welt erstrahlt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die Welt erstrahlt</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die welt erstrahlt" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Die Welt erstrahlt</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Die Welt erstrahlt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Weihnachtszeit, ist die schönste Zeit
 Alle machen sich bereit
 Nirgends herrscht der Neid
@@ -1710,16 +1724,15 @@ Joyeux Noël
 Buon Natale
 
 Merī Kurisumasu</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="this is my country (live)" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: This is my Country (Live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>This is my Country (Live)</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="this is my country (live)" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">This is my Country (Live)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: This is my Country (Live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">The old town’s shining bright tonight,
 Everyone’s filled with cheer,
 Every house is trimmed with lights,
@@ -1773,16 +1786,15 @@ This is my country,
 I know every single road,
 It’s Christmas time again,
 Every light is shining bold.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="weißt du&#x27;s noch (live)" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weißt du&#x27;s noch (live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Weißt du&#x27;s noch (live)</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="weißt du&#x27;s noch (live)" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Weißt du&#x27;s noch (live)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Weißt du&#x27;s noch (live)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Das Haus geschmückt, die Stube warm
 die Kinder machen wieder Alarm 
 Du lächelst nur und bist ganz still
@@ -1838,16 +1850,15 @@ Weißt du noch wie es war?
 Die Freude, Liebe alles da
 Gemeinsam sind wir alle hier
 Weißt du's noch?</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="das ist weihnachten" data-album="snow and fire" data-category="album">
-          <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Das ist Weihnachten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Das ist Weihnachten</h3>
-            <p class="song-meta">Snow and Fire · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="das ist weihnachten" data-album="snow and fire" data-category="album">
+          <summary class="song-toggle">Das ist Weihnachten</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-snow-and-fire.jpg" alt="Cover: Das ist Weihnachten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Snow and Fire · Season</p>
               <div class="lyrics">Jetzt ist es soweit, der Letze Song ist nun da.
 Und dieser Song soll uns alle dran erinnern 
 was Weihnachten überhaupt bedeutet. 
@@ -1909,9 +1920,9 @@ Macht euch jetzt bereit
 Weihnachten oh Weihnachten 
 Du stille Nacht.
 Hast uns heut Zusamm gebracht</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -1921,13 +1932,12 @@ Hast uns heut Zusamm gebracht</div>
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="der tag" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Der Tag" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Der Tag</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="der tag" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Der Tag</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Der Tag" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Verloren in der Stille der Welt
 Was ist nur passiert? 
 Jetzt bin ich hier und schau hinab 
@@ -2007,16 +2017,15 @@ Ein Tag der mich zerbrach
 Und ein Messer in meine Seele stach. 
 Ich weiß ich bin noch stark 
 Doch überlebe ich diesen Tag?</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="aufstehn" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Aufstehn" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Aufstehn</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="aufstehn" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Aufstehn</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Aufstehn" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Alte Männer haben zu viel Geld
 Sie regieren nur ihre Welt
 Führen Kriege um das was für sie zählt
@@ -2103,16 +2112,15 @@ Aufstehn
 Wir wollen wieder Frieden sehn!
 Aufstehn
 Lasst es alle Hören!</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="sternenstaub" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Sternenstaub" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Sternenstaub</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="sternenstaub" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Sternenstaub</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Sternenstaub" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Ich erinnere mich an jene Nacht
 Zusammen haben wir sie draußen verbracht 
 Du Schaust in den Himmel hoch 
@@ -2162,16 +2170,15 @@ Sternenstaub und Galaxien
 Am Himmel vorüber ziehn 
 Du und Ich das ist was zählt
 Wir haben unser Glück selbst gewählt!</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich bin da (new recordet)" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ich bin da (New Recordet)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich bin da (New Recordet)</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich bin da (new recordet)" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Ich bin da (New Recordet)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ich bin da (New Recordet)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Diese Träume und Momente sie gehen davon
 Alles was ich denken kann ist alleine zu sein
 Immer wenn ich da sitze und meine Gedanken kreisen
@@ -2236,16 +2243,15 @@ Ich bin Da, am Anfang meines Weges
 Ich bin Da, wo ich nie mehr hin will
 Ich bin da, mit leeren Händen
 Auf einem Weg zu uns.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wenn alles in mir schreit" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wenn alles in mir Schreit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wenn alles in mir Schreit</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wenn alles in mir schreit" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Wenn alles in mir Schreit</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wenn alles in mir Schreit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Sie sagen du bist doch normal.
 Das bisschen Müde ist doch egal.
 Du findest bestimmt noch jemanden
@@ -2346,16 +2352,15 @@ Wenn alles in mir Schreit!
 Ist die Welt um mich herum zu Laut
 Habe mir einen Panzer gebaut 
 Die Welt mir mein Leben raubt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="halt mich fest" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Halt mich fest" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Halt mich fest</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="halt mich fest" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Halt mich fest</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Halt mich fest" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Ich komme in die Küche und sehe dich 
 Mein Herz und meine Seele glühen innerlich 
 Dein Anblick verzaubert mich immer noch 
@@ -2414,16 +2419,15 @@ Unsere herzen sich berühren
 Halt mich fest 
 Alle solln es sehn 
 Ich lasse dich nie wieder gehn</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="schließe die augen" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Schließe die Augen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Schließe die Augen</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="schließe die augen" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Schließe die Augen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Schließe die Augen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Draußen ist es Dunkel und die Nacht kommt
 Der Tag war ansträngend und Schön 
 Darum Leg dich hin und atme durch 
@@ -2463,16 +2467,15 @@ Schließe die Augen und hör zu
 Deine Gedanken kommen zur ruh 
 Lass alles jetzt hinter dir 
 Denn du bist jetzt bei mir</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="der letzte funke" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Der letzte Funke" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Der letzte Funke</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="der letzte funke" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Der letzte Funke</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Der letzte Funke" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Schon wieder stehe ich am Abgrund 
 Sehe in das schwarze Loch 
 Mein Leben läuft nicht rund 
@@ -2542,16 +2545,15 @@ Der letzte Funke ist was zählt
 Egal wie das leben einen Quält
 Der Sumpf den ich Leben nenn
 Lasse ich mit ihm am Ende nieder Brenn</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wiedermal" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wiedermal" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wiedermal</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wiedermal" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Wiedermal</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Wiedermal" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Es ist Lange her das ich nicht geweint hab.
 So lange schon fühl ich mich taub
 Die Sonne ist bedeckt vom Regen 
@@ -2612,16 +2614,15 @@ Wiedermal hab ich geheult
 Wiedermal bist du nicht mehr da!
 Wieder weiß ich nicht was war. 
 Und doch mach ich weiter!</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ohne euch" data-album="lauter als die stille" data-category="album">
-          <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ohne euch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ohne euch</h3>
-            <p class="song-meta">Lauter als die Stille · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ohne euch" data-album="lauter als die stille" data-category="album">
+          <summary class="song-toggle">Ohne euch</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-lauter-als-die-stille.jpg" alt="Cover: Ohne euch" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Lauter als die Stille · Rock</p>
               <div class="lyrics">Ich bin hier oben und ihr seid da
 Was ich mache das ist klar
 Doch was wäre ich alleine hier?
@@ -2696,9 +2697,9 @@ Ohne euch wäre ich allein!
 Ohne euch da ist es Still 
 Ohne euch das ist wahr 
 Währe das Leben nur halb so wunderbar</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -2708,13 +2709,12 @@ Währe das Leben nur halb so wunderbar</div>
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="was wär gewesen" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Was wär gewesen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Was wär gewesen</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="was wär gewesen" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Was wär gewesen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Was wär gewesen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Es ist schon lange her bei mir.
 Ich war ein Teenager und nicht mehr.
 War nicht Schön und nicht beliebt. 
@@ -2767,16 +2767,15 @@ Keinen Mut und Zuviel Herz.
 Hab Heimlich an Sie gedacht. 
 Was wäre gewesen? 
 Hätte ich den Mut gehabt.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="gefunden" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Gefunden</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="gefunden" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Gefunden</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Die Geschichte begann
 Wie sie nur beginnen kann
 Ich hab sie nicht gesucht 
@@ -2835,16 +2834,15 @@ Sind beide für ein uns bereit.
 Die Reise beginnt
 Für 
 Uns.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="zerfetztes herz" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Zerfetztes Herz" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Zerfetztes Herz</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="zerfetztes herz" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Zerfetztes Herz</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Zerfetztes Herz" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Hörst du die Melodie im Radio? 
 Sie Spielen unser Lied.
 Träume und Erinnerungen
@@ -2912,16 +2910,15 @@ Hast du geklagt
 Es ist nichts
 Waren deine Worte zuletzt
 Nun hast du mit Freude mein Herz zerfetzt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="krone richten" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Krone richten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Krone richten</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="krone richten" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Krone richten</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Krone richten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Neue Liebe, neues Glück?
 Das klingt doch nur verrückt.
 Lag am Boden und war allein.
@@ -2984,16 +2981,15 @@ Aber das ist okay.
 Deshalb:
 Aufstehen, Krone richten,
 Der Weg ist das Ziel.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="traumfrau" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Traumfrau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Traumfrau</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="traumfrau" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Traumfrau</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Traumfrau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Rechner an, Kaffee bereit,
 Auf geht’s, ich bin soweit.
 Hier ’ne App und da ’ne Seite,
@@ -3046,16 +3042,15 @@ Wünschte, du wärst schon hier.
 Immer einen Klick entfernt,
 Oder haben wir uns schon kennengelernt?
 Meine Traumfrau… für mich.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ein schritt vor" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ein Schritt vor" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ein Schritt vor</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ein schritt vor" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Ein Schritt vor</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ein Schritt vor" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Lange her, dass mich jemand so packt.
 Ich wollte mich nicht mehr verlieben
 Und doch ist das Herzklopfen wieder da.
@@ -3130,16 +3125,15 @@ Ich will nicht mehr alleine sein.
 Doch darf ich wieder vertrauen?
 
 Ja oder nein?…</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich bleib bei dir" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ich bleib bei dir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich bleib bei dir</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich bleib bei dir" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Ich bleib bei dir</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Ich bleib bei dir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Ich mache meine Augen auf.
 Sehe dich neben mir.
 Das Zimmer im Dunkeln liegt.
@@ -3180,16 +3174,15 @@ Jeder Tag ist so neu.
 Jeder Tag ist anders mit dir.
 Was auch immer geschieht.
 Ich bleibe bei dir.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="am boden" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Am Boden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Am Boden</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="am boden" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Am Boden</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Am Boden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Meine Stimme kommt langsam wieder.
 Die Tränen bleiben aus.
 Doch es drückt mich noch nieder.
@@ -3250,16 +3243,15 @@ Wieder
 Ein Dolch in meinem Herzen.
 Wieder
 Bin Ich alleine.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="schwerelos" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Schwerelos" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Schwerelos</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="schwerelos" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Schwerelos</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Schwerelos" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Alles Dunkel um mich herum.
 Kein Lachen und kein Weinen.
 Die Welt ist aus geblendet. 
@@ -3312,16 +3304,15 @@ Leichtigkeit um mich herum.
 Schwerelos wie ein Astronaut.
 Alles Schwarz in mir drin. 
 Was ich spüre ist dahin.....</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="gradeaus" data-album="gradeaus" data-category="album">
-          <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gradeaus" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Gradeaus</h3>
-            <p class="song-meta">Gradeaus · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="gradeaus" data-album="gradeaus" data-category="album">
+          <summary class="song-toggle">Gradeaus</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-gradeaus.jpg" alt="Cover: Gradeaus" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Gradeaus · Rock</p>
               <div class="lyrics">Immer wieder bin ich Aufgewacht.
 Gefallen und geflogen. 
 Bis hier her bin ich gekommen.
@@ -3377,9 +3368,9 @@ Lange ist alles gut gegang.
 Egal wo hin es geht. 
 Ob Einsam oder zusammen...
 Es geht wieder weiter gradeaus.</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -3389,13 +3380,12 @@ Es geht wieder weiter gradeaus.</div>
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="alleine in mir (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Alleine in mir (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Alleine in mir (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Gothic</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="alleine in mir (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Alleine in mir (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Alleine in mir (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Gothic</p>
               <div class="lyrics">Ich sitze auf meinem Bett und lasse Gedanken kreisen,  
 Sie tragen mich voll Wehmut auf traurige Reisen.  
 Was nützt es, an früher zu denken,  
@@ -3449,16 +3439,15 @@ Wo nur, wo? Ja, wo find ich dich nur?
 Wann nur, wann wird es im Herzen wieder warm?  
 So hoffe ich schließlich auf dich –  
 Denn irgendwann, ja, findest du mich.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="alleine und einsam (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Alleine und Einsam (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Alleine und Einsam (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="alleine und einsam (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Alleine und Einsam (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Alleine und Einsam (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Rock</p>
               <div class="lyrics">Einsam und alleine ging ich durch die Stadt
 Weiß nicht mehr wo es genau begonnen hat
 Fühle mich so einsam 
@@ -3523,16 +3512,15 @@ Alleine und Einsam, geh ich durch mein Leben
 Alleine und Einsam, hab niemand zum Reden
 Keiner der mich tröstet und hält
 Einer der für mich da ist und zählt........</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="lied der erinnerung (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Lied der Erinnerung (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Lied der Erinnerung (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="lied der erinnerung (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Lied der Erinnerung (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Lied der Erinnerung (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Ballade</p>
               <div class="lyrics">Er sitzt allein, das Zimmer ist kalt
 Hände auf den Knien, die Geschichte entfaltet sich
 Er Dachte, er sei stark, dachte, er überlebt
@@ -3577,16 +3565,15 @@ Allein noch einmal, Schatten umarmt
 Die kalte Hand bleibt, Spuren der Narben tief im Herz
 Doch tief im Innern, ein Funken bleibt
 Durch Schmerz und Lied, ein kleines Licht von dir bleibt...</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="verlangen (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Verlangen (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Verlangen (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Dark Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="verlangen (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Verlangen (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Verlangen (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Dark Rock</p>
               <div class="lyrics">Sünde, Verlangen, Glut, Hitze
 
 In den Gedanken so frei und wild
@@ -3642,16 +3629,15 @@ In meiner Seele das verlangen es steigert sich schnell
 Was du auch tust du tust mir nicht gut
 Deine Berührung sie steigert die Glut.....
 Steigert die Glut....</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich brenne wie feuer (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Ich brenne wie Feuer (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich brenne wie Feuer (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Dark Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich brenne wie feuer (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Ich brenne wie Feuer (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Ich brenne wie Feuer (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Dark Rock</p>
               <div class="lyrics">Wie soll ich es dir nur erklären? 
 Ich will meine Seele nich entleeren.
 Du sollst nicht Traurig sein. 
@@ -3708,16 +3694,15 @@ Meine Liebe sie schreit
 Aber die Freundschaft besteht!
 
 Die Freundschaft besteht....</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wir beide (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wir beide (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wir beide (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Country Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wir beide (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Wir beide (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wir beide (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Country Rock</p>
               <div class="lyrics">Ich schaue in die Nacht hinein
 Mein Kopf voller Gedanken an dich 
 Wie kann sowas nur sein?
@@ -3789,16 +3774,15 @@ Haben uns gefunden und gewählt
 Nie wieder allein das haben wir gesagt 
 Haben beide das Träumen Gewagt...
 Das Träumen Gewagt...</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="phönix (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Phönix (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Phönix (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Gothic</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="phönix (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Phönix (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Phönix (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Gothic</p>
               <div class="lyrics">Du kamst mir vor 
 Wie meine schützende Hand
 Doch hast du in Wirklichkeit 
@@ -3876,16 +3860,15 @@ Der Phönix in mir
 Lebt
 
 in mir lebt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wann und wo (reimagined)" data-album="echos from the past" data-category="album">
-          <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wann und Wo (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wann und Wo (Reimagined)</h3>
-            <p class="song-meta">Echos from the Past · Gothic Film</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wann und wo (reimagined)" data-album="echos from the past" data-category="album">
+          <summary class="song-toggle">Wann und Wo (Reimagined)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-echos-from-the-past.jpg" alt="Cover: Wann und Wo (Reimagined)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Echos from the Past · Gothic Film</p>
               <div class="lyrics">Wie immer sitze ich hier
 Und denke über mein leben nach.
 Egal was ich auch mache 
@@ -3947,9 +3930,9 @@ Ewig allein
 Kann mein Herz nicht heil'n
 
 Komm und finde mich</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -3959,13 +3942,12 @@ Komm und finde mich</div>
         <span class="album-badge">Album</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="schlaf jetzt ein" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Schlaf jetzt ein" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Schlaf jetzt ein</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="schlaf jetzt ein" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Schlaf jetzt ein</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Schlaf jetzt ein" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Siehst du den Mond?
 Er leuchtet hell
 Die Nacht ist da
@@ -4028,16 +4010,15 @@ Spür wie ruhig mein Herzschlag ist
 Ich bin bei dir mein Kind
 
 Schlaf, jetzt, ein.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="nächte und stimmen" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Nächte und Stimmen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Nächte und Stimmen</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="nächte und stimmen" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Nächte und Stimmen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Nächte und Stimmen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Wart ihr schon mal Nachts in eurer Stadt unterwegs?
 Ich letztens erst, da ist mir etwas aufgefallen
 Wollt ihr wissen was?
@@ -4113,16 +4094,15 @@ Nächte und Stimmen in meiner Stadt
 Das Leben zieht an mir vorbei
 Gesichter und Geschichten füllen die Luft
 Ich spüre alles und fühl mich so frei..</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="leere neben mir" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Leere neben mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Leere neben mir</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="leere neben mir" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Leere neben mir</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Leere neben mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Abendrot, du bist da
 Dein Körper, ist mir so nah
 Ich Spüre deine Hand in meiner
@@ -4179,16 +4159,15 @@ Sitz nur ich
 Die Zeit, ist vergangen ohne dich
 Nur der Himmel über mir weiß
 Ich vermisse dich...</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="unerkannt (live version)" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Unerkannt (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Unerkannt (Live Version)</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="unerkannt (live version)" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Unerkannt (Live Version)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Unerkannt (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Sie sitzt auf ihrem Bett
 Weiß nicht was passiert ist
 Ihr tut alles weh. Vom Kopf bis Zeh
@@ -4276,16 +4255,15 @@ Reiche jemanden die Hand
 Steh jetzt auf
 Seine Taten bleiben nie
 Unerkannt.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="summer nights" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Summer Nights" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Summer Nights</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="summer nights" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Summer Nights</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Summer Nights" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">I smell the smoke from the fire
 See the flames right in front of me
 Thinking of all the adventures
@@ -4344,16 +4322,15 @@ That glow in the dark
 I've been through laughter and pain
 But one thing stays the same…
 Summer nights…</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="weg zum leben" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Weg zum Leben" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Weg zum Leben</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="weg zum leben" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Weg zum Leben</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Weg zum Leben" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Er steht vor dem Supermarkt Regal
 Sein Leben liegt in Trümmern
 Hat zu viel gesehen und erlebt
@@ -4405,16 +4382,15 @@ Schau dich um und geh furchtlos
 Zum Ende deines Tunnels
 Finde deinen Weg
 Der zum Leben führt.</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich (live version)" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ich (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich (Live Version)</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich (live version)" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Ich (Live Version)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ich (Live Version)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Ich frag mich Wo und Wer ich bin
 Macht so manches noch viel sinn?
 Hab mich verloren in dieser Welt
@@ -4479,16 +4455,15 @@ Fühl mich Stark und Lieg nur da, ein Funke hell und klar
 Sehe Leuchten, sehe Hoffnung, springe doch ins Dunkle rein
 Hab mich zu sehr verloren und sitze hier
 Und Wein...</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wege und geschichten" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Wege und Geschichten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wege und Geschichten</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wege und geschichten" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Wege und Geschichten</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Wege und Geschichten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Ein Voller Bahnhof in der Stadt. Das Abendlicht scheint matt
 Viele Menschen Steigen aus, fließen aus den Türen Raus
 Viele Stimmen wehen um her, manche freudig manche schwer
@@ -4563,16 +4538,15 @@ Jeder trägt sein eigenes Licht
 Zwischen Abschied und neuen Tagen
 Gehen wir weiter, egal was wir tragen
 Denn stehen bleiben tun wir nicht</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ein neuer tag beginnt" data-album="nächte und stimmen" data-category="album">
-          <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ein neuer Tag beginnt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ein neuer Tag beginnt</h3>
-            <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ein neuer tag beginnt" data-album="nächte und stimmen" data-category="album">
+          <summary class="song-toggle">Ein neuer Tag beginnt</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/album-naechte-und-stimmen.jpg" alt="Cover: Ein neuer Tag beginnt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Nächte und Stimmen · Singer/Songwriter</p>
               <div class="lyrics">Der Mann auf dem Marktplatz baut seinen Stand auf
 Neonlichter gehen aus
 Der Himmel wird heller über den Dächern
@@ -4632,9 +4606,9 @@ Ist mal schwer und mal leicht
 Aber eines ist sicher
 Jeder Weg geht weiter
 Und ein neuer Tag beginnt.</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -4644,534 +4618,486 @@ Und ein neuer Tag beginnt.</div>
         <span class="album-badge">Einzelveröffentlichungen</span>
       </div>
       <div class="song-grid">
-        <article class="song-card" data-title="lied der erinnerung" data-album="single" data-category="single">
-          <img class="cover" src="bilder/lied-der-erinnerung.jpg" alt="Cover: Lied der Erinnerung" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Lied der Erinnerung</h3>
-            <p class="song-meta">Single · Gothic Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        <details class="song-card" data-title="lied der erinnerung" data-album="single" data-category="single">
+          <summary class="song-toggle">Lied der Erinnerung</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/lied-der-erinnerung.jpg" alt="Cover: Lied der Erinnerung" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="verlangen" data-album="single" data-category="single">
-          <img class="cover" src="bilder/verlangen.jpg" alt="Cover: Verlangen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Verlangen</h3>
-            <p class="song-meta">Single · Dark Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="verlangen" data-album="single" data-category="single">
+          <summary class="song-toggle">Verlangen</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/verlangen.jpg" alt="Cover: Verlangen" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Dark Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="johny o&#x27;brian" data-album="single" data-category="single">
-          <img class="cover" src="bilder/johny-o-brian.jpg" alt="Cover: Johny O&#x27;Brian" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Johny O&#x27;Brian</h3>
-            <p class="song-meta">Single · Irish Pub</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="johny o&#x27;brian" data-album="single" data-category="single">
+          <summary class="song-toggle">Johny O&#x27;Brian</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/johny-o-brian.jpg" alt="Cover: Johny O&#x27;Brian" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Irish Pub</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="alleine und einsam" data-album="single" data-category="single">
-          <img class="cover" src="bilder/alleine-und-einsam.jpg" alt="Cover: Alleine und Einsam" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Alleine und Einsam</h3>
-            <p class="song-meta">Single · Gothic Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="alleine und einsam" data-album="single" data-category="single">
+          <summary class="song-toggle">Alleine und Einsam</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/alleine-und-einsam.jpg" alt="Cover: Alleine und Einsam" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="unser chat unser takt" data-album="single" data-category="single">
-          <img class="cover" src="bilder/unser-chat-unser-takt.jpg" alt="Cover: Unser Chat unser Takt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Unser Chat unser Takt</h3>
-            <p class="song-meta">Single · Hymne</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="unser chat unser takt" data-album="single" data-category="single">
+          <summary class="song-toggle">Unser Chat unser Takt</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/unser-chat-unser-takt.jpg" alt="Cover: Unser Chat unser Takt" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Hymne</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="phönix" data-album="single" data-category="single">
-          <img class="cover" src="bilder/phoenix.jpg" alt="Cover: Phönix" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Phönix</h3>
-            <p class="song-meta">Single · Gothic Metal</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="phönix" data-album="single" data-category="single">
+          <summary class="song-toggle">Phönix</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/phoenix.jpg" alt="Cover: Phönix" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Metal</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="im regen gefunden" data-album="single" data-category="single">
-          <img class="cover" src="bilder/im-regen-gefunden.jpg" alt="Cover: Im Regen Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Im Regen Gefunden</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="im regen gefunden" data-album="single" data-category="single">
+          <summary class="song-toggle">Im Regen Gefunden</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/im-regen-gefunden.jpg" alt="Cover: Im Regen Gefunden" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="alleine in mir" data-album="single" data-category="single">
-          <img class="cover" src="bilder/alleine-in-mir.jpg" alt="Cover: Alleine in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Alleine in mir</h3>
-            <p class="song-meta">Single · Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="alleine in mir" data-album="single" data-category="single">
+          <summary class="song-toggle">Alleine in mir</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/alleine-in-mir.jpg" alt="Cover: Alleine in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die weiße frau" data-album="single" data-category="single">
-          <img class="cover" src="bilder/die-weisse-frau.jpg" alt="Cover: Die weiße Frau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die weiße Frau</h3>
-            <p class="song-meta">Single · Folk</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die weiße frau" data-album="single" data-category="single">
+          <summary class="song-toggle">Die weiße Frau</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/die-weisse-frau.jpg" alt="Cover: Die weiße Frau" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Folk</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wann und wo" data-album="single" data-category="single">
-          <img class="cover" src="bilder/wann-und-wo.jpg" alt="Cover: Wann und Wo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wann und Wo</h3>
-            <p class="song-meta">Single · Steam Punk Gothic</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wann und wo" data-album="single" data-category="single">
+          <summary class="song-toggle">Wann und Wo</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/wann-und-wo.jpg" alt="Cover: Wann und Wo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Steam Punk Gothic</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="dunkles erbe" data-album="single" data-category="single">
-          <img class="cover" src="bilder/dunkles-erbe.jpg" alt="Cover: Dunkles Erbe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Dunkles Erbe</h3>
-            <p class="song-meta">Single · Dark Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="dunkles erbe" data-album="single" data-category="single">
+          <summary class="song-toggle">Dunkles Erbe</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/dunkles-erbe.jpg" alt="Cover: Dunkles Erbe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Dark Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="found and lost" data-album="single" data-category="single">
-          <img class="cover" src="bilder/found-and-lost.jpg" alt="Cover: Found and Lost" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Found and Lost</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="found and lost" data-album="single" data-category="single">
+          <summary class="song-toggle">Found and Lost</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/found-and-lost.jpg" alt="Cover: Found and Lost" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich brenne wie feuer" data-album="single" data-category="single">
-          <img class="cover" src="bilder/ich-brenne-wie-feuer.jpg" alt="Cover: Ich brenne wie Feuer" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich brenne wie Feuer</h3>
-            <p class="song-meta">Single · Dark Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich brenne wie feuer" data-album="single" data-category="single">
+          <summary class="song-toggle">Ich brenne wie Feuer</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/ich-brenne-wie-feuer.jpg" alt="Cover: Ich brenne wie Feuer" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Dark Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="halt meine hand" data-album="single" data-category="single">
-          <img class="cover" src="bilder/halt-meine-hand.jpg" alt="Cover: Halt meine Hand" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Halt meine Hand</h3>
-            <p class="song-meta">Single · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="halt meine hand" data-album="single" data-category="single">
+          <summary class="song-toggle">Halt meine Hand</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/halt-meine-hand.jpg" alt="Cover: Halt meine Hand" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wieland der schmied" data-album="single" data-category="single">
-          <img class="cover" src="bilder/wieland-der-schmied.jpg" alt="Cover: Wieland der Schmied" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wieland der Schmied</h3>
-            <p class="song-meta">Single · Nordic Folk</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wieland der schmied" data-album="single" data-category="single">
+          <summary class="song-toggle">Wieland der Schmied</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/wieland-der-schmied.jpg" alt="Cover: Wieland der Schmied" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Nordic Folk</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="papa lass los" data-album="single" data-category="single">
-          <img class="cover" src="bilder/papa-lass-los.jpg" alt="Cover: Papa lass los" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Papa lass los</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="papa lass los" data-album="single" data-category="single">
+          <summary class="song-toggle">Papa lass los</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/papa-lass-los.jpg" alt="Cover: Papa lass los" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="mama ich lebe" data-album="single" data-category="single">
-          <img class="cover" src="bilder/mama-ich-lebe.jpg" alt="Cover: Mama Ich Lebe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Mama Ich Lebe</h3>
-            <p class="song-meta">Single · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="mama ich lebe" data-album="single" data-category="single">
+          <summary class="song-toggle">Mama Ich Lebe</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/mama-ich-lebe.jpg" alt="Cover: Mama Ich Lebe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die schlachten krähe" data-album="single" data-category="single">
-          <img class="cover" src="bilder/die-schlachten-kraehe.jpg" alt="Cover: Die Schlachten Krähe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die Schlachten Krähe</h3>
-            <p class="song-meta">Single · Folk Metal</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die schlachten krähe" data-album="single" data-category="single">
+          <summary class="song-toggle">Die Schlachten Krähe</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/die-schlachten-kraehe.jpg" alt="Cover: Die Schlachten Krähe" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Folk Metal</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="hurra! es ist herbst" data-album="single" data-category="single">
-          <img class="cover" src="bilder/hurra-es-ist-herbst.jpg" alt="Cover: Hurra! es ist Herbst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Hurra! es ist Herbst</h3>
-            <p class="song-meta">Single · Kinderlied</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="hurra! es ist herbst" data-album="single" data-category="single">
+          <summary class="song-toggle">Hurra! es ist Herbst</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/hurra-es-ist-herbst.jpg" alt="Cover: Hurra! es ist Herbst" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Kinderlied</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="drachensong" data-album="single" data-category="single">
-          <img class="cover" src="bilder/drachensong.jpg" alt="Cover: Drachensong" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Drachensong</h3>
-            <p class="song-meta">Single · Kinderlied</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="drachensong" data-album="single" data-category="single">
+          <summary class="song-toggle">Drachensong</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/drachensong.jpg" alt="Cover: Drachensong" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Kinderlied</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="through the night" data-album="single" data-category="single">
-          <img class="cover" src="bilder/through-the-night.jpg" alt="Cover: Through the night" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Through the night</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="through the night" data-album="single" data-category="single">
+          <summary class="song-toggle">Through the night</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/through-the-night.jpg" alt="Cover: Through the night" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="your touch haunts me" data-album="single" data-category="single">
-          <img class="cover" src="bilder/your-touch-haunts-me.jpg" alt="Cover: Your Touch Haunts Me" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Your Touch Haunts Me</h3>
-            <p class="song-meta">Single · Gothic Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="your touch haunts me" data-album="single" data-category="single">
+          <summary class="song-toggle">Your Touch Haunts Me</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/your-touch-haunts-me.jpg" alt="Cover: Your Touch Haunts Me" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="halloween nehmt euch in acht" data-album="single" data-category="single">
-          <img class="cover" src="bilder/halloween-nehmt-euch-in-acht.jpg" alt="Cover: Halloween nehmt euch in acht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Halloween nehmt euch in acht</h3>
-            <p class="song-meta">Single · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="halloween nehmt euch in acht" data-album="single" data-category="single">
+          <summary class="song-toggle">Halloween nehmt euch in acht</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/halloween-nehmt-euch-in-acht.jpg" alt="Cover: Halloween nehmt euch in acht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Season</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="halloween you better beware" data-album="single" data-category="single">
-          <img class="cover" src="bilder/halloween-you-better-beware.jpg" alt="Cover: Halloween You better beware" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Halloween You better beware</h3>
-            <p class="song-meta">Single · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="halloween you better beware" data-album="single" data-category="single">
+          <summary class="song-toggle">Halloween You better beware</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/halloween-you-better-beware.jpg" alt="Cover: Halloween You better beware" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Season</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="kokoro no melody" data-album="single" data-category="single">
-          <img class="cover" src="bilder/kokoro-no-melody.jpg" alt="Cover: Kokoro no Melody" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Kokoro no Melody</h3>
-            <p class="song-meta">Single · K-Pop</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="kokoro no melody" data-album="single" data-category="single">
+          <summary class="song-toggle">Kokoro no Melody</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/kokoro-no-melody.jpg" alt="Cover: Kokoro no Melody" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · K-Pop</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich bin frei" data-album="single" data-category="single">
-          <img class="cover" src="bilder/ich-bin-frei.jpg" alt="Cover: Ich bin Frei" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich bin Frei</h3>
-            <p class="song-meta">Single · Gothic Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich bin frei" data-album="single" data-category="single">
+          <summary class="song-toggle">Ich bin Frei</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/ich-bin-frei.jpg" alt="Cover: Ich bin Frei" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="es ist halloween" data-album="single" data-category="single">
-          <img class="cover" src="bilder/es-ist-halloween.jpg" alt="Cover: Es ist Halloween" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Es ist Halloween</h3>
-            <p class="song-meta">Single · Season</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="es ist halloween" data-album="single" data-category="single">
+          <summary class="song-toggle">Es ist Halloween</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/es-ist-halloween.jpg" alt="Cover: Es ist Halloween" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Season</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="song called loneliness" data-album="single" data-category="single">
-          <img class="cover" src="bilder/song-called-loneliness.jpg" alt="Cover: Song called loneliness" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Song called loneliness</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="song called loneliness" data-album="single" data-category="single">
+          <summary class="song-toggle">Song called loneliness</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/song-called-loneliness.jpg" alt="Cover: Song called loneliness" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich bin da" data-album="single" data-category="single">
-          <img class="cover" src="bilder/ich-bin-da.jpg" alt="Cover: Ich bin Da" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich bin Da</h3>
-            <p class="song-meta">Single · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich bin da" data-album="single" data-category="single">
+          <summary class="song-toggle">Ich bin Da</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/ich-bin-da.jpg" alt="Cover: Ich bin Da" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Singer/Songwriter</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="licht und schatten" data-album="single" data-category="single">
-          <img class="cover" src="bilder/licht-und-schatten.jpg" alt="Cover: Licht und Schatten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Licht und Schatten</h3>
-            <p class="song-meta">Single · Gothic Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="licht und schatten" data-album="single" data-category="single">
+          <summary class="song-toggle">Licht und Schatten</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/licht-und-schatten.jpg" alt="Cover: Licht und Schatten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="the thunder" data-album="single" data-category="single">
-          <img class="cover" src="bilder/the-thunder.jpg" alt="Cover: The Thunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>The Thunder</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="the thunder" data-album="single" data-category="single">
+          <summary class="song-toggle">The Thunder</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/the-thunder.jpg" alt="Cover: The Thunder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="nicht ganz nah" data-album="single" data-category="single">
-          <img class="cover" src="bilder/nicht-ganz-nah.jpg" alt="Cover: Nicht ganz nah" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Nicht ganz nah</h3>
-            <p class="song-meta">Single · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="nicht ganz nah" data-album="single" data-category="single">
+          <summary class="song-toggle">Nicht ganz nah</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/nicht-ganz-nah.jpg" alt="Cover: Nicht ganz nah" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Singer/Songwriter</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="aufrecht" data-album="single" data-category="single">
-          <img class="cover" src="bilder/aufrecht.jpg" alt="Cover: Aufrecht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Aufrecht</h3>
-            <p class="song-meta">Single · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="aufrecht" data-album="single" data-category="single">
+          <summary class="song-toggle">Aufrecht</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/aufrecht.jpg" alt="Cover: Aufrecht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="letters to santa" data-album="single" data-category="single">
-          <img class="cover" src="bilder/letters-to-santa.jpg" alt="Cover: Letters to Santa" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Letters to Santa</h3>
-            <p class="song-meta">Single · Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="letters to santa" data-album="single" data-category="single">
+          <summary class="song-toggle">Letters to Santa</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/letters-to-santa.jpg" alt="Cover: Letters to Santa" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="irgendwo im nirgendwo" data-album="single" data-category="single">
-          <img class="cover" src="bilder/irgendwo-im-nirgendwo.jpg" alt="Cover: Irgendwo im Nirgendwo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Irgendwo im Nirgendwo</h3>
-            <p class="song-meta">Single · Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="irgendwo im nirgendwo" data-album="single" data-category="single">
+          <summary class="song-toggle">Irgendwo im Nirgendwo</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/irgendwo-im-nirgendwo.jpg" alt="Cover: Irgendwo im Nirgendwo" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="nicht zu zweit" data-album="single" data-category="single">
-          <img class="cover" src="bilder/nicht-zu-zweit.jpg" alt="Cover: Nicht zu Zweit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Nicht zu Zweit</h3>
-            <p class="song-meta">Single · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="nicht zu zweit" data-album="single" data-category="single">
+          <summary class="song-toggle">Nicht zu Zweit</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/nicht-zu-zweit.jpg" alt="Cover: Nicht zu Zweit" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="wie eins" data-album="single" data-category="single">
-          <img class="cover" src="bilder/wie-eins.jpg" alt="Cover: Wie Eins" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Wie Eins</h3>
-            <p class="song-meta">Single · Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="wie eins" data-album="single" data-category="single">
+          <summary class="song-toggle">Wie Eins</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/wie-eins.jpg" alt="Cover: Wie Eins" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="kōri no hana" data-album="single" data-category="single">
-          <img class="cover" src="bilder/kori-no-hana.jpg" alt="Cover: Kōri no Hana" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Kōri no Hana</h3>
-            <p class="song-meta">Single · Anime Ending</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="kōri no hana" data-album="single" data-category="single">
+          <summary class="song-toggle">Kōri no Hana</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/kori-no-hana.jpg" alt="Cover: Kōri no Hana" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Anime Ending</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="die maske in mir" data-album="single" data-category="single">
-          <img class="cover" src="bilder/die-maske-in-mir.jpg" alt="Cover: Die Maske in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Die Maske in mir</h3>
-            <p class="song-meta">Single · Pop Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="die maske in mir" data-album="single" data-category="single">
+          <summary class="song-toggle">Die Maske in mir</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/die-maske-in-mir.jpg" alt="Cover: Die Maske in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Pop Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="das kind in mir" data-album="single" data-category="single">
-          <img class="cover" src="bilder/das-kind-in-mir.jpg" alt="Cover: Das Kind in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Das Kind in mir</h3>
-            <p class="song-meta">Single · Rock Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="das kind in mir" data-album="single" data-category="single">
+          <summary class="song-toggle">Das Kind in mir</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/das-kind-in-mir.jpg" alt="Cover: Das Kind in mir" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Rock Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="norddeutschland" data-album="single" data-category="single">
-          <img class="cover" src="bilder/norddeutschland.jpg" alt="Cover: Norddeutschland" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Norddeutschland</h3>
-            <p class="song-meta">Single · Shanty Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="norddeutschland" data-album="single" data-category="single">
+          <summary class="song-toggle">Norddeutschland</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/norddeutschland.jpg" alt="Cover: Norddeutschland" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Shanty Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="lieder" data-album="single" data-category="single">
-          <img class="cover" src="bilder/lieder.jpg" alt="Cover: Lieder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Lieder</h3>
-            <p class="song-meta">Single · Ballade</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="lieder" data-album="single" data-category="single">
+          <summary class="song-toggle">Lieder</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/lieder.jpg" alt="Cover: Lieder" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Ballade</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="letztes licht" data-album="single" data-category="single">
-          <img class="cover" src="bilder/letztes-licht.jpg" alt="Cover: Letztes Licht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Letztes Licht</h3>
-            <p class="song-meta">Single · Gothic</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="letztes licht" data-album="single" data-category="single">
+          <summary class="song-toggle">Letztes Licht</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/letztes-licht.jpg" alt="Cover: Letztes Licht" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="unerkannt (studio)" data-album="single" data-category="single">
-          <img class="cover" src="bilder/unerkannt-studio.jpg" alt="Cover: Unerkannt (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Unerkannt (Studio)</h3>
-            <p class="song-meta">Single · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="unerkannt (studio)" data-album="single" data-category="single">
+          <summary class="song-toggle">Unerkannt (Studio)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/unerkannt-studio.jpg" alt="Cover: Unerkannt (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Singer/Songwriter</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="ich (studio)" data-album="single" data-category="single">
-          <img class="cover" src="bilder/ich-studio.jpg" alt="Cover: Ich (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Ich (Studio)</h3>
-            <p class="song-meta">Single · Singer/Songwriter</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="ich (studio)" data-album="single" data-category="single">
+          <summary class="song-toggle">Ich (Studio)</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/ich-studio.jpg" alt="Cover: Ich (Studio)" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Singer/Songwriter</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="world stands still" data-album="single" data-category="single">
-          <img class="cover" src="bilder/world-stands-still.jpg" alt="Cover: World Stands Still" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>World Stands Still</h3>
-            <p class="song-meta">Single · Gothic Country</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="world stands still" data-album="single" data-category="single">
+          <summary class="song-toggle">World Stands Still</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/world-stands-still.jpg" alt="Cover: World Stands Still" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Country</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="endgame" data-album="single" data-category="single">
-          <img class="cover" src="bilder/endgame.jpg" alt="Cover: Endgame" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Endgame</h3>
-            <p class="song-meta">Single · Gothic Cyberpunk</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="endgame" data-album="single" data-category="single">
+          <summary class="song-toggle">Endgame</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/endgame.jpg" alt="Cover: Endgame" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Gothic Cyberpunk</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
-        <article class="song-card" data-title="tänzerin" data-album="single" data-category="single">
-          <img class="cover" src="bilder/taenzerin.jpg" alt="Cover: Tänzerin" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
-          <div class="song-content">
-            <h3>Tänzerin</h3>
-            <p class="song-meta">Single · Orchestral Rock</p>
-            <details>
-              <summary>Songtext anzeigen</summary>
+        </details>
+        <details class="song-card" data-title="tänzerin" data-album="single" data-category="single">
+          <summary class="song-toggle">Tänzerin</summary>
+          <div class="song-open">
+            <img class="cover" src="bilder/taenzerin.jpg" alt="Cover: Tänzerin" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';"/>
+            <div class="song-content">
+              <p class="song-meta">Single · Orchestral Rock</p>
               <div class="lyrics">Songtext folgt</div>
-            </details>
+            </div>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
