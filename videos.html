@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=w7ZZBgg_7ln7EyNnLAgbdZWbn0vWoURIE4Zj_cSmG7J5nMqqCqYJzr-_9WDUy_EZGlFE_yf5Y3ZxHWQKdmgoKxSWRBxYsSxIt2Qr5y4wf_grTC9rk_Og12Ly6x4-O7DJAQdVLD5wxLcBX2XMTiohfJfh5YIBkZaW18_JjdhxrQFYicFLBzHgS09RCIcFTzBMb6-J6r8Sc4a4TvOSjUpifdq0L3RRV0cZ1PA-l9gNO1ssDbHKt3NfYQIdy_K4EaOZCiG0WuJj0EVQhvFTeXRkOYqDzv7ebAnVFtneWTgQ3BfFvnd0yIXf4v4avqJdWtmnyfXsLNN3AoEieZCKYUGTfA" charset="UTF-8"></script><style>
+  <style>
     :root {
       --bg: #09090d;
       --card: rgba(255, 255, 255, 0.065);
@@ -313,6 +313,34 @@
       .button-row { flex-direction: column; }
       .button { width: 100%; }
     }
+  
+    /* Mobile performance tuning */
+    @media (max-width: 760px) {
+      body {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
+      .hero,
+      .section-card,
+      .album-section,
+      .song-card,
+      .video-card,
+      .tile {
+        backdrop-filter: none;
+      }
+
+      .topbar {
+        backdrop-filter: none;
+      }
+
+      .hero,
+      .section-card,
+      .album-section {
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -351,7 +379,7 @@
           src="https://www.youtube.com/embed/vyxofDHhO5Y"
           title="Eselhans aktuelles YouTube-Video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
+          allowfullscreen loading="lazy">
         </iframe>
       </div>
 
@@ -374,7 +402,7 @@
 
       <div class="video-grid" id="videoGrid">
         <a class="video-card" href="https://youtu.be/fmJwhLSHbjk?si=_WGorMWS91J8xo8-" target="_blank" rel="noopener" data-title="alleine in mir">
-          <img src="https://img.youtube.com/vi/fmJwhLSHbjk/hqdefault.jpg" alt="YouTube Thumbnail: Alleine in mir" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/fmJwhLSHbjk/mqdefault.jpg" alt="YouTube Thumbnail: Alleine in mir" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Alleine in mir</h3>
@@ -382,7 +410,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/NSWSRggEfhQ?si=FC6kK4TIoQeRSjNp" target="_blank" rel="noopener" data-title="unser chat unser takt">
-          <img src="https://img.youtube.com/vi/NSWSRggEfhQ/hqdefault.jpg" alt="YouTube Thumbnail: Unser Chat unser Takt" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/NSWSRggEfhQ/mqdefault.jpg" alt="YouTube Thumbnail: Unser Chat unser Takt" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Unser Chat unser Takt</h3>
@@ -390,7 +418,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/sIJPeX_3N5U?si=4SeZbBcCfkmuZ-_L" target="_blank" rel="noopener" data-title="lied der erinnerung">
-          <img src="https://img.youtube.com/vi/sIJPeX_3N5U/hqdefault.jpg" alt="YouTube Thumbnail: Lied der Erinnerung" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/sIJPeX_3N5U/mqdefault.jpg" alt="YouTube Thumbnail: Lied der Erinnerung" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Lied der Erinnerung</h3>
@@ -398,7 +426,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/tbTyZINpNVg?si=4jM-u3YxFg5LNNnr" target="_blank" rel="noopener" data-title="dunkles erbe">
-          <img src="https://img.youtube.com/vi/tbTyZINpNVg/hqdefault.jpg" alt="YouTube Thumbnail: Dunkles Erbe" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/tbTyZINpNVg/mqdefault.jpg" alt="YouTube Thumbnail: Dunkles Erbe" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Dunkles Erbe</h3>
@@ -406,7 +434,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/t_kNfnaN8LQ?si=xuOrALBT_cr8cXXh" target="_blank" rel="noopener" data-title="alleine und einsam">
-          <img src="https://img.youtube.com/vi/t_kNfnaN8LQ/hqdefault.jpg" alt="YouTube Thumbnail: Alleine und Einsam" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/t_kNfnaN8LQ/mqdefault.jpg" alt="YouTube Thumbnail: Alleine und Einsam" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Alleine und Einsam</h3>
@@ -414,7 +442,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/9irGBFJiUF0?si=ToEN0zjeReyt7j6d" target="_blank" rel="noopener" data-title="johny o&#x27;brian">
-          <img src="https://img.youtube.com/vi/9irGBFJiUF0/hqdefault.jpg" alt="YouTube Thumbnail: Johny O&#x27;Brian" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/9irGBFJiUF0/mqdefault.jpg" alt="YouTube Thumbnail: Johny O&#x27;Brian" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Johny O&#x27;Brian</h3>
@@ -422,7 +450,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/ZPs0xGcDhOk?si=x_5EDMO5D4gCdiYN" target="_blank" rel="noopener" data-title="wir beide">
-          <img src="https://img.youtube.com/vi/ZPs0xGcDhOk/hqdefault.jpg" alt="YouTube Thumbnail: Wir beide" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/ZPs0xGcDhOk/mqdefault.jpg" alt="YouTube Thumbnail: Wir beide" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Wir beide</h3>
@@ -430,7 +458,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/aPpqetrGucA?si=qZkjNGm0NSpiXZ72" target="_blank" rel="noopener" data-title="die weiße frau">
-          <img src="https://img.youtube.com/vi/aPpqetrGucA/hqdefault.jpg" alt="YouTube Thumbnail: Die Weiße Frau" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/aPpqetrGucA/mqdefault.jpg" alt="YouTube Thumbnail: Die Weiße Frau" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Die Weiße Frau</h3>
@@ -438,7 +466,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/Tc0Jfb8lHEQ?si=bEgMdNMgaSn7A82m" target="_blank" rel="noopener" data-title="im regen gefunden">
-          <img src="https://img.youtube.com/vi/Tc0Jfb8lHEQ/hqdefault.jpg" alt="YouTube Thumbnail: Im Regen gefunden" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/Tc0Jfb8lHEQ/mqdefault.jpg" alt="YouTube Thumbnail: Im Regen gefunden" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Im Regen gefunden</h3>
@@ -446,7 +474,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/TkZMYS2NmDQ?si=k0cODX1WISf8mfwF" target="_blank" rel="noopener" data-title="phönix">
-          <img src="https://img.youtube.com/vi/TkZMYS2NmDQ/hqdefault.jpg" alt="YouTube Thumbnail: Phönix" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/TkZMYS2NmDQ/mqdefault.jpg" alt="YouTube Thumbnail: Phönix" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Phönix</h3>
@@ -454,7 +482,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/V1uo2E8G9g8?si=7y08yyz3dO5DsAx3" target="_blank" rel="noopener" data-title="wann und wo">
-          <img src="https://img.youtube.com/vi/V1uo2E8G9g8/hqdefault.jpg" alt="YouTube Thumbnail: Wann und Wo" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/V1uo2E8G9g8/mqdefault.jpg" alt="YouTube Thumbnail: Wann und Wo" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Wann und Wo</h3>
@@ -462,7 +490,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/JDqtXWXSBJk?si=fZYhYSV40hdspUQk" target="_blank" rel="noopener" data-title="found and lost">
-          <img src="https://img.youtube.com/vi/JDqtXWXSBJk/hqdefault.jpg" alt="YouTube Thumbnail: Found and Lost" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/JDqtXWXSBJk/mqdefault.jpg" alt="YouTube Thumbnail: Found and Lost" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Found and Lost</h3>
@@ -470,7 +498,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/GnOg4_QMHms?si=eA1hsDnBaGPTHHFT" target="_blank" rel="noopener" data-title="ich brenne wie feuer">
-          <img src="https://img.youtube.com/vi/GnOg4_QMHms/hqdefault.jpg" alt="YouTube Thumbnail: Ich brenne wie Feuer" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/GnOg4_QMHms/mqdefault.jpg" alt="YouTube Thumbnail: Ich brenne wie Feuer" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Ich brenne wie Feuer</h3>
@@ -478,7 +506,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/_Ae_3Ki59cg?si=bLTItzYHy6I6zo3c" target="_blank" rel="noopener" data-title="halt meine hand">
-          <img src="https://img.youtube.com/vi/_Ae_3Ki59cg/hqdefault.jpg" alt="YouTube Thumbnail: Halt meine Hand" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/_Ae_3Ki59cg/mqdefault.jpg" alt="YouTube Thumbnail: Halt meine Hand" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Halt meine Hand</h3>
@@ -486,7 +514,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/L-mYuVzwtGg?si=EJd_i-27eDXkhwUq" target="_blank" rel="noopener" data-title="wieland der schmied">
-          <img src="https://img.youtube.com/vi/L-mYuVzwtGg/hqdefault.jpg" alt="YouTube Thumbnail: Wieland der Schmied" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/L-mYuVzwtGg/mqdefault.jpg" alt="YouTube Thumbnail: Wieland der Schmied" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Wieland der Schmied</h3>
@@ -494,7 +522,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/EcPMQe88O00?si=CGVVfe6hAS40pgrw" target="_blank" rel="noopener" data-title="papa lass los">
-          <img src="https://img.youtube.com/vi/EcPMQe88O00/hqdefault.jpg" alt="YouTube Thumbnail: Papa lass Los" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/EcPMQe88O00/mqdefault.jpg" alt="YouTube Thumbnail: Papa lass Los" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Papa lass Los</h3>
@@ -502,7 +530,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/I2iyT-QBUYw?si=dcWTUauG3HgqwUlr" target="_blank" rel="noopener" data-title="mama ich lebe">
-          <img src="https://img.youtube.com/vi/I2iyT-QBUYw/hqdefault.jpg" alt="YouTube Thumbnail: Mama ich Lebe" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/I2iyT-QBUYw/mqdefault.jpg" alt="YouTube Thumbnail: Mama ich Lebe" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Mama ich Lebe</h3>
@@ -510,7 +538,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/9gexVdfMvak?si=Kk7TFLwsuDwwaKrD" target="_blank" rel="noopener" data-title="die schlachten krähe">
-          <img src="https://img.youtube.com/vi/9gexVdfMvak/hqdefault.jpg" alt="YouTube Thumbnail: Die Schlachten Krähe" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/9gexVdfMvak/mqdefault.jpg" alt="YouTube Thumbnail: Die Schlachten Krähe" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Die Schlachten Krähe</h3>
@@ -518,7 +546,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/UGseNHkfBns?si=W_TbnoqglPtumgpE" target="_blank" rel="noopener" data-title="hurra, es ist herbst!">
-          <img src="https://img.youtube.com/vi/UGseNHkfBns/hqdefault.jpg" alt="YouTube Thumbnail: Hurra, es ist Herbst!" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/UGseNHkfBns/mqdefault.jpg" alt="YouTube Thumbnail: Hurra, es ist Herbst!" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Hurra, es ist Herbst!</h3>
@@ -526,7 +554,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/lc0LpuepIRc?si=7DrjcRTyKrU0vGgw" target="_blank" rel="noopener" data-title="drachensong">
-          <img src="https://img.youtube.com/vi/lc0LpuepIRc/hqdefault.jpg" alt="YouTube Thumbnail: Drachensong" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/lc0LpuepIRc/mqdefault.jpg" alt="YouTube Thumbnail: Drachensong" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Drachensong</h3>
@@ -534,7 +562,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/bnDDgXF0TCU?si=kGKuxaG5wsZOduQI" target="_blank" rel="noopener" data-title="through the night">
-          <img src="https://img.youtube.com/vi/bnDDgXF0TCU/hqdefault.jpg" alt="YouTube Thumbnail: Through the Night" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/bnDDgXF0TCU/mqdefault.jpg" alt="YouTube Thumbnail: Through the Night" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Through the Night</h3>
@@ -542,7 +570,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/BdXaBmyCYnk?si=fuHWhu9dFLme7byQ" target="_blank" rel="noopener" data-title="lebensweg">
-          <img src="https://img.youtube.com/vi/BdXaBmyCYnk/hqdefault.jpg" alt="YouTube Thumbnail: Lebensweg" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/BdXaBmyCYnk/mqdefault.jpg" alt="YouTube Thumbnail: Lebensweg" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Lebensweg</h3>
@@ -550,7 +578,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/fM5xmC6o37s?si=ivkapNxTe7NF5g86" target="_blank" rel="noopener" data-title="halloween nehmt euch in acht">
-          <img src="https://img.youtube.com/vi/fM5xmC6o37s/hqdefault.jpg" alt="YouTube Thumbnail: Halloween nehmt euch in Acht" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/fM5xmC6o37s/mqdefault.jpg" alt="YouTube Thumbnail: Halloween nehmt euch in Acht" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Halloween nehmt euch in Acht</h3>
@@ -558,7 +586,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/z9czSFeRQxg?si=nbpAe7Coqyrm5ktB" target="_blank" rel="noopener" data-title="halloween you better beware">
-          <img src="https://img.youtube.com/vi/z9czSFeRQxg/hqdefault.jpg" alt="YouTube Thumbnail: Halloween you better beware" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/z9czSFeRQxg/mqdefault.jpg" alt="YouTube Thumbnail: Halloween you better beware" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Halloween you better beware</h3>
@@ -566,7 +594,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/IjXYSlIaJ-U?si=rqeDZKWUFMtZnnHl" target="_blank" rel="noopener" data-title="kokoro no melody">
-          <img src="https://img.youtube.com/vi/IjXYSlIaJ-U/hqdefault.jpg" alt="YouTube Thumbnail: Kokoro no Melody" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/IjXYSlIaJ-U/mqdefault.jpg" alt="YouTube Thumbnail: Kokoro no Melody" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Kokoro no Melody</h3>
@@ -574,7 +602,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/HOJXKlE-EKE?si=9ar9mO1Jl2bGl9ws" target="_blank" rel="noopener" data-title="ich bin frei">
-          <img src="https://img.youtube.com/vi/HOJXKlE-EKE/hqdefault.jpg" alt="YouTube Thumbnail: Ich bin Frei" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/HOJXKlE-EKE/mqdefault.jpg" alt="YouTube Thumbnail: Ich bin Frei" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Ich bin Frei</h3>
@@ -582,7 +610,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/U0eYo8LQlic?si=LChyIF_uKLSs2xN2" target="_blank" rel="noopener" data-title="through the night #2">
-          <img src="https://img.youtube.com/vi/U0eYo8LQlic/hqdefault.jpg" alt="YouTube Thumbnail: Through the Night #2" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/U0eYo8LQlic/mqdefault.jpg" alt="YouTube Thumbnail: Through the Night #2" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Through the Night #2</h3>
@@ -590,7 +618,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/gjWvtPvaqjY?si=esHmGo92mL35CAki" target="_blank" rel="noopener" data-title="es ist halloween">
-          <img src="https://img.youtube.com/vi/gjWvtPvaqjY/hqdefault.jpg" alt="YouTube Thumbnail: Es ist Halloween" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/gjWvtPvaqjY/mqdefault.jpg" alt="YouTube Thumbnail: Es ist Halloween" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Es ist Halloween</h3>
@@ -598,7 +626,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/dJKp7o5_6_c?si=rdzq8xT-Hotz_0z6" target="_blank" rel="noopener" data-title="song called loneliness">
-          <img src="https://img.youtube.com/vi/dJKp7o5_6_c/hqdefault.jpg" alt="YouTube Thumbnail: Song called Loneliness" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/dJKp7o5_6_c/mqdefault.jpg" alt="YouTube Thumbnail: Song called Loneliness" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Song called Loneliness</h3>
@@ -606,7 +634,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/ijDrE3cwgEI?si=amkUVAcrv7LPnBQ8" target="_blank" rel="noopener" data-title="ich bin da">
-          <img src="https://img.youtube.com/vi/ijDrE3cwgEI/hqdefault.jpg" alt="YouTube Thumbnail: Ich bin da" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/ijDrE3cwgEI/mqdefault.jpg" alt="YouTube Thumbnail: Ich bin da" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Ich bin da</h3>
@@ -614,7 +642,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/wtDA5HdrD_c?si=FtekhQLMSGnWwMxo" target="_blank" rel="noopener" data-title="licht und schatten">
-          <img src="https://img.youtube.com/vi/wtDA5HdrD_c/hqdefault.jpg" alt="YouTube Thumbnail: Licht und Schatten" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/wtDA5HdrD_c/mqdefault.jpg" alt="YouTube Thumbnail: Licht und Schatten" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Licht und Schatten</h3>
@@ -622,7 +650,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/o1FbO8BjlWI?si=C4GXst7FjKRM4CCD" target="_blank" rel="noopener" data-title="the thunder">
-          <img src="https://img.youtube.com/vi/o1FbO8BjlWI/hqdefault.jpg" alt="YouTube Thumbnail: The Thunder" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/o1FbO8BjlWI/mqdefault.jpg" alt="YouTube Thumbnail: The Thunder" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>The Thunder</h3>
@@ -630,7 +658,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/ze1RnX-yqis?si=v0S5gz3R0OfhhSEo" target="_blank" rel="noopener" data-title="weißt du&#x27;s noch">
-          <img src="https://img.youtube.com/vi/ze1RnX-yqis/hqdefault.jpg" alt="YouTube Thumbnail: Weißt du&#x27;s noch" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/ze1RnX-yqis/mqdefault.jpg" alt="YouTube Thumbnail: Weißt du&#x27;s noch" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Weißt du&#x27;s noch</h3>
@@ -638,7 +666,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/k7QR1uZzRVE?si=HzvGojgmFXf9CxeU" target="_blank" rel="noopener" data-title="nicht ganz nah">
-          <img src="https://img.youtube.com/vi/k7QR1uZzRVE/hqdefault.jpg" alt="YouTube Thumbnail: Nicht ganz nah" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/k7QR1uZzRVE/mqdefault.jpg" alt="YouTube Thumbnail: Nicht ganz nah" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Nicht ganz nah</h3>
@@ -646,7 +674,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/F7srsF4YeRY?si=WUomM9q7i-sb6aQi" target="_blank" rel="noopener" data-title="aufstehn">
-          <img src="https://img.youtube.com/vi/F7srsF4YeRY/hqdefault.jpg" alt="YouTube Thumbnail: Aufstehn" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/F7srsF4YeRY/mqdefault.jpg" alt="YouTube Thumbnail: Aufstehn" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Aufstehn</h3>
@@ -654,7 +682,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/-v4OhZbissE?si=7rsUdtyJl01TaZzG" target="_blank" rel="noopener" data-title="aufrecht">
-          <img src="https://img.youtube.com/vi/-v4OhZbissE/hqdefault.jpg" alt="YouTube Thumbnail: Aufrecht" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/-v4OhZbissE/mqdefault.jpg" alt="YouTube Thumbnail: Aufrecht" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Aufrecht</h3>
@@ -662,7 +690,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/_bpYpLW6kIM?si=qJIox09zHS0IyjWJ" target="_blank" rel="noopener" data-title="letters to santa">
-          <img src="https://img.youtube.com/vi/_bpYpLW6kIM/hqdefault.jpg" alt="YouTube Thumbnail: Letters to Santa" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/_bpYpLW6kIM/mqdefault.jpg" alt="YouTube Thumbnail: Letters to Santa" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Letters to Santa</h3>
@@ -670,7 +698,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/Tl1M0Dp0NMc?si=F9d6McVqk3nHLGN7" target="_blank" rel="noopener" data-title="irgendwo im nirgendwo">
-          <img src="https://img.youtube.com/vi/Tl1M0Dp0NMc/hqdefault.jpg" alt="YouTube Thumbnail: Irgendwo im Nirgendwo" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/Tl1M0Dp0NMc/mqdefault.jpg" alt="YouTube Thumbnail: Irgendwo im Nirgendwo" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Irgendwo im Nirgendwo</h3>
@@ -678,7 +706,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/RXwMJ1CbEWc?si=FGmOlqIqVk8mrIne" target="_blank" rel="noopener" data-title="nicht zu zweit">
-          <img src="https://img.youtube.com/vi/RXwMJ1CbEWc/hqdefault.jpg" alt="YouTube Thumbnail: Nicht zu Zweit" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/RXwMJ1CbEWc/mqdefault.jpg" alt="YouTube Thumbnail: Nicht zu Zweit" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Nicht zu Zweit</h3>
@@ -686,7 +714,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/qJx_gQ04z7I?si=yTcllkYpjukSnUlA" target="_blank" rel="noopener" data-title="wie eins">
-          <img src="https://img.youtube.com/vi/qJx_gQ04z7I/hqdefault.jpg" alt="YouTube Thumbnail: Wie Eins" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/qJx_gQ04z7I/mqdefault.jpg" alt="YouTube Thumbnail: Wie Eins" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Wie Eins</h3>
@@ -694,7 +722,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/36h19EVi9lY?si=DnprmvjUaKCiybRI" target="_blank" rel="noopener" data-title="kōri no hana 氷の花 (eisblumen)">
-          <img src="https://img.youtube.com/vi/36h19EVi9lY/hqdefault.jpg" alt="YouTube Thumbnail: Kōri no Hana 氷の花 (Eisblumen)" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/36h19EVi9lY/mqdefault.jpg" alt="YouTube Thumbnail: Kōri no Hana 氷の花 (Eisblumen)" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Kōri no Hana 氷の花 (Eisblumen)</h3>
@@ -702,7 +730,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/XPXcIF-dOfE?si=ghxrZ2h1-Yc9G1Bg" target="_blank" rel="noopener" data-title="kōri no hana (eisblumen - deutsche version)">
-          <img src="https://img.youtube.com/vi/XPXcIF-dOfE/hqdefault.jpg" alt="YouTube Thumbnail: Kōri no Hana (Eisblumen - Deutsche Version)" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/XPXcIF-dOfE/mqdefault.jpg" alt="YouTube Thumbnail: Kōri no Hana (Eisblumen - Deutsche Version)" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Kōri no Hana (Eisblumen - Deutsche Version)</h3>
@@ -710,7 +738,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/CP80F0gf3zI?si=lIiuTFUV9ZE4L5jQ" target="_blank" rel="noopener" data-title="die maske in mir">
-          <img src="https://img.youtube.com/vi/CP80F0gf3zI/hqdefault.jpg" alt="YouTube Thumbnail: Die Maske in mir" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/CP80F0gf3zI/mqdefault.jpg" alt="YouTube Thumbnail: Die Maske in mir" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Die Maske in mir</h3>
@@ -718,7 +746,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/8QBkft7GsOs?si=prU2VKzqDKQxDveK" target="_blank" rel="noopener" data-title="traumfrau">
-          <img src="https://img.youtube.com/vi/8QBkft7GsOs/hqdefault.jpg" alt="YouTube Thumbnail: Traumfrau" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/8QBkft7GsOs/mqdefault.jpg" alt="YouTube Thumbnail: Traumfrau" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Traumfrau</h3>
@@ -726,7 +754,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/0ywhY7JnMVI?si=zkuLbIZXbDY4sdZd" target="_blank" rel="noopener" data-title="das kind in mir">
-          <img src="https://img.youtube.com/vi/0ywhY7JnMVI/hqdefault.jpg" alt="YouTube Thumbnail: Das Kind in mir" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/0ywhY7JnMVI/mqdefault.jpg" alt="YouTube Thumbnail: Das Kind in mir" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Das Kind in mir</h3>
@@ -734,7 +762,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/Kso0BiK-aKQ?si=JykYO6HCOFm1WL9N" target="_blank" rel="noopener" data-title="lauter als die stille - komplettes album">
-          <img src="https://img.youtube.com/vi/Kso0BiK-aKQ/hqdefault.jpg" alt="YouTube Thumbnail: Lauter als die Stille - Komplettes Album" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/Kso0BiK-aKQ/mqdefault.jpg" alt="YouTube Thumbnail: Lauter als die Stille - Komplettes Album" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Lauter als die Stille - Komplettes Album</h3>
@@ -742,7 +770,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/f7hJ5u61pEE?si=DhlvadtIwJVAZvr9" target="_blank" rel="noopener" data-title="norddeutschland">
-          <img src="https://img.youtube.com/vi/f7hJ5u61pEE/hqdefault.jpg" alt="YouTube Thumbnail: Norddeutschland" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/f7hJ5u61pEE/mqdefault.jpg" alt="YouTube Thumbnail: Norddeutschland" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Norddeutschland</h3>
@@ -750,7 +778,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/YMzGES7BmlY?si=H_4WT3-FKYdFw4m5" target="_blank" rel="noopener" data-title="lieder">
-          <img src="https://img.youtube.com/vi/YMzGES7BmlY/hqdefault.jpg" alt="YouTube Thumbnail: Lieder" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/YMzGES7BmlY/mqdefault.jpg" alt="YouTube Thumbnail: Lieder" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Lieder</h3>
@@ -758,7 +786,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/4z0M7uF0DTY?si=jZChzdLcFswEqBiP" target="_blank" rel="noopener" data-title="letztes licht">
-          <img src="https://img.youtube.com/vi/4z0M7uF0DTY/hqdefault.jpg" alt="YouTube Thumbnail: Letztes Licht" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/4z0M7uF0DTY/mqdefault.jpg" alt="YouTube Thumbnail: Letztes Licht" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Letztes Licht</h3>
@@ -766,7 +794,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/vY09o1d1Dn0?si=dUCtNHVC7SM_dmDd" target="_blank" rel="noopener" data-title="unerkannt">
-          <img src="https://img.youtube.com/vi/vY09o1d1Dn0/hqdefault.jpg" alt="YouTube Thumbnail: Unerkannt" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/vY09o1d1Dn0/mqdefault.jpg" alt="YouTube Thumbnail: Unerkannt" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Unerkannt</h3>
@@ -774,7 +802,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/kmCXo58twPw?si=195it7rXKdHy9TyY" target="_blank" rel="noopener" data-title="ich">
-          <img src="https://img.youtube.com/vi/kmCXo58twPw/hqdefault.jpg" alt="YouTube Thumbnail: Ich" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/kmCXo58twPw/mqdefault.jpg" alt="YouTube Thumbnail: Ich" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Ich</h3>
@@ -782,7 +810,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/fXJsL0Vhwh4?si=BIGUBYPpiwfyZsNA" target="_blank" rel="noopener" data-title="world stands still">
-          <img src="https://img.youtube.com/vi/fXJsL0Vhwh4/hqdefault.jpg" alt="YouTube Thumbnail: World Stands Still" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/fXJsL0Vhwh4/mqdefault.jpg" alt="YouTube Thumbnail: World Stands Still" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>World Stands Still</h3>
@@ -790,7 +818,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/53ebtdI_dcc?si=5l-tHHv9ZnnzxpiV" target="_blank" rel="noopener" data-title="endgame">
-          <img src="https://img.youtube.com/vi/53ebtdI_dcc/hqdefault.jpg" alt="YouTube Thumbnail: Endgame" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/53ebtdI_dcc/mqdefault.jpg" alt="YouTube Thumbnail: Endgame" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Endgame</h3>
@@ -798,7 +826,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/JzvPB_vT4wg?si=SfhZvL7b5WH0nyk5" target="_blank" rel="noopener" data-title="tänzerin">
-          <img src="https://img.youtube.com/vi/JzvPB_vT4wg/hqdefault.jpg" alt="YouTube Thumbnail: Tänzerin" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/JzvPB_vT4wg/mqdefault.jpg" alt="YouTube Thumbnail: Tänzerin" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Tänzerin</h3>
@@ -806,7 +834,7 @@
           </div>
         </a>
         <a class="video-card" href="https://youtu.be/vyxofDHhO5Y?si=rh3PSJbAONAAXijx" target="_blank" rel="noopener" data-title="nächte und stimmen - komplettes album">
-          <img src="https://img.youtube.com/vi/vyxofDHhO5Y/hqdefault.jpg" alt="YouTube Thumbnail: Nächte und Stimmen - Komplettes Album" loading="lazy" />
+          <img src="https://i.ytimg.com/vi/vyxofDHhO5Y/mqdefault.jpg" alt="YouTube Thumbnail: Nächte und Stimmen - Komplettes Album" loading="lazy" />
           <div class="video-content">
             <span>Video</span>
             <h3>Nächte und Stimmen - Komplettes Album</h3>

@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TgSi8lWNtxn_IdCSl-4aRGKtV-lUyC8JxqqJKVA6GtN5oDkt5B-jItszF4y4QK6TjIAqXm4jvi8qNktM1t2mrKo1MNO8DLZgqoxSDYDmbQlOuyjwcwqpDu_ZkPDEQMKcZFhyd2pjSw7-UOdM_RZqO10ZEzYXVbKWoJHtXCCdL1kQiDqIM5Lpd1XLcH1vnVr6Rfj8CuiXbrC9eOW0WxyTPZIuQogz7MZ0epDdbSyGxgVS_W6Uiu9D2hPLm9jR_mJC7I8Co1mIQF3sd2VwLu4jy-PTrkr5xLwcSGS3XaHXToz32VCEXEhlTdVEug5tXXvJ" charset="UTF-8"></script><style>
+  <style>
     :root {
       --bg: #09090d;
       --card: rgba(255, 255, 255, 0.065);
@@ -284,6 +284,34 @@
       .button-row { flex-direction: column; }
       .button, .link-button { width: 100%; }
     }
+  
+    /* Mobile performance tuning */
+    @media (max-width: 760px) {
+      body {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
+      .hero,
+      .section-card,
+      .album-section,
+      .song-card,
+      .video-card,
+      .tile {
+        backdrop-filter: none;
+      }
+
+      .topbar {
+        backdrop-filter: none;
+      }
+
+      .hero,
+      .section-card,
+      .album-section {
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+      }
+    }
+
   </style>
 
 </head>

@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=USljm767FlhshLmULYqaWn8tSUztLmT2Y0djQnR-QGh2EonNTxQ4MhLSvYfNYDsFtVJJypsATV3BMOuPPyuKfgEItsjqQ-SkyEePhPXGPtlAtQJABjR023MyuBhJFMC4-NOpVANNeoFL9amBGFe8OZAojpsh8oAxddquNiaZZ4WJeFlXLeXKADKSLqoWPRFHCIUpCoyFleb74RDpdeLqVZTKLjSJBUVI88RYtKM9mO6JOdX4RNX3Pi0oPJaRQEIp1xSndkX1qxTGYTM-lCLgJg" charset="UTF-8"></script><style>
+  <style>
     :root {
       --bg: #09090d;
       --card: rgba(255, 255, 255, 0.065);
@@ -424,6 +424,34 @@
         width: 100%;
       }
     }
+  
+    /* Mobile performance tuning */
+    @media (max-width: 760px) {
+      body {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
+      .hero,
+      .section-card,
+      .album-section,
+      .song-card,
+      .video-card,
+      .tile {
+        backdrop-filter: none;
+      }
+
+      .topbar {
+        backdrop-filter: none;
+      }
+
+      .hero,
+      .section-card,
+      .album-section {
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -458,7 +486,7 @@
       </div>
 
       <div class="banner-wrap">
-        <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" />
+        <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" / loading="lazy">
       </div>
     </header>
 
@@ -472,7 +500,7 @@
 
       <div class="news-box" style="grid-template-columns: minmax(180px, 240px) 1fr auto;">
         <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: rgba(255,255,255,0.05); box-shadow: 0 12px 28px rgba(0,0,0,0.24);">
-          <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" />
+          <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" / loading="lazy">
         </div>
         <div>
           <span class="news-label">Coming Soon</span>
@@ -503,7 +531,7 @@
           src="https://www.youtube.com/embed/vyxofDHhO5Y"
           title="Eselhans aktuelles YouTube-Video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
+          allowfullscreen loading="lazy">
         </iframe>
       </div>
     </section>
