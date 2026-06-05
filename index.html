@@ -1,52 +1,606 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eselhans</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Eselhans | KI-Musik aus Ostfriesland</title>
+  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland. Ehrliche Songs, Musikvideos, Songtexte und Links zu YouTube, Spotify, Apple Music und weiteren Plattformen." />
+  <meta name="keywords" content="Eselhans, Musik, KI-Musik, Songtexte, Ostfriesland, YouTube, Spotify, Apple Music, Singer Songwriter" />
+  <meta name="author" content="Eselhans" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://eselhans.github.io" />
+
+  <meta property="og:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta property="og:description" content="Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eselhans.github.io" />
+  <meta property="og:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta name="twitter:description" content="Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen." />
+  <meta name="twitter:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+
+  <style>
+    :root {
+      --bg: #09090d;
+      --card: rgba(255, 255, 255, 0.065);
+      --card-strong: rgba(255, 255, 255, 0.095);
+      --border: rgba(255, 255, 255, 0.13);
+      --text: #f4f1ea;
+      --muted: #b9b0a6;
+      --accent: #c98b4f;
+      --accent-soft: rgba(201, 139, 79, 0.18);
+      --shadow: rgba(0, 0, 0, 0.46);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(201, 139, 79, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(97, 74, 125, 0.10), transparent 28%),
+        linear-gradient(rgba(7, 7, 10, 0.84), rgba(7, 7, 10, 0.94)),
+        url("bilder/hintergrund-eselhans.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 30px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      margin-bottom: 42px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(9, 9, 13, 0.74);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.18rem;
+      padding-left: 4px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--accent-soft);
+      border-color: rgba(201, 139, 79, 0.55);
+    }
+
+    .hero,
+    .section-card,
+    .tile {
+      border: 1px solid var(--border);
+      background: rgba(9, 9, 13, 0.58);
+      box-shadow: 0 24px 70px var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      padding: 42px;
+      border-radius: 34px;
+      margin-bottom: 26px;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.4rem);
+      line-height: 0.93;
+      letter-spacing: -0.075em;
+      margin-bottom: 20px;
+      text-shadow: 0 18px 45px var(--shadow);
+    }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #15110d;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .banner-wrap {
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .banner-wrap img {
+      width: 100%;
+      height: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section-card {
+      padding: 28px;
+      border-radius: 28px;
+      margin-top: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 4vw, 2.45rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .news-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .news-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+    }
+
+    .news-box p {
+      color: var(--muted);
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.42);
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+    }
+
+    .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
+      padding: 22px;
+      border-radius: 24px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(201, 139, 79, 0.55);
+    }
+
+    .tile span {
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .tile h3 {
+      font-size: 1.28rem;
+      line-height: 1.16;
+      margin-bottom: 10px;
+    }
+
+    .tile p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .platforms {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .platforms a {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .platforms a:hover {
+      background: var(--accent-soft);
+      border-color: rgba(201, 139, 79, 0.55);
+    }
+
+    footer {
+      padding: 36px 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--text);
+      margin: 0 8px;
+      opacity: 0.86;
+    }
+
+    footer a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .tile-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(94%, 1120px);
+        padding-top: 20px;
+      }
+
+      .topbar {
+        top: 10px;
+      }
+
+      .hero,
+      .section-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .banner-wrap {
+        min-height: auto;
+      }
+
+      .news-box {
+        grid-template-columns: 1fr;
+      }
+
+      .tile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button,
+      .platforms a {
+        width: 100%;
+      }
+    }
+  
+    /* Mobile performance tuning */
+    @media (max-width: 760px) {
+      body {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
+      .hero,
+      .section-card,
+      .album-section,
+      .song-card,
+      .video-card,
+      .tile {
+        backdrop-filter: none;
+      }
+
+      .topbar {
+        backdrop-filter: none;
+      }
+
+      .hero,
+      .section-card,
+      .album-section {
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+      }
+    }
+
+  </style>
 </head>
 <body>
+  <main class="page">
+    <nav class="topbar">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
+        Eselhans
+      </a>
 
-<div class="container">
+      <div class="nav-links">
+        <a href="musik.html">Musik</a>
+        <a href="songtexte.html">Songtexte</a>
+        <a href="videos.html">Videos</a>
+        <a href="news.html">News</a>
+        <a href="about.html">Über mich</a>
+      </div>
+    </nav>
 
-<div class="hero">
-<h1>Eselhans</h1>
-<p>KI Musik Artist Hub – Songs, Videos, Stories & News</p>
+    <header class="hero">
+      <div>
+        <span class="eyebrow">KI-Musik aus Ostfriesland</span>
+        <h1>Eselhans</h1>
+        <p class="lead">
+          Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen.
+          Willkommen auf meiner kleinen Künstlerseite.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="songtexte.html">Songtexte lesen</a>
+          <a class="button" href="#musik">Musik hören</a>
+        </div>
+      </div>
 
-<div class="nav">
-<a href="index.html">Start</a>
-<a href="musik.html">Musik</a>
-<a href="news.html">News</a>
-<a href="videos.html">Videos</a>
-<a href="songtexte.html">Songtexte</a>
-</div>
-</div>
+      <div class="banner-wrap">
+        <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" / loading="lazy">
+      </div>
+    </header>
 
-<div class="card">
-<h2>🔥 Neueste News</h2>
-<div id="news"></div>
-</div>
+    <section class="section-card" id="news">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Coming Soon / News</span>
+          <h2>Was gerade entsteht</h2>
+        </div>
+      </div>
 
-<div class="card">
-<h2>🎬 Featured Video</h2>
-<a href="https://youtu.be/fmJwhLSHbjk" target="_blank">Alleine in mir ansehen</a>
-</div>
+      <div class="news-box" style="grid-template-columns: minmax(180px, 240px) 1fr auto;">
+        <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: rgba(255,255,255,0.05); box-shadow: 0 12px 28px rgba(0,0,0,0.24);">
+          <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" / loading="lazy">
+        </div>
+        <div>
+          <span class="news-label">Coming Soon</span>
+          <h3>Neuer Song: Zwei Seiten</h3>
+          <p>
+            Als nächster Song steht <strong>Zwei Seiten</strong> im Fokus. Der neue Titel bekommt hier schon seinen Platz,
+            bevor er vollständig veröffentlicht wird.
+          </p>
+        </div>
+        <a class="button" href="news.html">Mehr News</a>
+      </div>
+    </section>
 
-</div>
+    <section class="section-card" id="video">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Aktuelles Video</span>
+          <h2>Neu auf YouTube</h2>
+        </div>
+      </div>
 
-<script>
-fetch('news.json')
-.then(r=>r.json())
-.then(d=>{
-d.sort((a,b)=>new Date(b.date)-new Date(a.date));
-let out=document.getElementById('news');
-d.slice(0,2).forEach(n=>{
-out.innerHTML += `<p><b>${n.title}</b> - ${n.date}</p>`;
-});
-});
-</script>
+      <p class="section-text">
+        Mein neuestes Video auf YouTube. Ein Songmoment zum Reinhören, Mitfühlen und Ankommen.
+      </p>
 
+      <div class="video-frame" style="margin-top: 18px;">
+        <iframe
+          src="https://www.youtube.com/embed/vyxofDHhO5Y"
+          title="Eselhans aktuelles YouTube-Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Bereiche</span>
+          <h2>Alles an seinem Platz</h2>
+        </div>
+      </div>
+
+      <div class="tile-grid">
+        <a class="tile" href="musik.html" id="musik">
+          <span>Hören</span>
+          <h3>Musik</h3>
+          <p>Links zu YouTube, YouTube Music, Spotify, Apple Music, Amazon Music und mehr.</p>
+        </a>
+
+        <a class="tile" href="songtexte.html">
+          <span>Lesen</span>
+          <h3>Songtexte</h3>
+          <p>Das Songtext-Archiv mit Alben, Singles, Covern und Klappansicht.</p>
+        </a>
+
+        <a class="tile" href="videos.html">
+          <span>Schauen</span>
+          <h3>Videos</h3>
+          <p>Musikvideos, Lyric-Videos und aktuelle Uploads von Eselhans.</p>
+        </a>
+
+        <a class="tile" href="about.html">
+          <span>Über</span>
+          <h3>Eselhans</h3>
+          <p>Ein paar Worte über die Musik, die Idee dahinter und den Menschen hinter den Songs.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Plattformen</span>
+          <h2>Musik hören & folgen</h2>
+        </div>
+      </div>
+
+      <p class="section-text">
+        Wenn du meine Musik weiter begleiten möchtest, findest du neue Songs, Videos, Shorts und kleine Updates auf meinen Kanälen.
+      </p>
+
+      <div class="platforms">
+        <a href="https://www.youtube.com/@Esel1983" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://music.youtube.com/@esel1983?si=1gpCOhMvAfkE-9sE" target="_blank" rel="noopener">YouTube Music</a>
+        <a href="https://open.spotify.com/artist/5Ib0WFO78TGEzNOwuwsuDA?si=82Z7P-a7ThW9yNd21iYZ8Q" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://music.apple.com/de/artist/eselhans/1839635407" target="_blank" rel="noopener">Apple Music</a>
+        <a href="https://music.amazon.de/artists/B0FR2FXMDP?ref=dm_sh_GlXnhDAyYHbP4fZZWNxSEnbTu" target="_blank" rel="noopener">Amazon Music</a>
+        <a href="https://www.instagram.com/eselhans1983?igsh=MXdhZWxvbjlycnFkOA==" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@florianpahl3?_r=1&_t=ZG-96gNfXAUy3c" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.threads.com/@eselhans1983" target="_blank" rel="noopener">Threads</a>
+        <a href="https://www.facebook.com/share/1Gfj6mh3eQ/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Eselhans · Musik, Texte & Gedanken · Songs aus Herz & Staub ·
+      <a href="impressum.html">Impressum</a> ·
+      <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </main>
 </body>
 </html>
