@@ -6,23 +6,79 @@
 <title>News - Eselhans</title>
 
 <style>
-body { font-family: Arial, sans-serif; background:#111; color:#fff; margin:0; padding:20px; }
-h1 { color:#f5c542; }
-.card { background:#1c1c1c; padding:15px; margin:15px 0; border-radius:12px; }
-.date { font-size:0.85em; opacity:0.7; margin-bottom:10px; }
-img { width:100%; max-width:420px; border-radius:10px; margin-top:10px; }
+body {
+  margin:0;
+  padding:30px;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
+  color:#fff;
+}
+
+h1 {
+  color:#f5c542;
+  margin-bottom:20px;
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding:18px;
+  margin:15px 0;
+  border-radius:16px;
+  backdrop-filter: blur(10px);
+}
+
+.card h2 {
+  margin:0 0 5px 0;
+  color:#fff;
+}
+
+.date {
+  font-size:0.85em;
+  opacity:0.7;
+  margin-bottom:10px;
+}
+
+img {
+  width:100%;
+  max-width:420px;
+  border-radius:12px;
+  margin-top:10px;
+}
+
+.badge {
+  display:inline-block;
+  padding:4px 10px;
+  font-size:12px;
+  border-radius:999px;
+  background:#f5c542;
+  color:#000;
+  margin-bottom:10px;
+  font-weight:bold;
+}
 </style>
 
 </head>
 <body>
 
+<div class="container">
 <h1>News</h1>
 <div id="news"></div>
+</div>
 
 <script>
 fetch('news.json')
   .then(res => res.json())
   .then(data => {
+
+    // 👉 SORTIERUNG (neueste zuerst)
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     const container = document.getElementById('news');
 
     data.forEach(item => {
@@ -30,6 +86,7 @@ fetch('news.json')
       div.className = 'card';
 
       div.innerHTML = `
+        <div class="badge">NEWS</div>
         <h2>${item.title}</h2>
         <div class="date">${item.date}</div>
         <p>${item.text}</p>
