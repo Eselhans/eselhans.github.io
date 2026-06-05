@@ -1,101 +1,208 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eselhans | Artist Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="style.css">
+  <title>Eselhans | KI-Musik aus Ostfriesland</title>
+  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland. Ehrliche Songs, Musikvideos, Songtexte und Links zu YouTube, Spotify, Apple Music und weiteren Plattformen." />
+  <meta name="keywords" content="Eselhans, Musik, KI-Musik, Songtexte, Ostfriesland, YouTube, Spotify, Apple Music, Singer Songwriter" />
+  <meta name="author" content="Eselhans" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://eselhans.github.io" />
+
+  <meta property="og:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta property="og:description" content="Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eselhans.github.io" />
+  <meta property="og:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta name="twitter:description" content="Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen." />
+  <meta name="twitter:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+
+  <!-- ✨ ONLY PATCH ADDITIONS (keine Struktur zerstört) -->
+  <style>
+    /* smooth entrance animation */
+    .hero, .news-box, .tile, .section-card {
+      animation: fadeIn 0.6s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    /* softer hover polish (no layout change) */
+    .tile, .button, .nav-links a {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-6px) scale(1.01);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* subtle glow upgrade */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(201,139,79,0.18), transparent 55%);
+      pointer-events: none;
+    }
+
+    /* image polish (fixes “flat look”) */
+    img {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+      filter: brightness(1.05);
+    }
+  </style>
 </head>
 
 <body>
+  <main class="page">
 
-<div class="container">
+    <nav class="topbar">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
+        Eselhans
+      </a>
 
-<!-- ================= HERO ================= -->
-<div class="hero">
+      <div class="nav-links">
+        <a href="musik.html">Musik</a>
+        <a href="songtexte.html">Songtexte</a>
+        <a href="videos.html">Videos</a>
+        <a href="news.html">News</a>
+        <a href="about.html">Über mich</a>
+      </div>
+    </nav>
 
-  <span class="badge">OFFICIAL ARTIST HUB</span>
+    <header class="hero">
+      <div>
+        <span class="eyebrow">KI-Musik aus Ostfriesland</span>
+        <h1>Eselhans</h1>
+        <p class="lead">
+          Songs aus Herz & Staub — ehrlich, emotional und manchmal genau da, wo Worte allein nicht reichen.
+          Willkommen auf meiner kleinen Künstlerseite.
+        </p>
 
-  <h1>Eselhans</h1>
+        <div class="hero-actions">
+          <a class="button primary" href="songtexte.html">Songtexte lesen</a>
+          <a class="button" href="musik.html">Musik entdecken</a>
+        </div>
+      </div>
 
-  <p>
-    Musik • Emotion • Geschichten • KI-Kunst
-  </p>
+      <div class="banner-wrap">
+        <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" loading="lazy">
+      </div>
+    </header>
 
-  <div class="nav">
-    <a href="index.html">Start</a>
-    <a href="musik.html">Musik</a>
-    <a href="news.html">News</a>
-    <a href="videos.html">Videos</a>
-    <a href="songtexte.html">Songtexte</a>
-  </div>
+    <section class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Coming Soon / News</span>
+          <h2>Was gerade entsteht</h2>
+        </div>
+      </div>
 
-</div>
+      <div class="news-box" style="grid-template-columns: minmax(180px, 240px) 1fr auto;">
+        <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: rgba(255,255,255,0.05);">
+          <img src="bilder/zwei-seiten-promo.jpg"
+               alt="Promo Cover"
+               style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;"
+               onerror="this.src='bilder/cover-platzhalter.png';"
+               loading="lazy">
+        </div>
 
-<!-- ================= NEWS PREVIEW ================= -->
-<div class="card">
+        <div>
+          <span class="news-label">Coming Soon</span>
+          <h3>Neuer Song: Zwei Seiten</h3>
+          <p>
+            Der nächste Release steht im Fokus. Emotional, ruhig und mit zwei Perspektiven auf dieselbe Geschichte.
+          </p>
+        </div>
 
-  <h2>🔥 Neueste News</h2>
+        <a class="button" href="news.html">Mehr News</a>
+      </div>
+    </section>
 
-  <div id="news"></div>
+    <section class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Aktuelles Video</span>
+          <h2>YouTube</h2>
+        </div>
+      </div>
 
-</div>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/vyxofDHhO5Y"
+          title="Eselhans Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
 
-<!-- ================= FEATURED VIDEO ================= -->
-<div class="card">
+    <section class="section-card">
+      <div class="tile-grid">
 
-  <h2>🎬 Featured Video</h2>
+        <a class="tile" href="musik.html">
+          <span>Hören</span>
+          <h3>Musik</h3>
+          <p>Alle Plattformen und Releases.</p>
+        </a>
 
-  <p>Aktueller Track:</p>
+        <a class="tile" href="songtexte.html">
+          <span>Lesen</span>
+          <h3>Songtexte</h3>
+          <p>Texte, Stories und Emotionen.</p>
+        </a>
 
-  <a href="https://youtu.be/fmJwhLSHbjk" target="_blank">
-    ▶ Alleine in mir ansehen
-  </a>
+        <a class="tile" href="videos.html">
+          <span>Schauen</span>
+          <h3>Videos</h3>
+          <p>Musikvideos und Uploads.</p>
+        </a>
 
-</div>
+        <a class="tile" href="news.html">
+          <span>Updates</span>
+          <h3>News</h3>
+          <p>Alles Neue auf einen Blick.</p>
+        </a>
 
-<!-- ================= SHORT INFO ================= -->
-<div class="card">
+      </div>
+    </section>
 
-  <h2>✨ Über das Projekt</h2>
+    <footer>
+      © 2026 Eselhans · Musik & Emotion
+    </footer>
 
-  <p>
-    Eselhans ist ein Musik- und Story-Projekt, das Emotionen,
-    digitale Kunst und moderne KI-Produktion verbindet.
-  </p>
-
-</div>
-
-</div>
-
-<!-- ================= NEWS SCRIPT ================= -->
-<script>
-fetch('news.json')
-  .then(res => res.json())
-  .then(data => {
-
-    const container = document.getElementById('news');
-
-    data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    const latest = data.slice(0, 2);
-
-    latest.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'card';
-
-      div.innerHTML = `
-        <h3>${item.title}</h3>
-        <p>${item.date}</p>
-        <p>${item.text}</p>
-      `;
-
-      container.appendChild(div);
-    });
-
-  });
-</script>
-
+  </main>
 </body>
 </html>
