@@ -1,14 +1,4 @@
 [
-  {
-    "title": "Morgendämmerung",
-    "date": "2026-06-05",
-    "text": "Neuer Song in Arbeit – atmosphärisch und emotional.",
-    "cover": "bilder/morgendaemmerung.jpg"
-  },
-  {
-    "title": "Zwei Seiten",
-    "date": "2026-06-01",
-    "text": "Release und Promo laufen.",
-    "cover": "bilder/zwei_seiten.jpg"
-  }
+{"title":"Morgendämmerung","date":"2026-06-05","text":"Neuer Song in Arbeit","cover":""},
+{"title":"Zwei Seiten","date":"2026-06-01","text":"Release läuft","cover":""}
 ]

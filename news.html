@@ -3,106 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News - Eselhans</title>
-
-<style>
-body {
-  margin:0;
-  padding:30px;
-  font-family: Arial, sans-serif;
-  background:#0e0e0e;
-  color:#fff;
-}
-
-h1 {
-  color:#f5c542;
-}
-
-.container {
-  max-width:900px;
-  margin:auto;
-}
-
-.card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding:18px;
-  margin:15px 0;
-  border-radius:16px;
-}
-
-.badge {
-  display:inline-block;
-  padding:4px 10px;
-  font-size:12px;
-  border-radius:999px;
-  background:#f5c542;
-  color:#000;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.date {
-  font-size:0.85em;
-  opacity:0.7;
-  margin-bottom:10px;
-}
-
-img {
-  width:100%;
-  max-width:420px;
-  border-radius:12px;
-  margin-top:10px;
-  display:block;
-}
-</style>
-
+<title>News</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="container">
 <h1>News</h1>
-<div id="news"></div>
+<div id="out"></div>
 </div>
 
 <script>
 fetch('news.json')
-  .then(res => res.json())
-  .then(data => {
-
-    const container = document.getElementById('news');
-
-    // 👉 STABILITÄT: neueste zuerst
-    data.sort((a,b) => new Date(b.date) - new Date(a.date));
-
-    data.forEach(item => {
-
-      const div = document.createElement('div');
-      div.className = 'card';
-
-      // 👉 STABIL: fehlende Felder absichern
-      const title = item.title || "Ohne Titel";
-      const date = item.date || "kein Datum";
-      const text = item.text || "";
-      const cover = item.cover || "";
-
-      div.innerHTML = `
-        <div class="badge">NEWS</div>
-        <h2>${title}</h2>
-        <div class="date">${date}</div>
-        <p>${text}</p>
-        ${cover ? `<img src="${cover}" alt="Cover">` : ""}
-      `;
-
-      container.appendChild(div);
-    });
-
-  })
-  .catch(err => {
-    document.getElementById("news").innerHTML =
-      "<p>News konnten nicht geladen werden.</p>";
-  });
+.then(r=>r.json())
+.then(d=>{
+d.sort((a,b)=>new Date(b.date)-new Date(a.date));
+let out=document.getElementById('out');
+d.forEach(n=>{
+out.innerHTML += `<div class="card"><h2>${n.title}</h2><p>${n.date}</p><p>${n.text}</p></div>`;
+});
+});
 </script>
-
 </body>
 </html>
