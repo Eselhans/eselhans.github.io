@@ -4,7 +4,6 @@
   --card:rgba(255,255,255,0.06);
   --border:rgba(255,255,255,0.12);
   --text:#f4f1ea;
-  --muted:#b9b0a6;
   --accent:#c98b4f;
 }
 
@@ -17,9 +16,15 @@ body{
   color:var(--text);
 }
 
+.container{width:min(1100px,92%); margin:auto; padding:25px;}
+
 a{color:var(--accent); text-decoration:none;}
 
-.container{width:min(1100px,92%); margin:auto; padding:30px;}
+.nav{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
 
 .card{
   background:var(--card);
@@ -31,4 +36,19 @@ a{color:var(--accent); text-decoration:none;}
 
 h1,h2{color:var(--accent);}
 
-.nav a{margin-right:12px}
+.hero{
+  padding:40px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#1a1a1a,#0b0b10);
+  border:1px solid var(--border);
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#c98b4f;
+  color:#000;
+  font-size:12px;
+  font-weight:bold;
+}

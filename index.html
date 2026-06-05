@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,32 +11,42 @@
 
 <div class="container">
 
+<div class="hero">
 <h1>Eselhans</h1>
+<p>KI Musik Artist Hub – Songs, Videos, Stories & News</p>
 
-<div class="card">
-  <a href="index.html">Start</a> |
-  <a href="musik.html">Musik</a> |
-  <a href="news.html">News</a> |
-  <a href="videos.html">Videos</a> |
-  <a href="songtexte.html">Songtexte</a>
+<div class="nav">
+<a href="index.html">Start</a>
+<a href="musik.html">Musik</a>
+<a href="news.html">News</a>
+<a href="videos.html">Videos</a>
+<a href="songtexte.html">Songtexte</a>
+</div>
 </div>
 
 <div class="card">
-  <h2>Willkommen</h2>
-  <p>Artist Hub – Musik, Videos, Texte & News</p>
+<h2>🔥 Neueste News</h2>
+<div id="news"></div>
 </div>
 
 <div class="card">
-  <h2>Letztes Video</h2>
-  <p>→ später dynamisch erweiterbar</p>
-</div>
-
-<div class="card">
-  <h2>News</h2>
-  <p>→ aktuelle Releases & Updates</p>
+<h2>🎬 Featured Video</h2>
+<a href="https://youtu.be/fmJwhLSHbjk" target="_blank">Alleine in mir ansehen</a>
 </div>
 
 </div>
+
+<script>
+fetch('news.json')
+.then(r=>r.json())
+.then(d=>{
+d.sort((a,b)=>new Date(b.date)-new Date(a.date));
+let out=document.getElementById('news');
+d.slice(0,2).forEach(n=>{
+out.innerHTML += `<p><b>${n.title}</b> - ${n.date}</p>`;
+});
+});
+</script>
 
 </body>
 </html>
