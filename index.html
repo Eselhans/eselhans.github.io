@@ -6,160 +6,156 @@
 
   <title>Eselhans | KI-Musik aus Ostfriesland</title>
 
-  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland. Ehrliche Songs, Musikvideos, Songtexte und Links zu YouTube, Spotify, Apple Music und weiteren Plattformen." />
-  <meta name="keywords" content="Eselhans, Musik, KI-Musik, Songtexte, Ostfriesland, YouTube, Spotify, Apple Music" />
-  <meta name="author" content="Eselhans" />
+  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://eselhans.github.io" />
 
-  <link rel="stylesheet" href="style.css">
-
-  <meta property="og:title" content="Eselhans | KI-Musik aus Ostfriesland" />
-  <meta property="og:description" content="Songs aus Herz & Staub — ehrlich, emotional und KI-Musik." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://eselhans.github.io" />
-  <meta property="og:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
-
-  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="style.css" />
 
   <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
 <body>
-  <main class="page">
 
-    <!-- NAV -->
-    <nav class="topbar">
-      <a class="brand" href="index.html">
-        <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Logo" />
-        Eselhans
+<main class="page">
+
+  <!-- NAV -->
+  <nav class="topbar">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="bilder/logo-eselhans.png" />
+      Eselhans
+    </a>
+
+    <div class="nav-links">
+      <a href="musik.html">Musik</a>
+      <a href="songtexte.html">Songtexte</a>
+      <a href="videos.html">Videos</a>
+      <a href="news.html">News</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <span class="eyebrow">KI-Musik aus Ostfriesland</span>
+      <h1>Eselhans</h1>
+      <p class="lead">
+        Songs aus Herz & Staub — ehrlich, emotional und KI-getrieben.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="songtexte.html">Songtexte</a>
+        <a class="button" href="musik.html">Musik</a>
+      </div>
+    </div>
+
+    <div class="banner-wrap">
+      <img src="bilder/banner-eselhans.png" />
+    </div>
+  </header>
+
+  <!-- NEWS (JSON ONLY) -->
+  <section class="section-card">
+    <div id="news-container"></div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section-card">
+    <div class="section-head">
+      <span class="eyebrow">Video</span>
+      <h2>YouTube</h2>
+    </div>
+
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/vyxofDHhO5Y"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- TILES -->
+  <section class="section-card">
+    <div class="tile-grid">
+
+      <a class="tile" href="musik.html">
+        <span>Hören</span>
+        <h3>Musik</h3>
+        <p>Alle Songs & Plattformen</p>
       </a>
 
-      <div class="nav-links">
-        <a href="musik.html">Musik</a>
-        <a href="songtexte.html">Songtexte</a>
-        <a href="videos.html">Videos</a>
-        <a href="news.html">News</a>
-        <a href="about.html">Über mich</a>
-      </div>
-    </nav>
+      <a class="tile" href="songtexte.html">
+        <span>Lesen</span>
+        <h3>Songtexte</h3>
+        <p>Texte & Stories</p>
+      </a>
 
-    <!-- HERO -->
-    <header class="hero">
-      <div>
-        <span class="eyebrow">KI-Musik aus Ostfriesland</span>
-        <h1>Eselhans</h1>
-        <p class="lead">
-          Songs aus Herz & Staub — ehrlich, emotional und KI-getrieben.
-        </p>
+      <a class="tile" href="videos.html">
+        <span>Schauen</span>
+        <h3>Videos</h3>
+        <p>YouTube Inhalte</p>
+      </a>
 
-        <div class="hero-actions">
-          <a class="button primary" href="songtexte.html">Songtexte</a>
-          <a class="button" href="musik.html">Musik</a>
-        </div>
-      </div>
+      <a class="tile" href="news.html">
+        <span>Updates</span>
+        <h3>News</h3>
+        <p>Alles Neue</p>
+      </a>
 
-      <div class="banner-wrap">
-        <img src="bilder/banner-eselhans.png" alt="Banner" loading="lazy">
-      </div>
-    </header>
+    </div>
+  </section>
 
-    <!-- NEWS -->
-    <section class="section-card">
-      <div id="news-container"></div>
-    </section>
+  <footer>
+    © 2026 Eselhans
+  </footer>
 
-    <!-- VIDEO -->
-    <section class="section-card">
-      <div class="section-head">
-        <span class="eyebrow">Video</span>
-        <h2>YouTube</h2>
-      </div>
+</main>
 
-      <div class="video-frame">
-        <iframe
-          src="https://www.youtube.com/embed/vyxofDHhO5Y"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
+<!-- NEWS ENGINE -->
+<script>
+async function loadNews() {
+  try {
+    const res = await fetch("news.json");
+    const data = await res.json();
 
-    <!-- TILES -->
-    <section class="section-card">
-      <div class="tile-grid">
+    const container = document.getElementById("news-container");
+    container.innerHTML = "";
 
-        <a class="tile" href="musik.html">
-          <span>Hören</span>
-          <h3>Musik</h3>
-          <p>Alle Plattformen.</p>
-        </a>
+    data
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3)
+      .forEach(n => {
 
-        <a class="tile" href="songtexte.html">
-          <span>Lesen</span>
-          <h3>Songtexte</h3>
-          <p>Texte & Stories.</p>
-        </a>
+        const el = document.createElement("div");
+        el.className = "news-box";
 
-        <a class="tile" href="videos.html">
-          <span>Schauen</span>
-          <h3>Videos</h3>
-          <p>YouTube Inhalte.</p>
-        </a>
+        el.innerHTML = `
+          <div>
+            <img src="${n.image}" onerror="this.src='bilder/cover-platzhalter.png'">
+          </div>
 
-        <a class="tile" href="news.html">
-          <span>Updates</span>
-          <h3>News</h3>
-          <p>Alle News.</p>
-        </a>
+          <div>
+            <span class="news-label">NEWS</span>
+            <h3>${n.title}</h3>
+            <p>${n.date}</p>
+            <p>${n.text}</p>
+          </div>
 
-      </div>
-    </section>
+          <div>
+            <a class="button" href="news.html">Open</a>
+          </div>
+        `;
 
-    <footer>
-      © 2026 Eselhans
-    </footer>
-
-  </main>
-
-  <!-- NEWS SCRIPT (FIXED & CLEAN) -->
-  <script>
-    fetch('news.json')
-      .then(res => res.json())
-      .then(data => {
-
-        const container = document.getElementById("news-container");
-
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        data.slice(0, 3).forEach(n => {
-
-          const card = document.createElement("div");
-          card.className = "news-box";
-
-          card.innerHTML = `
-            <div>
-              <img src="${n.image}" 
-                   style="width:100%; border-radius:14px; object-fit:cover;"
-                   onerror="this.src='bilder/cover-platzhalter.png'">
-            </div>
-
-            <div>
-              <span class="news-label">NEWS</span>
-              <h3>${n.title}</h3>
-              <p>${n.date}</p>
-              <p>${n.text}</p>
-            </div>
-
-            <div>
-              <a class="button" href="news.html">Öffnen</a>
-            </div>
-          `;
-
-          container.appendChild(card);
-        });
-
+        container.appendChild(el);
       });
-  </script>
+
+  } catch (e) {
+    console.error("News loading failed:", e);
+  }
+}
+
+loadNews();
+</script>
 
 </body>
 </html>
