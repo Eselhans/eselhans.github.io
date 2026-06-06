@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Multi Dashboard | Eselhans</title>
+<title>Multi Dashboard v2 | Eselhans</title>
 
 <style>
 body {
@@ -25,8 +25,8 @@ select, input, textarea {
 }
 
 button {
-  padding:12px 16px;
-  border-radius:12px;
+  padding:10px 14px;
+  border-radius:10px;
   border:0;
   background:#c98b4f;
   font-weight:bold;
@@ -41,22 +41,35 @@ button {
   margin-top:20px;
 }
 
-.preview {
-  white-space: pre-wrap;
-  font-size: 0.85rem;
-  color: #b9b0a6;
+.item {
+  padding:10px;
+  margin-top:10px;
+  border:1px solid #333;
+  border-radius:10px;
+  background:#111;
+}
+
+.row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.small {
+  font-size: 0.8rem;
+  color:#b9b0a6;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🧠 Multi Dashboard v1</h1>
+<h1>🧠 Multi Dashboard v2</h1>
 
 <div class="card">
 
-  <label>Kategorie wählen</label>
-  <select id="type" onchange="switchForm()">
+  <label>Kategorie</label>
+  <select id="type" onchange="render()">
     <option value="news">📰 News</option>
     <option value="songs">🎵 Songs</option>
     <option value="lyrics">📝 Lyrics</option>
@@ -64,67 +77,94 @@ button {
 
   <input id="title" placeholder="Titel">
   <input id="date" placeholder="Datum (YYYY-MM-DD)">
-
-  <input id="image" placeholder="Bild (optional - für News/Songs)">
-
+  <input id="image" placeholder="Bild (optional)">
   <textarea id="text" placeholder="Text / Lyrics"></textarea>
 
   <button onclick="addItem()">➕ Hinzufügen</button>
-  <button onclick="downloadJSON()">⬇ JSON Download</button>
+  <button onclick="download()">⬇ JSON Export</button>
 
 </div>
 
 <div class="card">
-  <h2>📦 JSON Vorschau</h2>
-  <pre id="output" class="preview"></pre>
+  <h2>📦 Einträge</h2>
+  <div id="list"></div>
 </div>
 
 <script>
 
-let database = {
+let db = {
   news: [],
   songs: [],
   lyrics: []
 };
 
-function switchForm() {
-  const type = document.getElementById("type").value;
-
-  document.getElementById("image").style.display =
-    (type === "lyrics") ? "none" : "block";
+function getType() {
+  return document.getElementById("type").value;
 }
 
 function addItem() {
 
-  const type = document.getElementById("type").value;
+  const type = getType();
 
-  let item = {
-    title: document.getElementById("title").value,
-    date: document.getElementById("date").value,
-    text: document.getElementById("text").value
+  const item = {
+    title: title.value,
+    date: date.value,
+    image: image.value,
+    text: text.value
   };
 
-  if (type !== "lyrics") {
-    item.image = document.getElementById("image").value;
-  }
+  db[type].push(item);
 
-  database[type].push(item);
-
-  updatePreview();
+  clearForm();
+  render();
 }
 
-function updatePreview() {
-  document.getElementById("output").innerText =
-    JSON.stringify(database, null, 2);
+function clearForm() {
+  title.value = "";
+  date.value = "";
+  image.value = "";
+  text.value = "";
 }
 
-function downloadJSON() {
+function deleteItem(index) {
+  const type = getType();
+  db[type].splice(index, 1);
+  render();
+}
 
-  const type = document.getElementById("type").value;
+function render() {
+
+  const type = getType();
+  const list = document.getElementById("list");
+
+  list.innerHTML = "";
+
+  db[type].forEach((item, i) => {
+
+    const div = document.createElement("div");
+    div.className = "item";
+
+    div.innerHTML = `
+      <b>${item.title}</b><br>
+      <span class="small">${item.date || ""}</span><br>
+      <span class="small">${item.text?.slice(0,80) || ""}</span><br>
+
+      <div class="row">
+        <button onclick="deleteItem(${i})">🗑 Löschen</button>
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+function download() {
+
+  const type = getType();
 
   const blob = new Blob(
-    [JSON.stringify(database[type], null, 2)],
-    { type: "application/json" }
+    [JSON.stringify(db[type], null, 2)],
+    {type:"application/json"}
   );
 
   const a = document.createElement("a");
@@ -133,7 +173,7 @@ function downloadJSON() {
   a.click();
 }
 
-switchForm();
+render();
 
 </script>
 
