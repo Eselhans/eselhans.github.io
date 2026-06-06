@@ -2,85 +2,112 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>News Admin</title>
+<title>Admin Panel | Eselhans</title>
+
 <style>
 body {
   font-family: Arial;
   background:#0b0b10;
-  color:#f4f1ea;
+  color:#fff;
   padding:30px;
 }
 
 input, textarea {
   width:100%;
-  margin-bottom:10px;
+  margin:8px 0;
   padding:10px;
-  border-radius:8px;
-  border:none;
+  border-radius:10px;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
 }
 
 button {
-  padding:10px 15px;
-  border-radius:10px;
-  border:none;
+  padding:12px 16px;
+  border-radius:12px;
+  border:0;
   background:#c98b4f;
   font-weight:bold;
   cursor:pointer;
+  margin-top:10px;
 }
 
 .card {
-  background:rgba(255,255,255,0.06);
+  background:#15151d;
   padding:20px;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+.preview img {
+  width:100%;
   border-radius:12px;
-  margin-bottom:20px;
 }
 </style>
 </head>
+
 <body>
 
-<h1>🛠 News Admin Panel</h1>
+<h1>🧠 News Admin Panel</h1>
 
 <div class="card">
 
-<input id="title" placeholder="Titel">
-<input id="date" placeholder="Datum (YYYY-MM-DD)">
-<input id="image" placeholder="Bildpfad (z.B. bilder/song.jpg)">
-<textarea id="text" placeholder="Text"></textarea>
+  <input id="title" placeholder="Titel">
+  <input id="date" placeholder="Datum (z.B. 2026-06-05)">
+  <input id="image" placeholder="Bild URL (z.B. bilder/test.jpg)">
+  <textarea id="text" rows="4" placeholder="Text"></textarea>
 
-<button onclick="addNews()">News hinzufügen</button>
+  <button onclick="addNews()">+ News hinzufügen</button>
+  <button onclick="downloadJSON()">⬇ JSON herunterladen</button>
 
 </div>
 
-<div class="card">
-<h2>JSON Export</h2>
-<button onclick="downloadJSON()">Download news.json</button>
-<pre id="output"></pre>
+<div class="card preview">
+  <h2>Live Preview</h2>
+  <div id="preview"></div>
 </div>
 
 <script>
+
 let news = [];
+
+function updatePreview() {
+  const t = document.getElementById("title").value;
+  const d = document.getElementById("date").value;
+  const i = document.getElementById("image").value;
+  const x = document.getElementById("text").value;
+
+  document.getElementById("preview").innerHTML = `
+    <h3>${t}</h3>
+    <p>${d}</p>
+    <img src="${i}">
+    <p>${x}</p>
+  `;
+}
+
+document.querySelectorAll("input, textarea").forEach(el => {
+  el.addEventListener("input", updatePreview);
+});
 
 function addNews() {
   news.push({
-    title: document.getElementById('title').value,
-    date: document.getElementById('date').value,
-    image: document.getElementById('image').value,
-    text: document.getElementById('text').value
+    title: document.getElementById("title").value,
+    date: document.getElementById("date").value,
+    image: document.getElementById("image").value,
+    text: document.getElementById("text").value
   });
 
-  document.getElementById('output').innerText =
-    JSON.stringify(news, null, 2);
+  alert("News hinzugefügt!");
 }
 
 function downloadJSON() {
-  const blob = new Blob([JSON.stringify(news, null, 2)], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-
+  const blob = new Blob([JSON.stringify(news, null, 2)], {type: "application/json"});
   const a = document.createElement("a");
-  a.href = url;
+  a.href = URL.createObjectURL(blob);
   a.download = "news.json";
   a.click();
 }
+
 </script>
 
 </body>
