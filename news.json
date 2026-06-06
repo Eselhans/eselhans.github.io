@@ -1,8 +1,18 @@
-[
-  {
-    "title": "Test News!",
-    "date": "06.06.2026",
-    "image": "bilder/cover-platzhalter.png",
-    "text": "Das ist ein Test um zu schauen ob es geht ;)"
-  }
-]
+{
+  "news": [
+    {
+      "id": "1780749227467",
+      "title": "",
+      "date": "29.05.2024",
+      "image": "bilder/zwei_seiten.jpg",
+      "text": "Es ist geschafft mein neuer Song ist raus und überall zu hören 🎉"
+    },
+    {
+      "id": "1780749354605",
+      "title": "",
+      "date": "06.06.2026",
+      "image": "bilder/cover-platzhalter.png",
+      "text": "Ich bin fleißig dabei meine Seite zu erweitern und um zu bauen. Ich hoffe es gefällt euch bis jetzt 👍"
+    }
+  ]
+}
