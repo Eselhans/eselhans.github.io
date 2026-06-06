@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Eselhans Admin - Songs System</title>
+<title>Admin V3 - Eselhans System</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -11,32 +11,56 @@ body {
   padding: 20px;
 }
 
+.tabs {
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tab {
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  cursor:pointer;
+  background: rgba(255,255,255,0.05);
+}
+
+.tab.active {
+  background: var(--accent-soft);
+}
+
 input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 6px 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  border:1px solid var(--border);
   background: rgba(255,255,255,0.05);
   color: var(--text);
 }
 
 button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
   background: var(--accent-soft);
   color: var(--text);
-  cursor: pointer;
-  margin-top: 10px;
+  cursor:pointer;
+  margin-top:10px;
 }
 
-.song-box {
-  border: 1px solid var(--border);
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 14px;
+.card {
+  border:1px solid var(--border);
+  padding:14px;
+  margin-top:14px;
+  border-radius:14px;
   background: rgba(255,255,255,0.05);
+}
+
+.row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 </style>
 
@@ -44,99 +68,179 @@ button {
 
 <body>
 
-<h1>🎵 Songs Admin System</h1>
+<h1>🎛 Admin V3 System</h1>
 
-<div class="card">
-
-<h2>Neuer Song</h2>
-
-<input id="title" placeholder="Titel">
-<input id="album" placeholder="Album (leer = Singles)">
-<input id="genre" placeholder="Genre">
-<input id="release" placeholder="Release Datum">
-<input id="youtube" placeholder="YouTube Link">
-<input id="cover" placeholder="Cover URL">
-<textarea id="lyrics" placeholder="Lyrics"></textarea>
-
-<button onclick="addSong()">➕ Song hinzufügen</button>
-
+<div class="tabs">
+  <div class="tab active" onclick="switchMode('songs')">🎵 Songs</div>
+  <div class="tab" onclick="switchMode('news')">📰 News</div>
 </div>
+
+<div id="form"></div>
 
 <hr>
 
-<h2>📦 Songs</h2>
+<h2>📦 Liste</h2>
 <div id="list"></div>
 
 <hr>
 
-<button onclick="downloadJSON()">⬇ songs.json Download</button>
+<button onclick="download()">⬇ Export JSON</button>
 
 <script>
 
-let songs = [];
+let mode = "songs";
 
+let db = {
+  songs: [],
+  news: []
+};
+
+let editIndex = null;
+
+// INIT
 fetch("songs.json")
-  .then(res => res.json())
-  .then(data => {
-    songs = data.songs || [];
+  .then(r => r.json())
+  .then(d => {
+    db.songs = d.songs || [];
+    renderForm();
     render();
   });
 
+function switchMode(m) {
+  mode = m;
+  editIndex = null;
+
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+
+  renderForm();
+  render();
+}
+
+// FORM
+function renderForm() {
+
+  const form = document.getElementById("form");
+
+  if(mode === "songs") {
+    form.innerHTML = `
+      <div class="card">
+        <h3>Neuer Song</h3>
+
+        <input id="title" placeholder="Titel">
+        <input id="album" placeholder="Album">
+        <input id="genre" placeholder="Genre">
+        <input id="release" placeholder="Release">
+        <input id="youtube" placeholder="YouTube">
+        <input id="cover" placeholder="Cover">
+        <textarea id="lyrics" placeholder="Lyrics"></textarea>
+
+        <button onclick="add()">➕ Save Song</button>
+      </div>
+    `;
+  } else {
+    form.innerHTML = `
+      <div class="card">
+        <h3>Neue News</h3>
+
+        <input id="title" placeholder="Titel">
+        <input id="date" placeholder="Datum">
+        <input id="image" placeholder="Bild">
+        <textarea id="text" placeholder="Text"></textarea>
+
+        <button onclick="add()">➕ Save News</button>
+      </div>
+    `;
+  }
+}
+
+// ADD
+function add() {
+
+  if(mode === "songs") {
+
+    db.songs.push({
+      id: title.value.toLowerCase().replaceAll(" ","-"),
+      title: title.value,
+      album: album.value || "Singles",
+      genre: genre.value,
+      release: release.value,
+      youtube: youtube.value,
+      cover: cover.value,
+      lyrics: lyrics.value
+    });
+
+  } else {
+
+    db.news.push({
+      title: title.value,
+      date: date.value,
+      image: image.value,
+      text: text.value
+    });
+  }
+
+  render();
+}
+
+// RENDER LIST
 function render() {
+
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  songs.forEach((s, i) => {
+  let arr = db[mode];
+
+  arr.forEach((item,i) => {
 
     const div = document.createElement("div");
-    div.className = "song-box";
+    div.className = "card";
 
     div.innerHTML = `
-      <b>${s.title}</b><br>
-      <small>${s.album || "Singles"}</small><br>
-      <small>${s.genre || ""}</small><br>
+      <b>${item.title}</b><br>
+      <small>${item.album || item.date || ""}</small><br>
 
-      <button onclick="removeSong(${i})">🗑 Delete</button>
+      <div class="row">
+        <button onclick="edit(${i})">✏ Edit</button>
+        <button onclick="del(${i})">🗑 Delete</button>
+      </div>
     `;
 
     list.appendChild(div);
   });
 }
 
-function addSong() {
-
-  const song = {
-    id: title.value.toLowerCase().replaceAll(" ","-"),
-    title: title.value,
-    album: album.value || "Singles",
-    genre: genre.value,
-    release: release.value,
-    youtube: youtube.value,
-    cover: cover.value || "bilder/cover-platzhalter.png",
-    lyrics: lyrics.value
-  };
-
-  songs.push(song);
+// DELETE
+function del(i) {
+  db[mode].splice(i,1);
   render();
 }
 
-function removeSong(i) {
-  songs.splice(i, 1);
+// EDIT (basic)
+function edit(i) {
+  const item = db[mode][i];
+
+  for(let key in item) {
+    if(document.getElementById(key)) {
+      document.getElementById(key).value = item[key];
+    }
+  }
+
+  db[mode].splice(i,1);
   render();
 }
 
-function downloadJSON() {
-
-  const data = { songs };
+// EXPORT
+function download() {
 
   const blob = new Blob(
-    [JSON.stringify(data, null, 2)],
+    [JSON.stringify(db[mode], null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "songs.json";
+  a.download = mode + ".json";
   a.click();
 }
 
