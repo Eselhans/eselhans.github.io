@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V5 - Creator Dashboard</title>
+<title>Admin V5.1 - Creator Dashboard</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -56,13 +56,28 @@ button {
 .list-item.dragging {
   opacity: 0.5;
 }
+
+.mode-switch {
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.mode-switch button {
+  flex:1;
+}
 </style>
 
 </head>
 
 <body>
 
-<h1>🎛 Admin V5 Dashboard</h1>
+<h1>🎛 Admin V5.1 Dashboard</h1>
+
+<div class="mode-switch">
+  <button onclick="switchMode('songs')">🎵 Songs</button>
+  <button onclick="switchMode('news')">📰 News</button>
+</div>
 
 <div class="container">
 
@@ -72,6 +87,8 @@ button {
 <div class="card">
 <h2>Editor</h2>
 
+<!-- SONG FIELDS -->
+<div id="songFields">
 <input id="title" placeholder="Titel">
 <input id="album" placeholder="Album">
 <input id="genre" placeholder="Genre">
@@ -79,13 +96,22 @@ button {
 <input id="youtube" placeholder="YouTube">
 <input id="cover" placeholder="Cover">
 <textarea id="lyrics" placeholder="Lyrics"></textarea>
+</div>
+
+<!-- NEWS FIELDS -->
+<div id="newsFields" style="display:none;">
+<input id="title" placeholder="Titel">
+<input id="date" placeholder="Datum">
+<input id="image" placeholder="Bild">
+<textarea id="text" placeholder="Text"></textarea>
+</div>
 
 <button onclick="saveItem()">💾 Save</button>
 <button onclick="undo()">↩ Undo</button>
 </div>
 
 <div class="card">
-<h2>📦 Liste (Drag & Drop)</h2>
+<h2>📦 Liste</h2>
 <div id="list"></div>
 </div>
 
@@ -106,50 +132,84 @@ button {
 <script>
 
 let songs = [];
-let history = [];
+let news = [];
+let mode = "songs";
 let currentEdit = null;
 
 // LOAD
-fetch("songs.json")
-  .then(r => r.json())
-  .then(d => {
-    songs = d.songs || [];
-    render();
-    autosave();
-  });
+Promise.all([
+  fetch("songs.json").then(r => r.json()),
+  fetch("news.json").then(r => r.json())
+]).then(([s, n]) => {
+  songs = s.songs || [];
+  news = n.news || [];
+  render();
+  autosave();
+});
+
+// SWITCH MODE
+function switchMode(m) {
+  mode = m;
+  currentEdit = null;
+
+  document.getElementById("songFields").style.display = m === "songs" ? "block" : "none";
+  document.getElementById("newsFields").style.display = m === "news" ? "block" : "none";
+
+  clear();
+  render();
+}
 
 // AUTOSAVE
 function autosave() {
   localStorage.setItem("songs_backup", JSON.stringify(songs));
+  localStorage.setItem("news_backup", JSON.stringify(news));
 }
 
-// UNDO
+// UNDO (simple global restore)
 function undo() {
-  const backup = localStorage.getItem("songs_backup");
-  if(backup) {
-    songs = JSON.parse(backup);
-    render();
-  }
+  const s = localStorage.getItem("songs_backup");
+  const n = localStorage.getItem("news_backup");
+
+  if(s) songs = JSON.parse(s);
+  if(n) news = JSON.parse(n);
+
+  render();
 }
 
-// SAVE / UPDATE
+// SAVE
 function saveItem() {
 
-  const song = {
-    id: currentEdit || title.value.toLowerCase().replaceAll(" ","-"),
-    title: title.value,
-    album: album.value,
-    genre: genre.value,
-    release: release.value,
-    youtube: youtube.value,
-    cover: cover.value,
-    lyrics: lyrics.value
-  };
+  if(mode === "songs") {
 
-  const index = songs.findIndex(s => s.id === song.id);
+    const song = {
+      id: currentEdit || title.value.toLowerCase().replaceAll(" ","-"),
+      title: title.value,
+      album: album.value,
+      genre: genre.value,
+      release: release.value,
+      youtube: youtube.value,
+      cover: cover.value,
+      lyrics: lyrics.value
+    };
 
-  if(index >= 0) songs[index] = song;
-  else songs.push(song);
+    const i = songs.findIndex(x => x.id === song.id);
+    if(i >= 0) songs[i] = song;
+    else songs.push(song);
+
+  } else {
+
+    const item = {
+      id: currentEdit || Date.now().toString(),
+      title: title.value,
+      date: date.value,
+      image: image.value,
+      text: text.value
+    };
+
+    const i = news.findIndex(x => x.id === item.id);
+    if(i >= 0) news[i] = item;
+    else news.push(item);
+  }
 
   currentEdit = null;
   clear();
@@ -157,47 +217,31 @@ function saveItem() {
   autosave();
 }
 
-// CLEAR FORM
+// CLEAR
 function clear() {
   document.querySelectorAll("input, textarea").forEach(i => i.value = "");
 }
 
-// RENDER
+// RENDER LIST
 function render() {
 
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  songs.forEach((s, i) => {
+  const data = mode === "songs" ? songs : news;
+
+  data.forEach(item => {
 
     const div = document.createElement("div");
     div.className = "list-item";
-    div.draggable = true;
 
     div.innerHTML = `
-      <b>${s.title}</b><br>
-      <small>${s.album || "Singles"}</small>
-      <button onclick="edit('${s.id}')">✏</button>
-      <button onclick="del('${s.id}')">🗑</button>
+      <b>${item.title}</b><br>
+      <small>${item.album || item.date || ""}</small><br>
+
+      <button onclick="edit('${item.id}')">✏</button>
+      <button onclick="del('${item.id}')">🗑</button>
     `;
-
-    // DRAG
-    div.addEventListener("dragstart", () => {
-      div.classList.add("dragging");
-      div.dataset.index = i;
-    });
-
-    div.addEventListener("dragend", () => {
-      div.classList.remove("dragging");
-    });
-
-    div.addEventListener("dragover", (e) => e.preventDefault());
-
-    div.addEventListener("drop", (e) => {
-      e.preventDefault();
-
-      const from = e.dataTransfer?.getData("text") || div.dataset.index;
-    });
 
     list.appendChild(div);
   });
@@ -208,48 +252,56 @@ function render() {
 
 // EDIT
 function edit(id) {
-  const s = songs.find(x => x.id === id);
+
+  const arr = mode === "songs" ? songs : news;
+  const item = arr.find(x => x.id === id);
+
   currentEdit = id;
 
-  title.value = s.title;
-  album.value = s.album;
-  genre.value = s.genre;
-  release.value = s.release;
-  youtube.value = s.youtube;
-  cover.value = s.cover;
-  lyrics.value = s.lyrics;
+  for(let key in item) {
+    const el = document.getElementById(key);
+    if(el) el.value = item[key];
+  }
 }
 
 // DELETE
 function del(id) {
-  songs = songs.filter(s => s.id !== id);
+  if(mode === "songs") {
+    songs = songs.filter(s => s.id !== id);
+  } else {
+    news = news.filter(n => n.id !== id);
+  }
   render();
-  autosave();
 }
 
 // PREVIEW
 function preview() {
   const p = document.getElementById("preview");
 
-  const featured = songs[0];
-
-  p.innerHTML = featured ? `
-    <h3>${featured.title}</h3>
-    <p>${featured.album}</p>
-    <p>${featured.genre}</p>
-  ` : "";
+  if(mode === "songs") {
+    const f = songs[0];
+    p.innerHTML = f ? `<h3>${f.title}</h3><p>${f.album}</p>` : "";
+  } else {
+    const f = news[0];
+    p.innerHTML = f ? `<h3>${f.title}</h3><p>${f.date}</p><p>${f.text}</p>` : "";
+  }
 }
 
 // EXPORT
 function download() {
+
+  const data = mode === "songs"
+    ? { songs }
+    : { news };
+
   const blob = new Blob(
-    [JSON.stringify({ songs }, null, 2)],
+    [JSON.stringify(data, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "songs.json";
+  a.download = mode + ".json";
   a.click();
 }
 
