@@ -2,24 +2,21 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V7 - CMS Engine</title>
+<title>Admin V8 - Cloud CMS</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
-body {
-  padding: 20px;
-  font-family: Arial;
-}
+body { padding:20px; font-family:Arial; }
 
 .bar {
   display:flex;
   gap:10px;
-  margin-bottom:15px;
   flex-wrap:wrap;
+  margin-bottom:15px;
 }
 
-.bar button {
+button {
   padding:10px 14px;
   border-radius:10px;
   border:1px solid var(--border);
@@ -46,13 +43,7 @@ body {
   margin:8px 0;
   border-radius:10px;
   border:1px solid var(--border);
-  background: rgba(0,0,0,0.2);
   cursor:pointer;
-}
-
-.small {
-  font-size:12px;
-  opacity:0.7;
 }
 </style>
 
@@ -60,7 +51,7 @@ body {
 
 <body>
 
-<h1>🎛 Admin V7 CMS Engine</h1>
+<h1>☁ Admin V8 - Cloud CMS</h1>
 
 <div class="bar">
   <button onclick="mode='songs'; render()">🎵 Songs</button>
@@ -69,19 +60,19 @@ body {
   <button onclick="saveSnapshot()">📸 Snapshot</button>
   <button onclick="undo()">↩ Undo</button>
 
-  <button onclick="exportJSON()">⬇ Export</button>
-  <button onclick="importJSON()">⬆ Import</button>
+  <button onclick="exportAll()">⬇ Full Export</button>
+  <button onclick="importFile()">⬆ Import</button>
+
+  <button onclick="pushToGitHub()">🚀 Push Live</button>
 </div>
 
 <div class="container">
 
-<!-- LIST -->
 <div class="card">
 <h2>📦 Content</h2>
 <div id="list"></div>
 </div>
 
-<!-- PREVIEW -->
 <div class="card">
 <h2>👁 Preview</h2>
 <div id="preview"></div>
@@ -89,7 +80,7 @@ body {
 
 </div>
 
-<input type="file" id="fileInput" style="display:none" />
+<input type="file" id="fileInput" style="display:none">
 
 <script>
 
@@ -100,20 +91,17 @@ let news = [];
 
 let history = [];
 
-// LOAD
+// INIT
 Promise.all([
   fetch("songs.json").then(r => r.json()),
   fetch("news.json").then(r => r.json())
-]).then(([s, n]) => {
-
+]).then(([s,n]) => {
   songs = s.songs || [];
   news = n.news || [];
-
-  loadLocal();
   render();
 });
 
-// GET DATA
+// DATA
 function getData() {
   return mode === "songs" ? songs : news;
 }
@@ -124,16 +112,14 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  const data = getData();
-
-  data.forEach((item, i) => {
+  getData().forEach((item,i) => {
 
     const div = document.createElement("div");
     div.className = "item";
 
     div.innerHTML = `
       <b>${item.title}</b><br>
-      <span class="small">${item.album || item.date || ""}</span>
+      <small>${item.album || item.date || ""}</small>
     `;
 
     div.onclick = () => {
@@ -149,7 +135,7 @@ function render() {
   saveLocal();
 }
 
-// SNAPSHOT (VERSION SYSTEM)
+// SNAPSHOT
 function saveSnapshot() {
   history.push(JSON.stringify({ songs, news }));
   alert("Snapshot gespeichert");
@@ -157,67 +143,90 @@ function saveSnapshot() {
 
 // UNDO
 function undo() {
-  if(history.length === 0) return;
-
+  if(!history.length) return;
   const last = JSON.parse(history.pop());
   songs = last.songs || songs;
   news = last.news || news;
-
   render();
 }
 
 // LOCAL SAVE
 function saveLocal() {
-  localStorage.setItem("cms_v7", JSON.stringify({ songs, news }));
+  localStorage.setItem("v8_cms", JSON.stringify({ songs, news }));
 }
 
-// LOCAL LOAD
-function loadLocal() {
-  const data = localStorage.getItem("cms_v7");
-  if(data) {
-    const parsed = JSON.parse(data);
-    songs = parsed.songs || songs;
-    news = parsed.news || news;
-  }
-}
-
-// EXPORT
-function exportJSON() {
-
-  const data = { songs, news };
-
+// EXPORT ALL
+function exportAll() {
   const blob = new Blob(
-    [JSON.stringify(data, null, 2)],
+    [JSON.stringify({ songs, news }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "cms_backup.json";
+  a.download = "full_backup.json";
   a.click();
 }
 
 // IMPORT
-function importJSON() {
+function importFile() {
   document.getElementById("fileInput").click();
 }
 
 document.getElementById("fileInput").addEventListener("change", e => {
-
-  const file = e.target.files[0];
   const reader = new FileReader();
 
-  reader.onload = function(evt) {
-    const data = JSON.parse(evt.target.result);
-
+  reader.onload = ev => {
+    const data = JSON.parse(ev.target.result);
     songs = data.songs || [];
     news = data.news || [];
-
     render();
   };
 
-  reader.readAsText(file);
+  reader.readAsText(e.target.files[0]);
 });
+
+// 🚀 GITHUB PUSH (CORE)
+async function pushToGitHub() {
+
+  const token = "YOUR_GITHUB_TOKEN";
+  const repo = "eselhans/eselhans.github.io";
+
+  const files = [
+    { path: "songs.json", content: songs },
+    { path: "news.json", content: news }
+  ];
+
+  for(const file of files) {
+
+    await fetch(`https://api.github.com/repos/${repo}/contents/${file.path}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "CMS Update",
+        content: btoa(JSON.stringify(file.content, null, 2)),
+        sha: await getSHA(repo, file.path, token)
+      })
+    });
+
+  }
+
+  alert("🚀 Push complete");
+}
+
+// GET SHA (required for GitHub update)
+async function getSHA(repo, path, token) {
+
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    headers: { Authorization: `token ${token}` }
+  });
+
+  const data = await res.json();
+  return data.sha;
+}
 
 </script>
 
