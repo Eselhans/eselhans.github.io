@@ -8,23 +8,34 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+.album {
+  margin-top: 40px;
+}
+
+.album-title {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+
 .song-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
 }
 
 .song-card {
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.05);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  cursor: pointer;
-  transition: 0.2s;
+  transition: 0.25s;
+  display: flex;
+  flex-direction: column;
 }
 
 .song-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   background: rgba(255,255,255,0.08);
 }
 
@@ -39,31 +50,51 @@
 }
 
 .song-title {
-  font-weight: bold;
   font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .song-meta {
+  font-size: 0.85rem;
   color: var(--muted);
-  font-size: 0.9rem;
   margin: 6px 0;
-}
-
-.lyrics {
-  display: none;
-  margin-top: 10px;
-  color: var(--muted);
-  white-space: pre-line;
-}
-
-.song-card.active .lyrics {
-  display: block;
 }
 
 .button-row {
   display: flex;
   gap: 8px;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.button-row a,
+.button-row button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.button-row a:hover,
+.button-row button:hover {
+  background: var(--accent-soft);
+  border-color: rgba(201,139,79,0.6);
+}
+
+.lyrics {
+  display: none;
+  margin-top: 10px;
+  white-space: pre-line;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.song-card.active .lyrics {
+  display: block;
 }
 </style>
 </head>
@@ -79,6 +110,7 @@
   </a>
 
   <div class="nav-links">
+    <a href="index.html">Home</a>
     <a href="songs.html">Songs</a>
     <a href="videos.html">Videos</a>
     <a href="news.html">News</a>
@@ -86,48 +118,72 @@
 </nav>
 
 <header class="hero">
-  <span class="eyebrow">Musik Universe</span>
+  <span class="eyebrow">Music System</span>
   <h1>Songs</h1>
   <p class="lead">Alle Songs, Lyrics, Videos & Infos an einem Ort.</p>
 </header>
 
-<section class="song-grid" id="songGrid"></section>
+<section id="albums"></section>
 
 </main>
 
 <script>
 fetch("songs.json")
-  .then(r => r.json())
+  .then(res => res.json())
   .then(data => {
 
-    const grid = document.getElementById("songGrid");
+    const container = document.getElementById("albums");
+
+    // ALBUMS gruppieren
+    const grouped = {};
 
     data.songs.forEach(song => {
+      if (!grouped[song.album]) {
+        grouped[song.album || "Ohne Album"] = [];
+      }
+      grouped[song.album || "Ohne Album"].push(song);
+    });
 
-      const card = document.createElement("div");
-      card.className = "song-card";
+    // ALBUM RENDER
+    Object.keys(grouped).forEach(albumName => {
 
-      card.innerHTML = `
-        <img src="${song.cover || 'bilder/cover-platzhalter.png'}">
+      const albumDiv = document.createElement("div");
+      albumDiv.className = "album";
 
-        <div class="song-content">
-          <div class="song-title">${song.title}</div>
-          <div class="song-meta">
-            ${song.album || ""} • ${song.genre || ""} • ${song.release || ""}
+      let html = `<div class="album-title">${albumName}</div>`;
+      html += `<div class="song-grid">`;
+
+      grouped[albumName].forEach(song => {
+
+        html += `
+          <div class="song-card">
+
+            <img src="${song.cover || 'bilder/cover-platzhalter.png'}">
+
+            <div class="song-content">
+              <div class="song-title">${song.title}</div>
+
+              <div class="song-meta">
+                ${song.genre || ""} • ${song.release || ""}
+              </div>
+
+              <div class="button-row">
+                <a href="${song.youtube}" target="_blank">YouTube</a>
+                <button onclick="this.closest('.song-card').classList.toggle('active')">
+                  Lyrics
+                </button>
+              </div>
+
+              <div class="lyrics">${song.lyrics || "Noch keine Lyrics vorhanden"}</div>
+            </div>
+
           </div>
+        `;
+      });
 
-          <div class="button-row">
-            <a href="${song.youtube}" target="_blank">YouTube</a>
-            <button onclick="this.parentElement.parentElement.parentElement.classList.toggle('active')">
-              Lyrics
-            </button>
-          </div>
-
-          <div class="lyrics">${song.lyrics || "Keine Lyrics vorhanden"}</div>
-        </div>
-      `;
-
-      grid.appendChild(card);
+      html += `</div>`;
+      albumDiv.innerHTML = html;
+      container.appendChild(albumDiv);
     });
 
   });
