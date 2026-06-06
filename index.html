@@ -124,32 +124,39 @@
     </header>
 
     <section class="section-card">
-      <div class="section-head">
+     <div id="news-container"></div>
+
+<script>
+fetch('news.json')
+  .then(res => res.json())
+  .then(data => {
+
+    const container = document.getElementById("news-container");
+
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    data.slice(0, 2).forEach(n => {
+
+      const card = document.createElement("div");
+      card.className = "news-box";
+
+      card.innerHTML = `
         <div>
-          <span class="eyebrow">Coming Soon / News</span>
-          <h2>Was gerade entsteht</h2>
+          <img src="${n.image}" style="width:100%; border-radius:14px; object-fit:cover;">
         </div>
-      </div>
-
-      <div class="news-box" style="grid-template-columns: minmax(180px, 240px) 1fr auto;">
-        <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: rgba(255,255,255,0.05);">
-          <img src="bilder/zwei-seiten-promo.jpg"
-               alt="Promo Cover"
-               style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;"
-               onerror="this.src='bilder/cover-platzhalter.png';"
-               loading="lazy">
-        </div>
-
         <div>
-          <span class="news-label">Coming Soon</span>
-          <h3>Neuer Song: Zwei Seiten</h3>
-          <p>
-            Der nächste Release steht im Fokus. Emotional, ruhig und mit zwei Perspektiven auf dieselbe Geschichte.
-          </p>
+          <span class="news-label">News</span>
+          <h3>${n.title}</h3>
+          <p>${n.date}</p>
+          <p>${n.text}</p>
         </div>
+      `;
 
-        <a class="button" href="news.html">Mehr News</a>
-      </div>
+      container.appendChild(card);
+    });
+
+  });
+</script>
     </section>
 
     <section class="section-card">
