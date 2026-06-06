@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V8 - Cloud CMS</title>
+<title>Admin V8 - CLEAN FIX</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -51,19 +51,15 @@ button {
 
 <body>
 
-<h1>☁ Admin V8 - Cloud CMS</h1>
+<h1>🎛 Admin V8 FIXED</h1>
 
 <div class="bar">
   <button onclick="mode='songs'; render()">🎵 Songs</button>
   <button onclick="mode='news'; render()">📰 News</button>
 
-  <button onclick="saveSnapshot()">📸 Snapshot</button>
-  <button onclick="undo()">↩ Undo</button>
-
-  <button onclick="exportAll()">⬇ Full Export</button>
+  <button onclick="saveLocal()">💾 Save Local</button>
+  <button onclick="exportAll()">⬇ Export JSON</button>
   <button onclick="importFile()">⬆ Import</button>
-
-  <button onclick="pushToGitHub()">🚀 Push Live</button>
 </div>
 
 <div class="container">
@@ -74,8 +70,16 @@ button {
 </div>
 
 <div class="card">
-<h2>👁 Preview</h2>
-<div id="preview"></div>
+<h2>✏ Editor</h2>
+
+<input id="title" placeholder="Title">
+<input id="album" placeholder="Album / Date">
+<input id="extra1" placeholder="Extra 1">
+<input id="extra2" placeholder="Extra 2">
+<textarea id="text" placeholder="Text"></textarea>
+
+<button onclick="saveItem()">Save</button>
+<button onclick="deleteItem()">Delete</button>
 </div>
 
 </div>
@@ -85,13 +89,11 @@ button {
 <script>
 
 let mode = "songs";
-
 let songs = [];
 let news = [];
+let currentEdit = null;
 
-let history = [];
-
-// INIT
+// LOAD
 Promise.all([
   fetch("songs.json").then(r => r.json()),
   fetch("news.json").then(r => r.json())
@@ -101,7 +103,7 @@ Promise.all([
   render();
 });
 
-// DATA
+// GET DATA
 function getData() {
   return mode === "songs" ? songs : news;
 }
@@ -112,89 +114,97 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  const data = getData();
-
-  data.forEach((item, i) => {
+  getData().forEach(item => {
 
     const div = document.createElement("div");
     div.className = "item";
 
     div.innerHTML = `
-      <b contenteditable="true" onblur="updateTitle('${item.id}', this.innerText)">
-        ${item.title}
-      </b><br>
+      <b>${item.title}</b><br>
       <small>${item.album || item.date || ""}</small>
-      <br><br>
-
-      <button onclick="selectItem('${item.id}')">✏ Edit Full</button>
-      <button onclick="deleteItem('${item.id}')">🗑 Delete</button>
     `;
+
+    div.onclick = () => loadItem(item.id);
 
     list.appendChild(div);
   });
-
-  saveLocal();
 }
 
-function updateTitle(id, newTitle) {
+// LOAD INTO EDITOR
+function loadItem(id) {
 
-  const data = getData();
-  const item = data.find(x => x.id === id);
-
-  if(item) {
-    item.title = newTitle;
-    saveLocal();
-  }
-
-  render();
-}
-
-function selectItem(id) {
-
-  const data = getData();
-  const item = data.find(x => x.id === id);
+  const arr = getData();
+  const item = arr.find(x => x.id === id);
 
   if(!item) return;
 
   currentEdit = id;
 
-  for(let key in item) {
-    const el = document.getElementById(key);
-    if(el) el.value = item[key];
-  }
+  title.value = item.title || "";
+  album.value = item.album || item.date || "";
+  extra1.value = item.extra1 || item.genre || "";
+  extra2.value = item.extra2 || item.youtube || "";
+  text.value = item.text || item.lyrics || "";
 }
 
-function deleteItem(id) {
+// SAVE
+function saveItem() {
 
-  if(mode === "songs") {
-    songs = songs.filter(x => x.id !== id);
+  const arr = getData();
+
+  const newItem = {
+    id: currentEdit || Date.now().toString(),
+    title: title.value,
+    album: album.value,
+    extra1: extra1.value,
+    extra2: extra2.value,
+    text: text.value
+  };
+
+  const index = arr.findIndex(x => x.id === newItem.id);
+
+  if(index >= 0) {
+    arr[index] = newItem;
   } else {
-    news = news.filter(x => x.id !== id);
+    arr.push(newItem);
   }
 
-  render();
-}
-// SNAPSHOT
-function saveSnapshot() {
-  history.push(JSON.stringify({ songs, news }));
-  alert("Snapshot gespeichert");
-}
-
-// UNDO
-function undo() {
-  if(!history.length) return;
-  const last = JSON.parse(history.pop());
-  songs = last.songs || songs;
-  news = last.news || news;
+  currentEdit = null;
+  clear();
   render();
 }
 
-// LOCAL SAVE
+// DELETE
+function deleteItem() {
+
+  const arr = getData();
+
+  if(!currentEdit) return;
+
+  const index = arr.findIndex(x => x.id === currentEdit);
+
+  if(index >= 0) arr.splice(index, 1);
+
+  currentEdit = null;
+  clear();
+  render();
+}
+
+// CLEAR
+function clear() {
+  title.value = "";
+  album.value = "";
+  extra1.value = "";
+  extra2.value = "";
+  text.value = "";
+}
+
+// SAVE LOCAL
 function saveLocal() {
-  localStorage.setItem("v8_cms", JSON.stringify({ songs, news }));
+  localStorage.setItem("cms", JSON.stringify({ songs, news }));
 }
 
-// EXPORT ALL
+// EXPORT
 function exportAll() {
   const blob = new Blob(
     [JSON.stringify({ songs, news }, null, 2)],
@@ -203,27 +213,9 @@ function exportAll() {
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "full_backup.json";
+  a.download = "backup.json";
   a.click();
 }
-
-// IMPORT
-function importFile() {
-  document.getElementById("fileInput").click();
-}
-
-document.getElementById("fileInput").addEventListener("change", e => {
-  const reader = new FileReader();
-
-  reader.onload = ev => {
-    const data = JSON.parse(ev.target.result);
-    songs = data.songs || [];
-    news = data.news || [];
-    render();
-  };
-
-  reader.readAsText(e.target.files[0]);
-});
 
 // 🚀 GITHUB PUSH (CORE)
 async function pushToGitHub() {
@@ -256,16 +248,24 @@ async function pushToGitHub() {
   alert("🚀 Push complete");
 }
 
-// GET SHA (required for GitHub update)
-async function getSHA(repo, path, token) {
-
-  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-    headers: { Authorization: `token ${token}` }
-  });
-
-  const data = await res.json();
-  return data.sha;
+// IMPORT
+function importFile() {
+  document.getElementById("fileInput").click();
 }
+
+document.getElementById("fileInput").addEventListener("change", e => {
+
+  const reader = new FileReader();
+
+  reader.onload = ev => {
+    const data = JSON.parse(ev.target.result);
+    songs = data.songs || [];
+    news = data.news || [];
+    render();
+  };
+
+  reader.readAsText(e.target.files[0]);
+});
 
 </script>
 
