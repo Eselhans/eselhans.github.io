@@ -1,14 +1,8 @@
 [
   {
-    "title": "Es geht weiter",
+    "title": "Test News!",
     "date": "06.06.2026",
     "image": "bilder/cover-platzhalter.png",
-    "text": "Ich baue fleißig an meiner Seite. Also nicht wundern wenn es mal Komisch aussieht"
-  },
-  {
-    "title": "Out Now! ",
-    "date": "29.05.2026",
-    "image": "bilder/zwei_seiten.jpg",
-    "text": "Es ist Geschafft 😊 Zwei Seiten ist fertig und kann nun gehört werden."
+    "text": "Das ist ein Test um zu schauen ob es geht ;)"
   }
 ]
