@@ -1,0 +1,50 @@
+{
+  "albums": [
+    {
+      "title": "Nächte und Stimmen",
+      "songs": [
+        {
+          "title": "Unknown",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Unknown",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Ein neuer Tag beginnt",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Wege und Geschichten",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Ich (Live Version)",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Weg zum Leben",
+          "lyrics": "Songtext folgt"
+        }
+      ]
+    },
+    {
+      "title": "Einzelveröffentlichungen",
+      "songs": [
+        {
+          "title": "Summer Nights",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Summer Nights",
+          "lyrics": "Songtext folgt"
+        },
+        {
+          "title": "Tänzerin",
+          "lyrics": "Songtext folgt"
+        }
+      ]
+    }
+  ]
+}
