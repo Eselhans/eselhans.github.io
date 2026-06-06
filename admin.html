@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V3 - Eselhans System</title>
+<title>Admin V4 - Eselhans CMS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -68,14 +68,14 @@ button {
 
 <body>
 
-<h1>🎛 Admin V3 System</h1>
+<h1>🎛 Admin V4 System</h1>
 
 <div class="tabs">
   <div class="tab active" onclick="switchMode('songs')">🎵 Songs</div>
   <div class="tab" onclick="switchMode('news')">📰 News</div>
 </div>
 
-<div id="form"></div>
+<div class="card" id="form"></div>
 
 <hr>
 
@@ -95,7 +95,7 @@ let db = {
   news: []
 };
 
-let editIndex = null;
+let editId = null;
 
 // INIT
 fetch("songs.json")
@@ -106,13 +106,10 @@ fetch("songs.json")
     render();
   });
 
+// SWITCH
 function switchMode(m) {
   mode = m;
-  editIndex = null;
-
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  event.target.classList.add("active");
-
+  editId = null;
   renderForm();
   render();
 }
@@ -120,47 +117,43 @@ function switchMode(m) {
 // FORM
 function renderForm() {
 
-  const form = document.getElementById("form");
+  const f = document.getElementById("form");
 
   if(mode === "songs") {
-    form.innerHTML = `
-      <div class="card">
-        <h3>Neuer Song</h3>
+    f.innerHTML = `
+      <h3>${editId ? "Song bearbeiten" : "Neuer Song"}</h3>
 
-        <input id="title" placeholder="Titel">
-        <input id="album" placeholder="Album">
-        <input id="genre" placeholder="Genre">
-        <input id="release" placeholder="Release">
-        <input id="youtube" placeholder="YouTube">
-        <input id="cover" placeholder="Cover">
-        <textarea id="lyrics" placeholder="Lyrics"></textarea>
+      <input id="title" placeholder="Titel">
+      <input id="album" placeholder="Album">
+      <input id="genre" placeholder="Genre">
+      <input id="release" placeholder="Release">
+      <input id="youtube" placeholder="YouTube">
+      <input id="cover" placeholder="Cover">
+      <textarea id="lyrics" placeholder="Lyrics"></textarea>
 
-        <button onclick="add()">➕ Save Song</button>
-      </div>
+      <button onclick="save()">💾 Save</button>
     `;
   } else {
-    form.innerHTML = `
-      <div class="card">
-        <h3>Neue News</h3>
+    f.innerHTML = `
+      <h3>${editId ? "News bearbeiten" : "Neue News"}</h3>
 
-        <input id="title" placeholder="Titel">
-        <input id="date" placeholder="Datum">
-        <input id="image" placeholder="Bild">
-        <textarea id="text" placeholder="Text"></textarea>
+      <input id="title" placeholder="Titel">
+      <input id="date" placeholder="Datum">
+      <input id="image" placeholder="Bild">
+      <textarea id="text" placeholder="Text"></textarea>
 
-        <button onclick="add()">➕ Save News</button>
-      </div>
+      <button onclick="save()">💾 Save</button>
     `;
   }
 }
 
-// ADD
-function add() {
+// SAVE (CREATE + UPDATE LOGIC)
+function save() {
 
   if(mode === "songs") {
 
-    db.songs.push({
-      id: title.value.toLowerCase().replaceAll(" ","-"),
+    const song = {
+      id: editId || title.value.toLowerCase().replaceAll(" ","-"),
       title: title.value,
       album: album.value || "Singles",
       genre: genre.value,
@@ -168,19 +161,43 @@ function add() {
       youtube: youtube.value,
       cover: cover.value,
       lyrics: lyrics.value
-    });
+    };
+
+    const index = db.songs.findIndex(s => s.id === song.id);
+
+    if(index >= 0) {
+      db.songs[index] = song;
+    } else {
+      db.songs.push(song);
+    }
 
   } else {
 
-    db.news.push({
+    const item = {
+      id: editId || Date.now().toString(),
       title: title.value,
       date: date.value,
       image: image.value,
       text: text.value
-    });
+    };
+
+    const index = db.news.findIndex(n => n.id === item.id);
+
+    if(index >= 0) {
+      db.news[index] = item;
+    } else {
+      db.news.push(item);
+    }
   }
 
+  editId = null;
+  clear();
   render();
+}
+
+// CLEAR
+function clear() {
+  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
 }
 
 // RENDER LIST
@@ -189,9 +206,9 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  let arr = db[mode];
+  const arr = db[mode];
 
-  arr.forEach((item,i) => {
+  arr.forEach(item => {
 
     const div = document.createElement("div");
     div.className = "card";
@@ -201,8 +218,8 @@ function render() {
       <small>${item.album || item.date || ""}</small><br>
 
       <div class="row">
-        <button onclick="edit(${i})">✏ Edit</button>
-        <button onclick="del(${i})">🗑 Delete</button>
+        <button onclick="edit('${item.id}')">✏ Edit</button>
+        <button onclick="del('${item.id}')">🗑 Delete</button>
       </div>
     `;
 
@@ -210,23 +227,23 @@ function render() {
   });
 }
 
-// DELETE
-function del(i) {
-  db[mode].splice(i,1);
-  render();
-}
+// EDIT
+function edit(id) {
 
-// EDIT (basic)
-function edit(i) {
-  const item = db[mode][i];
+  const item = db[mode].find(x => x.id === id);
+  editId = id;
 
   for(let key in item) {
-    if(document.getElementById(key)) {
-      document.getElementById(key).value = item[key];
-    }
+    const el = document.getElementById(key);
+    if(el) el.value = item[key];
   }
 
-  db[mode].splice(i,1);
+  renderForm();
+}
+
+// DELETE
+function del(id) {
+  db[mode] = db[mode].filter(x => x.id !== id);
   render();
 }
 
