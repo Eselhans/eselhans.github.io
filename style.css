@@ -264,6 +264,14 @@ h2 {
   background: rgba(255,255,255,0.05);
 }
 
+.news-box img {
+  width: 100%;
+  max-width: 140px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
 .news-label {
   font-size: 0.75rem;
   text-transform: uppercase;
