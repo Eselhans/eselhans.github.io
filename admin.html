@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>News Admin</title>
+<style>
+body {
+  font-family: Arial;
+  background:#0b0b10;
+  color:#f4f1ea;
+  padding:30px;
+}
+
+input, textarea {
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+}
+
+button {
+  padding:10px 15px;
+  border-radius:10px;
+  border:none;
+  background:#c98b4f;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.card {
+  background:rgba(255,255,255,0.06);
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<h1>🛠 News Admin Panel</h1>
+
+<div class="card">
+
+<input id="title" placeholder="Titel">
+<input id="date" placeholder="Datum (YYYY-MM-DD)">
+<input id="image" placeholder="Bildpfad (z.B. bilder/song.jpg)">
+<textarea id="text" placeholder="Text"></textarea>
+
+<button onclick="addNews()">News hinzufügen</button>
+
+</div>
+
+<div class="card">
+<h2>JSON Export</h2>
+<button onclick="downloadJSON()">Download news.json</button>
+<pre id="output"></pre>
+</div>
+
+<script>
+let news = [];
+
+function addNews() {
+  news.push({
+    title: document.getElementById('title').value,
+    date: document.getElementById('date').value,
+    image: document.getElementById('image').value,
+    text: document.getElementById('text').value
+  });
+
+  document.getElementById('output').innerText =
+    JSON.stringify(news, null, 2);
+}
+
+function downloadJSON() {
+  const blob = new Blob([JSON.stringify(news, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "news.json";
+  a.click();
+}
+</script>
+
+</body>
+</html>
