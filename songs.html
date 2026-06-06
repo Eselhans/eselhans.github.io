@@ -9,7 +9,7 @@
 
 <style>
 .album {
-  margin-top: 40px;
+  margin-top: 42px;
 }
 
 .album-title {
@@ -120,7 +120,7 @@
 <header class="hero">
   <span class="eyebrow">Music System</span>
   <h1>Songs</h1>
-  <p class="lead">Alle Songs, Lyrics, Videos & Infos an einem Ort.</p>
+  <p class="lead">Alle Songs, sauber sortiert nach Alben & Singles.</p>
 </header>
 
 <section id="albums"></section>
@@ -128,23 +128,43 @@
 </main>
 
 <script>
-fetch("songs.json")
+fetch("songs_v4_full.json")
   .then(res => res.json())
   .then(data => {
 
     const container = document.getElementById("albums");
 
-    // ALBUMS gruppieren
-    const grouped = {};
+    // 1. SORTIEREN
+    const songs = data.songs;
 
-    data.songs.forEach(song => {
-      if (!grouped[song.album]) {
-        grouped[song.album || "Ohne Album"] = [];
+    songs.sort((a, b) => {
+      const albumA = a.album || "Singles";
+      const albumB = b.album || "Singles";
+
+      if (albumA === albumB) {
+        return (a.release || "").localeCompare(b.release || "");
       }
-      grouped[song.album || "Ohne Album"].push(song);
+
+      // Singles IMMER nach hinten
+      if (albumA === "Singles") return 1;
+      if (albumB === "Singles") return -1;
+
+      return albumA.localeCompare(albumB);
     });
 
-    // ALBUM RENDER
+    // 2. GROUPING
+    const grouped = {};
+
+    songs.forEach(song => {
+      const album = song.album && song.album.trim() !== ""
+        ? song.album
+        : "Singles";
+
+      if (!grouped[album]) grouped[album] = [];
+      grouped[album].push(song);
+    });
+
+    // 3. RENDER
     Object.keys(grouped).forEach(albumName => {
 
       const albumDiv = document.createElement("div");
@@ -161,10 +181,11 @@ fetch("songs.json")
             <img src="${song.cover || 'bilder/cover-platzhalter.png'}">
 
             <div class="song-content">
+
               <div class="song-title">${song.title}</div>
 
               <div class="song-meta">
-                ${song.genre || ""} • ${song.release || ""}
+                ${song.genre || "—"} • ${song.release || "—"}
               </div>
 
               <div class="button-row">
@@ -174,9 +195,11 @@ fetch("songs.json")
                 </button>
               </div>
 
-              <div class="lyrics">${song.lyrics || "Noch keine Lyrics vorhanden"}</div>
-            </div>
+              <div class="lyrics">
+                ${song.lyrics || "Noch keine Lyrics vorhanden"}
+              </div>
 
+            </div>
           </div>
         `;
       });
