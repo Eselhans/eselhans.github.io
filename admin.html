@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V4 - Eselhans CMS</title>
+<title>Admin V5 - Creator Dashboard</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -11,56 +11,50 @@ body {
   padding: 20px;
 }
 
-.tabs {
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.tab {
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  cursor:pointer;
+.card {
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.05);
 }
 
-.tab.active {
-  background: var(--accent-soft);
-}
-
 input, textarea {
-  width:100%;
-  padding:10px;
-  margin:6px 0;
-  border-radius:10px;
-  border:1px solid var(--border);
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
   background: rgba(255,255,255,0.05);
   color: var(--text);
 }
 
 button {
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
   background: var(--accent-soft);
   color: var(--text);
-  cursor:pointer;
-  margin-top:10px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-.card {
-  border:1px solid var(--border);
-  padding:14px;
-  margin-top:14px;
-  border-radius:14px;
-  background: rgba(255,255,255,0.05);
+.list-item {
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  cursor: grab;
 }
 
-.row {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+.list-item.dragging {
+  opacity: 0.5;
 }
 </style>
 
@@ -68,196 +62,194 @@ button {
 
 <body>
 
-<h1>🎛 Admin V4 System</h1>
+<h1>🎛 Admin V5 Dashboard</h1>
 
-<div class="tabs">
-  <div class="tab active" onclick="switchMode('songs')">🎵 Songs</div>
-  <div class="tab" onclick="switchMode('news')">📰 News</div>
+<div class="container">
+
+<!-- LEFT -->
+<div>
+
+<div class="card">
+<h2>Editor</h2>
+
+<input id="title" placeholder="Titel">
+<input id="album" placeholder="Album">
+<input id="genre" placeholder="Genre">
+<input id="release" placeholder="Release">
+<input id="youtube" placeholder="YouTube">
+<input id="cover" placeholder="Cover">
+<textarea id="lyrics" placeholder="Lyrics"></textarea>
+
+<button onclick="saveItem()">💾 Save</button>
+<button onclick="undo()">↩ Undo</button>
 </div>
 
-<div class="card" id="form"></div>
-
-<hr>
-
-<h2>📦 Liste</h2>
+<div class="card">
+<h2>📦 Liste (Drag & Drop)</h2>
 <div id="list"></div>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+<h2>👁 Live Preview</h2>
+<div id="preview"></div>
 
 <hr>
 
 <button onclick="download()">⬇ Export JSON</button>
+</div>
+
+</div>
 
 <script>
 
-let mode = "songs";
+let songs = [];
+let history = [];
+let currentEdit = null;
 
-let db = {
-  songs: [],
-  news: []
-};
-
-let editId = null;
-
-// INIT
+// LOAD
 fetch("songs.json")
   .then(r => r.json())
   .then(d => {
-    db.songs = d.songs || [];
-    renderForm();
+    songs = d.songs || [];
     render();
+    autosave();
   });
 
-// SWITCH
-function switchMode(m) {
-  mode = m;
-  editId = null;
-  renderForm();
-  render();
+// AUTOSAVE
+function autosave() {
+  localStorage.setItem("songs_backup", JSON.stringify(songs));
 }
 
-// FORM
-function renderForm() {
-
-  const f = document.getElementById("form");
-
-  if(mode === "songs") {
-    f.innerHTML = `
-      <h3>${editId ? "Song bearbeiten" : "Neuer Song"}</h3>
-
-      <input id="title" placeholder="Titel">
-      <input id="album" placeholder="Album">
-      <input id="genre" placeholder="Genre">
-      <input id="release" placeholder="Release">
-      <input id="youtube" placeholder="YouTube">
-      <input id="cover" placeholder="Cover">
-      <textarea id="lyrics" placeholder="Lyrics"></textarea>
-
-      <button onclick="save()">💾 Save</button>
-    `;
-  } else {
-    f.innerHTML = `
-      <h3>${editId ? "News bearbeiten" : "Neue News"}</h3>
-
-      <input id="title" placeholder="Titel">
-      <input id="date" placeholder="Datum">
-      <input id="image" placeholder="Bild">
-      <textarea id="text" placeholder="Text"></textarea>
-
-      <button onclick="save()">💾 Save</button>
-    `;
+// UNDO
+function undo() {
+  const backup = localStorage.getItem("songs_backup");
+  if(backup) {
+    songs = JSON.parse(backup);
+    render();
   }
 }
 
-// SAVE (CREATE + UPDATE LOGIC)
-function save() {
+// SAVE / UPDATE
+function saveItem() {
 
-  if(mode === "songs") {
+  const song = {
+    id: currentEdit || title.value.toLowerCase().replaceAll(" ","-"),
+    title: title.value,
+    album: album.value,
+    genre: genre.value,
+    release: release.value,
+    youtube: youtube.value,
+    cover: cover.value,
+    lyrics: lyrics.value
+  };
 
-    const song = {
-      id: editId || title.value.toLowerCase().replaceAll(" ","-"),
-      title: title.value,
-      album: album.value || "Singles",
-      genre: genre.value,
-      release: release.value,
-      youtube: youtube.value,
-      cover: cover.value,
-      lyrics: lyrics.value
-    };
+  const index = songs.findIndex(s => s.id === song.id);
 
-    const index = db.songs.findIndex(s => s.id === song.id);
+  if(index >= 0) songs[index] = song;
+  else songs.push(song);
 
-    if(index >= 0) {
-      db.songs[index] = song;
-    } else {
-      db.songs.push(song);
-    }
-
-  } else {
-
-    const item = {
-      id: editId || Date.now().toString(),
-      title: title.value,
-      date: date.value,
-      image: image.value,
-      text: text.value
-    };
-
-    const index = db.news.findIndex(n => n.id === item.id);
-
-    if(index >= 0) {
-      db.news[index] = item;
-    } else {
-      db.news.push(item);
-    }
-  }
-
-  editId = null;
+  currentEdit = null;
   clear();
   render();
+  autosave();
 }
 
-// CLEAR
+// CLEAR FORM
 function clear() {
-  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  document.querySelectorAll("input, textarea").forEach(i => i.value = "");
 }
 
-// RENDER LIST
+// RENDER
 function render() {
 
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  const arr = db[mode];
-
-  arr.forEach(item => {
+  songs.forEach((s, i) => {
 
     const div = document.createElement("div");
-    div.className = "card";
+    div.className = "list-item";
+    div.draggable = true;
 
     div.innerHTML = `
-      <b>${item.title}</b><br>
-      <small>${item.album || item.date || ""}</small><br>
-
-      <div class="row">
-        <button onclick="edit('${item.id}')">✏ Edit</button>
-        <button onclick="del('${item.id}')">🗑 Delete</button>
-      </div>
+      <b>${s.title}</b><br>
+      <small>${s.album || "Singles"}</small>
+      <button onclick="edit('${s.id}')">✏</button>
+      <button onclick="del('${s.id}')">🗑</button>
     `;
+
+    // DRAG
+    div.addEventListener("dragstart", () => {
+      div.classList.add("dragging");
+      div.dataset.index = i;
+    });
+
+    div.addEventListener("dragend", () => {
+      div.classList.remove("dragging");
+    });
+
+    div.addEventListener("dragover", (e) => e.preventDefault());
+
+    div.addEventListener("drop", (e) => {
+      e.preventDefault();
+
+      const from = e.dataTransfer?.getData("text") || div.dataset.index;
+    });
 
     list.appendChild(div);
   });
+
+  preview();
+  autosave();
 }
 
 // EDIT
 function edit(id) {
+  const s = songs.find(x => x.id === id);
+  currentEdit = id;
 
-  const item = db[mode].find(x => x.id === id);
-  editId = id;
-
-  for(let key in item) {
-    const el = document.getElementById(key);
-    if(el) el.value = item[key];
-  }
-
-  renderForm();
+  title.value = s.title;
+  album.value = s.album;
+  genre.value = s.genre;
+  release.value = s.release;
+  youtube.value = s.youtube;
+  cover.value = s.cover;
+  lyrics.value = s.lyrics;
 }
 
 // DELETE
 function del(id) {
-  db[mode] = db[mode].filter(x => x.id !== id);
+  songs = songs.filter(s => s.id !== id);
   render();
+  autosave();
+}
+
+// PREVIEW
+function preview() {
+  const p = document.getElementById("preview");
+
+  const featured = songs[0];
+
+  p.innerHTML = featured ? `
+    <h3>${featured.title}</h3>
+    <p>${featured.album}</p>
+    <p>${featured.genre}</p>
+  ` : "";
 }
 
 // EXPORT
 function download() {
-
   const blob = new Blob(
-    [JSON.stringify(db[mode], null, 2)],
+    [JSON.stringify({ songs }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = mode + ".json";
+  a.download = "songs.json";
   a.click();
 }
 
