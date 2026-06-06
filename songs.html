@@ -140,88 +140,86 @@
 </main>
 
 <script>
+let allSongs = [];
+
 fetch("songs.json")
   .then(res => res.json())
   .then(data => {
 
-    const container = document.getElementById("albums");
+    allSongs = data.songs;
+    render(allSongs);
 
-    // 1. SORTIEREN
-    const songs = data.songs;
+    document.getElementById("search").addEventListener("input", (e) => {
+      const val = e.target.value.toLowerCase();
 
-    songs.sort((a, b) => {
-      const albumA = a.album || "Singles";
-      const albumB = b.album || "Singles";
+      const filtered = allSongs.filter(song =>
+        (song.title || "").toLowerCase().includes(val) ||
+        (song.album || "").toLowerCase().includes(val) ||
+        (song.genre || "").toLowerCase().includes(val)
+      );
 
-      if (albumA === albumB) {
-        return (a.release || "").localeCompare(b.release || "");
-      }
-
-      // Singles IMMER nach hinten
-      if (albumA === "Singles") return 1;
-      if (albumB === "Singles") return -1;
-
-      return albumA.localeCompare(albumB);
+      render(filtered);
     });
-
-    // 2. GROUPING
-    const grouped = {};
-
-    songs.forEach(song => {
-      const album = song.album && song.album.trim() !== ""
-        ? song.album
-        : "Singles";
-
-      if (!grouped[album]) grouped[album] = [];
-      grouped[album].push(song);
-    });
-
-    // 3. RENDER
-    Object.keys(grouped).forEach(albumName => {
-
-      const albumDiv = document.createElement("div");
-      albumDiv.className = "album";
-
-      let html = `<div class="album-title">${albumName}</div>`;
-      html += `<div class="song-grid">`;
-
-      grouped[albumName].forEach(song => {
-
-        html += `
-          <div class="song-card">
-
-            <img src="${song.cover || 'bilder/cover-platzhalter.png'}">
-
-            <div class="song-content">
-
-              <div class="song-title">${song.title}</div>
-
-              <div class="song-meta">
-                ${song.genre || "—"} • ${song.release || "—"}
-              </div>
-
-              <div class="button-row">
-                <a href="${song.youtube}" target="_blank">YouTube</a>
-                <button onclick="this.closest('.song-card').classList.toggle('active')">
-                  Lyrics
-                </button>
-              </div>
-
-              <div class="lyrics">
-                ${song.lyrics || "Noch keine Lyrics vorhanden"}
-              </div>
-
-            </div>
-          </div>
-        `;
-      });
-
-      html += `</div>`;
-      albumDiv.innerHTML = html;
-      container.appendChild(albumDiv);
-    });
-
   });
+
+function render(songs) {
+  const container = document.getElementById("albums");
+  container.innerHTML = "";
+
+  // GROUPING
+  const grouped = {};
+
+  songs.forEach(song => {
+    const album = song.album && song.album.trim() !== "" ? song.album : "Singles";
+    if (!grouped[album]) grouped[album] = [];
+    grouped[album].push(song);
+  });
+
+  // RENDER
+  Object.keys(grouped).forEach(albumName => {
+
+    const albumDiv = document.createElement("div");
+    albumDiv.className = "album";
+
+    let html = `<div class="album-title">${albumName}</div>`;
+    html += `<div class="song-grid">`;
+
+    grouped[albumName].forEach(song => {
+
+      html += `
+        <div class="song-card">
+
+          <img src="${song.cover || 'bilder/cover-platzhalter.png'}">
+
+          <div class="song-content">
+
+            <div class="song-title">${song.title}</div>
+
+            <div class="song-meta">
+              ${song.genre || "—"} • ${song.release || "—"}
+            </div>
+
+            <div class="button-row">
+              <a href="${song.youtube}" target="_blank">YouTube</a>
+              <button onclick="this.closest('.song-card').classList.toggle('active')">
+                Lyrics
+              </button>
+            </div>
+
+            <div class="lyrics">
+              ${song.lyrics || "Noch keine Lyrics vorhanden"}
+            </div>
+
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    albumDiv.innerHTML = html;
+    container.appendChild(albumDiv);
+  });
+}
 </script>
 
 </body>
