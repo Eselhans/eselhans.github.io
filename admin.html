@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <title>Admin V5 - Creator Dashboard</title>
 
-  <div style="margin-bottom:15px;">
-  <button onclick="mode='songs'; render()">🎵 Songs</button>
-  <button onclick="mode='news'; render()">📰 News</button>
-</div>
-
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -109,24 +104,19 @@ button {
 </div>
 
 <script>
-  
+
 let songs = [];
-let news = [];
-let mode = "songs";
 let history = [];
 let currentEdit = null;
 
 // LOAD
-Promise.all([
-  fetch("songs.json").then(r => r.json()),
-  fetch("news.json").then(r => r.json())
-]).then(([s, n]) => {
-  songs = s.songs || [];
-  news = n.news || [];
-
-  render();
-  autosave();
-});
+fetch("songs.json")
+  .then(r => r.json())
+  .then(d => {
+    songs = d.songs || [];
+    render();
+    autosave();
+  });
 
 // AUTOSAVE
 function autosave() {
@@ -145,39 +135,21 @@ function undo() {
 // SAVE / UPDATE
 function saveItem() {
 
-  if(mode === "songs") {
+  const song = {
+    id: currentEdit || title.value.toLowerCase().replaceAll(" ","-"),
+    title: title.value,
+    album: album.value,
+    genre: genre.value,
+    release: release.value,
+    youtube: youtube.value,
+    cover: cover.value,
+    lyrics: lyrics.value
+  };
 
-    const song = {
-      id: currentEdit || title.value.toLowerCase().replaceAll(" ","-"),
-      title: title.value,
-      album: album.value,
-      genre: genre.value,
-      release: release.value,
-      youtube: youtube.value,
-      cover: cover.value,
-      lyrics: lyrics.value
-    };
+  const index = songs.findIndex(s => s.id === song.id);
 
-    const i = songs.findIndex(s => s.id === song.id);
-
-    if(i >= 0) songs[i] = song;
-    else songs.push(song);
-
-  } else {
-
-    const item = {
-      id: currentEdit || Date.now().toString(),
-      title: title.value,
-      date: release.value,
-      image: cover.value,
-      text: lyrics.value
-    };
-
-    const i = news.findIndex(n => n.id === item.id);
-
-    if(i >= 0) news[i] = item;
-    else news.push(item);
-  }
+  if(index >= 0) songs[index] = song;
+  else songs.push(song);
 
   currentEdit = null;
   clear();
@@ -196,26 +168,18 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  const data = mode === "songs" ? songs : news;
-
-  data.forEach(item => {
+  songs.forEach((s, i) => {
 
     const div = document.createElement("div");
     div.className = "list-item";
+    div.draggable = true;
 
     div.innerHTML = `
-      <b>${item.title}</b><br>
-      <small>${item.album || item.date || ""}</small><br>
-
-      <button onclick="edit('${item.id}')">✏</button>
-      <button onclick="del('${item.id}')">🗑</button>
+      <b>${s.title}</b><br>
+      <small>${s.album || "Singles"}</small>
+      <button onclick="edit('${s.id}')">✏</button>
+      <button onclick="del('${s.id}')">🗑</button>
     `;
-
-    list.appendChild(div);
-  });
-
-  preview();
-}
 
     // DRAG
     div.addEventListener("dragstart", () => {
@@ -244,27 +208,25 @@ function render() {
 
 // EDIT
 function edit(id) {
-
-  const arr = mode === "songs" ? songs : news;
-  const item = arr.find(x => x.id === id);
-
+  const s = songs.find(x => x.id === id);
   currentEdit = id;
 
-  for(let key in item) {
-    const el = document.getElementById(key);
-    if(el) el.value = item[key];
-  }
+  title.value = s.title;
+  album.value = s.album;
+  genre.value = s.genre;
+  release.value = s.release;
+  youtube.value = s.youtube;
+  cover.value = s.cover;
+  lyrics.value = s.lyrics;
 }
 
 // DELETE
 function del(id) {
-  if(mode === "songs") {
-    songs = songs.filter(s => s.id !== id);
-  } else {
-    news = news.filter(n => n.id !== id);
-  }
+  songs = songs.filter(s => s.id !== id);
   render();
+  autosave();
 }
+
 // PREVIEW
 function preview() {
   const p = document.getElementById("preview");
@@ -280,19 +242,14 @@ function preview() {
 
 // EXPORT
 function download() {
-
-  const data = mode === "songs"
-    ? { songs }
-    : { news };
-
   const blob = new Blob(
-    [JSON.stringify(data, null, 2)],
+    [JSON.stringify({ songs }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = mode + ".json";
+  a.download = "songs.json";
   a.click();
 }
 
