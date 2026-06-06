@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V6 - Creator Studio</title>
+<title>Admin V7 - CMS Engine</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,14 +12,15 @@ body {
   font-family: Arial;
 }
 
-.topbar {
+.bar {
   display:flex;
   gap:10px;
   margin-bottom:15px;
+  flex-wrap:wrap;
 }
 
-.topbar button {
-  padding:10px;
+.bar button {
+  padding:10px 14px;
   border-radius:10px;
   border:1px solid var(--border);
   background: var(--accent-soft);
@@ -46,27 +47,12 @@ body {
   border-radius:10px;
   border:1px solid var(--border);
   background: rgba(0,0,0,0.2);
-  cursor: grab;
-}
-
-.item[contenteditable="true"] {
-  outline: 2px solid var(--accent);
+  cursor:pointer;
 }
 
 .small {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.actions {
-  display:flex;
-  gap:8px;
-  margin-top:6px;
-}
-
-.actions button {
-  padding:5px 8px;
   font-size:12px;
+  opacity:0.7;
 }
 </style>
 
@@ -74,19 +60,24 @@ body {
 
 <body>
 
-<h1>🎛 Admin V6 Studio</h1>
+<h1>🎛 Admin V7 CMS Engine</h1>
 
-<div class="topbar">
+<div class="bar">
   <button onclick="mode='songs'; render()">🎵 Songs</button>
   <button onclick="mode='news'; render()">📰 News</button>
-  <button onclick="saveToFile()">💾 Export JSON</button>
+
+  <button onclick="saveSnapshot()">📸 Snapshot</button>
+  <button onclick="undo()">↩ Undo</button>
+
+  <button onclick="exportJSON()">⬇ Export</button>
+  <button onclick="importJSON()">⬆ Import</button>
 </div>
 
 <div class="container">
 
 <!-- LIST -->
 <div class="card">
-<h2>📦 Liste (Drag + Inline Edit)</h2>
+<h2>📦 Content</h2>
 <div id="list"></div>
 </div>
 
@@ -98,6 +89,8 @@ body {
 
 </div>
 
+<input type="file" id="fileInput" style="display:none" />
+
 <script>
 
 let mode = "songs";
@@ -105,19 +98,22 @@ let mode = "songs";
 let songs = [];
 let news = [];
 
-let dragIndex = null;
+let history = [];
 
 // LOAD
 Promise.all([
   fetch("songs.json").then(r => r.json()),
   fetch("news.json").then(r => r.json())
 ]).then(([s, n]) => {
+
   songs = s.songs || [];
   news = n.news || [];
+
+  loadLocal();
   render();
 });
 
-// GET ACTIVE ARRAY
+// GET DATA
 function getData() {
   return mode === "songs" ? songs : news;
 }
@@ -128,89 +124,67 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  getData().forEach((item, i) => {
+  const data = getData();
+
+  data.forEach((item, i) => {
 
     const div = document.createElement("div");
     div.className = "item";
-    div.draggable = true;
-    div.contentEditable = true;
+
     div.innerHTML = `
       <b>${item.title}</b><br>
       <span class="small">${item.album || item.date || ""}</span>
     `;
 
-    // INLINE EDIT → SAVE ON BLUR
-    div.addEventListener("blur", () => {
-      const text = div.innerText.split("\n")[0];
-      item.title = text;
-      autosave();
-    }, true);
-
-    // DRAG START
-    div.addEventListener("dragstart", () => {
-      dragIndex = i;
-    });
-
-    div.addEventListener("dragover", (e) => e.preventDefault());
-
-    div.addEventListener("drop", () => {
-      const arr = getData();
-
-      const dragged = arr[dragIndex];
-      arr.splice(dragIndex, 1);
-      arr.splice(i, 0, dragged);
-
-      dragIndex = null;
-      render();
-      autosave();
-    });
+    div.onclick = () => {
+      document.getElementById("preview").innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.album || item.date || ""}</p>
+      `;
+    };
 
     list.appendChild(div);
   });
 
-  preview();
+  saveLocal();
 }
 
-// PREVIEW
-function preview() {
+// SNAPSHOT (VERSION SYSTEM)
+function saveSnapshot() {
+  history.push(JSON.stringify({ songs, news }));
+  alert("Snapshot gespeichert");
+}
 
-  const p = document.getElementById("preview");
-  const data = getData();
+// UNDO
+function undo() {
+  if(history.length === 0) return;
 
-  if(!data.length) {
-    p.innerHTML = "Empty";
-    return;
+  const last = JSON.parse(history.pop());
+  songs = last.songs || songs;
+  news = last.news || news;
+
+  render();
+}
+
+// LOCAL SAVE
+function saveLocal() {
+  localStorage.setItem("cms_v7", JSON.stringify({ songs, news }));
+}
+
+// LOCAL LOAD
+function loadLocal() {
+  const data = localStorage.getItem("cms_v7");
+  if(data) {
+    const parsed = JSON.parse(data);
+    songs = parsed.songs || songs;
+    news = parsed.news || news;
   }
-
-  const f = data[0];
-
-  p.innerHTML = `
-    <h3>${f.title}</h3>
-    <p>${f.album || f.date || ""}</p>
-  `;
-}
-
-// AUTOSAVE
-function autosave() {
-  localStorage.setItem("songs", JSON.stringify(songs));
-  localStorage.setItem("news", JSON.stringify(news));
-}
-
-// LOAD AUTOSAVE
-function loadSave() {
-  const s = localStorage.getItem("songs");
-  const n = localStorage.getItem("news");
-
-  if(s) songs = JSON.parse(s);
-  if(n) news = JSON.parse(n);
 }
 
 // EXPORT
-function saveToFile() {
+function exportJSON() {
 
-  const data = mode === "songs"
-    ? { songs }
-    : { news };
+  const data = { songs, news };
 
   const blob = new Blob(
     [JSON.stringify(data, null, 2)],
@@ -219,9 +193,31 @@ function saveToFile() {
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = mode + ".json";
+  a.download = "cms_backup.json";
   a.click();
 }
+
+// IMPORT
+function importJSON() {
+  document.getElementById("fileInput").click();
+}
+
+document.getElementById("fileInput").addEventListener("change", e => {
+
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(evt) {
+    const data = JSON.parse(evt.target.result);
+
+    songs = data.songs || [];
+    news = data.news || [];
+
+    render();
+  };
+
+  reader.readAsText(file);
+});
 
 </script>
 
