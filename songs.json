@@ -1,50 +1,154 @@
 {
-  "albums": [
+  "songs": [
     {
-      "title": "Nächte und Stimmen",
-      "songs": [
-        {
-          "title": "Unknown",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Unknown",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Ein neuer Tag beginnt",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Wege und Geschichten",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Ich (Live Version)",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Weg zum Leben",
-          "lyrics": "Songtext folgt"
-        }
-      ]
+      "id": "alleine-in-mir",
+      "title": "Alleine in mir",
+      "album": "Lebensweg",
+      "genre": "Ballade",
+      "release": "2025-09-16",
+      "youtube": "https://youtu.be/fmJwhLSHbjk",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
     },
     {
-      "title": "Einzelveröffentlichungen",
-      "songs": [
-        {
-          "title": "Summer Nights",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Summer Nights",
-          "lyrics": "Songtext folgt"
-        },
-        {
-          "title": "Tänzerin",
-          "lyrics": "Songtext folgt"
-        }
-      ]
+      "id": "unser-chat-unser-takt",
+      "title": "Unser Chat unser Takt",
+      "album": "Lebensweg",
+      "genre": "Hymne",
+      "release": "2025-09-14",
+      "youtube": "https://youtu.be/NSWSRggEfhQ",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "lied-der-erinnerung",
+      "title": "Lied der Erinnerung",
+      "album": "Echos from the Past",
+      "genre": "Gothic Ballade",
+      "release": "2025-09-13",
+      "youtube": "https://youtu.be/sIJPeX_3N5U",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "dunkles-erbe",
+      "title": "Dunkles Erbe",
+      "album": "Echos from the Past",
+      "genre": "Dark Country",
+      "release": "2025-09-19",
+      "youtube": "https://youtu.be/tbTyZINpNVg",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "alleine-und-einsam",
+      "title": "Alleine und Einsam",
+      "album": "Echos from the Past",
+      "genre": "Gothic Rock",
+      "release": "2025-09-14",
+      "youtube": "https://youtu.be/t_kNfnaN8LQ",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "johny-obrian",
+      "title": "Johny O'Brian",
+      "album": "Lauter als die Stille",
+      "genre": "Irish Pub",
+      "release": "2025-09-14",
+      "youtube": "https://youtu.be/9irGBFJiUF0",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "wir-beide",
+      "title": "Wir beide",
+      "album": "Lauter als die Stille",
+      "genre": "Pop Ballade",
+      "release": "2025-09-14",
+      "youtube": "https://youtu.be/ZPs0xGcDhOk",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "die-weisse-frau",
+      "title": "Die Weiße Frau",
+      "album": "Gradeaus",
+      "genre": "Folk",
+      "release": "2025-09-16",
+      "youtube": "https://youtu.be/aPpqetrGucA",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "im-regen-gefunden",
+      "title": "Im Regen gefunden",
+      "album": "Gradeaus",
+      "genre": "Country",
+      "release": "2025-09-15",
+      "youtube": "https://youtu.be/Tc0Jfb8lHEQ",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "phoenix",
+      "title": "Phönix",
+      "album": "Echos from the Past",
+      "genre": "Gothic Metal",
+      "release": "2025-09-15",
+      "youtube": "https://youtu.be/TkZMYS2NmDQ",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "wann-und-wo",
+      "title": "Wann und Wo",
+      "album": "Gradeaus",
+      "genre": "Steampunk Gothic",
+      "release": "2025-09-19",
+      "youtube": "https://youtu.be/V1uo2E8G9g8",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "found-and-lost",
+      "title": "Found and Lost",
+      "album": "Gradeaus",
+      "genre": "Country",
+      "release": "2025-09-20",
+      "youtube": "https://youtu.be/JDqtXWXSBJk",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "ich-brenne-wie-feuer",
+      "title": "Ich brenne wie Feuer",
+      "album": "Lauter als die Stille",
+      "genre": "Dark Ballade",
+      "release": "2025-09-23",
+      "youtube": "https://youtu.be/GnOg4_QMHms",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "halt-meine-hand",
+      "title": "Halt meine Hand",
+      "album": "Lauter als die Stille",
+      "genre": "Rock Ballade",
+      "release": "2025-09-25",
+      "youtube": "https://youtu.be/_Ae_3Ki59cg",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
+    },
+    {
+      "id": "wieland-der-schmied",
+      "title": "Wieland der Schmied",
+      "album": "Gradeaus",
+      "genre": "Nordic Folk",
+      "release": "2025-09-25",
+      "youtube": "https://youtu.be/L-mYuVzwtGg",
+      "cover": "bilder/default.jpg",
+      "lyrics": ""
     }
   ]
 }
