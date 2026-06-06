@@ -6,10 +6,9 @@
       "album": "Singles",
       "genre": "Gothic Ballade",
       "release": "2025-09-13",
-      "status": "Veröffentlicht",
       "youtube": "https://youtu.be/sIJPeX_3N5U?si=4SeZbBcCfkmuZ-_L",
-      "cover": "bilder/default.jpg",
-      "lyrics": ""
+      "cover": "bilder/lied-der-erinnerung.jpg",
+      "lyrics": "bla bla bla test "
     },
     {
       "id": "verlangen",
