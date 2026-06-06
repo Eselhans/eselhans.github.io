@@ -2,17 +2,19 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin Panel | Eselhans</title>
+<title>Multi Dashboard | Eselhans</title>
 
 <style>
 body {
   font-family: Arial;
   background:#0b0b10;
-  color:#fff;
+  color:#f4f1ea;
   padding:30px;
 }
 
-input, textarea {
+h1 { margin-bottom: 20px; }
+
+select, input, textarea {
   width:100%;
   margin:8px 0;
   padding:10px;
@@ -39,74 +41,99 @@ button {
   margin-top:20px;
 }
 
-.preview img {
-  width:100%;
-  border-radius:12px;
+.preview {
+  white-space: pre-wrap;
+  font-size: 0.85rem;
+  color: #b9b0a6;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🧠 News Admin Panel</h1>
+<h1>🧠 Multi Dashboard v1</h1>
 
 <div class="card">
 
-  <input id="title" placeholder="Titel">
-  <input id="date" placeholder="Datum (z.B. 2026-06-05)">
-  <input id="image" placeholder="Bild URL (z.B. bilder/test.jpg)">
-  <textarea id="text" rows="4" placeholder="Text"></textarea>
+  <label>Kategorie wählen</label>
+  <select id="type" onchange="switchForm()">
+    <option value="news">📰 News</option>
+    <option value="songs">🎵 Songs</option>
+    <option value="lyrics">📝 Lyrics</option>
+  </select>
 
-  <button onclick="addNews()">+ News hinzufügen</button>
-  <button onclick="downloadJSON()">⬇ JSON herunterladen</button>
+  <input id="title" placeholder="Titel">
+  <input id="date" placeholder="Datum (YYYY-MM-DD)">
+
+  <input id="image" placeholder="Bild (optional - für News/Songs)">
+
+  <textarea id="text" placeholder="Text / Lyrics"></textarea>
+
+  <button onclick="addItem()">➕ Hinzufügen</button>
+  <button onclick="downloadJSON()">⬇ JSON Download</button>
 
 </div>
 
-<div class="card preview">
-  <h2>Live Preview</h2>
-  <div id="preview"></div>
+<div class="card">
+  <h2>📦 JSON Vorschau</h2>
+  <pre id="output" class="preview"></pre>
 </div>
 
 <script>
 
-let news = [];
+let database = {
+  news: [],
+  songs: [],
+  lyrics: []
+};
 
-function updatePreview() {
-  const t = document.getElementById("title").value;
-  const d = document.getElementById("date").value;
-  const i = document.getElementById("image").value;
-  const x = document.getElementById("text").value;
+function switchForm() {
+  const type = document.getElementById("type").value;
 
-  document.getElementById("preview").innerHTML = `
-    <h3>${t}</h3>
-    <p>${d}</p>
-    <img src="${i}">
-    <p>${x}</p>
-  `;
+  document.getElementById("image").style.display =
+    (type === "lyrics") ? "none" : "block";
 }
 
-document.querySelectorAll("input, textarea").forEach(el => {
-  el.addEventListener("input", updatePreview);
-});
+function addItem() {
 
-function addNews() {
-  news.push({
+  const type = document.getElementById("type").value;
+
+  let item = {
     title: document.getElementById("title").value,
     date: document.getElementById("date").value,
-    image: document.getElementById("image").value,
     text: document.getElementById("text").value
-  });
+  };
 
-  alert("News hinzugefügt!");
+  if (type !== "lyrics") {
+    item.image = document.getElementById("image").value;
+  }
+
+  database[type].push(item);
+
+  updatePreview();
+}
+
+function updatePreview() {
+  document.getElementById("output").innerText =
+    JSON.stringify(database, null, 2);
 }
 
 function downloadJSON() {
-  const blob = new Blob([JSON.stringify(news, null, 2)], {type: "application/json"});
+
+  const type = document.getElementById("type").value;
+
+  const blob = new Blob(
+    [JSON.stringify(database[type], null, 2)],
+    { type: "application/json" }
+  );
+
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "news.json";
+  a.download = type + ".json";
   a.click();
 }
+
+switchForm();
 
 </script>
 
