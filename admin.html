@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Multi Dashboard v2 | Eselhans</title>
+<title>Multi Dashboard PRO | Eselhans</title>
 
 <style>
 body {
@@ -59,12 +59,17 @@ button {
   font-size: 0.8rem;
   color:#b9b0a6;
 }
+
+.preview {
+  border-left:3px solid #c98b4f;
+  padding-left:10px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>🧠 Multi Dashboard v2</h1>
+<h1>🧠 Dashboard PRO</h1>
 
 <div class="card">
 
@@ -76,18 +81,26 @@ button {
   </select>
 
   <input id="title" placeholder="Titel">
-  <input id="date" placeholder="Datum (YYYY-MM-DD)">
+  <input id="date" placeholder="Datum">
   <input id="image" placeholder="Bild (optional)">
   <textarea id="text" placeholder="Text / Lyrics"></textarea>
 
-  <button onclick="addItem()">➕ Hinzufügen</button>
-  <button onclick="download()">⬇ JSON Export</button>
-
+  <button onclick="addItem()">➕ Add / Update</button>
 </div>
 
 <div class="card">
-  <h2>📦 Einträge</h2>
+  <h2>📦 Liste</h2>
   <div id="list"></div>
+</div>
+
+<div class="card">
+  <h2>👁 Live Preview</h2>
+  <div id="preview" class="preview"></div>
+</div>
+
+<div class="card">
+  <h2>⬇ Export</h2>
+  <button onclick="download()">JSON Download</button>
 </div>
 
 <script>
@@ -97,6 +110,8 @@ let db = {
   songs: [],
   lyrics: []
 };
+
+let editIndex = null;
 
 function getType() {
   return document.getElementById("type").value;
@@ -113,7 +128,12 @@ function addItem() {
     text: text.value
   };
 
-  db[type].push(item);
+  if(editIndex !== null) {
+    db[type][editIndex] = item;
+    editIndex = null;
+  } else {
+    db[type].push(item);
+  }
 
   clearForm();
   render();
@@ -126,10 +146,38 @@ function clearForm() {
   text.value = "";
 }
 
-function deleteItem(index) {
+function editItem(i) {
   const type = getType();
-  db[type].splice(index, 1);
+  const item = db[type][i];
+
+  title.value = item.title;
+  date.value = item.date;
+  image.value = item.image;
+  text.value = item.text;
+
+  editIndex = i;
+  renderPreview(item);
+}
+
+function deleteItem(i) {
+  const type = getType();
+  db[type].splice(i,1);
   render();
+}
+
+function moveUp(i) {
+  const type = getType();
+  if(i === 0) return;
+  [db[type][i-1], db[type][i]] = [db[type][i], db[type][i-1]];
+  render();
+}
+
+function renderPreview(item) {
+  document.getElementById("preview").innerHTML = `
+    <b>${item.title}</b><br>
+    <small>${item.date}</small><br>
+    <p>${item.text}</p>
+  `;
 }
 
 function render() {
@@ -146,11 +194,13 @@ function render() {
 
     div.innerHTML = `
       <b>${item.title}</b><br>
-      <span class="small">${item.date || ""}</span><br>
-      <span class="small">${item.text?.slice(0,80) || ""}</span><br>
+      <span class="small">${item.date}</span><br>
+      <span class="small">${item.text?.slice(0,80)}</span><br>
 
       <div class="row">
-        <button onclick="deleteItem(${i})">🗑 Löschen</button>
+        <button onclick="editItem(${i})">✏ Edit</button>
+        <button onclick="deleteItem(${i})">🗑 Delete</button>
+        <button onclick="moveUp(${i})">⬆ Up</button>
       </div>
     `;
 
@@ -159,7 +209,6 @@ function render() {
 }
 
 function download() {
-
   const type = getType();
 
   const blob = new Blob(
