@@ -77,12 +77,17 @@
 
     <!-- SCRIPT -->
     <script>
-     async function loadNews() {
+    async function loadNews() {
 
   const news = await loadJSON("news.json", "news");
 
   const container = document.getElementById("news-container");
   container.innerHTML = "";
+
+  if (!news.length) {
+    container.innerHTML = "<p>Keine News vorhanden</p>";
+    return;
+  }
 
   news
     .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -94,14 +99,15 @@
 
       el.innerHTML = `
         <div>
-          <img src="${n.image}" onerror="this.src='bilder/cover-platzhalter.png'">
+          <img src="${n.image || 'bilder/cover-platzhalter.png'}"
+               onerror="this.src='bilder/cover-platzhalter.png'">
         </div>
 
         <div>
           <span class="news-label">NEWS</span>
-          <h3>${n.title}</h3>
-          <p>${n.date}</p>
-          <p>${n.text}</p>
+          <h3>${n.title || ""}</h3>
+          <p>${n.date || ""}</p>
+          <p>${n.text || ""}</p>
         </div>
 
         <div>
@@ -112,8 +118,6 @@
       container.appendChild(el);
     });
 }
-
-        });
     </script>
 
   </main>
