@@ -2,12 +2,15 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V9 - Clean CMS</title>
+<title>Admin V9 - Stable Fix</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
-body { padding:20px; font-family:Arial; }
+body {
+  padding: 20px;
+  font-family: Arial;
+}
 
 .bar {
   display:flex;
@@ -45,25 +48,19 @@ button {
   border:1px solid var(--border);
   cursor:pointer;
 }
-
-.small {
-  font-size:12px;
-  opacity:0.7;
-}
 </style>
 
 </head>
 
 <body>
 
-<h1>🎛 Admin V9 - Clean CMS</h1>
+<h1>🎛 Admin V9 Stable Fix</h1>
 
 <div class="bar">
-  <button onclick="filter('all')">All</button>
-  <button onclick="filter('song')">Songs</button>
-  <button onclick="filter('news')">News</button>
+  <button onclick="mode='songs'; render()">🎵 Songs</button>
+  <button onclick="mode='news'; render()">📰 News</button>
 
-  <button onclick="save()">💾 Save Local</button>
+  <button onclick="saveLocal()">💾 Save Local</button>
   <button onclick="exportJSON()">⬇ Export</button>
 </div>
 
@@ -80,15 +77,13 @@ button {
 <h2>✏ Editor</h2>
 
 <input id="title" placeholder="Title">
-<input id="type" placeholder="Type (song/news)">
-<input id="date" placeholder="Date">
-<input id="image" placeholder="Image URL">
-<textarea id="text" placeholder="Text"></textarea>
+<input id="album" placeholder="Album / Date">
+<input id="extra1" placeholder="Genre / Extra">
+<input id="extra2" placeholder="YouTube / Extra">
+<textarea id="text" placeholder="Lyrics / Text"></textarea>
 
-<input id="meta_album" placeholder="Album (optional)">
-<input id="meta_genre" placeholder="Genre (optional)">
-
-<button onclick="saveItem()">Save Item</button>
+<button onclick="saveItem()">Save</button>
+<button onclick="deleteItem()">Delete</button>
 <button onclick="clearForm()">Clear</button>
 
 </div>
@@ -97,28 +92,26 @@ button {
 
 <script>
 
-let data = [];
-let currentId = null;
-let activeFilter = "all";
+let mode = "songs";
+let songs = [];
+let news = [];
+let currentEdit = null;
 
-// LOAD
-fetch("content.json")
-  .then(r => r.json())
-  .then(d => {
-    data = d.items || [];
-    render();
-  });
+// LOAD (SAFE)
+Promise.all([
+  fetch("songs.json").then(r => r.json()),
+  fetch("news.json").then(r => r.json())
+]).then(([s, n]) => {
 
-// FILTER
-function filter(type) {
-  activeFilter = type;
+  songs = s.songs || [];
+  news = n.news || [];
+
   render();
-}
+});
 
-// GET FILTERED DATA
-function getFiltered() {
-  if(activeFilter === "all") return data;
-  return data.filter(x => x.type === activeFilter);
+// GET DATA
+function getData() {
+  return mode === "songs" ? songs : news;
 }
 
 // RENDER
@@ -127,64 +120,80 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  getFiltered().forEach(item => {
+  const data = getData();
+
+  data.forEach(item => {
 
     const div = document.createElement("div");
     div.className = "item";
 
     div.innerHTML = `
       <b>${item.title}</b><br>
-      <span class="small">${item.type} • ${item.date || ""}</span>
+      <small>${item.album || item.date || ""}</small>
     `;
 
-    div.onclick = () => load(item.id);
+    div.onclick = () => loadItem(item.id);
 
     list.appendChild(div);
   });
-
-  saveLocal();
 }
 
-// LOAD ITEM INTO EDITOR
-function load(id) {
+// LOAD ITEM
+function loadItem(id) {
 
+  const data = getData();
   const item = data.find(x => x.id === id);
+
   if(!item) return;
 
-  currentId = id;
+  currentEdit = id;
 
   title.value = item.title || "";
-  type.value = item.type || "";
-  date.value = item.date || "";
-  image.value = item.image || "";
-  text.value = item.text || "";
-
-  meta_album.value = item.meta?.album || "";
-  meta_genre.value = item.meta?.genre || "";
+  album.value = item.album || item.date || "";
+  extra1.value = item.genre || item.extra1 || "";
+  extra2.value = item.youtube || item.extra2 || "";
+  text.value = item.lyrics || item.text || "";
 }
 
-// SAVE ITEM
+// SAVE (SAFE UPDATE)
 function saveItem() {
 
-  const item = {
-    id: currentId || Date.now().toString(),
-    type: type.value,
+  const data = getData();
+
+  const updated = {
+    id: currentEdit || Date.now().toString(),
     title: title.value,
-    date: date.value,
-    image: image.value,
-    text: text.value,
-    meta: {
-      album: meta_album.value,
-      genre: meta_genre.value
-    }
+    album: album.value,
+    genre: extra1.value,
+    youtube: extra2.value,
+    lyrics: text.value
   };
 
-  const index = data.findIndex(x => x.id === item.id);
+  const index = data.findIndex(x => x.id === updated.id);
 
-  if(index >= 0) data[index] = item;
-  else data.push(item);
+  if(index >= 0) {
+    data[index] = updated;
+  } else {
+    data.push(updated);
+  }
 
-  currentId = null;
+  currentEdit = null;
+  clearForm();
+  render();
+}
+
+// DELETE
+function deleteItem() {
+
+  const data = getData();
+
+  if(!currentEdit) return;
+
+  const index = data.findIndex(x => x.id === currentEdit);
+
+  if(index >= 0) data.splice(index, 1);
+
+  currentEdit = null;
   clearForm();
   render();
 }
@@ -192,35 +201,28 @@ function saveItem() {
 // CLEAR
 function clearForm() {
   title.value = "";
-  type.value = "";
-  date.value = "";
-  image.value = "";
+  album.value = "";
+  extra1.value = "";
+  extra2.value = "";
   text.value = "";
-  meta_album.value = "";
-  meta_genre.value = "";
 }
 
-// SAVE LOCAL
+// SAVE LOCAL BACKUP
 function saveLocal() {
-  localStorage.setItem("v9", JSON.stringify(data));
-}
-
-// SAVE BUTTON
-function save() {
-  saveLocal();
-  alert("Saved locally");
+  localStorage.setItem("cms_safe", JSON.stringify({ songs, news }));
 }
 
 // EXPORT
 function exportJSON() {
+
   const blob = new Blob(
-    [JSON.stringify({ items: data }, null, 2)],
+    [JSON.stringify({ songs, news }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "content.json";
+  a.download = "backup.json";
   a.click();
 }
 
