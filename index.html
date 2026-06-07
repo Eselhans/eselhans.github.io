@@ -134,8 +134,42 @@ async function loadJSON(file, key) {
     return [];
   }
 }
+  async function loadIndexNews() {
 
-loadNews();
+  const news = await loadJSON("news.json", "news");
+
+  const container = document.getElementById("news-container");
+  container.innerHTML = "";
+
+  if (!news.length) return;
+
+  news
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3)
+    .forEach(n => {
+
+      const el = document.createElement("div");
+      el.className = "news-box";
+
+      el.innerHTML = `
+        <img src="${n.image || 'bilder/cover-platzhalter.png'}"
+             onerror="this.src='bilder/cover-platzhalter.png'">
+
+        <div>
+          <h3>${n.title || ""}</h3>
+          <p>${n.date || ""}</p>
+          <p>${n.text || ""}</p>
+        </div>
+
+        <a href="news.html">Mehr</a>
+      `;
+
+      container.appendChild(el);
+    });
+}
+
+loadIndexNews();
+
 </script>
 
    <footer>
