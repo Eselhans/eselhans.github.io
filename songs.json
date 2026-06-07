@@ -1165,7 +1165,7 @@
       "cover": "bilder/cover-platzhalter.png",
       "lyrics": ""
     },
-    {
+       {
       "id": "zwei-seiten",
       "title": "Zwei Seiten",
       "album": "",
@@ -1175,3 +1175,6 @@
       "youtube": "https://youtu.be/gl7OWruEZEc",
       "cover": "bilder/zwei-seiten.jpg",
       "lyrics": ""
+    }
+  ]
+}
