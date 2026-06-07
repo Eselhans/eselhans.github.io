@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V8 - CLEAN FIX</title>
+<title>Admin V9 - Clean CMS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -45,67 +45,80 @@ button {
   border:1px solid var(--border);
   cursor:pointer;
 }
+
+.small {
+  font-size:12px;
+  opacity:0.7;
+}
 </style>
 
 </head>
 
 <body>
 
-<h1>🎛 Admin V8 FIXED</h1>
+<h1>🎛 Admin V9 - Clean CMS</h1>
 
 <div class="bar">
-  <button onclick="mode='songs'; render()">🎵 Songs</button>
-  <button onclick="mode='news'; render()">📰 News</button>
+  <button onclick="filter('all')">All</button>
+  <button onclick="filter('song')">Songs</button>
+  <button onclick="filter('news')">News</button>
 
-  <button onclick="saveLocal()">💾 Save Local</button>
-  <button onclick="exportAll()">⬇ Export JSON</button>
-  <button onclick="importFile()">⬆ Import</button>
+  <button onclick="save()">💾 Save Local</button>
+  <button onclick="exportJSON()">⬇ Export</button>
 </div>
 
 <div class="container">
 
+<!-- LIST -->
 <div class="card">
 <h2>📦 Content</h2>
 <div id="list"></div>
 </div>
 
+<!-- EDITOR -->
 <div class="card">
 <h2>✏ Editor</h2>
 
 <input id="title" placeholder="Title">
-<input id="album" placeholder="Album / Date">
-<input id="extra1" placeholder="Extra 1">
-<input id="extra2" placeholder="Extra 2">
+<input id="type" placeholder="Type (song/news)">
+<input id="date" placeholder="Date">
+<input id="image" placeholder="Image URL">
 <textarea id="text" placeholder="Text"></textarea>
 
-<button onclick="saveItem()">Save</button>
-<button onclick="deleteItem()">Delete</button>
-</div>
+<input id="meta_album" placeholder="Album (optional)">
+<input id="meta_genre" placeholder="Genre (optional)">
+
+<button onclick="saveItem()">Save Item</button>
+<button onclick="clearForm()">Clear</button>
 
 </div>
 
-<input type="file" id="fileInput" style="display:none">
+</div>
 
 <script>
 
-let mode = "songs";
-let songs = [];
-let news = [];
-let currentEdit = null;
+let data = [];
+let currentId = null;
+let activeFilter = "all";
 
 // LOAD
-Promise.all([
-  fetch("songs.json").then(r => r.json()),
-  fetch("news.json").then(r => r.json())
-]).then(([s,n]) => {
-  songs = s.songs || [];
-  news = n.news || [];
-  render();
-});
+fetch("content.json")
+  .then(r => r.json())
+  .then(d => {
+    data = d.items || [];
+    render();
+  });
 
-// GET DATA
-function getData() {
-  return mode === "songs" ? songs : news;
+// FILTER
+function filter(type) {
+  activeFilter = type;
+  render();
+}
+
+// GET FILTERED DATA
+function getFiltered() {
+  if(activeFilter === "all") return data;
+  return data.filter(x => x.type === activeFilter);
 }
 
 // RENDER
@@ -114,158 +127,102 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  getData().forEach(item => {
+  getFiltered().forEach(item => {
 
     const div = document.createElement("div");
     div.className = "item";
 
     div.innerHTML = `
       <b>${item.title}</b><br>
-      <small>${item.album || item.date || ""}</small>
+      <span class="small">${item.type} • ${item.date || ""}</span>
     `;
 
-    div.onclick = () => loadItem(item.id);
+    div.onclick = () => load(item.id);
 
     list.appendChild(div);
   });
+
+  saveLocal();
 }
 
-// LOAD INTO EDITOR
-function loadItem(id) {
+// LOAD ITEM INTO EDITOR
+function load(id) {
 
-  const arr = getData();
-  const item = arr.find(x => x.id === id);
-
+  const item = data.find(x => x.id === id);
   if(!item) return;
 
-  currentEdit = id;
+  currentId = id;
 
   title.value = item.title || "";
-  album.value = item.album || item.date || "";
-  extra1.value = item.extra1 || item.genre || "";
-  extra2.value = item.extra2 || item.youtube || "";
-  text.value = item.text || item.lyrics || "";
+  type.value = item.type || "";
+  date.value = item.date || "";
+  image.value = item.image || "";
+  text.value = item.text || "";
+
+  meta_album.value = item.meta?.album || "";
+  meta_genre.value = item.meta?.genre || "";
 }
 
-// SAVE
+// SAVE ITEM
 function saveItem() {
 
-  const arr = getData();
-
-  const newItem = {
-    id: currentEdit || Date.now().toString(),
+  const item = {
+    id: currentId || Date.now().toString(),
+    type: type.value,
     title: title.value,
-    album: album.value,
-    extra1: extra1.value,
-    extra2: extra2.value,
-    text: text.value
+    date: date.value,
+    image: image.value,
+    text: text.value,
+    meta: {
+      album: meta_album.value,
+      genre: meta_genre.value
+    }
   };
 
-  const index = arr.findIndex(x => x.id === newItem.id);
+  const index = data.findIndex(x => x.id === item.id);
 
-  if(index >= 0) {
-    arr[index] = newItem;
-  } else {
-    arr.push(newItem);
-  }
+  if(index >= 0) data[index] = item;
+  else data.push(item);
 
-  currentEdit = null;
-  clear();
-  render();
-}
-
-// DELETE
-function deleteItem() {
-
-  const arr = getData();
-
-  if(!currentEdit) return;
-
-  const index = arr.findIndex(x => x.id === currentEdit);
-
-  if(index >= 0) arr.splice(index, 1);
-
-  currentEdit = null;
-  clear();
+  currentId = null;
+  clearForm();
   render();
 }
 
 // CLEAR
-function clear() {
+function clearForm() {
   title.value = "";
-  album.value = "";
-  extra1.value = "";
-  extra2.value = "";
+  type.value = "";
+  date.value = "";
+  image.value = "";
   text.value = "";
+  meta_album.value = "";
+  meta_genre.value = "";
 }
 
 // SAVE LOCAL
 function saveLocal() {
-  localStorage.setItem("cms", JSON.stringify({ songs, news }));
+  localStorage.setItem("v9", JSON.stringify(data));
+}
+
+// SAVE BUTTON
+function save() {
+  saveLocal();
+  alert("Saved locally");
 }
 
 // EXPORT
-function exportAll() {
+function exportJSON() {
   const blob = new Blob(
-    [JSON.stringify({ songs, news }, null, 2)],
+    [JSON.stringify({ items: data }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "backup.json";
+  a.download = "content.json";
   a.click();
 }
-
-// 🚀 GITHUB PUSH (CORE)
-async function pushToGitHub() {
-
-  const token = "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";
-  const repo = "eselhans/eselhans.github.io";
-
-  const files = [
-    { path: "songs.json", content: songs },
-    { path: "news.json", content: news }
-  ];
-
-  for(const file of files) {
-
-    await fetch(`https://api.github.com/repos/${repo}/contents/${file.path}`, {
-      method: "PUT",
-      headers: {
-        "Authorization": `token ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: "CMS Update",
-        content: btoa(JSON.stringify(file.content, null, 2)),
-        sha: await getSHA(repo, file.path, token)
-      })
-    });
-
-  }
-
-  alert("🚀 Push complete");
-}
-
-// IMPORT
-function importFile() {
-  document.getElementById("fileInput").click();
-}
-
-document.getElementById("fileInput").addEventListener("change", e => {
-
-  const reader = new FileReader();
-
-  reader.onload = ev => {
-    const data = JSON.parse(ev.target.result);
-    songs = data.songs || [];
-    news = data.news || [];
-    render();
-  };
-
-  reader.readAsText(e.target.files[0]);
-});
 
 </script>
 
