@@ -1,15 +1,6 @@
 {
   "news": [
     {
-      "id": "1780846617017",
-      "title": "Es geht weiter",
-      "album": "07.06.2026",
-      "genre": "",
-      "youtube": "",
-      "image": "bilder/cover-platzhalter.png",
-      "lyrics": "Ich arbeite fleißig an der Seite und bald erscheind der neue SOng von mir !!! "
-    },
-    {
       "id": "1780847186386",
       "title": "Out Now!",
       "date": "29.05.2026",
@@ -26,6 +17,15 @@
       "extra2": "",
       "image": "bilder/morgendaemmerung.jpg",
       "text": "Bald erscheind mein neuster Song Morgendämmerung. Ein Song aus den Tiefen der Schottischen Highlands mit Herz, Gefühl und Dudelsack 👍"
+    },
+    {
+      "id": "1780851082959",
+      "title": "Es Geht weiter",
+      "date": "07.06.2026",
+      "extra": "",
+      "extra2": "",
+      "image": "bilder/ich_arbeite.jpg",
+      "text": "Ich bin Fleiß am Webseite Umbauen und Bauen, Texte Einfügen und alles Fein machen 😊👍 "
     }
   ]
 }
