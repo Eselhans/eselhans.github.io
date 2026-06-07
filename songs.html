@@ -145,7 +145,7 @@ fetch("songs.json")
   .then(res => res.json())
   .then(data => {
 
-    allSongs = data.songs;
+    allSongs = Array.isArray(data) ? data : data.songs || [];
     render(allSongs);
 
     document.getElementById("search").addEventListener("input", (e) => {
