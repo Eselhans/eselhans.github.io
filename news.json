@@ -1,8 +1,4 @@
 [
-  {
-    "title": "Test News!",
-    "date": "06.06.2026",
-    "image": "bilder/cover-platzhalter.png",
-    "text": "Das ist ein Test um zu schauen ob es geht ;)"
-  }
+{"title":"Morgendämmerung","date":"2026-06-05","text":"Neuer Song in Arbeit","cover":""},
+{"title":"Zwei Seiten","date":"2026-06-01","text":"Release läuft","cover":""}
 ]
