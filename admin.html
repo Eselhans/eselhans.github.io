@@ -93,7 +93,8 @@ input, textarea {
   <button onclick="mode='news'; render()">📰 News</button>
 
   <button onclick="saveLocal()">💾 Save</button>
-  <button onclick="exportJSON()">⬇ Export</button>
+  <button onclick="exportSongs()">⬇ Songs Export</button>
+  <button onclick="exportNews()">⬇ News Export</button>
 </div>
 
 <div class="container">
@@ -264,15 +265,27 @@ function saveLocal() {
 }
 
 // EXPORT
-function exportJSON() {
+function exportSongs() {
   const blob = new Blob(
-    [JSON.stringify({ songs, news }, null, 2)],
+    [JSON.stringify({ songs }, null, 2)],
     { type: "application/json" }
   );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "backup.json";
+  a.download = "songs.json";
+  a.click();
+}
+
+function exportNews() {
+  const blob = new Blob(
+    [JSON.stringify({ news }, null, 2)],
+    { type: "application/json" }
+  );
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "news.json";
   a.click();
 }
 
