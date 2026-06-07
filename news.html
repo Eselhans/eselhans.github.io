@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* kleine Ergänzung nur für News Layout */
     .news-list {
       display: grid;
       gap: 18px;
@@ -70,56 +69,74 @@
       </p>
     </header>
 
-    <!-- NEWS CONTAINER -->
+    <!-- NEWS -->
     <section class="section-card">
       <div id="news-container" class="news-list"></div>
     </section>
 
     <!-- SCRIPT -->
     <script>
-    async function loadNews() {
+      // 🔧 SAFE LOADER (WICHTIG)
+      async function loadJSON(file, key) {
+        try {
+          const res = await fetch(file);
+          if (!res.ok) return [];
 
-  const news = await loadJSON("news.json", "news");
+          const data = await res.json();
 
-  const container = document.getElementById("news-container");
-  container.innerHTML = "";
+          if (Array.isArray(data)) return data;
+          if (data && Array.isArray(data[key])) return data[key];
 
-  if (!news.length) {
-    container.innerHTML = "<p>Keine News vorhanden</p>";
-    return;
-  }
+          return [];
 
-  news
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 3)
-    .forEach(n => {
+        } catch (e) {
+          console.error("Load error:", e);
+          return [];
+        }
+      }
 
-      const el = document.createElement("div");
-      el.className = "news-box";
+      async function loadNews() {
 
-      el.innerHTML = `
-        <div>
-          <img src="${n.image || 'bilder/cover-platzhalter.png'}"
-               onerror="this.src='bilder/cover-platzhalter.png'">
-        </div>
+        const news = await loadJSON("news.json", "news");
 
-        <div>
-          <span class="news-label">NEWS</span>
-          <h3>${n.title || ""}</h3>
-          <p>${n.date || ""}</p>
-          <p>${n.text || ""}</p>
-        </div>
+        const container = document.getElementById("news-container");
+        container.innerHTML = "";
 
-        <div>
-          <a class="button" href="news.html">Open</a>
-        </div>
-      `;
+        if (!news.length) {
+          container.innerHTML = "<p>Keine News vorhanden</p>";
+          return;
+        }
 
-      container.appendChild(el);
-    });
-}
+        news
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .forEach(n => {
+
+            const el = document.createElement("div");
+            el.className = "news-box";
+
+            el.innerHTML = `
+              <div>
+                <img src="${n.image || 'bilder/cover-platzhalter.png'}"
+                     onerror="this.src='bilder/cover-platzhalter.png'">
+              </div>
+
+              <div>
+                <span class="news-label">NEWS</span>
+                <h3>${n.title || ""}</h3>
+                <p>${n.date || ""}</p>
+                <p>${n.text || ""}</p>
+              </div>
+
+              <div>
+                <a class="button" href="news.html">Open</a>
+              </div>
+            `;
+
+            container.appendChild(el);
+          });
+      }
+
       loadNews();
-      
     </script>
 
   </main>
