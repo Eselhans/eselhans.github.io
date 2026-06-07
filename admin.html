@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Admin V9 - Stable Fix</title>
+<title>Admin V9 - Stable Phase 2</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -34,6 +34,36 @@ button {
   gap:16px;
 }
 
+/* ITEM CARDS */
+.item {
+  padding:10px;
+  margin:8px 0;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  cursor:pointer;
+  transition: 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.08);
+}
+
+.item.active {
+  border: 1px solid var(--accent);
+  background: rgba(201,139,79,0.15);
+}
+
+/* PREVIEW IMAGE */
+.preview-img {
+  width:100%;
+  border-radius:12px;
+  margin-top:10px;
+  object-fit:cover;
+  max-height:180px;
+}
+
 .card {
   border:1px solid var(--border);
   padding:14px;
@@ -41,12 +71,14 @@ button {
   background: rgba(255,255,255,0.05);
 }
 
-.item {
+input, textarea {
+  width:100%;
   padding:10px;
-  margin:8px 0;
+  margin:6px 0;
   border-radius:10px;
   border:1px solid var(--border);
-  cursor:pointer;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
 }
 </style>
 
@@ -54,13 +86,13 @@ button {
 
 <body>
 
-<h1>🎛 Admin V9 Stable Fix</h1>
+<h1>🎛 Admin V9 - Phase 2</h1>
 
 <div class="bar">
   <button onclick="mode='songs'; render()">🎵 Songs</button>
   <button onclick="mode='news'; render()">📰 News</button>
 
-  <button onclick="saveLocal()">💾 Save Local</button>
+  <button onclick="saveLocal()">💾 Save</button>
   <button onclick="exportJSON()">⬇ Export</button>
 </div>
 
@@ -80,7 +112,10 @@ button {
 <input id="album" placeholder="Album / Date">
 <input id="extra1" placeholder="Genre / Extra">
 <input id="extra2" placeholder="YouTube / Extra">
+<input id="image" placeholder="Cover / Image URL">
 <textarea id="text" placeholder="Lyrics / Text"></textarea>
+
+<img id="imgPreview" class="preview-img" style="display:none;">
 
 <button onclick="saveItem()">Save</button>
 <button onclick="deleteItem()">Delete</button>
@@ -97,15 +132,13 @@ let songs = [];
 let news = [];
 let currentEdit = null;
 
-// LOAD (SAFE)
+// LOAD
 Promise.all([
   fetch("songs.json").then(r => r.json()),
   fetch("news.json").then(r => r.json())
 ]).then(([s, n]) => {
-
   songs = s.songs || [];
   news = n.news || [];
-
   render();
 });
 
@@ -125,7 +158,7 @@ function render() {
   data.forEach(item => {
 
     const div = document.createElement("div");
-    div.className = "item";
+    div.className = "item" + (item.id === currentEdit ? " active" : "");
 
     div.innerHTML = `
       <b>${item.title}</b><br>
@@ -150,32 +183,48 @@ function loadItem(id) {
 
   title.value = item.title || "";
   album.value = item.album || item.date || "";
-  extra1.value = item.genre || item.extra1 || "";
-  extra2.value = item.youtube || item.extra2 || "";
+  extra1.value = item.genre || "";
+  extra2.value = item.youtube || "";
+  image.value = item.image || "";
   text.value = item.lyrics || item.text || "";
+
+  updatePreview();
+  render();
 }
 
-// SAVE (SAFE UPDATE)
+// IMAGE PREVIEW LIVE
+image.addEventListener("input", updatePreview);
+
+function updatePreview() {
+  const img = document.getElementById("imgPreview");
+
+  if(image.value) {
+    img.src = image.value;
+    img.style.display = "block";
+  } else {
+    img.style.display = "none";
+  }
+}
+
+// SAVE
 function saveItem() {
 
   const data = getData();
 
-  const updated = {
+  const item = {
     id: currentEdit || Date.now().toString(),
     title: title.value,
     album: album.value,
     genre: extra1.value,
     youtube: extra2.value,
+    image: image.value,
     lyrics: text.value
   };
 
-  const index = data.findIndex(x => x.id === updated.id);
+  const index = data.findIndex(x => x.id === item.id);
 
-  if(index >= 0) {
-    data[index] = updated;
-  } else {
-    data.push(updated);
-  }
+  if(index >= 0) data[index] = item;
+  else data.push(item);
 
   currentEdit = null;
   clearForm();
@@ -204,17 +253,18 @@ function clearForm() {
   album.value = "";
   extra1.value = "";
   extra2.value = "";
+  image.value = "";
   text.value = "";
+  document.getElementById("imgPreview").style.display = "none";
 }
 
-// SAVE LOCAL BACKUP
+// SAVE LOCAL
 function saveLocal() {
-  localStorage.setItem("cms_safe", JSON.stringify({ songs, news }));
+  localStorage.setItem("cms_phase2", JSON.stringify({ songs, news }));
 }
 
 // EXPORT
 function exportJSON() {
-
   const blob = new Blob(
     [JSON.stringify({ songs, news }, null, 2)],
     { type: "application/json" }
