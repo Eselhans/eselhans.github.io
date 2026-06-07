@@ -114,7 +114,7 @@ async function loadNews() {
     const container = document.getElementById("news-container");
     container.innerHTML = "";
 
-    data
+    data.news
       .sort((a, b) => new Date(b.date) - new Date(a.date))
       .slice(0, 3)
       .forEach(n => {
