@@ -170,6 +170,7 @@ button.action {
     <h2>✏ Editor</h2>
     <label>Titel:</label><input id="title" placeholder="Titel">
     <label id="labelAlbumOrDate">Album/Datum:</label><input id="albumOrDate">
+    <label>Release (nur Songs):</label><input id="release">
     <label id="labelExtra1">Genre / Extra:</label><input id="extra1">
     <label id="labelExtra2">YouTube / Extra:</label><input id="extra2">
     <label>Cover-/Bild-URL:</label><input id="image" placeholder="URL Cover oder Bild">
@@ -349,6 +350,7 @@ function loadItem(id) {
   extra2.value = item.youtube || item.extra2 || '';
   image.value = item.cover || item.image || '';
   text.value = item.lyrics || item.text || '';
+  release.value = item.release || '';
   updatePreview();
   render();
 }
@@ -377,6 +379,7 @@ function saveItem() {
     item.youtube = extra2.value;
     item.cover = image.value;
     item.lyrics = text.value;
+    item.release = release.value;
   } else {
     item.date = albumOrDate.value;
     item.extra = extra1.value;
