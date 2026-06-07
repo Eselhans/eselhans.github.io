@@ -108,16 +108,12 @@
 <script>
 async function loadNews() {
   try {
-    const res = await fetch("news.json");
-    const data = await res.json();
+   const news = await loadJSON("news.json", "news");
 
-    const container = document.getElementById("news-container");
-    container.innerHTML = "";
-
-    data.news
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 3)
-      .forEach(n => {
+news
+  .sort((a,b) => new Date(b.date) - new Date(a.date))
+  .slice(0,3)
+  .forEach(n => {
 
         const el = document.createElement("div");
         el.className = "news-box";
