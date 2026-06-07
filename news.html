@@ -77,41 +77,41 @@
 
     <!-- SCRIPT -->
     <script>
-      fetch('news.json')
-        .then(res => res.json())
-        .then(data => {
+     async function loadNews() {
 
-          const container = document.getElementById("news-container");
+  const news = await loadJSON("news.json", "news");
 
-          data.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const container = document.getElementById("news-container");
+  container.innerHTML = "";
 
-          data.forEach(n => {
+  news
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3)
+    .forEach(n => {
 
-            const card = document.createElement("div");
-            card.className = "news-box";
+      const el = document.createElement("div");
+      el.className = "news-box";
 
-            card.innerHTML = `
-              <div>
-                <img src="${n.image}" 
-                     onerror="this.src='bilder/cover-platzhalter.png'">
-              </div>
+      el.innerHTML = `
+        <div>
+          <img src="${n.image}" onerror="this.src='bilder/cover-platzhalter.png'">
+        </div>
 
-              <div>
-                <span class="news-label">NEWS</span>
-                <h3>${n.title}</h3>
-                <p style="color: var(--muted); font-size: 0.9rem;">
-                  ${n.date}
-                </p>
-                <p>${n.text}</p>
-              </div>
+        <div>
+          <span class="news-label">NEWS</span>
+          <h3>${n.title}</h3>
+          <p>${n.date}</p>
+          <p>${n.text}</p>
+        </div>
 
-              <div>
-                <a class="button" href="index.html">Zurück</a>
-              </div>
-            `;
+        <div>
+          <a class="button" href="news.html">Open</a>
+        </div>
+      `;
 
-            container.appendChild(card);
-          });
+      container.appendChild(el);
+    });
+}
 
         });
     </script>
