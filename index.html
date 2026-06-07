@@ -106,40 +106,32 @@
 
 <!-- NEWS ENGINE -->
 <script>
-async function loadNews() {
+async function loadJSON(file, key) {
   try {
-   const news = await loadJSON("news.json", "news");
+    const res = await fetch(file);
 
-news
-  .sort((a,b) => new Date(b.date) - new Date(a.date))
-  .slice(0,3)
-  .forEach(n => {
+    if (!res.ok) {
+      console.error("File not found:", file);
+      return [];
+    }
 
-        const el = document.createElement("div");
-        el.className = "news-box";
+    const data = await res.json();
 
-        el.innerHTML = `
-          <div>
-            <img src="${n.image}" onerror="this.src='bilder/cover-platzhalter.png'">
-          </div>
+    // CASE 1: { news: [...] } oder { songs: [...] }
+    if (data && Array.isArray(data[key])) {
+      return data[key];
+    }
 
-          <div>
-            <span class="news-label">NEWS</span>
-            <h3>${n.title}</h3>
-            <p>${n.date}</p>
-            <p>${n.text}</p>
-          </div>
+    // CASE 2: direktes Array [...]
+    if (Array.isArray(data)) {
+      return data;
+    }
 
-          <div>
-            <a class="button" href="news.html">Open</a>
-          </div>
-        `;
-
-        container.appendChild(el);
-      });
+    return [];
 
   } catch (e) {
-    console.error("News loading failed:", e);
+    console.error("JSON Load Error:", file, e);
+    return [];
   }
 }
 
