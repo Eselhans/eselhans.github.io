@@ -142,10 +142,14 @@
 let allSongs = [];
 
 fetch("songs.json")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("songs.json nicht gefunden");
+    return res.json();
+  })
   .then(data => {
 
     allSongs = Array.isArray(data) ? data : data.songs || [];
+
     render(allSongs);
 
     document.getElementById("search").addEventListener("input", (e) => {
@@ -159,6 +163,12 @@ fetch("songs.json")
 
       render(filtered);
     });
+
+  })
+  .catch(err => {
+    console.error("LOAD ERROR:", err);
+    document.getElementById("albums").innerHTML =
+      "<p style='color:red'>songs.json konnte nicht geladen werden</p>";
   });
 
 function render(songs) {
