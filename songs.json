@@ -1019,7 +1019,7 @@
       "release": "2026-04-02",
       "status": "veröffentlicht",
       "youtube": "https://youtu.be/vY09o1d1Dn0?si=dUCtNHVC7SM_dmDd",
-      "cover":"bilder/cover-platzhalter.png",
+      "cover": "bilder/cover-platzhalter.png",
       "lyrics": ""
     },
     {
@@ -1165,13 +1165,11 @@
       "cover": "bilder/cover-platzhalter.png",
       "lyrics": ""
     },
-       {
+    {
       "id": "zwei-seiten",
       "title": "Zwei Seiten",
-      "album": "",
+      "album": "Singles",
       "genre": "Rock Orchestral",
-      "release": "2026-05-29",
-      "status": "veröffentlich",
       "youtube": "https://youtu.be/gl7OWruEZEc",
       "cover": "bilder/zwei_seiten.jpg",
       "lyrics": ""
