@@ -1,4 +1,13 @@
-[
-{"title":"Morgendämmerung","date":"2026-06-05","text":"Bald ist er da!","cover":"bilder/morgendaemmerung.jpg"},
-{"title":"Zwei Seiten","date":"2026-06-01","text":"Out Now!","cover":"bilder/zwei_seiten.jpg"}
-]
+{
+  "news": [
+    {
+      "id": "1780846617017",
+      "title": "Es geht weiter",
+      "album": "07.06.2026",
+      "genre": "",
+      "youtube": "",
+      "image": "bilder/cover-platzhalter.png",
+      "lyrics": "Ich arbeite fleißig an der Seite und bald erscheind der neue SOng von mir !!! "
+    }
+  ]
+}
