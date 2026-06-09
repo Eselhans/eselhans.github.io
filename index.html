@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="bilder/logo-eselhans.png" />
 </head>
 
 <body>
@@ -22,7 +22,7 @@
   <!-- NAV -->
   <nav class="topbar">
     <a class="brand" href="index.html">
-      <img class="brand-logo" src="bilder/logo-eselhans.png" />
+      <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
       Eselhans
     </a>
 
@@ -49,7 +49,7 @@
     </div>
 
     <div class="banner-wrap">
-      <img src="bilder/banner-eselhans.png" />
+      <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" />
     </div>
   </header>
 
@@ -67,8 +67,10 @@
 
     <div class="video-frame">
       <iframe
-        src=https://www.youtube.com/embed/aL8YNxv6Oxc?si=Xz4DZXPv3ZyLWQTc"
-        allowfullscreen>
+        src="https://www.youtube.com/embed/gl7OWruEZEc?si=8rslnDIAmdHYm4Jz"
+        title="Eselhans YouTube-Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen loading="lazy">
       </iframe>
     </div>
   </section>
@@ -106,77 +108,49 @@
 
 <!-- NEWS ENGINE -->
 <script>
-async function loadJSON(file, key) {
+async function loadNews() {
   try {
-    const res = await fetch(file);
-
-    if (!res.ok) {
-      console.error("File not found:", file);
-      return [];
-    }
-
+    const res = await fetch("news.json");
     const data = await res.json();
 
-    // CASE 1: { news: [...] } oder { songs: [...] }
-    if (data && Array.isArray(data[key])) {
-      return data[key];
-    }
+    const container = document.getElementById("news-container");
+    container.innerHTML = "";
 
-    // CASE 2: direktes Array [...]
-    if (Array.isArray(data)) {
-      return data;
-    }
+    data
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3)
+      .forEach(n => {
 
-    return [];
+        const el = document.createElement("div");
+        el.className = "news-box";
+
+        el.innerHTML = `
+          <div>
+            <img src="${n.image}" alt="Newsbild" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
+          </div>
+
+          <div>
+            <span class="news-label">NEWS</span>
+            <h3>${n.title}</h3>
+            <p>${n.date}</p>
+            <p>${n.text}</p>
+          </div>
+
+          <div>
+            <a class="button" href="news.html">Open</a>
+          </div>
+        `;
+
+        container.appendChild(el);
+      });
 
   } catch (e) {
-    console.error("JSON Load Error:", file, e);
-    return [];
+    console.error("News loading failed:", e);
   }
 }
-  async function loadIndexNews() {
 
-  const news = await loadJSON("news.json", "news");
-
-  const container = document.getElementById("news-container");
-  container.innerHTML = "";
-
-  if (!news.length) return;
-
-  news
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 3)
-    .forEach(n => {
-
-      const el = document.createElement("div");
-      el.className = "news-box";
-
-      el.innerHTML = `
-        <img src="${n.image || 'bilder/cover-platzhalter.png'}"
-             onerror="this.src='bilder/cover-platzhalter.png'">
-
-        <div>
-          <h3>${n.title || ""}</h3>
-          <p>${n.date || ""}</p>
-          <p>${n.text || ""}</p>
-        </div>
-
-        <a href="news.html">Mehr</a>
-      `;
-
-      container.appendChild(el);
-    });
-}
-
-loadIndexNews();
-
+loadNews();
 </script>
 
-   <footer>
-      © 2026 Eselhans · Musik, Texte & Gedanken · Songs aus Herz & Staub ·
-      <a href="impressum.html">Impressum</a> ·
-      <a href="datenschutz.html">Datenschutz</a>
-    </footer>
-  </main>
 </body>
 </html>
