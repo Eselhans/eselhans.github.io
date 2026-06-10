@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -322,30 +322,32 @@
     }
 
   </style>
+  <link rel="stylesheet" href="style.css" data-unified-style="true" />
 
 </head>
 <body>
   <main class="page">
 
     <nav class="topbar">
-      <a class="brand" href="index.html">
-        <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
-        Eselhans
-      </a>
-      <div class="nav-links">
-        <a href="musik.html">Musik</a>
-        <a href="songs.html">Songs und Videos</a>
-        <a href="news.html">News</a>
-        <a href="about.html">Über mich</a>
-      </div>
-    </nav>
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
+    Eselhans
+  </a>
+  <div class="nav-links" aria-label="Hauptnavigation">
+    <a href="index.html">Home</a>
+    <a href="songs.html">Songs und Videos</a>
+    <a href="musik.html">Hier Streamen</a>
+    <a href="news.html">News</a>
+    <a href="about.html">&Uuml;ber mich</a>
+  </div>
+</nav>
 
 
     <header class="hero">
       <span class="eyebrow">News & Coming Soon</span>
       <h1>News</h1>
       <p class="lead">
-        Kleine Updates zur Website, neuen Songs, kommenden Veröffentlichungen und allem, was gerade im Eselhans-Kosmos entsteht.
+        Kleine Updates zur Website, neuen Songs, kommenden VerÃ¶ffentlichungen und allem, was gerade im Eselhans-Kosmos entsteht.
       </p>
     </header>
 
@@ -353,14 +355,14 @@
       <h2>Aktuell</h2>
 
       <div class="grid two">
-        <article class="tile" style="padding:18px;">
-          <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; background: rgba(255,255,255,0.05);">
-            <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" style="display:block; width:100%; aspect-ratio:1/1; object-fit:cover;" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" loading="lazy" />
+        <article class="tile">
+          <div class="news-cover">
+            <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" loading="lazy" />
           </div>
           <span>Coming Soon</span>
           <h3>Neuer Song: Zwei Seiten</h3>
           <p>
-            <strong>Zwei Seiten</strong> ist als nächster Song eingeplant. Hier bekommt der Titel schon vorab seinen Platz
+            <strong>Zwei Seiten</strong> ist als nÃ¤chster Song eingeplant. Hier bekommt der Titel schon vorab seinen Platz
             als kleiner Ausblick auf das, was kommt.
           </p>
         </article>
@@ -376,19 +378,21 @@
     </section>
 
     <section class="section-card">
-      <h2>Ideen für später</h2>
+      <h2>Ideen fÃ¼r spÃ¤ter</h2>
       <p class="section-text">
-        Dieser Bereich kann später wie ein kleines Tagebuch für Musikprojekte genutzt werden: neue Tracks, Albumpläne, Release-Hinweise
-        oder kleine Notizen aus dem Entstehungsprozess. Aktuell steht dort als nächster Ausblick schon <strong>Zwei Seiten</strong>.
+        Dieser Bereich kann spÃ¤ter wie ein kleines Tagebuch fÃ¼r Musikprojekte genutzt werden: neue Tracks, AlbumplÃ¤ne, Release-Hinweise
+        oder kleine Notizen aus dem Entstehungsprozess. Aktuell steht dort als nÃ¤chster Ausblick schon <strong>Zwei Seiten</strong>.
       </p>
     </section>
 
 
     <footer>
-      © 2026 Eselhans · Musik, Texte & Gedanken · Songs aus Herz & Staub ·
-      <a href="impressum.html">Impressum</a> ·
-      <a href="datenschutz.html">Datenschutz</a>
-    </footer>
+  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
+  <a href="impressum.html">Impressum</a> &middot;
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
   </main>
 </body>
 </html>
+
+

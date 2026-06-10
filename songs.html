@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -16,8 +16,6 @@
 <meta name="twitter:title" content="Eselhans | Songs und Videos" />
 <meta name="twitter:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite." />
 <meta name="twitter:image" content="https://eselhans.github.io/bilder/logo-eselhans.png" />
-
-<link rel="stylesheet" href="style.css">
 
 <style>
 .album {
@@ -111,6 +109,7 @@
   display: block;
 }
 </style>
+  <link rel="stylesheet" href="style.css" data-unified-style="true" />
 </head>
 
 <body>
@@ -119,12 +118,12 @@
 
 <nav class="topbar">
   <a class="brand" href="index.html">
-    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo">
+    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
     Eselhans
   </a>
-
-  <div class="nav-links">
+  <div class="nav-links" aria-label="Hauptnavigation">
     <a href="index.html">Home</a>
+    <a href="songs.html">Songs und Videos</a>
     <a href="musik.html">Hier Streamen</a>
     <a href="news.html">News</a>
     <a href="about.html">&Uuml;ber mich</a>
@@ -152,7 +151,7 @@
 <section id="albums"></section>
 
 <footer>
-  &copy; 2026 Eselhans &middot;
+  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
   <a href="impressum.html">Impressum</a> &middot;
   <a href="datenschutz.html">Datenschutz</a>
 </footer>
@@ -230,7 +229,7 @@ function render(songs) {
             <h3 class="song-title">${song.title}</h3>
 
             <div class="song-meta">
-              ${song.genre || "—"} • ${song.release || "—"}
+              ${song.genre || "â€”"} â€¢ ${song.release || "â€”"}
             </div>
 
             <div class="button-row">
@@ -258,3 +257,5 @@ function render(songs) {
 
 </body>
 </html>
+
+
