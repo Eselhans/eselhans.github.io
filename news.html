@@ -354,7 +354,8 @@
     <section class="section-card">
       <h2>Aktuell</h2>
 
-      <div class="grid two">
+      <div id="news-page-container" class="news-list"></div>
+      <div class="grid two" hidden style="display:none">
         <article class="tile">
           <div class="news-cover">
             <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" loading="lazy" />
@@ -392,6 +393,54 @@
   <a href="datenschutz.html">Datenschutz</a>
 </footer>
   </main>
+
+  <script>
+  async function loadNewsPage() {
+    try {
+      const res = await fetch("news.json");
+      if (!res.ok) throw new Error("news.json konnte nicht geladen werden");
+
+      const payload = await res.json();
+      const data = Array.isArray(payload) ? payload : payload.news || [];
+      const parseDate = (value) => {
+        const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+        return match ? new Date(`${match[3]}-${match[2]}-${match[1]}`) : new Date(value);
+      };
+
+      const container = document.getElementById("news-page-container");
+      container.innerHTML = "";
+
+      data
+        .sort((a, b) => parseDate(b.date) - parseDate(a.date))
+        .slice(0, 3)
+        .forEach((n) => {
+          const el = document.createElement("article");
+          el.className = "news-box";
+
+          el.innerHTML = `
+            <div>
+              <img src="${n.image}" alt="News: ${n.title || 'Eselhans'}" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
+            </div>
+
+            <div>
+              <span class="news-label">NEWS</span>
+              <h3>${n.title}</h3>
+              <p>${n.date}</p>
+              <p>${n.text}</p>
+            </div>
+          `;
+
+          container.appendChild(el);
+        });
+    } catch (e) {
+      console.error("News loading failed:", e);
+      document.getElementById("news-page-container").innerHTML =
+        "<p class='section-text'>News konnten gerade nicht geladen werden.</p>";
+    }
+  }
+
+  loadNewsPage();
+  </script>
 </body>
 </html>
 
