@@ -551,6 +551,17 @@ a {
   border-color: rgba(201, 139, 79, 0.55);
 }
 
+a:focus-visible,
+button:focus-visible,
+.button:focus-visible,
+.link-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(201, 139, 79, 0.85);
+  outline-offset: 3px;
+}
+
 .button.primary {
   background: var(--accent);
   color: #171008;

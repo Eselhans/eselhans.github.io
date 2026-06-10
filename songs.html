@@ -234,7 +234,7 @@ function render(songs) {
 
             <div class="button-row">
               ${youtubeButton}
-              <button onclick="this.closest('.song-card').classList.toggle('active')">
+              <button aria-expanded="false" onclick="toggleLyrics(this)">
                 Lyrics
               </button>
             </div>
@@ -252,6 +252,12 @@ function render(songs) {
     albumDiv.innerHTML = html;
     container.appendChild(albumDiv);
   });
+}
+
+function toggleLyrics(button) {
+  const card = button.closest('.song-card');
+  const isOpen = card.classList.toggle('active');
+  button.setAttribute('aria-expanded', String(isOpen));
 }
 </script>
 
