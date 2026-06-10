@@ -6,9 +6,18 @@
 
   <title>Eselhans | KI-Musik aus Ostfriesland</title>
 
-  <meta name="description" content="Eselhans ist ein KI-Musik-Künstler aus Ostfriesland." />
+  <meta name="description" content="Eselhans ist ein KI-Musik-K&uuml;nstler aus Ostfriesland mit emotionalen Songs, Musikvideos, Songtexten und Streaming-Links." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://eselhans.github.io" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta property="og:description" content="Emotionale KI-Musik, Songs, Videos, Songtexte und News von Eselhans." />
+  <meta property="og:url" content="https://eselhans.github.io/" />
+  <meta property="og:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eselhans | KI-Musik aus Ostfriesland" />
+  <meta name="twitter:description" content="Emotionale KI-Musik, Songs, Videos, Songtexte und News von Eselhans." />
+  <meta name="twitter:image" content="https://eselhans.github.io/bilder/banner-eselhans.png" />
 
   <link rel="stylesheet" href="style.css" />
 
@@ -111,13 +120,18 @@
 async function loadNews() {
   try {
     const res = await fetch("news.json");
-    const data = await res.json();
+    const payload = await res.json();
+    const data = Array.isArray(payload) ? payload : payload.news || [];
+    const parseDate = (value) => {
+      const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+      return match ? new Date(`${match[3]}-${match[2]}-${match[1]}`) : new Date(value);
+    };
 
     const container = document.getElementById("news-container");
     container.innerHTML = "";
 
     data
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .sort((a, b) => parseDate(b.date) - parseDate(a.date))
       .slice(0, 3)
       .forEach(n => {
 
@@ -126,7 +140,7 @@ async function loadNews() {
 
         el.innerHTML = `
           <div>
-            <img src="${n.image}" alt="Newsbild" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
+            <img src="${n.image}" alt="News: ${n.title || 'Eselhans'}" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
           </div>
 
           <div>

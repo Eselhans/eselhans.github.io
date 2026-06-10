@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eselhans | Songs</title>
+<title>Eselhans | Songs und Videos</title>
+<meta name="description" content="Songs und Videos von Eselhans: Alben, Singles, Cover, YouTube-Links und Songtexte an einem Ort." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://eselhans.github.io/songs.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Eselhans | Songs und Videos" />
+<meta property="og:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite." />
+<meta property="og:url" content="https://eselhans.github.io/songs.html" />
+<meta property="og:image" content="https://eselhans.github.io/bilder/logo-eselhans.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Eselhans | Songs und Videos" />
+<meta name="twitter:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite." />
+<meta name="twitter:image" content="https://eselhans.github.io/bilder/logo-eselhans.png" />
 
 <link rel="stylesheet" href="style.css">
 
@@ -52,6 +64,8 @@
 .song-title {
   font-size: 1.1rem;
   font-weight: bold;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .song-meta {
@@ -132,7 +146,7 @@
 </div>
   <span class="eyebrow">Music System</span>
   <h1>Songs</h1>
-  <p class="lead">Alles auf einem Blick und nach Alben & Singles sortiert.</p>
+  <p class="lead">Alles auf einen Blick und nach Alben & Singles sortiert.</p>
 </header>
 
 <section id="albums"></section>
@@ -197,26 +211,30 @@ function render(songs) {
     const albumDiv = document.createElement("div");
     albumDiv.className = "album";
 
-    let html = `<div class="album-title">${albumName}</div>`;
+    let html = `<h2 class="album-title">${albumName}</h2>`;
     html += `<div class="song-grid">`;
 
     grouped[albumName].forEach(song => {
 
+      const youtubeButton = song.youtube
+        ? `<a href="${song.youtube}" target="_blank" rel="noopener">YouTube</a>`
+        : "";
+
       html += `
         <div class="song-card">
 
-          <img src="${song.cover || 'bilder/cover-platzhalter.png'}" alt="Cover: ${song.title || 'Eselhans Song'}" loading="lazy">
+          <img src="${song.cover || 'bilder/cover-platzhalter.png'}" alt="Cover: ${song.title || 'Eselhans Song'} von Eselhans" loading="lazy">
 
           <div class="song-content">
 
-            <div class="song-title">${song.title}</div>
+            <h3 class="song-title">${song.title}</h3>
 
             <div class="song-meta">
               ${song.genre || "—"} • ${song.release || "—"}
             </div>
 
             <div class="button-row">
-              <a href="${song.youtube}" target="_blank" rel="noopener">YouTube</a>
+              ${youtubeButton}
               <button onclick="this.closest('.song-card').classList.toggle('active')">
                 Lyrics
               </button>
