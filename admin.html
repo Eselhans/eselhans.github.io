@@ -1,446 +1,921 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin V9 - UX Upgrade</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eselhans Admin</title>
 <style>
 :root {
+  --bg: #09090d;
+  --panel: rgba(18, 18, 25, 0.88);
+  --panel-soft: rgba(255, 255, 255, 0.055);
+  --panel-hover: rgba(255, 255, 255, 0.085);
+  --border: rgba(255, 255, 255, 0.13);
+  --text: #f4f1ea;
+  --muted: #b9b0a6;
   --accent: #c98b4f;
-  --accent-soft: rgba(201,139,79,0.2);
-  --border: rgba(255,255,255,0.2);
-  --text: #ddd;
-  --muted: #aaa;
+  --accent-soft: rgba(201, 139, 79, 0.18);
+  --danger: #e06b6b;
+  --ok: #7acb8b;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background: #222;
-  color: #ddd;
-}
-.bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-.bar button {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--accent-soft);
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
-  cursor: pointer;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(201, 139, 79, 0.12), transparent 30%),
+    linear-gradient(rgba(7, 7, 10, 0.92), rgba(7, 7, 10, 0.98)),
+    #09090d;
+  line-height: 1.5;
 }
-.bar button:hover {
-  background: var(--accent);
+
+a {
+  color: inherit;
 }
-.mode-label {
-  margin-left: 20px;
-  padding: 6px;
-  border-radius: 8px;
-  background: var(--accent-soft);
-  color: var(--accent);
+
+.app {
+  width: min(1240px, 94%);
+  margin: 0 auto;
+  padding: 24px 0 48px;
 }
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-@media (max-width: 600px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-}
-.card {
+
+.topbar,
+.panel,
+.item,
+.preview {
   border: 1px solid var(--border);
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  background: var(--panel);
 }
-.card h2 {
-  margin-top: 0;
-}
-.item {
+
+.topbar {
   display: flex;
   align-items: center;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.02);
-  cursor: pointer;
-  transition: 0.2s;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 18px;
 }
-.item:hover {
-  background: var(--accent-soft);
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.item:focus, .item.active {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  background: rgba(201,139,79,0.1);
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.15;
 }
-.item img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-right: 10px;
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
 }
-.item-info {
-  flex: 1;
-}
-.item-title {
-  font-weight: bold;
-}
-.item-meta {
-  font-size: 0.8rem;
+
+.muted {
   color: var(--muted);
 }
-label {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.9rem;
+
+.tabs,
+.actions,
+.row,
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 8px;
+
+button,
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 13px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
-  color: var(--text);
-}
-textarea {
-  height: 100px;
-  resize: vertical;
-}
-button.action {
-  margin-top: 10px;
-}
-#undoSnackbar {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #ddd;
-  padding: 10px 16px;
   border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+button:hover,
+.file-label:hover {
+  background: var(--accent-soft);
+  border-color: rgba(201, 139, 79, 0.6);
+}
+
+button.primary {
+  background: var(--accent);
+  color: #171008;
+}
+
+button.danger {
+  border-color: rgba(224, 107, 107, 0.5);
+  color: #ffe5e5;
+}
+
+button.active {
+  background: var(--accent-soft);
+  border-color: rgba(201, 139, 79, 0.65);
+}
+
+input[type="file"] {
   display: none;
 }
-#undoSnackbar button {
-  background: none;
-  border: none;
+
+.layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.panel {
+  padding: 16px;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stats {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+  max-height: 68vh;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.item {
+  width: 100%;
+  display: block;
+  padding: 11px;
+  text-align: left;
+  background: var(--panel-soft);
+}
+
+.item:hover,
+.item.selected {
+  background: var(--panel-hover);
+  border-color: rgba(201, 139, 79, 0.55);
+}
+
+.item strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(201, 139, 79, 0.72);
+  box-shadow: 0 0 0 3px rgba(201, 139, 79, 0.16);
+}
+
+.preview {
+  overflow: hidden;
+  background: var(--panel-soft);
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.preview-body {
+  padding: 14px;
+}
+
+.preview-label {
   color: var(--accent);
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  margin-left: 8px;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.notice {
+  margin-top: 12px;
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.notice.ok {
+  color: var(--ok);
+  border-color: rgba(122, 203, 139, 0.35);
+}
+
+.notice.error {
+  color: #ffdede;
+  border-color: rgba(224, 107, 107, 0.5);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .layout,
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .list {
+    max-height: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs button,
+  .actions button,
+  .file-label {
+    width: 100%;
+  }
 }
 </style>
 </head>
 <body>
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>Eselhans Admin</h1>
+      <div class="muted">JSON laden, bearbeiten, pr&uuml;fen und wieder downloaden.</div>
+    </div>
+    <div class="tabs" aria-label="Bereich ausw&auml;hlen">
+      <button id="tab-news" class="active" type="button" onclick="setMode('news')">News</button>
+      <button id="tab-songs" type="button" onclick="setMode('songs')">Songs</button>
+    </div>
+  </header>
 
-<h1>🎛 Admin V9 – UX Upgrade</h1>
-<div class="bar">
-  <!-- Add-Buttons -->
-  <button onclick="addNew('songs')">+ Song hinzufügen</button>
-  <button onclick="addNew('news')">+ News hinzufügen</button>
-  <!-- Modus-Umschaltung -->
-  <button onclick="mode='songs'; render()">🎵 Songs</button>
-  <button onclick="mode='news'; render()">📰 News</button>
-  <span class="mode-label" id="modeLabel"></span>
-  <!-- Export/Import -->
-  <button onclick="saveLocal()">💾 Save</button>
-  <button onclick="exportSongs()">⬇ Songs Export</button>
-  <button onclick="exportNews()">⬇ News Export</button>
-  <button onclick="importSongs()">⬆ Songs Import</button>
-  <button onclick="importNews()">⬆ News Import</button>
-</div>
+  <section class="panel">
+    <div class="section-head">
+      <div>
+        <h2>Dateien</h2>
+        <div class="stats" id="file-status">Noch keine JSON-Datei geladen.</div>
+      </div>
+      <div class="actions">
+        <label class="file-label" for="news-file">news.json laden</label>
+        <input id="news-file" type="file" accept=".json,application/json" onchange="importJson(event, 'news')" />
+        <label class="file-label" for="songs-file">songs.json laden</label>
+        <input id="songs-file" type="file" accept=".json,application/json" onchange="importJson(event, 'songs')" />
+        <button type="button" onclick="loadFromServer()">Vom Ordner laden</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" onclick="downloadBackup()">Backup downloaden</button>
+      <button class="primary" type="button" onclick="downloadCurrent()">Aktuelle JSON downloaden</button>
+    </div>
+    <div class="notice">
+      Tipp: Wenn du diese Datei &uuml;ber einen kleinen lokalen Server oder GitHub Pages &ouml;ffnest, kann "Vom Ordner laden" die vorhandenen JSON-Dateien direkt laden. Beim normalen Datei-&Ouml;ffnen nutzt du einfach die Lade-Buttons.
+    </div>
+  </section>
 
-<div class="container">
-  <!-- Inhalts-Liste -->
-  <div class="card">
-    <h2>📦 Inhalte</h2>
-    <div id="list"></div>
+  <div class="layout" style="margin-top:16px;">
+    <aside class="panel">
+      <div class="section-head">
+        <div>
+          <h2 id="list-title">News</h2>
+          <div class="stats" id="list-stats">0 Eintr&auml;ge</div>
+        </div>
+        <button type="button" onclick="newItem()">Neu</button>
+      </div>
+      <input id="filter" placeholder="Suchen..." oninput="renderList()" />
+      <div id="item-list" class="list" style="margin-top:12px;"></div>
+    </aside>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2 id="editor-title">News bearbeiten</h2>
+          <div class="stats" id="editor-status">Neuer Eintrag</div>
+        </div>
+        <div class="actions">
+          <button type="button" onclick="sortCurrent()">Sortieren</button>
+          <button type="button" onclick="duplicateCurrent()">Duplizieren</button>
+          <button class="danger" type="button" onclick="deleteCurrent()">L&ouml;schen</button>
+        </div>
+      </div>
+
+      <div id="news-editor" class="editor-grid">
+        <form class="form-grid" onsubmit="event.preventDefault(); saveCurrent();">
+          <div class="field">
+            <label for="news-title">Titel</label>
+            <input id="news-title" />
+          </div>
+          <div class="field">
+            <label for="news-date">Datum (DD.MM.YYYY)</label>
+            <input id="news-date" placeholder="09.06.2026" />
+          </div>
+          <div class="field full">
+            <label for="news-image">Bildpfad</label>
+            <input id="news-image" placeholder="bilder/morgendaemmerung.jpg" oninput="updatePreview()" />
+          </div>
+          <div class="field full">
+            <label for="news-text">Text</label>
+            <textarea id="news-text"></textarea>
+          </div>
+          <div class="field">
+            <label for="news-extra">Extra</label>
+            <input id="news-extra" />
+          </div>
+          <div class="field">
+            <label for="news-extra2">Extra 2</label>
+            <input id="news-extra2" />
+          </div>
+          <div class="field full">
+            <div class="button-row">
+              <button class="primary" type="submit">News speichern</button>
+              <button type="button" onclick="clearForm()">Formular leeren</button>
+            </div>
+          </div>
+        </form>
+
+        <article class="preview">
+          <img id="news-preview-image" alt="News Vorschau" src="bilder/cover-platzhalter.png" onerror="this.src='bilder/cover-platzhalter.png'" />
+          <div class="preview-body">
+            <div class="preview-label">News Vorschau</div>
+            <h3 id="news-preview-title">Titel</h3>
+            <p class="muted" id="news-preview-date">Datum</p>
+            <p id="news-preview-text">Text</p>
+          </div>
+        </article>
+      </div>
+
+      <div id="songs-editor" class="editor-grid hidden">
+        <form class="form-grid" onsubmit="event.preventDefault(); saveCurrent();">
+          <div class="field">
+            <label for="song-id">ID</label>
+            <input id="song-id" placeholder="mein-song" />
+          </div>
+          <div class="field">
+            <label for="song-title">Titel</label>
+            <input id="song-title" oninput="suggestSongId()" />
+          </div>
+          <div class="field">
+            <label for="song-album">Album</label>
+            <input id="song-album" list="album-list" placeholder="Singles" />
+            <datalist id="album-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="song-genre">Genre</label>
+            <input id="song-genre" list="genre-list" />
+            <datalist id="genre-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="song-release">Release (YYYY-MM-DD)</label>
+            <input id="song-release" placeholder="2026-06-10" />
+          </div>
+          <div class="field">
+            <label for="song-youtube">YouTube-Link</label>
+            <input id="song-youtube" placeholder="https://youtu.be/..." />
+          </div>
+          <div class="field full">
+            <label for="song-cover">Coverpfad</label>
+            <input id="song-cover" placeholder="bilder/mein-song.jpg" oninput="updatePreview()" />
+          </div>
+          <div class="field full">
+            <label for="song-lyrics">Lyrics</label>
+            <textarea id="song-lyrics"></textarea>
+          </div>
+          <div class="field full">
+            <div class="button-row">
+              <button class="primary" type="submit">Song speichern</button>
+              <button type="button" onclick="clearForm()">Formular leeren</button>
+            </div>
+          </div>
+        </form>
+
+        <article class="preview">
+          <img id="song-preview-image" alt="Song Vorschau" src="bilder/cover-platzhalter.png" onerror="this.src='bilder/cover-platzhalter.png'" />
+          <div class="preview-body">
+            <div class="preview-label">Song Vorschau</div>
+            <h3 id="song-preview-title">Titel</h3>
+            <p class="muted" id="song-preview-meta">Album - Genre - Release</p>
+            <p id="song-preview-youtube">YouTube-Link</p>
+          </div>
+        </article>
+      </div>
+
+      <div id="messages"></div>
+    </section>
   </div>
-  <!-- Editor -->
-  <div class="card">
-    <h2>✏ Editor</h2>
-    <label>Titel:</label><input id="title" placeholder="Titel">
-    <label id="labelAlbumOrDate">Album/Datum:</label><input id="albumOrDate">
-    <label>Release (nur Songs):</label><input id="release">
-    <label id="labelExtra1">Genre / Extra:</label><input id="extra1">
-    <label id="labelExtra2">YouTube / Extra:</label><input id="extra2">
-    <label>Cover-/Bild-URL:</label><input id="image" placeholder="URL Cover oder Bild">
-    <img id="imgPreview" style="display:none; margin-top:10px; max-width:100%; max-height:150px; border-radius:8px;">
-    <label>Text/Lyrics:</label><textarea id="text"></textarea>
-    <button class="action" onclick="saveItem()">Save</button>
-    <button class="action" onclick="deleteItem()">Delete</button>
-    <button class="action" onclick="clearForm()">Clear</button>
-  </div>
-</div>
-
-<div id="undoSnackbar">
-  <span id="undoText"></span> 
-  <button onclick="undoDelete()">Undo</button>
-</div>
-
-<input type="file" id="fileInput" style="display:none">
+</main>
 
 <script>
-// Globaler Zustand
-let mode = 'songs';            // aktueller Modus: 'songs' oder 'news'
-let songs = [], news = [];     // Daten-Arrays
-let currentEdit = null;        // ID des aktuell editierten Items
-let lastDeleted = null;        // Letzte Löschung zum Undo
-let undoTimeout = null;        
+const state = {
+  mode: "news",
+  selectedIndex: -1,
+  news: [],
+  songs: []
+};
 
-// Lade initial die JSON-Daten
-Promise.all([
-  fetch('songs.json').then(r => r.ok ? r.json() : {songs: []}),
-  fetch('news.json').then(r => r.ok ? r.json() : {news: []})
-]).then(([s, n]) => {
-  songs = s.songs || [];
-  news = n.news || [];
-  // Wenn Backup im localStorage existiert, überschreiben (optional)
-  const backup = JSON.parse(localStorage.getItem('cms_v9_backup'));
-  if (backup) {
-    songs = backup.songs || songs;
-    news = backup.news || news;
+function setMode(mode) {
+  state.mode = mode;
+  state.selectedIndex = -1;
+  document.getElementById("tab-news").classList.toggle("active", mode === "news");
+  document.getElementById("tab-songs").classList.toggle("active", mode === "songs");
+  document.getElementById("news-editor").classList.toggle("hidden", mode !== "news");
+  document.getElementById("songs-editor").classList.toggle("hidden", mode !== "songs");
+  document.getElementById("list-title").textContent = mode === "news" ? "News" : "Songs";
+  document.getElementById("editor-title").textContent = mode === "news" ? "News bearbeiten" : "Song bearbeiten";
+  clearForm();
+  renderList();
+  renderStatus();
+}
+
+function currentArray() {
+  return state.mode === "news" ? state.news : state.songs;
+}
+
+function showMessage(text, type = "") {
+  const el = document.getElementById("messages");
+  el.innerHTML = `<div class="notice ${type}">${escapeHtml(text)}</div>`;
+}
+
+function renderStatus() {
+  document.getElementById("file-status").textContent =
+    `${state.news.length} News, ${state.songs.length} Songs geladen.`;
+}
+
+function parseNewsDate(value) {
+  const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  return match ? new Date(`${match[3]}-${match[2]}-${match[1]}`) : new Date(0);
+}
+
+function parseSongDate(value) {
+  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return match ? new Date(value) : new Date(0);
+}
+
+function sortCurrent() {
+  if (state.mode === "news") {
+    state.news.sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
+  } else {
+    state.songs.sort((a, b) => {
+      const album = String(a.album || "").localeCompare(String(b.album || ""), "de");
+      return album || parseSongDate(b.release) - parseSongDate(a.release) || String(a.title || "").localeCompare(String(b.title || ""), "de");
+    });
   }
-  render();
+  state.selectedIndex = -1;
+  clearForm();
+  renderList();
+  showMessage("Sortiert.", "ok");
+}
+
+async function loadFromServer() {
+  try {
+    const [newsRes, songsRes] = await Promise.all([fetch("news.json"), fetch("songs.json")]);
+    if (!newsRes.ok || !songsRes.ok) throw new Error("JSON-Dateien konnten nicht geladen werden.");
+    setNewsData(await newsRes.json());
+    setSongsData(await songsRes.json());
+    renderAll();
+    showMessage("news.json und songs.json wurden aus dem Ordner geladen.", "ok");
+  } catch (error) {
+    showMessage("Laden aus dem Ordner nicht moeglich. Nutze die Datei-Ladebuttons.", "error");
+  }
+}
+
+function importJson(event, type) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const payload = JSON.parse(reader.result);
+      if (type === "news") setNewsData(payload);
+      if (type === "songs") setSongsData(payload);
+      renderAll();
+      showMessage(`${file.name} geladen.`, "ok");
+    } catch (error) {
+      showMessage(`${file.name} ist keine gueltige JSON-Datei.`, "error");
+    }
+    event.target.value = "";
+  };
+  reader.readAsText(file, "utf-8");
+}
+
+function setNewsData(payload) {
+  state.news = Array.isArray(payload) ? payload : payload.news || [];
+  state.news = state.news.map((item) => ({
+    id: item.id || String(Date.now()),
+    title: item.title || "",
+    date: item.date || "",
+    extra: item.extra || "",
+    extra2: item.extra2 || "",
+    image: item.image || "",
+    text: item.text || ""
+  }));
+}
+
+function setSongsData(payload) {
+  state.songs = Array.isArray(payload) ? payload : payload.songs || [];
+  state.songs = state.songs.map((item) => ({
+    id: item.id || slugify(item.title || "song"),
+    title: item.title || "",
+    album: item.album || "Singles",
+    genre: item.genre || "",
+    release: item.release || "",
+    youtube: item.youtube || "",
+    cover: item.cover || "",
+    lyrics: item.lyrics || ""
+  }));
+  updateDatalists();
+}
+
+function renderAll() {
+  state.selectedIndex = -1;
+  clearForm();
+  renderList();
+  renderStatus();
+}
+
+function renderList() {
+  const list = document.getElementById("item-list");
+  const stats = document.getElementById("list-stats");
+  const filter = document.getElementById("filter").value.trim().toLowerCase();
+  const items = currentArray();
+  const filtered = items
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => {
+      const haystack = state.mode === "news"
+        ? `${item.title} ${item.date} ${item.text}`
+        : `${item.title} ${item.album} ${item.genre} ${item.release}`;
+      return haystack.toLowerCase().includes(filter);
+    });
+
+  stats.textContent = `${items.length} Eintraege`;
+  list.innerHTML = "";
+
+  filtered.forEach(({ item, index }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `item ${index === state.selectedIndex ? "selected" : ""}`;
+    button.onclick = () => selectItem(index);
+    if (state.mode === "news") {
+      button.innerHTML = `<strong>${escapeHtml(item.title || "Ohne Titel")}</strong><span>${escapeHtml(item.date || "Kein Datum")}</span>`;
+    } else {
+      button.innerHTML = `<strong>${escapeHtml(item.title || "Ohne Titel")}</strong><span>${escapeHtml(item.album || "Singles")} - ${escapeHtml(item.release || "Kein Release")}</span>`;
+    }
+    list.appendChild(button);
+  });
+}
+
+function selectItem(index) {
+  state.selectedIndex = index;
+  const item = currentArray()[index];
+  document.getElementById("editor-status").textContent = `Eintrag ${index + 1} bearbeiten`;
+
+  if (state.mode === "news") {
+    setValue("news-title", item.title);
+    setValue("news-date", item.date);
+    setValue("news-image", item.image);
+    setValue("news-text", item.text);
+    setValue("news-extra", item.extra);
+    setValue("news-extra2", item.extra2);
+  } else {
+    setValue("song-id", item.id);
+    setValue("song-title", item.title);
+    setValue("song-album", item.album);
+    setValue("song-genre", item.genre);
+    setValue("song-release", item.release);
+    setValue("song-youtube", item.youtube);
+    setValue("song-cover", item.cover);
+    setValue("song-lyrics", item.lyrics);
+  }
+  updatePreview();
+  renderList();
+}
+
+function newItem() {
+  state.selectedIndex = -1;
+  clearForm();
+}
+
+function clearForm() {
+  document.getElementById("editor-status").textContent = "Neuer Eintrag";
+  ["news-title", "news-date", "news-image", "news-text", "news-extra", "news-extra2",
+   "song-id", "song-title", "song-album", "song-genre", "song-release", "song-youtube", "song-cover", "song-lyrics"]
+    .forEach((id) => setValue(id, ""));
+  if (state.mode === "news") {
+    setValue("news-date", todayGerman());
+  } else {
+    setValue("song-album", "Singles");
+  }
+  updatePreview();
+  renderList();
+}
+
+function saveCurrent() {
+  const item = state.mode === "news" ? readNewsForm() : readSongForm();
+  const errors = state.mode === "news" ? validateNews(item) : validateSong(item);
+  if (errors.length) {
+    showMessage(errors.join(" "), "error");
+    return;
+  }
+
+  const items = currentArray();
+  if (state.mode === "songs") {
+    const duplicate = items.findIndex((song, index) => song.id === item.id && index !== state.selectedIndex);
+    if (duplicate !== -1) {
+      showMessage("Diese Song-ID gibt es bereits. Bitte eine eindeutige ID nutzen.", "error");
+      return;
+    }
+  }
+
+  if (state.selectedIndex >= 0) {
+    items[state.selectedIndex] = item;
+  } else {
+    items.push(item);
+    state.selectedIndex = items.length - 1;
+  }
+
+  if (state.mode === "songs") updateDatalists();
+  renderList();
+  renderStatus();
+  showMessage("Gespeichert. Download nicht vergessen, bevor du die Seite schliesst.", "ok");
+}
+
+function readNewsForm() {
+  return {
+    id: state.selectedIndex >= 0 ? state.news[state.selectedIndex].id : String(Date.now()),
+    title: value("news-title"),
+    date: value("news-date"),
+    extra: value("news-extra"),
+    extra2: value("news-extra2"),
+    image: value("news-image"),
+    text: value("news-text")
+  };
+}
+
+function readSongForm() {
+  const title = value("song-title");
+  return {
+    id: value("song-id") || slugify(title),
+    title,
+    album: value("song-album") || "Singles",
+    genre: value("song-genre"),
+    release: value("song-release"),
+    youtube: value("song-youtube"),
+    cover: value("song-cover"),
+    lyrics: value("song-lyrics")
+  };
+}
+
+function validateNews(item) {
+  const errors = [];
+  if (!item.title) errors.push("Titel fehlt.");
+  if (!/^\d{2}\.\d{2}\.\d{4}$/.test(item.date)) errors.push("News-Datum bitte als DD.MM.YYYY eintragen.");
+  if (!item.image) errors.push("Bildpfad fehlt.");
+  if (!item.text) errors.push("Text fehlt.");
+  return errors;
+}
+
+function validateSong(item) {
+  const errors = [];
+  if (!item.id) errors.push("ID fehlt.");
+  if (!item.title) errors.push("Titel fehlt.");
+  if (!item.album) errors.push("Album fehlt.");
+  if (item.release && !/^\d{4}-\d{2}-\d{2}$/.test(item.release)) errors.push("Release bitte als YYYY-MM-DD eintragen.");
+  if (!item.cover) errors.push("Coverpfad fehlt.");
+  return errors;
+}
+
+function duplicateCurrent() {
+  if (state.selectedIndex < 0) {
+    showMessage("Bitte zuerst einen Eintrag auswaehlen.", "error");
+    return;
+  }
+  const items = currentArray();
+  const copy = JSON.parse(JSON.stringify(items[state.selectedIndex]));
+  if (state.mode === "news") {
+    copy.id = String(Date.now());
+    copy.title = `${copy.title} Kopie`;
+  } else {
+    copy.id = uniqueSongId(`${copy.id}-kopie`);
+    copy.title = `${copy.title} Kopie`;
+  }
+  items.push(copy);
+  state.selectedIndex = items.length - 1;
+  selectItem(state.selectedIndex);
+  renderStatus();
+  showMessage("Eintrag dupliziert.", "ok");
+}
+
+function deleteCurrent() {
+  if (state.selectedIndex < 0) {
+    showMessage("Bitte zuerst einen Eintrag auswaehlen.", "error");
+    return;
+  }
+  currentArray().splice(state.selectedIndex, 1);
+  state.selectedIndex = -1;
+  clearForm();
+  renderList();
+  renderStatus();
+  showMessage("Eintrag geloescht. Download nicht vergessen.", "ok");
+}
+
+function downloadCurrent() {
+  if (state.mode === "news") {
+    downloadJson("news.json", { news: state.news });
+  } else {
+    downloadJson("songs.json", { songs: state.songs });
+  }
+}
+
+function downloadBackup() {
+  const stamp = new Date().toISOString().slice(0, 10);
+  if (state.mode === "news") {
+    downloadJson(`news-backup-${stamp}.json`, { news: state.news });
+  } else {
+    downloadJson(`songs-backup-${stamp}.json`, { songs: state.songs });
+  }
+}
+
+function downloadJson(filename, payload) {
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function updatePreview() {
+  if (state.mode === "news") {
+    const image = value("news-image") || "bilder/cover-platzhalter.png";
+    document.getElementById("news-preview-image").src = image;
+    document.getElementById("news-preview-title").textContent = value("news-title") || "Titel";
+    document.getElementById("news-preview-date").textContent = value("news-date") || "Datum";
+    document.getElementById("news-preview-text").textContent = value("news-text") || "Text";
+  } else {
+    const image = value("song-cover") || "bilder/cover-platzhalter.png";
+    document.getElementById("song-preview-image").src = image;
+    document.getElementById("song-preview-title").textContent = value("song-title") || "Titel";
+    document.getElementById("song-preview-meta").textContent =
+      `${value("song-album") || "Album"} - ${value("song-genre") || "Genre"} - ${value("song-release") || "Release"}`;
+    document.getElementById("song-preview-youtube").textContent = value("song-youtube") || "Kein YouTube-Link";
+  }
+}
+
+function suggestSongId() {
+  if (value("song-id")) return;
+  setValue("song-id", uniqueSongId(slugify(value("song-title"))));
+}
+
+function updateDatalists() {
+  fillDatalist("album-list", [...new Set(state.songs.map((song) => song.album).filter(Boolean))]);
+  fillDatalist("genre-list", [...new Set(state.songs.map((song) => song.genre).filter(Boolean))]);
+}
+
+function fillDatalist(id, values) {
+  const list = document.getElementById(id);
+  list.innerHTML = values.sort((a, b) => a.localeCompare(b, "de"))
+    .map((entry) => `<option value="${escapeHtml(entry)}"></option>`)
+    .join("");
+}
+
+function uniqueSongId(base) {
+  let id = base || "song";
+  let next = id;
+  let counter = 2;
+  const existing = new Set(state.songs.map((song, index) => index === state.selectedIndex ? null : song.id));
+  while (existing.has(next)) {
+    next = `${id}-${counter}`;
+    counter += 1;
+  }
+  return next;
+}
+
+function slugify(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "song";
+}
+
+function todayGerman() {
+  const d = new Date();
+  return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
+}
+
+function value(id) {
+  return document.getElementById(id).value.trim();
+}
+
+function setValue(id, value) {
+  document.getElementById(id).value = value || "";
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+document.querySelectorAll("input, textarea").forEach((element) => {
+  element.addEventListener("input", updatePreview);
 });
 
-// Speichert Daten im localStorage (als Backup, Daten bestehen aus {songs, news})
-function saveLocal() {
-  localStorage.setItem('cms_v9_backup', JSON.stringify({songs, news}));
-  alert('Daten lokal gespeichert.');
-}
-
-// Export-Funktionen für Dateien
-function exportSongs() {
-  downloadFile({ songs }, 'songs.json');
-}
-function exportNews() {
-  downloadFile({ news }, 'news.json');
-}
-function downloadFile(data, filename) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-}
-
-// Import-Funktionen
-function importSongs() {
-  fileInput.onchange = (e) => {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      try {
-        const data = JSON.parse(ev.target.result);
-        if (Array.isArray(data.songs)) {
-          songs = data.songs;
-          render();
-          alert('Songs importiert.');
-        } else {
-          alert('Ungültige songs.json-Datei.');
-        }
-      } catch {
-        alert('Fehler beim Einlesen der Datei.');
-      }
-    };
-    reader.readAsText(e.target.files[0]);
-  };
-  fileInput.accept = '.json';
-  fileInput.click();
-}
-function importNews() {
-  fileInput.onchange = (e) => {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      try {
-        const data = JSON.parse(ev.target.result);
-        if (Array.isArray(data.news)) {
-          news = data.news;
-          render();
-          alert('News importiert.');
-        } else {
-          alert('Ungültige news.json-Datei.');
-        }
-      } catch {
-        alert('Fehler beim Einlesen der Datei.');
-      }
-    };
-    reader.readAsText(e.target.files[0]);
-  };
-  fileInput.accept = '.json';
-  fileInput.click();
-}
-
-// Wechselt in den „Neu anlegen“-Modus (Formular leeren, neuer Eintrag)
-function addNew(type) {
-  mode = type;
-  currentEdit = null;
-  clearForm();
-  render();
-}
-
-// Aktualisiert Modus-Anzeige und Form-Lables
-function updateModeLabel() {
-  document.getElementById('modeLabel').textContent = mode === 'songs' ? 'Modus: Songs' : 'Modus: News';
-  document.getElementById('labelAlbumOrDate').textContent = mode==='songs' ? 'Album:' : 'Datum:';
-  document.getElementById('labelExtra1').textContent = mode==='songs' ? 'Genre:' : 'Extra:';
-  document.getElementById('labelExtra2').textContent = mode==='songs' ? 'YouTube:' : 'Extra:';
-}
-
-// Rendert die Liste der Inhalte je nach Modus
-function render() {
-  const list = document.getElementById('list');
-  list.innerHTML = '';
-  const data = mode === 'songs' ? songs : news;
-  data.forEach(item => {
-    const div = document.createElement('div');
-    div.setAttribute('role','button');   // Rolle für Screenreader
-    div.className = 'item';
-    div.tabIndex = 0;                    // fokusierbar
-    // kleines Cover-Bild
-    const img = document.createElement('img');
-    img.src = item.cover || item.image || '';
-    img.alt = '';
-    if (!img.src) img.style.display = 'none';
-    div.appendChild(img);
-    // Titel & Metadaten
-    const info = document.createElement('div');
-    info.className = 'item-info';
-    const title = document.createElement('div');
-    title.className = 'item-title';
-    title.textContent = item.title || '(kein Titel)';
-    const meta = document.createElement('div');
-    meta.className = 'item-meta';
-    meta.textContent = item.album || item.date || '';
-    info.appendChild(title);
-    info.appendChild(meta);
-    div.appendChild(info);
-    // Klick- und Tastatur-Event
-    div.onclick = () => loadItem(item.id);
-    div.onkeydown = (e) => { if(e.key === 'Enter') loadItem(item.id); };
-    list.appendChild(div);
-    // Markierung, wenn ausgewählt
-    if (item.id === currentEdit) {
-      div.classList.add('active');
-      div.focus();
-    }
-  });
-  updateModeLabel();
-  saveLocal();  // Automatische Sicherung nach Render
-}
-
-// Läd einen Eintrag in die Formular-Felder
-function loadItem(id) {
-  const arr = mode === 'songs' ? songs : news;
-  const item = arr.find(x => x.id === id);
-  if (!item) return;
-  currentEdit = id;
-  title.value = item.title || '';
-  albumOrDate.value = item.album || item.date || '';
-  extra1.value = item.genre || item.extra || '';
-  extra2.value = item.youtube || item.extra2 || '';
-  image.value = item.cover || item.image || '';
-  text.value = item.lyrics || item.text || '';
-  release.value = item.release || '';
-  updatePreview();
-  render();
-}
-
-// Update der Cover-Vorschau
-image.addEventListener('input', updatePreview);
-function updatePreview() {
-  const img = document.getElementById('imgPreview');
-  if (image.value) {
-    img.src = image.value;
-    img.style.display = 'block';
-  } else {
-    img.style.display = 'none';
-  }
-}
-
-// Speichert oder aktualisiert einen Eintrag
-function saveItem() {
-  const arr = mode === 'songs' ? songs : news;
-  const id = currentEdit || Date.now().toString();
-  const item = { id };
-  item.title = title.value;
-  if (mode === 'songs') {
-    item.album = albumOrDate.value;
-    item.genre = extra1.value;
-    item.youtube = extra2.value;
-    item.cover = image.value;
-    item.lyrics = text.value;
-    item.release = release.value;
-  } else {
-    item.date = albumOrDate.value;
-    item.extra = extra1.value;
-    item.extra2 = extra2.value;
-    item.image = image.value;
-    item.text = text.value;
-  }
-  const idx = arr.findIndex(x => x.id === id);
-  if (idx >= 0) arr[idx] = item;
-  else arr.push(item);
-  currentEdit = null;
-  clearForm();
-  render();
-}
-
-// Löschen mit Bestätigung und Undo-Option
-function deleteItem() {
-  const arr = mode === 'songs' ? songs : news;
-  if (!currentEdit) return;
-  if (!confirm('Wirklich löschen?')) return;
-  const idx = arr.findIndex(x => x.id === currentEdit);
-  if (idx >= 0) {
-    lastDeleted = { item: arr[idx], index: idx, mode };
-    arr.splice(idx, 1);
-    currentEdit = null;
-    clearForm();
-    render();
-    showUndo();
-  }
-}
-function showUndo() {
-  clearTimeout(undoTimeout);
-  const snackbar = document.getElementById('undoSnackbar');
-  document.getElementById('undoText').textContent = (lastDeleted.mode==='songs'?'Song':'News') + ' gelöscht.';
-  snackbar.style.display = 'block';
-  undoTimeout = setTimeout(() => {
-    snackbar.style.display = 'none';
-    lastDeleted = null;
-  }, 5000);
-}
-function undoDelete() {
-  if (!lastDeleted) return;
-  const arr = lastDeleted.mode === 'songs' ? songs : news;
-  arr.splice(lastDeleted.index, 0, lastDeleted.item);
-  render();
-  lastDeleted = null;
-  document.getElementById('undoSnackbar').style.display = 'none';
-}
-
-// Formularfelder leeren
-function clearForm() {
-  title.value = '';
-  albumOrDate.value = '';
-  extra1.value = '';
-  extra2.value = '';
-  image.value = '';
-  text.value = '';
-  release.value = '';
-  document.getElementById('imgPreview').style.display = 'none';
-}
+clearForm();
+renderAll();
 </script>
-
 </body>
 </html>
