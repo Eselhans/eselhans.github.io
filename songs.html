@@ -111,8 +111,9 @@
 
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="news.html">News</a>
     <a href="musik.html">Hier Streamen</a>
+    <a href="news.html">News</a>
+    <a href="about.html">&Uuml;ber mich</a>
   </div>
 </nav>
 
@@ -135,6 +136,12 @@
 </header>
 
 <section id="albums"></section>
+
+<footer>
+  &copy; 2026 Eselhans &middot;
+  <a href="impressum.html">Impressum</a> &middot;
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
 
 </main>
 
@@ -209,7 +216,7 @@ function render(songs) {
             </div>
 
             <div class="button-row">
-              <a href="${song.youtube}" target="_blank">YouTube</a>
+              <a href="${song.youtube}" target="_blank" rel="noopener">YouTube</a>
               <button onclick="this.closest('.song-card').classList.toggle('active')">
                 Lyrics
               </button>
