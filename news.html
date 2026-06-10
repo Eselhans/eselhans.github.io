@@ -412,7 +412,6 @@
 
       data
         .sort((a, b) => parseDate(b.date) - parseDate(a.date))
-        .slice(0, 3)
         .forEach((n) => {
           const el = document.createElement("article");
           el.className = "news-box";
