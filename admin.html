@@ -116,6 +116,15 @@ button:hover,
   border-color: rgba(201, 139, 79, 0.6);
 }
 
+button:focus-visible,
+.file-label:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(201, 139, 79, 0.85);
+  outline-offset: 3px;
+}
+
 button.primary {
   background: var(--accent);
   color: #171008;

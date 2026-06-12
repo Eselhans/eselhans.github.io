@@ -108,6 +108,10 @@
 .song-card.active .lyrics {
   display: block;
 }
+
+.song-card .lyrics {
+  display: none;
+}
 </style>
   <link rel="stylesheet" href="style.css" data-unified-style="true" />
 </head>
@@ -150,6 +154,16 @@
 
 <section id="albums"></section>
 
+<div id="lyrics-modal" class="lyrics-modal" role="dialog" aria-modal="true" aria-labelledby="lyrics-modal-title" aria-describedby="lyrics-modal-meta" hidden>
+  <div class="lyrics-dialog">
+    <button class="lyrics-close" type="button" aria-label="Lyrics schlie&szlig;en" onclick="closeLyrics()">Schlie&szlig;en</button>
+    <span class="eyebrow">Songtext</span>
+    <h2 id="lyrics-modal-title">Songtitel</h2>
+    <p id="lyrics-modal-meta" class="song-meta"></p>
+    <div id="lyrics-modal-text" class="lyrics-text"></div>
+  </div>
+</div>
+
 <footer>
   &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
   <a href="impressum.html">Impressum</a> &middot;
@@ -160,6 +174,7 @@
 
 <script>
 let allSongs = [];
+let activeLyricsButton = null;
 
 fetch("songs.json")
   .then(res => {
@@ -210,23 +225,24 @@ function render(songs) {
     const albumDiv = document.createElement("div");
     albumDiv.className = "album";
 
-    let html = `<h2 class="album-title">${albumName}</h2>`;
+    let html = `<h2 class="album-title">${escapeHtml(albumName)}</h2>`;
     html += `<div class="song-grid">`;
 
     grouped[albumName].forEach(song => {
+      const songIndex = allSongs.indexOf(song);
 
       const youtubeButton = song.youtube
-        ? `<a href="${song.youtube}" target="_blank" rel="noopener">YouTube</a>`
+        ? `<a href="${escapeAttribute(song.youtube)}" target="_blank" rel="noopener">YouTube</a>`
         : "";
 
       html += `
         <div class="song-card">
 
-          <img src="${song.cover || 'bilder/cover-platzhalter.png'}" alt="Cover: ${song.title || 'Eselhans Song'} von Eselhans" loading="lazy">
+          <img src="${escapeAttribute(song.cover || 'bilder/cover-platzhalter.png')}" alt="Cover: ${escapeAttribute(song.title || 'Eselhans Song')} von Eselhans" loading="lazy">
 
           <div class="song-content">
 
-            <h3 class="song-title">${song.title}</h3>
+            <h3 class="song-title">${escapeHtml(song.title)}</h3>
 
             <div class="song-meta">
               ${song.genre || "—"} • ${song.release || "—"}
@@ -234,13 +250,9 @@ function render(songs) {
 
             <div class="button-row">
               ${youtubeButton}
-              <button aria-expanded="false" onclick="toggleLyrics(this)">
+              <button type="button" aria-expanded="false" aria-controls="lyrics-modal" data-song-index="${songIndex}" aria-label="Lyrics zu ${escapeAttribute(song.title || 'diesem Song')} anzeigen" onclick="openLyrics(this)">
                 Lyrics
               </button>
-            </div>
-
-            <div class="lyrics">
-              ${song.lyrics || "Songtext folgt"}
             </div>
 
           </div>
@@ -254,10 +266,64 @@ function render(songs) {
   });
 }
 
-function toggleLyrics(button) {
-  const card = button.closest('.song-card');
-  const isOpen = card.classList.toggle('active');
-  button.setAttribute('aria-expanded', String(isOpen));
+function openLyrics(button) {
+  const index = Number(button.dataset.songIndex);
+  const song = allSongs[index];
+  if (!song) return;
+
+  if (activeLyricsButton && activeLyricsButton !== button) {
+    activeLyricsButton.setAttribute("aria-expanded", "false");
+  }
+
+  activeLyricsButton = button;
+  button.setAttribute("aria-expanded", "true");
+
+  const meta = [song.album, song.genre, song.release].filter(Boolean).join(" - ");
+  document.getElementById("lyrics-modal-title").textContent = song.title || "Song";
+  document.getElementById("lyrics-modal-meta").textContent = meta;
+  document.getElementById("lyrics-modal-text").textContent = song.lyrics || "Songtext folgt";
+
+  const modal = document.getElementById("lyrics-modal");
+  modal.removeAttribute("hidden");
+  document.body.classList.add("modal-open");
+  modal.querySelector(".lyrics-close").focus();
+}
+
+function closeLyrics() {
+  const modal = document.getElementById("lyrics-modal");
+  modal.setAttribute("hidden", "");
+  document.body.classList.remove("modal-open");
+
+  if (activeLyricsButton) {
+    activeLyricsButton.setAttribute("aria-expanded", "false");
+    activeLyricsButton.focus();
+    activeLyricsButton = null;
+  }
+}
+
+document.getElementById("lyrics-modal").addEventListener("click", (event) => {
+  if (event.target.id === "lyrics-modal") {
+    closeLyrics();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !document.getElementById("lyrics-modal").hasAttribute("hidden")) {
+    closeLyrics();
+  }
+});
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function escapeAttribute(value) {
+  return escapeHtml(value);
 }
 </script>
 
