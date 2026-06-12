@@ -72,14 +72,15 @@
   <section class="section-card">
     <div class="section-head">
       <span class="eyebrow">Aktuelle Ver&ouml;ffentlichung</span>
-      <h2>Neuer Song auf YouTube</h2>
-      <p class="section-text">
+      <h2 id="featured-title">Neuer Song auf YouTube</h2>
+      <p class="section-text" id="featured-description">
         Hier steht der aktuelle Einstieg in die Musik von Eselhans: Video ansehen, Stimmung aufnehmen und danach direkt ins Song-Archiv oder zu den Streaming-Links wechseln.
       </p>
     </div>
 
     <div class="video-frame">
       <iframe
+        id="featured-video"
         src="https://www.youtube.com/embed/gl7OWruEZEc?si=8rslnDIAmdHYm4Jz"
         title="Eselhans YouTube-Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -88,6 +89,7 @@
     </div>
 
     <div class="button-row">
+      <a class="button primary" id="featured-button" href="https://www.youtube.com/watch?v=gl7OWruEZEc" target="_blank" rel="noopener">Video auf YouTube ansehen</a>
       <a class="button primary" href="songs.html">Weitere Songs &amp; Videos</a>
       <a class="button" href="musik.html">Streaming-Links</a>
     </div>
@@ -175,6 +177,69 @@ async function loadNews() {
 }
 
 loadNews();
+</script>
+
+<!-- FEATURED VIDEO ENGINE -->
+<script>
+function getYouTubeId(url) {
+  try {
+    const parsed = new URL(String(url || "").trim());
+    const host = parsed.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      return parsed.pathname.split("/").filter(Boolean)[0] || "";
+    }
+
+    if (host.endsWith("youtube.com")) {
+      if (parsed.pathname === "/watch") return parsed.searchParams.get("v") || "";
+      const parts = parsed.pathname.split("/").filter(Boolean);
+      if (["embed", "shorts", "live"].includes(parts[0])) return parts[1] || "";
+    }
+  } catch (error) {
+    return "";
+  }
+
+  return "";
+}
+
+function toYouTubeEmbedUrl(url) {
+  const id = getYouTubeId(url);
+  return id ? `https://www.youtube.com/embed/${id}` : "";
+}
+
+async function loadFeaturedVideo() {
+  try {
+    const res = await fetch("featured.json");
+    if (!res.ok) throw new Error("featured.json nicht gefunden");
+    const featured = await res.json();
+    const embedUrl = toYouTubeEmbedUrl(featured.youtubeUrl);
+
+    if (featured.title) {
+      document.getElementById("featured-title").textContent = featured.title;
+      document.getElementById("featured-video").title = featured.title;
+    }
+
+    if (featured.description) {
+      document.getElementById("featured-description").textContent = featured.description;
+    }
+
+    if (embedUrl) {
+      document.getElementById("featured-video").src = embedUrl;
+    }
+
+    if (featured.youtubeUrl) {
+      document.getElementById("featured-button").href = featured.youtubeUrl;
+    }
+
+    if (featured.buttonText) {
+      document.getElementById("featured-button").textContent = featured.buttonText;
+    }
+  } catch (error) {
+    console.error("Featured video loading failed:", error);
+  }
+}
+
+loadFeaturedVideo();
 </script>
 
 </body>

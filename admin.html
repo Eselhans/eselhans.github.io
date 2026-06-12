@@ -266,6 +266,14 @@ select:focus {
   background: rgba(0, 0, 0, 0.35);
 }
 
+.preview iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
 .preview-body {
   padding: 14px;
 }
@@ -363,6 +371,58 @@ select:focus {
     </div>
     <div class="notice">
       Tipp: Wenn du diese Datei &uuml;ber einen kleinen lokalen Server oder GitHub Pages &ouml;ffnest, kann "Vom Ordner laden" die vorhandenen JSON-Dateien direkt laden. Beim normalen Datei-&Ouml;ffnen nutzt du einfach die Lade-Buttons.
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:16px;">
+    <div class="section-head">
+      <div>
+        <h2>Startseiten-Video</h2>
+        <div class="stats" id="featured-status">featured.json vorbereiten oder aus dem Ordner laden.</div>
+      </div>
+      <div class="actions">
+        <label class="file-label" for="featured-file">featured.json laden</label>
+        <input id="featured-file" type="file" accept=".json,application/json" onchange="importFeaturedJson(event)" />
+        <button type="button" onclick="loadFeaturedFromServer()">Aus Ordner laden</button>
+        <button class="primary" type="button" onclick="downloadFeaturedJson()">featured.json downloaden</button>
+      </div>
+    </div>
+
+    <div class="editor-grid">
+      <form class="form-grid" onsubmit="event.preventDefault(); downloadFeaturedJson();">
+        <div class="field">
+          <label for="featured-title">Titel</label>
+          <input id="featured-title" />
+        </div>
+        <div class="field">
+          <label for="featured-button-text">Button-Text</label>
+          <input id="featured-button-text" />
+        </div>
+        <div class="field full">
+          <label for="featured-youtube-url">YouTube-Link</label>
+          <input id="featured-youtube-url" placeholder="https://youtu.be/..." />
+        </div>
+        <div class="field full">
+          <label for="featured-description">Beschreibung</label>
+          <textarea id="featured-description"></textarea>
+        </div>
+      </form>
+
+      <article class="preview">
+        <iframe
+          id="featured-preview-video"
+          title="Startseiten-Video Vorschau"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+        <div class="preview-body">
+          <div class="preview-label">Startseiten-Video Vorschau</div>
+          <h3 id="featured-preview-title">Titel</h3>
+          <p id="featured-preview-description">Beschreibung</p>
+          <p class="muted" id="featured-preview-url">YouTube-Link</p>
+          <button type="button" id="featured-preview-button">Button-Text</button>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -502,7 +562,13 @@ const state = {
   mode: "news",
   selectedIndex: -1,
   news: [],
-  songs: []
+  songs: [],
+  featured: {
+    title: "Neuer Song auf YouTube",
+    description: "Hier steht der aktuelle Einstieg in die Musik von Eselhans: Video ansehen, Stimmung aufnehmen und danach direkt ins Song-Archiv oder zu den Streaming-Links wechseln.",
+    youtubeUrl: "https://www.youtube.com/watch?v=gl7OWruEZEc",
+    buttonText: "Video auf YouTube ansehen"
+  }
 };
 
 function setMode(mode) {
@@ -564,6 +630,7 @@ async function loadFromServer() {
     if (!newsRes.ok || !songsRes.ok) throw new Error("JSON-Dateien konnten nicht geladen werden.");
     setNewsData(await newsRes.json());
     setSongsData(await songsRes.json());
+    await loadFeaturedFromServer(false);
     renderAll();
     showMessage("news.json und songs.json wurden aus dem Ordner geladen.", "ok");
   } catch (error) {
@@ -616,6 +683,47 @@ function setSongsData(payload) {
     lyrics: item.lyrics || ""
   }));
   updateDatalists();
+}
+
+async function loadFeaturedFromServer(showStatus = true) {
+  try {
+    const res = await fetch("featured.json");
+    if (!res.ok) throw new Error("featured.json konnte nicht geladen werden.");
+    setFeaturedData(await res.json());
+    if (showStatus) showMessage("featured.json wurde aus dem Ordner geladen.", "ok");
+  } catch (error) {
+    if (showStatus) showMessage("featured.json konnte nicht aus dem Ordner geladen werden.", "error");
+  }
+}
+
+function importFeaturedJson(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      setFeaturedData(JSON.parse(reader.result));
+      showMessage(`${file.name} geladen.`, "ok");
+    } catch (error) {
+      showMessage(`${file.name} ist keine gueltige featured.json.`, "error");
+    }
+    event.target.value = "";
+  };
+  reader.readAsText(file, "utf-8");
+}
+
+function setFeaturedData(payload) {
+  state.featured = {
+    title: payload && payload.title ? String(payload.title) : "",
+    description: payload && payload.description ? String(payload.description) : "",
+    youtubeUrl: payload && payload.youtubeUrl ? String(payload.youtubeUrl) : "",
+    buttonText: payload && payload.buttonText ? String(payload.buttonText) : ""
+  };
+  setValue("featured-title", state.featured.title);
+  setValue("featured-description", state.featured.description);
+  setValue("featured-youtube-url", state.featured.youtubeUrl);
+  setValue("featured-button-text", state.featured.buttonText);
+  updateFeaturedPreview();
 }
 
 function renderAll() {
@@ -839,6 +947,84 @@ function downloadJson(filename, payload) {
   URL.revokeObjectURL(url);
 }
 
+function readFeaturedForm() {
+  return {
+    title: value("featured-title"),
+    description: value("featured-description"),
+    youtubeUrl: value("featured-youtube-url"),
+    buttonText: value("featured-button-text")
+  };
+}
+
+function downloadFeaturedJson() {
+  const featured = readFeaturedForm();
+  const errors = [];
+  if (!featured.title) errors.push("Titel fehlt.");
+  if (!featured.description) errors.push("Beschreibung fehlt.");
+  if (!featured.youtubeUrl) errors.push("YouTube-Link fehlt.");
+  if (!featured.buttonText) errors.push("Button-Text fehlt.");
+  if (featured.youtubeUrl && !toYouTubeEmbedUrl(featured.youtubeUrl)) errors.push("Der YouTube-Link konnte nicht erkannt werden.");
+
+  if (errors.length) {
+    showMessage(errors.join(" "), "error");
+    return;
+  }
+
+  state.featured = featured;
+  updateFeaturedPreview();
+  downloadJson("featured.json", featured);
+  showMessage("featured.json wurde vorbereitet und heruntergeladen.", "ok");
+}
+
+function getYouTubeId(url) {
+  try {
+    const parsed = new URL(String(url || "").trim());
+    const host = parsed.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      return parsed.pathname.split("/").filter(Boolean)[0] || "";
+    }
+
+    if (host.endsWith("youtube.com")) {
+      if (parsed.pathname === "/watch") return parsed.searchParams.get("v") || "";
+      const parts = parsed.pathname.split("/").filter(Boolean);
+      if (["embed", "shorts", "live"].includes(parts[0])) return parts[1] || "";
+    }
+  } catch (error) {
+    return "";
+  }
+
+  return "";
+}
+
+function toYouTubeEmbedUrl(url) {
+  const id = getYouTubeId(url);
+  return id ? `https://www.youtube.com/embed/${id}` : "";
+}
+
+function updateFeaturedPreview() {
+  const featured = readFeaturedForm();
+  const embedUrl = toYouTubeEmbedUrl(featured.youtubeUrl);
+  const iframe = document.getElementById("featured-preview-video");
+
+  document.getElementById("featured-preview-title").textContent = featured.title || "Titel";
+  document.getElementById("featured-preview-description").textContent = featured.description || "Beschreibung";
+  document.getElementById("featured-preview-url").textContent = featured.youtubeUrl || "Kein YouTube-Link";
+  document.getElementById("featured-preview-button").textContent = featured.buttonText || "Button-Text";
+
+  if (embedUrl) {
+    iframe.hidden = false;
+    iframe.src = embedUrl;
+  } else {
+    iframe.hidden = true;
+    iframe.removeAttribute("src");
+  }
+
+  document.getElementById("featured-status").textContent = embedUrl
+    ? "YouTube-Link erkannt. Vorschau ist bereit."
+    : "Bitte einen gueltigen YouTube-Link eintragen.";
+}
+
 function updatePreview() {
   if (state.mode === "news") {
     const image = value("news-image") || "bilder/cover-platzhalter.png";
@@ -924,6 +1110,11 @@ document.querySelectorAll("input, textarea").forEach((element) => {
   element.addEventListener("input", updatePreview);
 });
 
+["featured-title", "featured-description", "featured-youtube-url", "featured-button-text"].forEach((id) => {
+  document.getElementById(id).addEventListener("input", updateFeaturedPreview);
+});
+
+setFeaturedData(state.featured);
 clearForm();
 renderAll();
 </script>
