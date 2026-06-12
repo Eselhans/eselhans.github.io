@@ -227,6 +227,97 @@
       margin-bottom: 10px;
     }
 
+    .platform-icon,
+    .tile .platform-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 58px;
+      width: 58px;
+      height: 58px;
+      margin: 4px 0 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      letter-spacing: 0;
+      text-transform: none;
+      overflow: hidden;
+    }
+
+    .platform-logo {
+      display: block;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      max-width: 34px;
+      max-height: 34px;
+      object-fit: contain;
+    }
+
+    .platform-youtube .platform-logo rect {
+      fill: #d94b42;
+    }
+
+    .platform-youtube .platform-logo path,
+    .platform-youtube-music .platform-logo path,
+    .platform-apple .platform-logo path {
+      fill: #fff7ed;
+    }
+
+    .platform-youtube-music .platform-logo circle:first-child {
+      fill: #d94b42;
+      opacity: 0.92;
+    }
+
+    .platform-youtube-music .platform-logo circle:nth-child(2) {
+      fill: rgba(9, 9, 13, 0.34);
+    }
+
+    .platform-spotify .platform-logo circle {
+      fill: #42b869;
+    }
+
+    .platform-spotify .platform-logo path {
+      fill: none;
+      stroke: #08120c;
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+
+    .platform-apple .platform-logo rect {
+      fill: #d95f8d;
+      opacity: 0.86;
+    }
+
+    .platform-amazon .platform-logo rect {
+      fill: #2f97c8;
+      opacity: 0.86;
+    }
+
+    .platform-amazon .platform-logo text {
+      fill: #fff7ed;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .platform-amazon .platform-logo path {
+      fill: none;
+      stroke: #fff7ed;
+      stroke-width: 3.4;
+      stroke-linecap: round;
+    }
+
+    .platform-eselhans .platform-logo {
+      width: 40px;
+      height: 40px;
+      max-width: 40px;
+      max-height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .video-frame {
       position: relative;
       width: 100%;
