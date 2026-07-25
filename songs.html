@@ -127,7 +127,7 @@
   </a>
   <div class="nav-links" aria-label="Hauptnavigation">
     <a href="/">Home</a>
-    <a href="songs.html">Songs und Videos</a>
+    <a href="songs.html" aria-current="page">Songs und Videos</a>
     <a href="musik.html">Hier Streamen</a>
     <a href="news.html">News</a>
     <a href="about.html">&Uuml;ber mich</a>
@@ -136,7 +136,7 @@
 
 <header class="hero">
   <div style="margin-top:20px;">
-  <input id="search" type="text" placeholder="Suche Songs..."
+  <input id="search" type="text" placeholder="Songs, Alben oder Genre suchen &hellip;" aria-label="Songs, Alben oder Genre suchen"
     style="
       width:100%;
       padding:12px 16px;
@@ -146,6 +146,10 @@
       color:var(--text);
       outline:none;
     ">
+    <div class="search-summary">
+      <p id="search-status" class="search-status" role="status" aria-live="polite" aria-atomic="true">Songs werden geladen &hellip;</p>
+      <button id="search-reset" class="button" type="button" hidden>Suche zur&uuml;cksetzen</button>
+    </div>
 </div>
   <span class="eyebrow">Music System</span>
   <h1>Songs</h1>
@@ -185,26 +189,55 @@ fetch("songs.json")
 
     allSongs = Array.isArray(data) ? data : data.songs || [];
 
-    render(allSongs);
+    const searchInput = document.getElementById("search");
+    const searchReset = document.getElementById("search-reset");
 
-    document.getElementById("search").addEventListener("input", (e) => {
-      const val = e.target.value.toLowerCase();
-
-      const filtered = allSongs.filter(song =>
-        (song.title || "").toLowerCase().includes(val) ||
-        (song.album || "").toLowerCase().includes(val) ||
-        (song.genre || "").toLowerCase().includes(val)
-      );
-
-      render(filtered);
+    searchInput.addEventListener("input", applySearch);
+    searchReset.addEventListener("click", () => {
+      searchInput.value = "";
+      applySearch();
+      searchInput.focus();
     });
+
+    applySearch();
 
   })
   .catch(err => {
     console.error("LOAD ERROR:", err);
     document.getElementById("albums").innerHTML =
       "<p style='color:red'>songs.json konnte nicht geladen werden</p>";
+    document.getElementById("search-status").textContent =
+      "Songs konnten nicht geladen werden.";
   });
+
+function applySearch() {
+  const searchInput = document.getElementById("search");
+  const query = searchInput.value.trim();
+  const value = query.toLocaleLowerCase("de");
+
+  const filtered = allSongs.filter(song =>
+    (song.title || "").toLocaleLowerCase("de").includes(value) ||
+    (song.album || "").toLocaleLowerCase("de").includes(value) ||
+    (song.genre || "").toLocaleLowerCase("de").includes(value)
+  );
+
+  render(filtered);
+  updateSearchStatus(filtered.length, query);
+}
+
+function updateSearchStatus(count, query) {
+  const status = document.getElementById("search-status");
+  const reset = document.getElementById("search-reset");
+  const label = count === 1 ? "1 Treffer" : `${count} Treffer`;
+
+  status.textContent = query
+    ? count === 0
+      ? `Keine Treffer f\u00fcr „${query}“.`
+      : `${label} f\u00fcr „${query}“.`
+    : label;
+
+  reset.hidden = query === "";
+}
 
 function render(songs) {
   const container = document.getElementById("albums");
