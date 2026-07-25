@@ -551,6 +551,11 @@ a {
   border-color: rgba(201, 139, 79, 0.55);
 }
 
+.nav-links a[aria-current="page"] {
+  background: var(--accent-soft);
+  border-color: rgba(201, 139, 79, 0.55);
+}
+
 a:focus-visible,
 button:focus-visible,
 .button:focus-visible,
@@ -623,6 +628,12 @@ h1 {
   font-size: 4.4rem;
   line-height: 0.98;
   letter-spacing: 0;
+}
+
+.legal-card h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 h2,
@@ -855,6 +866,11 @@ h3,
   gap: 16px;
 }
 
+.news-section-title {
+  margin-bottom: 16px;
+  font-size: 1.35rem;
+}
+
 .news-box img {
   max-width: none;
   aspect-ratio: 1 / 1;
@@ -964,6 +980,28 @@ h3,
 #search:focus {
   border-color: rgba(201, 139, 79, 0.72) !important;
   box-shadow: 0 0 0 3px rgba(201, 139, 79, 0.16);
+}
+
+.search-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.search-status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.search-summary .button {
+  min-height: 36px;
+  padding: 7px 11px;
+}
+
+.search-summary .button[hidden] {
+  display: none;
 }
 
 footer {

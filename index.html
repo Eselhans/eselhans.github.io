@@ -61,7 +61,7 @@
     Eselhans
   </a>
   <div class="nav-links" aria-label="Hauptnavigation">
-    <a href="/">Home</a>
+    <a href="/" aria-current="page">Home</a>
     <a href="songs.html">Songs und Videos</a>
     <a href="musik.html">Hier Streamen</a>
     <a href="news.html">News</a>
@@ -90,7 +90,8 @@
   </header>
 
   <!-- NEWS (JSON ONLY) -->
-  <section class="section-card">
+  <section class="section-card" aria-labelledby="home-news-title">
+    <h2 id="home-news-title" class="news-section-title">Aktuelle News</h2>
     <div id="news-container"></div>
   </section>
 
@@ -107,7 +108,6 @@
     <div class="video-frame">
       <iframe
         id="featured-video"
-        src="https://www.youtube.com/embed/gl7OWruEZEc?si=8rslnDIAmdHYm4Jz"
         title="Eselhans YouTube-Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen loading="lazy">
