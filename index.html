@@ -46,237 +46,204 @@
   </script>
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="home.css" />
   <script src="navigation.js" defer></script>
+  <script src="home.js" defer></script>
 
   <link rel="icon" type="image/png" href="bilder/logo-eselhans.png" />
 </head>
 
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
-<main class="page">
+  <div class="home-shell">
+    <nav class="topbar" aria-label="Hauptnavigation">
+      <a class="brand" href="/">
+        <img
+          class="brand-logo"
+          src="bilder/logo-eselhans.png"
+          alt="Eselhans Logo"
+        />
+        <span>Eselhans</span>
+      </a>
 
-  <!-- NAV -->
-  <nav class="topbar">
-  <a class="brand" href="/">
-    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
-    Eselhans
-  </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Men&uuml; &ouml;ffnen">
-    <span class="menu-toggle-text">Men&uuml;</span>
-    <span class="menu-toggle-icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <div class="nav-links" id="primary-navigation" aria-label="Hauptnavigation">
-    <a href="/" aria-current="page">Home</a>
-    <a href="songs.html">Songs und Videos</a>
-    <a href="musik.html">Hier Streamen</a>
-    <a href="news.html">News</a>
-    <a href="about.html">&Uuml;ber mich</a>
-  </div>
-</nav>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Men&uuml; &ouml;ffnen"
+      >
+        <span class="menu-toggle-text">Men&uuml;</span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div>
-      <span class="eyebrow">KI-Musik aus Ostfriesland</span>
-      <h1>Eselhans</h1>
-      <p class="lead">
-        Eselhans ist ein KI-Musik-Projekt mit Rock, Gothic-Balladen, Country, Singer/Songwriter und emotionalem Storytelling.
-      </p>
-
-      <div class="hero-actions">
-        <a class="button primary" href="songs.html">Songs &amp; Videos ansehen</a>
-        <a class="button" href="musik.html">Musik streamen</a>
+      <div class="nav-links" id="primary-navigation">
+        <a href="/" aria-current="page">Home</a>
+        <a href="songs.html">Songs und Videos</a>
+        <a href="musik.html">Hier Streamen</a>
+        <a href="news.html">News</a>
+        <a href="about.html">&Uuml;ber mich</a>
       </div>
-    </div>
+    </nav>
 
-    <div class="banner-wrap">
-      <img src="bilder/banner-eselhans.png" alt="Eselhans Banner" />
-    </div>
-  </header>
+    <main id="main-content">
+      <header class="home-hero">
+        <div class="hero-glow" aria-hidden="true"></div>
 
-  <!-- NEWS (JSON ONLY) -->
-  <section class="section-card" aria-labelledby="home-news-title">
-    <h2 id="home-news-title" class="news-section-title">Aktuelle News</h2>
-    <div id="news-container"></div>
-  </section>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">KI-Musik aus Ostfriesland</span>
+            <h1>Eselhans</h1>
+            <p class="lead">
+              Eselhans ist ein KI-Musik-Projekt mit Rock, Gothic-Balladen,
+              Country, Singer/Songwriter und emotionalem Storytelling.
+            </p>
 
-  <!-- CURRENT RELEASE -->
-  <section class="section-card">
-    <div class="section-head">
-      <span class="eyebrow">Aktuelle Ver&ouml;ffentlichung</span>
-      <h2 id="featured-title">Neuer Song auf YouTube</h2>
-      <p class="section-text" id="featured-description">
-        Hier steht der aktuelle Einstieg in die Musik von Eselhans: Video ansehen, Stimmung aufnehmen und danach direkt ins Song-Archiv oder zu den Streaming-Links wechseln.
-      </p>
-    </div>
-
-    <div class="video-frame">
-      <iframe
-        id="featured-video"
-        title="Eselhans YouTube-Video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen loading="lazy">
-      </iframe>
-    </div>
-
-    <div class="button-row">
-      <a class="button primary" id="featured-button" href="https://www.youtube.com/watch?v=gl7OWruEZEc" target="_blank" rel="noopener">Video auf YouTube ansehen</a>
-      <a class="button primary" href="songs.html">Weitere Songs &amp; Videos</a>
-      <a class="button" href="musik.html">Streaming-Links</a>
-    </div>
-  </section>
-
-  <!-- TILES -->
-  <section class="section-card">
-    <div class="tile-grid">
-
-      <a class="tile" href="musik.html">
-        <span>H&ouml;ren</span>
-        <h3>Musik</h3>
-        <p>Streaming-Links und Kan&auml;le auf einen Blick.</p>
-      </a>
-
-      <a class="tile" href="songs.html">
-        <span>Lesen und Schauen</span>
-        <h3>Songs und Videos</h3>
-        <p>Songtexte, Cover und YouTube-Links im Archiv.</p>
-      </a>
-
-      <a class="tile" href="news.html">
-        <span>Updates</span>
-        <h3>News</h3>
-        <p>Aktuelle Meldungen und kommende Ver&ouml;ffentlichungen.</p>
-      </a>
-
-    </div>
-  </section>
-
-  <footer>
-  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
-  <a href="impressum.html">Impressum</a> &middot;
-  <a href="datenschutz.html">Datenschutz</a>
-</footer>
-
-</main>
-
-<!-- NEWS ENGINE -->
-<script>
-async function loadNews() {
-  try {
-    const res = await fetch("news.json");
-    const payload = await res.json();
-    const data = Array.isArray(payload) ? payload : payload.news || [];
-    const parseDate = (value) => {
-      const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
-      return match ? new Date(`${match[3]}-${match[2]}-${match[1]}`) : new Date(value);
-    };
-
-    const container = document.getElementById("news-container");
-    container.innerHTML = "";
-
-    data
-      .sort((a, b) => parseDate(b.date) - parseDate(a.date))
-      .slice(0, 3)
-      .forEach(n => {
-
-        const el = document.createElement("div");
-        el.className = "news-box";
-
-        el.innerHTML = `
-          <div>
-            <img src="${n.image}" alt="News: ${n.title || 'Eselhans'}" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
+            <div class="hero-actions">
+              <a class="button primary" href="songs.html">
+                Songs &amp; Videos ansehen
+              </a>
+              <a class="button" href="musik.html">Musik streamen</a>
+            </div>
           </div>
 
+          <figure class="hero-art">
+            <img
+              src="bilder/banner-eselhans.png"
+              alt="Eselhans Banner"
+            />
+            <figcaption>Songs aus Herz &amp; Staub</figcaption>
+          </figure>
+        </div>
+
+        <div class="scroll-cue" aria-hidden="true">
+          <span></span>
+        </div>
+      </header>
+
+      <section
+        class="flow-section news-section"
+        id="aktuelle-news"
+        aria-labelledby="home-news-title"
+      >
+        <div class="section-intro">
           <div>
-            <span class="news-label">NEWS</span>
-            <h3>${n.title}</h3>
-            <p>${n.date}</p>
-            <p>${n.text}</p>
+            <span class="section-rule" aria-hidden="true"></span>
+            <h2 id="home-news-title">Aktuelle News</h2>
+          </div>
+          <a class="text-link" href="news.html">Alle News ansehen</a>
+        </div>
+
+        <div
+          class="news-editorial"
+          id="home-news"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <p class="loading-state">Aktuelle News werden geladen&nbsp;&hellip;</p>
+        </div>
+      </section>
+
+      <section
+        class="flow-section video-section"
+        id="aktuelles-video"
+        aria-labelledby="featured-title"
+      >
+        <div class="video-atmosphere" aria-hidden="true"></div>
+
+        <div class="video-layout">
+          <div class="video-copy">
+            <span class="section-kicker">Aktuelle Ver&ouml;ffentlichung</span>
+            <h2 id="featured-title">Neuer Song auf YouTube</h2>
+            <p id="featured-description">
+              Hier steht der aktuelle Einstieg in die Musik von Eselhans:
+              Video ansehen, Stimmung aufnehmen und danach direkt ins
+              Song-Archiv oder zu den Streaming-Links wechseln.
+            </p>
+
+            <div class="button-row">
+              <a
+                class="button primary"
+                id="featured-button"
+                href="https://www.youtube.com/watch?v=gl7OWruEZEc"
+                target="_blank"
+                rel="noopener"
+              >
+                Video auf YouTube ansehen
+              </a>
+              <a class="text-link" href="songs.html">
+                Weitere Songs &amp; Videos
+              </a>
+              <a class="text-link" href="musik.html">Streaming-Links</a>
+            </div>
           </div>
 
-          <div>
-            <a class="button" href="news.html">News ansehen</a>
+          <div class="video-frame">
+            <iframe
+              id="featured-video"
+              title="Eselhans YouTube-Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
           </div>
-        `;
+        </div>
+      </section>
 
-        container.appendChild(el);
-      });
+      <section
+        class="flow-section journey-section"
+        aria-labelledby="journey-title"
+      >
+        <div class="section-intro compact">
+          <div>
+            <span class="section-kicker">Musik, Texte &amp; Gedanken</span>
+            <h2 id="journey-title">Entdecke Eselhans</h2>
+          </div>
+        </div>
 
-  } catch (e) {
-    console.error("News loading failed:", e);
-  }
-}
+        <div class="journey-links">
+          <a href="musik.html">
+            <span class="journey-copy">
+              <span>H&ouml;ren</span>
+              <strong>Musik</strong>
+              <small>Streaming-Links und Kan&auml;le auf einen Blick.</small>
+            </span>
+            <span class="journey-arrow" aria-hidden="true">&rarr;</span>
+          </a>
 
-loadNews();
-</script>
+          <a href="songs.html">
+            <span class="journey-copy">
+              <span>Lesen und Schauen</span>
+              <strong>Songs und Videos</strong>
+              <small>Songtexte, Cover und YouTube-Links im Archiv.</small>
+            </span>
+            <span class="journey-arrow" aria-hidden="true">&rarr;</span>
+          </a>
 
-<!-- FEATURED VIDEO ENGINE -->
-<script>
-function getYouTubeId(url) {
-  try {
-    const parsed = new URL(String(url || "").trim());
-    const host = parsed.hostname.replace(/^www\./, "");
+          <a href="news.html">
+            <span class="journey-copy">
+              <span>Updates</span>
+              <strong>News</strong>
+              <small>Aktuelle Meldungen und kommende Ver&ouml;ffentlichungen.</small>
+            </span>
+            <span class="journey-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </section>
+    </main>
 
-    if (host === "youtu.be") {
-      return parsed.pathname.split("/").filter(Boolean)[0] || "";
-    }
-
-    if (host.endsWith("youtube.com")) {
-      if (parsed.pathname === "/watch") return parsed.searchParams.get("v") || "";
-      const parts = parsed.pathname.split("/").filter(Boolean);
-      if (["embed", "shorts", "live"].includes(parts[0])) return parts[1] || "";
-    }
-  } catch (error) {
-    return "";
-  }
-
-  return "";
-}
-
-function toYouTubeEmbedUrl(url) {
-  const id = getYouTubeId(url);
-  return id ? `https://www.youtube.com/embed/${id}` : "";
-}
-
-async function loadFeaturedVideo() {
-  try {
-    const res = await fetch("featured.json");
-    if (!res.ok) throw new Error("featured.json nicht gefunden");
-    const featured = await res.json();
-    const embedUrl = toYouTubeEmbedUrl(featured.youtubeUrl);
-
-    if (featured.title) {
-      document.getElementById("featured-title").textContent = featured.title;
-      document.getElementById("featured-video").title = featured.title;
-    }
-
-    if (featured.description) {
-      document.getElementById("featured-description").textContent = featured.description;
-    }
-
-    if (embedUrl) {
-      document.getElementById("featured-video").src = embedUrl;
-    }
-
-    if (featured.youtubeUrl) {
-      document.getElementById("featured-button").href = featured.youtubeUrl;
-    }
-
-    if (featured.buttonText) {
-      document.getElementById("featured-button").textContent = featured.buttonText;
-    }
-  } catch (error) {
-    console.error("Featured video loading failed:", error);
-  }
-}
-
-loadFeaturedVideo();
-</script>
-
+    <footer>
+      &copy; 2026 Eselhans &middot; Musik, Texte &amp; Gedanken &middot;
+      Songs aus Herz &amp; Staub &middot;
+      <a href="impressum.html">Impressum</a> &middot;
+      <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </div>
 </body>
 </html>
 
