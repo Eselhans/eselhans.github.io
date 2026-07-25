@@ -556,6 +556,52 @@ a {
   border-color: rgba(201, 139, 79, 0.55);
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.menu-toggle-icon {
+  display: grid;
+  width: 18px;
+  gap: 4px;
+}
+
+.menu-toggle-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 a:focus-visible,
 button:focus-visible,
 .button:focus-visible,
@@ -1132,5 +1178,50 @@ footer a:hover {
     position: static;
     width: 100%;
     margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  html.has-mobile-menu .topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 64px;
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
+
+  html.has-mobile-menu .brand {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  html.has-mobile-menu .menu-toggle {
+    display: inline-flex;
+  }
+
+  html.has-mobile-menu .nav-links {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    display: none !important;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(9, 9, 13, 0.96);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(14px);
+  }
+
+  html.has-mobile-menu .nav-links.is-open {
+    display: grid !important;
+  }
+
+  html.has-mobile-menu .nav-links a {
+    min-height: 44px;
   }
 }

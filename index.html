@@ -46,6 +46,7 @@
   </script>
 
   <link rel="stylesheet" href="style.css" />
+  <script src="navigation.js" defer></script>
 
   <link rel="icon" type="image/png" href="bilder/logo-eselhans.png" />
 </head>
@@ -60,7 +61,15 @@
     <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
     Eselhans
   </a>
-  <div class="nav-links" aria-label="Hauptnavigation">
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Men&uuml; &ouml;ffnen">
+    <span class="menu-toggle-text">Men&uuml;</span>
+    <span class="menu-toggle-icon" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  <div class="nav-links" id="primary-navigation" aria-label="Hauptnavigation">
     <a href="/" aria-current="page">Home</a>
     <a href="songs.html">Songs und Videos</a>
     <a href="musik.html">Hier Streamen</a>
