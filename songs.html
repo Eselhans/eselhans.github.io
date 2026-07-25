@@ -1,375 +1,300 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eselhans | Songs und Videos</title>
-<meta name="description" content="Songs und Videos von Eselhans: Alben, Singles, Cover, YouTube-Links und Songtexte an einem Ort." />
-<meta name="robots" content="index,follow" />
-<link rel="canonical" href="https://eselhans.github.io/songs.html" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Eselhans | Songs und Videos" />
-<meta property="og:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite." />
-<meta property="og:url" content="https://eselhans.github.io/songs.html" />
-<meta property="og:image" content="https://eselhans.github.io/bilder/logo-eselhans.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Eselhans | Songs und Videos" />
-<meta name="twitter:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite." />
-<meta name="twitter:image" content="https://eselhans.github.io/bilder/logo-eselhans.png" />
-
-<style>
-.album {
-  margin-top: 42px;
-}
-
-.album-title {
-  font-size: 2rem;
-  margin-bottom: 14px;
-  color: var(--accent);
-}
-
-.song-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 14px;
-}
-
-.song-card {
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
-  border-radius: 18px;
-  overflow: hidden;
-  transition: 0.25s;
-  display: flex;
-  flex-direction: column;
-}
-
-.song-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255,255,255,0.08);
-}
-
-.song-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.song-content {
-  padding: 14px;
-}
-
-.song-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.song-meta {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin: 6px 0;
-}
-
-.button-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.button-row a,
-.button-row button {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.06);
-  color: var(--text);
-  cursor: pointer;
-  font-size: 0.85rem;
-  text-decoration: none;
-}
-
-.button-row a:hover,
-.button-row button:hover {
-  background: var(--accent-soft);
-  border-color: rgba(201,139,79,0.6);
-}
-
-.lyrics {
-  display: none;
-  margin-top: 10px;
-  white-space: pre-line;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.song-card.active .lyrics {
-  display: block;
-}
-
-.song-card .lyrics {
-  display: none;
-}
-</style>
-  <link rel="stylesheet" href="style.css" data-unified-style="true" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eselhans | Songs und Videos</title>
+  <meta name="description" content="Songs und Videos von Eselhans: Alben, Singles, Cover, YouTube-Links und Songtexte an einem Ort.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://eselhans.github.io/songs.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Eselhans | Songs und Videos">
+  <meta property="og:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite.">
+  <meta property="og:url" content="https://eselhans.github.io/songs.html">
+  <meta property="og:image" content="https://eselhans.github.io/bilder/logo-eselhans.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Eselhans | Songs und Videos">
+  <meta name="twitter:description" content="Alle Songs, Videos, Cover und Songtexte von Eselhans gesammelt auf einer Seite.">
+  <meta name="twitter:image" content="https://eselhans.github.io/bilder/logo-eselhans.png">
+  <link rel="stylesheet" href="style.css" data-unified-style="true">
+  <link rel="stylesheet" href="songs.css">
   <script src="navigation.js" defer></script>
+  <script src="songs.js" defer></script>
 </head>
 
-<body>
+<body class="songs-page">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
-<main class="page">
+  <div class="songs-page-content" id="songs-page">
+    <div class="songs-shell">
+      <nav class="topbar" aria-label="Hauptnavigation">
+        <a class="brand" href="/">
+          <img
+            class="brand-logo"
+            src="bilder/logo-eselhans.png"
+            alt="Eselhans Logo"
+          >
+          <span>Eselhans</span>
+        </a>
 
-<nav class="topbar">
-  <a class="brand" href="/">
-    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
-    Eselhans
-  </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Men&uuml; &ouml;ffnen">
-    <span class="menu-toggle-text">Men&uuml;</span>
-    <span class="menu-toggle-icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <div class="nav-links" id="primary-navigation" aria-label="Hauptnavigation">
-    <a href="/">Home</a>
-    <a href="songs.html" aria-current="page">Songs und Videos</a>
-    <a href="musik.html">Hier Streamen</a>
-    <a href="news.html">News</a>
-    <a href="about.html">&Uuml;ber mich</a>
-  </div>
-</nav>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Menü öffnen"
+        >
+          <span class="menu-toggle-text">Menü</span>
+          <span class="menu-toggle-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
 
-<header class="hero">
-  <div style="margin-top:20px;">
-  <input id="search" type="text" placeholder="Songs, Alben oder Genre suchen &hellip;" aria-label="Songs, Alben oder Genre suchen"
-    style="
-      width:100%;
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.05);
-      color:var(--text);
-      outline:none;
-    ">
-    <div class="search-summary">
-      <p id="search-status" class="search-status" role="status" aria-live="polite" aria-atomic="true">Songs werden geladen &hellip;</p>
-      <button id="search-reset" class="button" type="button" hidden>Suche zur&uuml;cksetzen</button>
-    </div>
-</div>
-  <span class="eyebrow">Music System</span>
-  <h1>Songs</h1>
-  <p class="lead">Alles auf einen Blick und nach Alben & Singles sortiert.</p>
-</header>
-
-<section id="albums"></section>
-
-<div id="lyrics-modal" class="lyrics-modal" role="dialog" aria-modal="true" aria-labelledby="lyrics-modal-title" aria-describedby="lyrics-modal-meta" hidden>
-  <div class="lyrics-dialog">
-    <button class="lyrics-close" type="button" aria-label="Lyrics schlie&szlig;en" onclick="closeLyrics()">Schlie&szlig;en</button>
-    <span class="eyebrow">Songtext</span>
-    <h2 id="lyrics-modal-title">Songtitel</h2>
-    <p id="lyrics-modal-meta" class="song-meta"></p>
-    <div id="lyrics-modal-text" class="lyrics-text"></div>
-  </div>
-</div>
-
-<footer>
-  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
-  <a href="impressum.html">Impressum</a> &middot;
-  <a href="datenschutz.html">Datenschutz</a>
-</footer>
-
-</main>
-
-<script>
-let allSongs = [];
-let activeLyricsButton = null;
-
-fetch("songs.json")
-  .then(res => {
-    if (!res.ok) throw new Error("songs.json nicht gefunden");
-    return res.json();
-  })
-  .then(data => {
-
-    allSongs = Array.isArray(data) ? data : data.songs || [];
-
-    const searchInput = document.getElementById("search");
-    const searchReset = document.getElementById("search-reset");
-
-    searchInput.addEventListener("input", applySearch);
-    searchReset.addEventListener("click", () => {
-      searchInput.value = "";
-      applySearch();
-      searchInput.focus();
-    });
-
-    applySearch();
-
-  })
-  .catch(err => {
-    console.error("LOAD ERROR:", err);
-    document.getElementById("albums").innerHTML =
-      "<p style='color:red'>songs.json konnte nicht geladen werden</p>";
-    document.getElementById("search-status").textContent =
-      "Songs konnten nicht geladen werden.";
-  });
-
-function applySearch() {
-  const searchInput = document.getElementById("search");
-  const query = searchInput.value.trim();
-  const value = query.toLocaleLowerCase("de");
-
-  const filtered = allSongs.filter(song =>
-    (song.title || "").toLocaleLowerCase("de").includes(value) ||
-    (song.album || "").toLocaleLowerCase("de").includes(value) ||
-    (song.genre || "").toLocaleLowerCase("de").includes(value)
-  );
-
-  render(filtered);
-  updateSearchStatus(filtered.length, query);
-}
-
-function updateSearchStatus(count, query) {
-  const status = document.getElementById("search-status");
-  const reset = document.getElementById("search-reset");
-  const label = count === 1 ? "1 Treffer" : `${count} Treffer`;
-
-  status.textContent = query
-    ? count === 0
-      ? `Keine Treffer f\u00fcr „${query}“.`
-      : `${label} f\u00fcr „${query}“.`
-    : label;
-
-  reset.hidden = query === "";
-}
-
-function render(songs) {
-  const container = document.getElementById("albums");
-  container.innerHTML = "";
-
-  // GROUPING
-  const grouped = {};
-
-  songs.forEach(song => {
-    const album = song.album && song.album.trim() !== "" ? song.album : "Singles";
-    if (!grouped[album]) grouped[album] = [];
-    grouped[album].push(song);
-  });
-
-  // RENDER
-  Object.keys(grouped).forEach(albumName => {
-
-    const albumDiv = document.createElement("div");
-    albumDiv.className = "album";
-
-    let html = `<h2 class="album-title">${escapeHtml(albumName)}</h2>`;
-    html += `<div class="song-grid">`;
-
-    grouped[albumName].forEach(song => {
-      const songIndex = allSongs.indexOf(song);
-
-      const youtubeButton = song.youtube
-        ? `<a href="${escapeAttribute(song.youtube)}" target="_blank" rel="noopener">YouTube</a>`
-        : "";
-
-      html += `
-        <div class="song-card">
-
-          <img src="${escapeAttribute(song.cover || 'bilder/cover-platzhalter.png')}" alt="Cover: ${escapeAttribute(song.title || 'Eselhans Song')} von Eselhans" loading="lazy">
-
-          <div class="song-content">
-
-            <h3 class="song-title">${escapeHtml(song.title)}</h3>
-
-            <div class="song-meta">
-              ${song.genre || "—"} • ${song.release || "—"}
-            </div>
-
-            <div class="button-row">
-              ${youtubeButton}
-              <button type="button" aria-expanded="false" aria-controls="lyrics-modal" data-song-index="${songIndex}" aria-label="Lyrics zu ${escapeAttribute(song.title || 'diesem Song')} anzeigen" onclick="openLyrics(this)">
-                Lyrics
-              </button>
-            </div>
-
-          </div>
+        <div class="nav-links" id="primary-navigation">
+          <a href="/">Home</a>
+          <a href="songs.html" aria-current="page">Songs und Videos</a>
+          <a href="musik.html">Hier Streamen</a>
+          <a href="news.html">News</a>
+          <a href="about.html">Über mich</a>
         </div>
-      `;
-    });
+      </nav>
 
-    html += `</div>`;
-    albumDiv.innerHTML = html;
-    container.appendChild(albumDiv);
-  });
-}
+      <main id="main-content">
+        <header class="archive-hero">
+          <span class="section-kicker">Musikarchiv</span>
+          <h1>Songs &amp; Videos</h1>
+          <div class="hero-intro">
+            <p>
+              Alle Songs von Eselhans – von Gothic-Balladen bis Country.
+            </p>
+            <p class="catalog-count" id="catalog-count">
+              112 veröffentlichte Songs
+            </p>
+          </div>
+        </header>
 
-function openLyrics(button) {
-  const index = Number(button.dataset.songIndex);
-  const song = allSongs[index];
-  if (!song) return;
+        <section
+          class="archive-tools"
+          aria-labelledby="archive-tools-title"
+        >
+          <h2 class="visually-hidden" id="archive-tools-title">
+            Musikarchiv durchsuchen und filtern
+          </h2>
 
-  if (activeLyricsButton && activeLyricsButton !== button) {
-    activeLyricsButton.setAttribute("aria-expanded", "false");
-  }
+          <div class="search-field">
+            <label for="song-search">Musikarchiv durchsuchen</label>
+            <input
+              id="song-search"
+              type="search"
+              placeholder="Songs, Alben oder Genre suchen …"
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
 
-  activeLyricsButton = button;
-  button.setAttribute("aria-expanded", "true");
+          <div
+            class="type-filter"
+            role="group"
+            aria-label="Veröffentlichungstyp filtern"
+          >
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+              aria-controls="archive-content"
+            >
+              Alle
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="singles"
+              aria-pressed="false"
+              aria-controls="archive-content"
+            >
+              Singles
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="albums"
+              aria-pressed="false"
+              aria-controls="archive-content"
+            >
+              Alben
+            </button>
+          </div>
 
-  const meta = [song.album, song.genre, song.release].filter(Boolean).join(" - ");
-  document.getElementById("lyrics-modal-title").textContent = song.title || "Song";
-  document.getElementById("lyrics-modal-meta").textContent = meta;
-  document.getElementById("lyrics-modal-text").textContent = song.lyrics || "Songtext folgt";
+          <div class="sort-field">
+            <label for="song-sort">Sortierung</label>
+            <select id="song-sort">
+              <option value="newest">Neueste zuerst</option>
+              <option value="oldest">Älteste zuerst</option>
+              <option value="title">Titel A–Z</option>
+            </select>
+          </div>
 
-  const modal = document.getElementById("lyrics-modal");
-  modal.removeAttribute("hidden");
-  document.body.classList.add("modal-open");
-  modal.querySelector(".lyrics-close").focus();
-}
+          <div class="tool-status">
+            <p
+              id="result-status"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              Songs werden geladen …
+            </p>
+            <button
+              class="text-button"
+              id="search-reset"
+              type="button"
+              hidden
+            >
+              Suche zurücksetzen
+            </button>
+          </div>
+        </section>
 
-function closeLyrics() {
-  const modal = document.getElementById("lyrics-modal");
-  modal.setAttribute("hidden", "");
-  document.body.classList.remove("modal-open");
+        <section
+          class="latest-section"
+          id="latest-section"
+          aria-labelledby="latest-title"
+        >
+          <div class="section-heading">
+            <div>
+              <span class="section-rule" aria-hidden="true"></span>
+              <span class="section-kicker">Frisch veröffentlicht</span>
+              <h2 id="latest-title">Neue Veröffentlichungen</h2>
+            </div>
+            <p>Die jüngsten Titel – direkt aus den vorhandenen Daten.</p>
+          </div>
 
-  if (activeLyricsButton) {
-    activeLyricsButton.setAttribute("aria-expanded", "false");
-    activeLyricsButton.focus();
-    activeLyricsButton = null;
-  }
-}
+          <div class="latest-grid" id="latest-releases">
+            <p class="loading-state">Veröffentlichungen werden geladen …</p>
+          </div>
+        </section>
 
-document.getElementById("lyrics-modal").addEventListener("click", (event) => {
-  if (event.target.id === "lyrics-modal") {
-    closeLyrics();
-  }
-});
+        <section
+          class="archive-section"
+          id="archive-content"
+          aria-labelledby="archive-title"
+          aria-busy="true"
+        >
+          <div class="section-heading archive-heading">
+            <div>
+              <span class="section-rule" aria-hidden="true"></span>
+              <span class="section-kicker">Alle Veröffentlichungen</span>
+              <h2 id="archive-title">Das vollständige Archiv</h2>
+            </div>
+            <p id="archive-summary">
+              Singles bildstark, Alben als kompakte Tracklisten.
+            </p>
+          </div>
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !document.getElementById("lyrics-modal").hasAttribute("hidden")) {
-    closeLyrics();
-  }
-});
+          <div class="empty-state" id="empty-state" hidden>
+            <span class="section-kicker">Keine Treffer</span>
+            <h3>Kein Song passt zu dieser Auswahl.</h3>
+            <p>
+              Versuche einen anderen Suchbegriff oder zeige wieder das
+              vollständige Archiv.
+            </p>
+            <button class="button primary" id="empty-reset" type="button">
+              Suche zurücksetzen
+            </button>
+          </div>
 
-function escapeHtml(value) {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+          <section
+            class="singles-section"
+            id="singles-section"
+            aria-labelledby="singles-title"
+          >
+            <div class="subsection-heading">
+              <div>
+                <span class="section-kicker">Einzelveröffentlichungen</span>
+                <h3 id="singles-title">Singles</h3>
+              </div>
+              <p id="singles-count">54 Songs</p>
+            </div>
+            <div class="singles-grid" id="singles-grid"></div>
+          </section>
 
-function escapeAttribute(value) {
-  return escapeHtml(value);
-}
-</script>
+          <section
+            class="albums-section"
+            id="albums-section"
+            aria-labelledby="albums-title"
+          >
+            <div class="subsection-heading">
+              <div>
+                <span class="section-kicker">Zusammengehörige Werke</span>
+                <h3 id="albums-title">Alben</h3>
+              </div>
+              <p id="albums-count">6 Alben · 58 Songs</p>
+            </div>
+            <div class="album-list" id="album-list"></div>
+          </section>
+        </section>
+      </main>
 
+      <footer>
+        &copy; 2026 Eselhans &middot; Musik, Texte &amp; Gedanken &middot;
+        Songs aus Herz &amp; Staub &middot;
+        <a href="impressum.html">Impressum</a> &middot;
+        <a href="datenschutz.html">Datenschutz</a>
+      </footer>
+    </div>
+  </div>
+
+  <div
+    class="lyrics-modal"
+    id="lyrics-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lyrics-modal-title"
+    aria-describedby="lyrics-modal-meta"
+    hidden
+  >
+    <div class="lyrics-dialog">
+      <header class="lyrics-header">
+        <div class="lyrics-header-copy">
+          <span class="section-kicker">Songtext</span>
+          <h2 id="lyrics-modal-title">Songtitel</h2>
+          <p class="lyrics-meta" id="lyrics-modal-meta"></p>
+        </div>
+        <button
+          class="lyrics-close"
+          id="lyrics-close"
+          type="button"
+          aria-label="Lyrics schließen"
+        >
+          <span aria-hidden="true">×</span>
+          <span>Schließen</span>
+        </button>
+      </header>
+
+      <div class="lyrics-body">
+        <aside class="lyrics-song-info">
+          <img
+            id="lyrics-cover"
+            src="bilder/cover-platzhalter.png"
+            alt=""
+          >
+          <a
+            class="text-link"
+            id="lyrics-youtube"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            hidden
+          >
+            Auf YouTube ansehen
+          </a>
+        </aside>
+
+        <div class="lyrics-text" id="lyrics-modal-text"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
-
-
