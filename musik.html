@@ -20,533 +20,334 @@
   <link rel="icon" type="image/png" href="bilder/logo-eselhans.png" />
   <link rel="apple-touch-icon" href="bilder/logo-eselhans.png" />
 
-  <style>
-    :root {
-      --bg: #09090d;
-      --card: rgba(255, 255, 255, 0.065);
-      --border: rgba(255, 255, 255, 0.13);
-      --text: #f4f1ea;
-      --muted: #b9b0a6;
-      --accent: #c98b4f;
-      --accent-soft: rgba(201, 139, 79, 0.18);
-      --shadow: rgba(0, 0, 0, 0.46);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(201, 139, 79, 0.12), transparent 30%),
-        radial-gradient(circle at top right, rgba(97, 74, 125, 0.10), transparent 28%),
-        linear-gradient(rgba(7, 7, 10, 0.84), rgba(7, 7, 10, 0.94)),
-        url("bilder/hintergrund-eselhans.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .page {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      padding: 30px 0 56px;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 14px;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 14px;
-      margin-bottom: 42px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(9, 9, 13, 0.74);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(14px);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      font-size: 1.18rem;
-      padding-left: 4px;
-    }
-
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a,
-    .button,
-    .link-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text);
-      font-weight: 800;
-      font-size: 0.92rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .button:hover,
-    .link-button:hover {
-      transform: translateY(-2px);
-      background: var(--accent-soft);
-      border-color: rgba(201, 139, 79, 0.55);
-    }
-
-    .hero,
-    .section-card,
-    .tile {
-      border: 1px solid var(--border);
-      background: rgba(9, 9, 13, 0.58);
-      box-shadow: 0 24px 70px var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-
-    .hero {
-      padding: 42px;
-      border-radius: 34px;
-      margin-bottom: 26px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 16px;
-      padding: 7px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--muted);
-      font-size: 0.86rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 8vw, 6.2rem);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
-      margin-bottom: 20px;
-      text-shadow: 0 18px 45px var(--shadow);
-    }
-
-    h2 {
-      font-size: clamp(1.7rem, 4vw, 2.45rem);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    h3 {
-      font-size: 1.25rem;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .lead,
-    .section-text,
-    .tile p,
-    .meta {
-      color: var(--muted);
-    }
-
-    .lead {
-      max-width: 820px;
-      font-size: 1.12rem;
-    }
-
-    .section-card {
-      padding: 28px;
-      border-radius: 28px;
-      margin-top: 24px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .grid.two { grid-template-columns: repeat(2, 1fr); }
-
-    .tile {
-      display: flex;
-      flex-direction: column;
-      min-height: 165px;
-      padding: 22px;
-      border-radius: 24px;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .tile:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(201, 139, 79, 0.55);
-    }
-
-    .tile span {
-      color: var(--accent);
-      font-size: 0.84rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .platform-icon,
-    .tile .platform-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 58px;
-      width: 58px;
-      height: 58px;
-      margin: 4px 0 6px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--text);
-      letter-spacing: 0;
-      text-transform: none;
-      overflow: hidden;
-    }
-
-    .platform-logo {
-      display: block;
-      flex: 0 0 auto;
-      width: 34px;
-      height: 34px;
-      max-width: 34px;
-      max-height: 34px;
-      object-fit: contain;
-    }
-
-    .platform-youtube .platform-logo rect {
-      fill: #d94b42;
-    }
-
-    .platform-youtube .platform-logo path,
-    .platform-youtube-music .platform-logo path,
-    .platform-apple .platform-logo path {
-      fill: #fff7ed;
-    }
-
-    .platform-youtube-music .platform-logo circle:first-child {
-      fill: #d94b42;
-      opacity: 0.92;
-    }
-
-    .platform-youtube-music .platform-logo circle:nth-child(2) {
-      fill: rgba(9, 9, 13, 0.34);
-    }
-
-    .platform-spotify .platform-logo circle {
-      fill: #42b869;
-    }
-
-    .platform-spotify .platform-logo path {
-      fill: none;
-      stroke: #08120c;
-      stroke-width: 4;
-      stroke-linecap: round;
-    }
-
-    .platform-apple .platform-logo rect {
-      fill: #d95f8d;
-      opacity: 0.86;
-    }
-
-    .platform-amazon .platform-logo rect {
-      fill: #2f97c8;
-      opacity: 0.86;
-    }
-
-    .platform-amazon .platform-logo text {
-      fill: #fff7ed;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      font-weight: 900;
-    }
-
-    .platform-amazon .platform-logo path {
-      fill: none;
-      stroke: #fff7ed;
-      stroke-width: 3.4;
-      stroke-linecap: round;
-    }
-
-    .platform-eselhans .platform-logo {
-      width: 40px;
-      height: 40px;
-      max-width: 40px;
-      max-height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .video-frame {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.42);
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
-      margin-top: 18px;
-    }
-
-    .video-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    .note {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.055);
-      color: var(--muted);
-    }
-
-    .button-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    footer {
-      padding: 36px 0 0;
-      color: var(--muted);
-      text-align: center;
-      font-size: 0.95rem;
-    }
-
-    footer a {
-      color: var(--text);
-      margin: 0 8px;
-      opacity: 0.86;
-    }
-
-    footer a:hover {
-      opacity: 1;
-      color: var(--accent);
-    }
-
-    @media (max-width: 980px) {
-      .grid,
-      .grid.two { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .page { width: min(94%, 1120px); padding-top: 20px; }
-      .topbar { top: 10px; }
-      .hero, .section-card { padding: 22px; border-radius: 24px; }
-      .button-row { flex-direction: column; }
-      .button, .link-button { width: 100%; }
-    }
-  
-    /* Mobile performance tuning */
-    @media (max-width: 760px) {
-      body {
-        background-attachment: scroll;
-        background-position: center top;
-      }
-
-      .hero,
-      .section-card,
-      .album-section,
-      .song-card,
-      .video-card,
-      .tile {
-        backdrop-filter: none;
-      }
-
-      .topbar {
-        backdrop-filter: none;
-      }
-
-      .hero,
-      .section-card,
-      .album-section {
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
-      }
-    }
-
-  </style>
-  <link rel="stylesheet" href="style.css" data-unified-style="true" />
+  <link rel="stylesheet" href="musik.css" />
   <script src="navigation.js" defer></script>
-
 </head>
-<body>
-  <main class="page">
 
-    <nav class="topbar">
-  <a class="brand" href="/">
-    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
-    Eselhans
-  </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Men&uuml; &ouml;ffnen">
-    <span class="menu-toggle-text">Men&uuml;</span>
-    <span class="menu-toggle-icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <div class="nav-links" id="primary-navigation" aria-label="Hauptnavigation">
-    <a href="/">Home</a>
-    <a href="songs.html">Songs und Videos</a>
-    <a href="musik.html" aria-current="page">Hier Streamen</a>
-    <a href="news.html">News</a>
-    <a href="about.html">&Uuml;ber mich</a>
-  </div>
-</nav>
+<body class="streaming-page">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
+  <div class="streaming-shell">
+    <nav class="topbar" aria-label="Hauptnavigation">
+      <a class="brand" href="/">
+        <img
+          class="brand-logo"
+          src="bilder/logo-eselhans.png"
+          alt="Eselhans Logo"
+        />
+        <span>Eselhans</span>
+      </a>
 
-    <header class="hero">
-      <span class="eyebrow">Musik hören</span>
-      <h1>Musik</h1>
-      <p class="lead">
-        Hier findest du die wichtigsten Plattformen, auf denen du meine Songs hören, speichern oder weiter begleiten kannst.
-      </p>
-    </header>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Men&uuml; &ouml;ffnen"
+      >
+        <span class="menu-toggle-text">Men&uuml;</span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
 
-    <section class="section-card">
-      <h2>Streaming & Kanäle</h2>
-      <p class="section-text">
-        Neue Songs, Musikvideos, Shorts und Releases erscheinen nach und nach auf meinen Kanälen.
-      </p>
+      <div class="nav-links" id="primary-navigation">
+        <a href="/">Home</a>
+        <a href="songs.html">Songs und Videos</a>
+        <a href="musik.html" aria-current="page">
+          Hier Streamen
+        </a>
+        <a href="news.html">News</a>
+        <a href="about.html">&Uuml;ber mich</a>
+      </div>
+    </nav>
 
-      <div class="grid">
-        <a class="tile featured-platform" href="https://www.youtube.com/@Esel1983" target="_blank" rel="noopener">
-          <span>Videos</span>
-          <span class="platform-icon platform-youtube">
-            <svg class="platform-logo" viewBox="0 0 64 44" role="img" aria-label="YouTube Logo">
+    <main id="main-content">
+      <header class="streaming-hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+          <span class="section-kicker">Musik &amp; Kan&auml;le</span>
+          <h1>Musik h&ouml;ren. Videos sehen. Gedanken teilen.</h1>
+          <p class="hero-lead">
+            Eselhans auf Streamingdiensten, YouTube und Social Media &ndash; je
+            nachdem, ob du Musik h&ouml;ren, Videos sehen oder mehr &uuml;ber
+            die Gedanken hinter den Songs erfahren m&ouml;chtest.
+          </p>
+        </div>
+
+        <nav class="channel-map" aria-label="Bereiche dieser Seite">
+          <a href="#musik-hoeren">Musik h&ouml;ren</a>
+          <a href="#videos-shorts">Videos &amp; Shorts</a>
+          <a href="#gedanken-neuigkeiten">Gedanken &amp; Neuigkeiten</a>
+        </nav>
+      </header>
+
+      <section
+        class="flow-section music-section"
+        id="musik-hoeren"
+        aria-labelledby="music-title"
+      >
+        <div class="section-intro">
+          <div>
+            <span class="section-kicker">Musik h&ouml;ren</span>
+            <h2 id="music-title">Auf deiner Plattform</h2>
+          </div>
+          <p>
+            Songs speichern, Eselhans folgen oder einfach dort weiterh&ouml;ren,
+            wo du ohnehin Musik h&ouml;rst.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <a
+            class="service-link"
+            href="https://music.youtube.com/@esel1983?si=1gpCOhMvAfkE-9sE"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="platform-mark platform-youtube-music" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="27"></circle>
+                <circle cx="32" cy="32" r="17"></circle>
+                <path d="M28 22 L43 32 L28 42 Z"></path>
+              </svg>
+            </span>
+            <span class="service-copy">
+              <strong>YouTube Music</strong>
+              <small>
+                Songs und Ver&ouml;ffentlichungen direkt auf YouTube Music
+                h&ouml;ren.
+              </small>
+              <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+            </span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+
+          <a
+            class="service-link"
+            href="https://open.spotify.com/artist/5Ib0WFO78TGEzNOwuwsuDA?si=82Z7P-a7ThW9yNd21iYZ8Q"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="platform-mark platform-spotify" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="28"></circle>
+                <path d="M19 26c9-3 22-2 30 3"></path>
+                <path d="M21 34c8-2 18-1 25 3"></path>
+                <path d="M23 42c6-2 14-1 20 2"></path>
+              </svg>
+            </span>
+            <span class="service-copy">
+              <strong>Spotify</strong>
+              <small>
+                Eselhans folgen, Songs speichern und in Playlists h&ouml;ren.
+              </small>
+              <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+            </span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+
+          <a
+            class="service-link"
+            href="https://music.apple.com/de/artist/eselhans/1839635407"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="platform-mark platform-apple" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="8" y="8" width="48" height="48" rx="13"></rect>
+                <path d="M39 18v25a7 7 0 1 1-4-6.3V24l-14 3v19a7 7 0 1 1-4-6.3V25l22-5z"></path>
+              </svg>
+            </span>
+            <span class="service-copy">
+              <strong>Apple Music</strong>
+              <small>Ver&ouml;ffentlichungen von Eselhans auf Apple Music.</small>
+              <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+            </span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+
+          <a
+            class="service-link"
+            href="https://music.amazon.de/artists/B0FR2FXMDP?ref=dm_sh_GlXnhDAyYHbP4fZZWNxSEnbTu"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="platform-mark platform-amazon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="8" y="8" width="48" height="48" rx="13"></rect>
+                <text x="31" y="36" text-anchor="middle">a</text>
+                <path d="M22 43c8 5 20 5 28-1"></path>
+              </svg>
+            </span>
+            <span class="service-copy">
+              <strong>Amazon Music</strong>
+              <small>Songs und Alben &uuml;ber Amazon Music h&ouml;ren.</small>
+              <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+            </span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="flow-section video-section"
+        id="videos-shorts"
+        aria-labelledby="video-title"
+      >
+        <div class="section-intro">
+          <div>
+            <span class="section-kicker">Videos &amp; Shorts</span>
+            <h2 id="video-title">Musik in Bildern</h2>
+          </div>
+          <p>
+            Musikvideos und Lyrics stehen im Mittelpunkt. Kurze Ausschnitte
+            erg&auml;nzen die Songs auf weiteren Kan&auml;len.
+          </p>
+        </div>
+
+        <a
+          class="youtube-feature"
+          href="https://www.youtube.com/@Esel1983"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="youtube-glow" aria-hidden="true"></span>
+          <span class="youtube-logo" aria-hidden="true">
+            <svg viewBox="0 0 64 44">
               <rect x="2" y="4" width="60" height="36" rx="10"></rect>
               <path d="M27 14 L43 22 L27 30 Z"></path>
             </svg>
           </span>
-          <h3>YouTube</h3>
-          <p>Musikvideos, Lyric-Videos, Shorts und neue Uploads.</p>
-          <span class="tile-button">YouTube ansehen</span>
-        </a>
 
-        <a class="tile" href="https://music.youtube.com/@esel1983?si=1gpCOhMvAfkE-9sE" target="_blank" rel="noopener">
-          <span>Streaming</span>
-          <span class="platform-icon platform-youtube-music">
-            <svg class="platform-logo" viewBox="0 0 64 64" role="img" aria-label="YouTube Music Logo">
-              <circle cx="32" cy="32" r="27"></circle>
-              <circle cx="32" cy="32" r="17"></circle>
-              <path d="M28 22 L43 32 L28 42 Z"></path>
-            </svg>
+          <span class="youtube-copy">
+            <span>Hauptkanal</span>
+            <strong>YouTube</strong>
+            <small>
+              Musikvideos, Lyrics-Videos, Shorts und neue Uploads von Eselhans.
+            </small>
+            <span class="link-label">YouTube-Kanal &ouml;ffnen</span>
+            <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
           </span>
-          <h3>YouTube Music</h3>
-          <p>Meine Songs als Musikstream auf YouTube Music.</p>
-          <span class="tile-button">YouTube Music h&ouml;ren</span>
+
+          <span class="external-arrow large" aria-hidden="true">&nearr;</span>
         </a>
 
-        <a class="tile" href="https://open.spotify.com/artist/5Ib0WFO78TGEzNOwuwsuDA?si=82Z7P-a7ThW9yNd21iYZ8Q" target="_blank" rel="noopener">
-          <span>Streaming</span>
-          <span class="platform-icon platform-spotify">
-            <svg class="platform-logo" viewBox="0 0 64 64" role="img" aria-label="Spotify Logo">
-              <circle cx="32" cy="32" r="28"></circle>
-              <path d="M19 26c9-3 22-2 30 3"></path>
-              <path d="M21 34c8-2 18-1 25 3"></path>
-              <path d="M23 42c6-2 14-1 20 2"></path>
-            </svg>
-          </span>
-          <h3>Spotify</h3>
-          <span class="tile-button">Spotify &ouml;ffnen</span>
-          <p>Folgen, speichern und Songs in Playlists hören.</p>
-        </a>
+        <div class="social-pair">
+          <a
+            class="social-link"
+            href="https://www.instagram.com/eselhans1983"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="channel-type">Kurze Einblicke</span>
+            <strong>Instagram</strong>
+            <small>
+              Shorts, kurze Musikvideos, Songausschnitte und visuelle
+              Eindr&uuml;cke.
+            </small>
+            <span class="link-label">Instagram &ouml;ffnen</span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+            <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+          </a>
 
-        <a class="tile" href="https://music.apple.com/de/artist/eselhans/1839635407" target="_blank" rel="noopener">
-          <span>Streaming</span>
-          <span class="platform-icon platform-apple">
-            <svg class="platform-logo" viewBox="0 0 64 64" role="img" aria-label="Apple Music Logo">
-              <rect x="8" y="8" width="48" height="48" rx="13"></rect>
-              <path d="M39 18v25a7 7 0 1 1-4-6.3V24l-14 3v19a7 7 0 1 1-4-6.3V25l22-5z"></path>
-            </svg>
-          </span>
-          <h3>Apple Music</h3>
-          <span class="tile-button">Apple Music h&ouml;ren</span>
-          <p>Meine Musik auf Apple Music.</p>
-        </a>
+          <a
+            class="social-link"
+            href="https://www.tiktok.com/@florianpahl3"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="channel-type">Musik in K&uuml;rze</span>
+            <strong>TikTok</strong>
+            <small>
+              Kurze Musikclips, Shorts und Ausschnitte aus neuen Songs.
+            </small>
+            <span class="link-label">TikTok &ouml;ffnen</span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+            <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+          </a>
+        </div>
+      </section>
 
-        <a class="tile" href="https://music.amazon.de/artists/B0FR2FXMDP?ref=dm_sh_GlXnhDAyYHbP4fZZWNxSEnbTu" target="_blank" rel="noopener">
-          <span>Streaming</span>
-          <span class="platform-icon platform-amazon">
-            <svg class="platform-logo" viewBox="0 0 64 64" role="img" aria-label="Amazon Music Logo">
-              <rect x="8" y="8" width="48" height="48" rx="13"></rect>
-              <text x="31" y="36" text-anchor="middle">a</text>
-              <path d="M22 43c8 5 20 5 28-1"></path>
-            </svg>
-          </span>
-          <h3>Amazon Music</h3>
-          <span class="tile-button">Amazon Music h&ouml;ren</span>
-          <p>Releases und Songs bei Amazon Music.</p>
-        </a>
+      <section
+        class="flow-section thoughts-section"
+        id="gedanken-neuigkeiten"
+        aria-labelledby="thoughts-title"
+      >
+        <div class="section-intro">
+          <div>
+            <span class="section-kicker">Gedanken &amp; Neuigkeiten</span>
+            <h2 id="thoughts-title">Mehr als nur Ver&ouml;ffentlichungen</h2>
+          </div>
+          <p>
+            Pers&ouml;nliche Gedanken auf der einen, neue Musik und Updates auf
+            der anderen Seite.
+          </p>
+        </div>
 
-        <a class="tile" href="songs.html">
-          <span>Archiv</span>
-          <span class="platform-icon platform-eselhans">
-            <img class="platform-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" loading="lazy" />
-          </span>
-          <h3>Songs und Videos</h3>
-          <span class="tile-button">Website-Archiv &ouml;ffnen</span>
-          <p>Texte, Cover und YouTube-Links direkt auf dieser Website.</p>
-        </a>
-      </div>
-    </section>
+        <div class="thought-links">
+          <a
+            class="thought-link personal"
+            href="https://www.threads.com/@eselhans1983"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="channel-type">Pers&ouml;nlicher</span>
+            <strong>Threads</strong>
+            <small>
+              Gedanken zu Songs, Musik, Alltag und manchmal auch zu den Dingen,
+              die mich pers&ouml;nlich besch&auml;ftigen.
+            </small>
+            <span class="link-label">Threads &ouml;ffnen</span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+            <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+          </a>
 
+          <a
+            class="thought-link"
+            href="https://www.facebook.com/eselhans.2025"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="channel-type">Neuigkeiten</span>
+            <strong>Facebook</strong>
+            <small>
+              Neue Ver&ouml;ffentlichungen, Videos, Neuigkeiten und Updates rund
+              um Eselhans.
+            </small>
+            <span class="link-label">Facebook &ouml;ffnen</span>
+            <span class="external-arrow" aria-hidden="true">&nearr;</span>
+            <span class="sr-only"> &Ouml;ffnet in einem neuen Tab.</span>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="archive-section"
+        aria-labelledby="archive-title"
+      >
+        <div class="archive-copy">
+          <span class="section-kicker">Auf dieser Website</span>
+          <h2 id="archive-title">Alle Songs an einem Ort</h2>
+          <p>
+            Im Musikarchiv findest du Cover, Songtexte, Videos, Singles und
+            Alben von Eselhans.
+          </p>
+        </div>
+
+        <a class="button primary" href="songs.html">Musikarchiv &ouml;ffnen</a>
+      </section>
+    </main>
 
     <footer>
-  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
-  <a href="impressum.html">Impressum</a> &middot;
-  <a href="datenschutz.html">Datenschutz</a>
-</footer>
-  </main>
+      &copy; 2026 Eselhans &middot; Musik, Texte &amp; Gedanken &middot;
+      Songs aus Herz &amp; Staub &middot;
+      <a href="impressum.html">Impressum</a> &middot;
+      <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </div>
 </body>
 </html>
-
-
