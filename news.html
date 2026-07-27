@@ -20,436 +20,76 @@
   <link rel="icon" type="image/png" href="bilder/logo-eselhans.png" />
   <link rel="apple-touch-icon" href="bilder/logo-eselhans.png" />
 
-  <style>
-    :root {
-      --bg: #09090d;
-      --card: rgba(255, 255, 255, 0.065);
-      --border: rgba(255, 255, 255, 0.13);
-      --text: #f4f1ea;
-      --muted: #b9b0a6;
-      --accent: #c98b4f;
-      --accent-soft: rgba(201, 139, 79, 0.18);
-      --shadow: rgba(0, 0, 0, 0.46);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(201, 139, 79, 0.12), transparent 30%),
-        radial-gradient(circle at top right, rgba(97, 74, 125, 0.10), transparent 28%),
-        linear-gradient(rgba(7, 7, 10, 0.84), rgba(7, 7, 10, 0.94)),
-        url("bilder/hintergrund-eselhans.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .page {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      padding: 30px 0 56px;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 14px;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 14px;
-      margin-bottom: 42px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(9, 9, 13, 0.74);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(14px);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      font-size: 1.18rem;
-      padding-left: 4px;
-    }
-
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a,
-    .button,
-    .link-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text);
-      font-weight: 800;
-      font-size: 0.92rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .button:hover,
-    .link-button:hover {
-      transform: translateY(-2px);
-      background: var(--accent-soft);
-      border-color: rgba(201, 139, 79, 0.55);
-    }
-
-    .hero,
-    .section-card,
-    .tile {
-      border: 1px solid var(--border);
-      background: rgba(9, 9, 13, 0.58);
-      box-shadow: 0 24px 70px var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-
-    .hero {
-      padding: 42px;
-      border-radius: 34px;
-      margin-bottom: 26px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 16px;
-      padding: 7px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--muted);
-      font-size: 0.86rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 8vw, 6.2rem);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
-      margin-bottom: 20px;
-      text-shadow: 0 18px 45px var(--shadow);
-    }
-
-    h2 {
-      font-size: clamp(1.7rem, 4vw, 2.45rem);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    h3 {
-      font-size: 1.25rem;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .lead,
-    .section-text,
-    .tile p,
-    .meta {
-      color: var(--muted);
-    }
-
-    .lead {
-      max-width: 820px;
-      font-size: 1.12rem;
-    }
-
-    .section-card {
-      padding: 28px;
-      border-radius: 28px;
-      margin-top: 24px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .grid.two { grid-template-columns: repeat(2, 1fr); }
-
-    .tile {
-      display: flex;
-      flex-direction: column;
-      min-height: 165px;
-      padding: 22px;
-      border-radius: 24px;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .tile:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(201, 139, 79, 0.55);
-    }
-
-    .tile span {
-      color: var(--accent);
-      font-size: 0.84rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .video-frame {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.42);
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
-      margin-top: 18px;
-    }
-
-    .video-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    .note {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.055);
-      color: var(--muted);
-    }
-
-    .button-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    footer {
-      padding: 36px 0 0;
-      color: var(--muted);
-      text-align: center;
-      font-size: 0.95rem;
-    }
-
-    footer a {
-      color: var(--text);
-      margin: 0 8px;
-      opacity: 0.86;
-    }
-
-    footer a:hover {
-      opacity: 1;
-      color: var(--accent);
-    }
-
-    @media (max-width: 980px) {
-      .grid,
-      .grid.two { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .page { width: min(94%, 1120px); padding-top: 20px; }
-      .topbar { top: 10px; }
-      .hero, .section-card { padding: 22px; border-radius: 24px; }
-      .button-row { flex-direction: column; }
-      .button, .link-button { width: 100%; }
-    }
-  
-    /* Mobile performance tuning */
-    @media (max-width: 760px) {
-      body {
-        background-attachment: scroll;
-        background-position: center top;
-      }
-
-      .hero,
-      .section-card,
-      .album-section,
-      .song-card,
-      .video-card,
-      .tile {
-        backdrop-filter: none;
-      }
-
-      .topbar {
-        backdrop-filter: none;
-      }
-
-      .hero,
-      .section-card,
-      .album-section {
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
-      }
-    }
-
-  </style>
-  <link rel="stylesheet" href="style.css" data-unified-style="true" />
+  <link rel="stylesheet" href="news.css" />
   <script src="navigation.js" defer></script>
-
+  <script src="news.js" defer></script>
 </head>
-<body>
-  <main class="page">
 
-    <nav class="topbar">
-  <a class="brand" href="/">
-    <img class="brand-logo" src="bilder/logo-eselhans.png" alt="Eselhans Logo" />
-    Eselhans
-  </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Men&uuml; &ouml;ffnen">
-    <span class="menu-toggle-text">Men&uuml;</span>
-    <span class="menu-toggle-icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <div class="nav-links" id="primary-navigation" aria-label="Hauptnavigation">
-    <a href="/">Home</a>
-    <a href="songs.html">Songs und Videos</a>
-    <a href="musik.html">Hier Streamen</a>
-    <a href="news.html" aria-current="page">News</a>
-    <a href="about.html">&Uuml;ber mich</a>
-  </div>
-</nav>
+<body class="news-page">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
+  <div class="news-shell">
+    <nav class="topbar" aria-label="Hauptnavigation">
+      <a class="brand" href="/">
+        <img
+          class="brand-logo"
+          src="bilder/logo-eselhans.png"
+          alt="Eselhans Logo"
+        />
+        <span>Eselhans</span>
+      </a>
 
-    <header class="hero">
-      <span class="eyebrow">News & Coming Soon</span>
-      <h1>News</h1>
-      <p class="lead">
-        Kleine Updates zur Website, neuen Songs, kommenden Veröffentlichungen und allem, was gerade im Eselhans-Kosmos entsteht.
-      </p>
-    </header>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Men&uuml; &ouml;ffnen"
+      >
+        <span class="menu-toggle-text">Men&uuml;</span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
 
-    <section class="section-card">
-      <h2>Aktuell</h2>
-
-      <div id="news-page-container" class="news-list"></div>
-      <div class="grid two" hidden style="display:none">
-        <article class="tile">
-          <div class="news-cover">
-            <img src="bilder/zwei-seiten-promo.jpg" alt="Promo Cover: Zwei Seiten" onerror="this.onerror=null; this.src='bilder/cover-platzhalter.png';" loading="lazy" />
-          </div>
-          <span>Coming Soon</span>
-          <h3>Neuer Song: Zwei Seiten</h3>
-          <p>
-            <strong>Zwei Seiten</strong> ist als nächster Song eingeplant. Hier bekommt der Titel schon vorab seinen Platz
-            als kleiner Ausblick auf das, was kommt.
-          </p>
-        </article>
-
-        <article class="tile">
-          <span>Website</span>
-          <h3>Das Songs-Archiv w&auml;chst</h3>
-          <p>
-            Die Songs-Seite wurde kompakter aufgebaut. Titel lassen sich jetzt aufklappen und zeigen Cover, Albuminfo, Text und Video-Links an einem Ort.
-          </p>
-        </article>
+      <div class="nav-links" id="primary-navigation">
+        <a href="/">Home</a>
+        <a href="songs.html">Songs und Videos</a>
+        <a href="musik.html">Hier Streamen</a>
+        <a href="news.html" aria-current="page">News</a>
+        <a href="about.html">&Uuml;ber mich</a>
       </div>
-    </section>
+    </nav>
 
-    <section class="section-card">
-      <h2>Ausblick</h2>
-      <p class="section-text">
-        Dieser Bereich kann später wie ein kleines Tagebuch für Musikprojekte genutzt werden: neue Tracks, Albumpläne, Release-Hinweise
-        oder kleine Notizen aus dem Entstehungsprozess. Aktuell steht dort als nächster Ausblick schon <strong>Zwei Seiten</strong>.
-      </p>
-    </section>
+    <main id="main-content">
+      <header class="journal-hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <span class="section-kicker">Neues von Eselhans</span>
+        <h1>News &amp; Einblicke</h1>
+        <div class="hero-bottom">
+          <p class="hero-lead">
+            Neue Songs, Videos, kommende Ver&ouml;ffentlichungen und Gedanken
+            aus dem Eselhans-Kosmos.
+          </p>
+          <p class="news-count" id="news-count" aria-live="polite">
+            Meldungen werden geladen
+          </p>
+        </div>
+      </header>
 
+      <div id="news-content" aria-busy="true">
+        <p class="loading-note">Das Musikjournal wird geladen &hellip;</p>
+      </div>
+    </main>
 
     <footer>
-  &copy; 2026 Eselhans &middot; Musik, Texte & Gedanken &middot; Songs aus Herz & Staub &middot;
-  <a href="impressum.html">Impressum</a> &middot;
-  <a href="datenschutz.html">Datenschutz</a>
-</footer>
-  </main>
-
-  <script>
-  async function loadNewsPage() {
-    try {
-      const res = await fetch("news.json");
-      if (!res.ok) throw new Error("news.json konnte nicht geladen werden");
-
-      const payload = await res.json();
-      const data = Array.isArray(payload) ? payload : payload.news || [];
-      const parseDate = (value) => {
-        const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
-        return match ? new Date(`${match[3]}-${match[2]}-${match[1]}`) : new Date(value);
-      };
-
-      const container = document.getElementById("news-page-container");
-      container.innerHTML = "";
-
-      data
-        .sort((a, b) => parseDate(b.date) - parseDate(a.date))
-        .forEach((n) => {
-          const el = document.createElement("article");
-          el.className = "news-box";
-
-          el.innerHTML = `
-            <div>
-              <img src="${n.image}" alt="News: ${n.title || 'Eselhans'}" onerror="this.src='bilder/cover-platzhalter.png'" loading="lazy">
-            </div>
-
-            <div>
-              <span class="news-label">NEWS</span>
-              <h3>${n.title}</h3>
-              <p>${n.date}</p>
-              <p>${n.text}</p>
-            </div>
-          `;
-
-          container.appendChild(el);
-        });
-    } catch (e) {
-      console.error("News loading failed:", e);
-      document.getElementById("news-page-container").innerHTML =
-        "<p class='section-text'>News konnten gerade nicht geladen werden.</p>";
-    }
-  }
-
-  loadNewsPage();
-  </script>
+      &copy; 2026 Eselhans &middot; Musik, Texte &amp; Gedanken &middot;
+      Songs aus Herz &amp; Staub &middot;
+      <a href="impressum.html">Impressum</a> &middot;
+      <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </div>
 </body>
 </html>
-
-
